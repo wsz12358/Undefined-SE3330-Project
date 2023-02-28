@@ -1,26 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import BottomBar from "./BottomBar";
+import Home from "./Home";
+import Stats from "./Stats";
+import Discover from "./Discover";
+import Mine from "./Mine";
+
+const {Route, Switch, MemoryRouter} = require('react-router-dom');
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (<MemoryRouter initialEntries={['/home']}>
+        <div className="app">
+            <div className="appBody">
+                <Switch>
+                    <Route exact path='/home'>
+                        <Home/>
+                    </Route>
+                    <Route exact path='/stats'>
+                        <Stats/>
+                    </Route>
+                    <Route exact path='/discover'>
+                        <Discover/>
+                    </Route>
+                    <Route exact path='/mine'>
+                        <Mine/>
+                    </Route>
+                </Switch>
+            </div>
+            <div className="appBottom">
+                <BottomBar/>
+            </div>
+        </div>
+    </MemoryRouter>)
 }
 
 export default App;
