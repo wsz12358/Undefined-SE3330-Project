@@ -28,7 +28,7 @@ function App() {
                 </Switch>
             </div>
             <div className="appBottom">
-                <BottomBar/>
+                <BottomBar />
             </div>
         </div>
     </MemoryRouter>)

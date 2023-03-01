@@ -13,18 +13,22 @@ export default function BottomBar() {
     const tabs = [
         {
             key: '/home',
+            title: '首页',
             icon: <AppOutline />,
         },
         {
             key: '/stats',
+            title: '回顾',
             icon: <PieOutline />,
         },
         {
             key: '/discover',
+            title: '发现',
             icon: <StarOutline />,
         },
         {
             key: '/mine',
+            title: '我的',
             icon: <UserOutline />,
         },
     ];
@@ -32,7 +36,7 @@ export default function BottomBar() {
         <TabBar activeKey={pathname}
                 onChange={value => setRouteActive(value)}>
             {tabs.map(item => (
-                <TabBar.Item key={item.key} icon={item.icon}/>
+                <TabBar.Item key={item.key} icon={item.icon} title={item.title}/>
             ))}
         </TabBar>
     );

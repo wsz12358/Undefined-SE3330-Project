@@ -1,0 +1,114 @@
+.body {
+    height: 100%;
+    width: 100%;
+    background-color: #aef7ae;
+}
+
+.avatarField {
+    position: relative;
+    height: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font: bold 2em "Microsoft YaHei UI";
+}
+
+.avatar {
+    position: absolute;
+    height: 2em;
+    width: 2em;
+    right: .7em;
+    top: .5em;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border: black .1em solid;
+    background-color: greenyellow;
+    background-image: url('../assets/miyu.jpg');
+    background-size: 100%;
+    box-shadow: 0 0 .3em .05em rgba(0, 0, 0, .3);
+}
+
+.frontField {
+    display: flex;
+    height: calc(100% - 6em);
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 6em;
+}
+
+.frontBox {
+    width: 75%;
+    margin:0 auto;
+    border: .5em solid;
+    border-radius: 1em;
+    animation: frontBoxBorderAnim 6s infinite;
+}
+
+@keyframes frontBoxBorderAnim {
+    0% {border-color: rgba(0, 0, 0, 1);}
+    50% {border-color: rgba(0, 0, 0,.3);}
+    100% {border-color: rgba(0, 0, 0, 1);}
+}
+
+.timeBox {
+    padding: .45em 0;
+    text-align: center;
+    font: 250 5em/1.5 sans-serif;
+    border-bottom: rgba(0, 0, 0,.3) .05em solid;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background-color: #88f183;
+}
+
+.noteBox, .dateBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 96px;
+    margin:0 auto;
+    text-align: center;
+    background-color: #7fe279;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    font: 700 1.5em sans-serif;
+}
+
+.dateBox {
+    font: bolder 2.5em/64px "Book Antiqua";
+    color: white;
+    background-image: url(../assets/roxy.png);
+    background-size: 100%;
+}
+
+.noteBoxDisp {
+    display: none;
+}
+
+.dateBoxDisp {
+    display: none;
+}
+
+.tagBtn {
+    width: 30%;
+    margin: 2em auto;
+    --border-color: black;
+    background-color: transparent;
+}
+
+.countBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1em;
+    font: bold 2em "Microsoft YaHei UI";
+}
+
+.startBtn {
+    width: 50%;
+    margin: 4em auto;
+    border-radius: 1em;
+    border-color: #427b38;
+    border-width: 2px;
+    background-color: #59a64d;
+}
