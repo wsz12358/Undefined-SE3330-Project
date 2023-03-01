@@ -4,11 +4,11 @@ This is the repo for SEP&amp;Practice project 2023.
 Update logs shall be recorded in another doc, I'll figure it out later. <br>
 md文件用的是markdown语言，说不定之后放弃了直接用txt写。 <br><br>
 
-这里写一些注意事项。<br><br>
+这里写一些注意事项。虽然目前只有前端成员需要用到这个repo，以防万一以后所有成员都要用到，我把一些重要的信息记录下来。<br><br>
 
-23.2.28 influ3nza: 创建仓库----修改README.md<br><br>
+**23.2.28 influ3nza: 创建仓库----修改README.md**<br><br>
 
-23.2.28 influ3nza: 如何将本仓库克隆到本地并且能正常运作。<br><br>
+**23.2.28 influ3nza: 如何将本仓库克隆到本地并且能正常运作。**<br><br>
 
 如果使用Intellij IDEA，应该和clion是一样的毕竟是同一家公司。<br><br>
 
@@ -25,4 +25,18 @@ md文件用的是markdown语言，说不定之后放弃了直接用txt写。 <br
 
 接下来就可以运行看看效果了。<br><br>
 
-剩下来就是讲一下我写了些啥，感觉口头讲更方便，这里就不写了。
+剩下来就是讲一下我写了些啥，感觉口头讲更方便，这里就不写了。<br><br>
+
+**23.3.1 influ3nza: 优化项目结构**<br><br>
+
+**23.3.1 influ3nza: 项目结构说明。**<br><br>
+
+为了保证项目结构清晰，我把文件进行划分。asset存放资源文件，例如各种jpg；pages存放各级页面，即路由可以达到的页面；tests存放暂时不需要用到的测试文件。<br><br>
+
+后期应该还会有service文件夹，用于存放API的调用；以及utils文件夹，用于存放通用函数。<br><br>
+
+参考了`www.jianshu.com/p/383a4a80c1d9`<br><br>
+
+
+
+
