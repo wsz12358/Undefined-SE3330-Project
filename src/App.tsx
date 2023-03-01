@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
 import BottomBar from "./BottomBar";
-import Home from "./Home";
-import Stats from "./Stats";
-import Discover from "./Discover";
-import Mine from "./Mine";
+import Home from "./pages/Home";
+import Stats from "./pages/Stats";
+import Discover from "./pages/Discover";
+import Mine from "./pages/Mine";
 
 const {Route, Switch, MemoryRouter} = require('react-router-dom');
 
