@@ -25,7 +25,7 @@ class Home extends React.Component {
     render() {
         var _moment = moment().format('HH:mm:ss')
 
-        return (<div className="body">
+        return (<div className="homeBody">
             <div className="avatarField">
                 Title here.
                 <div className="avatar">
@@ -44,7 +44,7 @@ class Home extends React.Component {
                 <div className="countBox">
                     本月已记录<em>$0$</em>次
                 </div>
-                <Button block className="startBtn" size='large'
+                <Button className="startBtn" size='large'
                         fill='solid' color='primary'>
                     <AddOutline fontSize={30}/>
                 </Button>

@@ -1,0 +1,96 @@
+.statsBody {
+    width: 100%;
+}
+
+.absoluteFieldBox {
+    margin-top: 60px;
+    height: 230px;
+}
+
+.absoluteField {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border-bottom: solid 1px var(--adm-color-border);
+}
+
+.filterField {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 200px;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: #7fe279;
+    box-shadow: 0 0 5px 3px #666;
+}
+
+.navBarField {
+    height: 50px;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: solid 1px var(--adm-color-border);
+}
+
+.filterModeBox {
+    width: 70%;
+}
+
+/*.adm-selector-item {*/
+/*    margin: 3px 2px;*/
+/*}*/
+
+.selectorBox {
+    padding: 3px 2px;
+    --border-radius: 20px;
+}
+
+.adm-selector-item-active,
+.adm-selector-item-multiple-active {
+    box-shadow: 0 0 2px 2px;
+    color: green;
+    background-color: #c0d5c0;
+}
+
+.adm-capsule-tabs-tab-active {
+    background-color: #5ce077;
+    border: #427b38 2px solid;
+}
+
+.appBottom {
+    position: fixed;
+    z-index: 100;
+    bottom: 0;
+    width: 100%;
+    padding: 1em 0;
+    background-color: white;
+    border-top: solid 1px var(--adm-color-border);
+}
+
+.set {
+    font-size: 100px;
+}
+
+.capRenderField {
+    padding-bottom: 90px;
+}
+
+.eventListField {
+    width: 100%;
+}
+
+.sgeventIcon {
+    position: absolute;
+    z-index: 1;
+    right: 20px;
+}
+
+.sgeventBox:active {
+    opacity: 70%;
+}
