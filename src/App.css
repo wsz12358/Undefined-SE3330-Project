@@ -5,10 +5,9 @@
 }
 
 .appBody {
-    flex: 1;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    height: calc(100% - 76px);
+    width: 100%;
 }
 
 .appBottom {

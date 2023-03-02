@@ -1,4 +1,4 @@
-.body {
+.homeBody {
     height: 100%;
     width: 100%;
     background-color: #4fd7b0;
@@ -34,6 +34,7 @@
     height: calc(100% - 6em);
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     padding-top: 3em;
 }
 
@@ -101,7 +102,7 @@
 .tagBtn {
     width: 30%;
     margin: 2em auto;
-    --border-color: black;
+    border-color: black;
     background-color: transparent;
 }
 

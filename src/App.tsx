@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import BottomBar from "./components/BottomBar";
 import Home from "./pages/Home";
-import Stats from "./pages/Stats";
+import Stats from "./pages/Stats/Stats";
 import Discover from "./pages/Discover";
 import Mine from "./pages/Mine";
 
