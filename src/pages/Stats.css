@@ -1,0 +1,9 @@
+.navBarField {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: solid 1px var(--adm-color-border);;
+}
