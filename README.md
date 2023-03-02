@@ -17,7 +17,7 @@ md文件用的是markdown语言，说不定之后放弃了直接用txt写。 <br
 随后点击上方的add configuration，左上角加号，选择npm，右侧记得选择script为start，下方interpreter应该自己帮你选好node.exe了，如果没有自己选一下。<br><br>
 
 随后在clion底下的控制台中分别输入
-    `npm install --save antd-mobile`
+    
     `npm install --save antd-mobile-icons`
 如果显示npm为不可识别的指令，则在存放这个clion project的文件夹里打开一个cmd再输入这两行。<br><br>
 
@@ -36,6 +36,12 @@ md文件用的是markdown语言，说不定之后放弃了直接用txt写。 <br
 后期应该还会有service文件夹，用于存放API的调用；以及utils文件夹，用于存放通用函数。<br><br>
 
 参考了`www.jianshu.com/p/383a4a80c1d9`<br><br>
+
+**23.3.2 influ3nza: 新增依赖包。**<br><br>
+
+请在控制台中运行
+    `npm install --save moment`
+从而正常编译运行。<br><br>
 
 
 
