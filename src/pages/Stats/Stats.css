@@ -42,10 +42,6 @@
     width: 70%;
 }
 
-/*.adm-selector-item {*/
-/*    margin: 3px 2px;*/
-/*}*/
-
 .selectorBox {
     padding: 3px 2px;
     --border-radius: 20px;
@@ -85,12 +81,44 @@
     width: 100%;
 }
 
-.sgeventIcon {
+.stats_timescroll {
+    position: fixed;
+    z-index: 1;
+    left: 35px;
+    width: 10px;
+    height: 1000px;
+    background-color: #bbdfbb;
+}
+
+.stats_sgEventArrow {
     position: absolute;
     z-index: 1;
     right: 20px;
 }
 
-.sgeventBox:active {
+.sgEventBox:active {
     opacity: 70%;
+}
+
+.stats_sgEventIcon {
+    position: absolute;
+    z-index: 1;
+    left: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: green;
+    background-image: url(../../assets/miyu.jpg);
+    background-size: 100%;
+    border: black 2px solid;
+}
+
+.stats_dateBox {
+    margin: 10px;
+    margin-right: calc(50% + 50px);
+    width: 100px;
+    text-align: center;
+    font: bolder 20px/2 "Microsoft Sans Serif";
+    border-radius: 20px;
+    background-color: #9fe774;
 }
