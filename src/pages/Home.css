@@ -1,7 +1,7 @@
 .body {
     height: 100%;
     width: 100%;
-    background-color: #aef7ae;
+    background-color: #4fd7b0;
 }
 
 .avatarField {
@@ -10,7 +10,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font: bold 2em "Microsoft YaHei UI";
+    font: 2em "Microsoft Sans Serif";
 }
 
 .avatar {
@@ -34,14 +34,16 @@
     height: calc(100% - 6em);
     flex-direction: column;
     justify-content: center;
-    padding-top: 6em;
+    padding-top: 3em;
 }
 
 .frontBox {
-    width: 75%;
+    overflow: hidden;
+    width: 300px;
+    height: 300px;
     margin:0 auto;
     border: .5em solid;
-    border-radius: 1em;
+    border-radius: 50%;
     animation: frontBoxBorderAnim 6s infinite;
 }
 
@@ -52,12 +54,13 @@
 }
 
 .timeBox {
-    padding: .45em 0;
-    text-align: center;
-    font: 250 5em/1.5 sans-serif;
+    display: flex;
+    height: 150px;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+    font: 250 5em sans-serif;
     border-bottom: rgba(0, 0, 0,.3) .05em solid;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
     background-color: #88f183;
 }
 
@@ -65,13 +68,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 96px;
-    margin:0 auto;
+    height: 150px;
+    margin: 0 auto;
+    padding-bottom: 30px;
     text-align: center;
     background-color: #7fe279;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     font: 700 1.5em sans-serif;
+}
+
+.noteBox {
+    padding-left: 15%;
+    padding-right: 15%;
 }
 
 .dateBox {
@@ -101,12 +110,12 @@
     align-items: center;
     justify-content: center;
     margin-top: 1em;
-    font: bold 2em "Microsoft YaHei UI";
+    font: 100 2em "Microsoft Sans Serif";
 }
 
 .startBtn {
     width: 50%;
-    margin: 4em auto;
+    margin: 3em auto;
     border-radius: 1em;
     border-color: #427b38;
     border-width: 2px;

@@ -12,7 +12,10 @@
 }
 
 .appBottom {
-    flex: 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
     padding: 1em 0;
+    background-color: white;
     border-top: solid 1px var(--adm-color-border);
 }

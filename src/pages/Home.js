@@ -2,6 +2,7 @@ import React from 'react'
 import './Home.css'
 import {Button} from 'antd-mobile'
 import {AddOutline, UndoOutline} from "antd-mobile-icons";
+import moment from "moment"
 
 class Home extends React.Component {
     state = {showsDate: true}
@@ -22,6 +23,8 @@ class Home extends React.Component {
     }
 
     render() {
+        var _moment = moment().format('HH:mm:ss')
+
         return (<div className="body">
             <div className="avatarField">
                 Title here.
@@ -31,7 +34,7 @@ class Home extends React.Component {
             <div className="frontField">
                 <div className="frontBox">
                     <div className="timeBox">
-                        20:02:30
+                        {_moment}
                     </div>
                     {this.renderDate()}
                 </div>
