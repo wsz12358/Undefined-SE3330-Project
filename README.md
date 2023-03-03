@@ -43,6 +43,18 @@ md文件用的是markdown语言，说不定之后放弃了直接用txt写。 <br
     `npm install --save moment`
 从而正常编译运行。<br><br>
 
+**23.3.3 influ3nza: 有关git pull的注意事项。**<br><br>
 
+在每次写代码之前，请先git pull以更新最新的样式修改。如果显示untracked branch警告，点击下方蓝字，手动修改为origin-main。<br><br>
+
+另，我修改了.gitignore文件，把一些文件在整个git版本控制中忽略了，应该没事（），这个文件可能不会在git pull的时候更新，我不清楚。我把修改方式写一下。<br><br>
+
+以文本文档的方式打开.gitignore，在末尾加上三行：
+    
+    .name
+    Project_Default.xml
+    vcs.xml
+    
+即可。记得先修改再git pull。
 
 
