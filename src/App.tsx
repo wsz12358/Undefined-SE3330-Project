@@ -13,17 +13,13 @@ function App() {
         <div className="app">
             <div className="appBody">
                 <Switch>
-                    <Route exact path='/home'>
-                        <Home/>
+                    <Route path='/stats' component={Stats}>
                     </Route>
-                    <Route exact path='/stats'>
-                        <Stats/>
+                    <Route path='/home' component={Home}>
                     </Route>
-                    <Route exact path='/discover'>
-                        <Discover/>
+                    <Route path='/discover' component={Discover}>
                     </Route>
-                    <Route exact path='/mine'>
-                        <Mine/>
+                    <Route path='/mine' component={Mine}>
                     </Route>
                 </Switch>
             </div>
