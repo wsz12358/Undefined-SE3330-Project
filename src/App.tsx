@@ -3,7 +3,7 @@ import './App.css';
 import BottomBar from "./components/BottomBar";
 import Home from "./pages/Home";
 import Stats from "./pages/Stats/Stats";
-import Discover from "./pages/Discover";
+import Discover from "./pages/Discover/Discover";
 import Mine from "./pages/Mine";
 
 const {Route, Switch, MemoryRouter} = require('react-router-dom');

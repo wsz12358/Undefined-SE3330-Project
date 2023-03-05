@@ -1,0 +1,93 @@
+.disBody {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    font: 2em "Microsoft Sans Serif";
+}
+
+.head {
+    position: relative;
+    height: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font: 2em "Microsoft Sans Serif";
+    background-color: lawngreen;
+}
+
+.bottomLine {
+    border-bottom: 1px solid gray;
+}
+
+.oneEvent {
+    width: 80%;
+    margin: 1em;
+}
+
+.avatarAndTag {
+    margin-bottom: 1em;
+}
+
+.share {
+    width: 90%;
+    margin: auto;
+    font-size: 0.8em;
+}
+
+.locationAndFunc {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.locationAndFunc .location {
+    margin-left: 5%;
+    display: inline-block;
+    font-size: 0.7em;
+    text-align: center;
+}
+
+.locationAndFunc .allFunc {
+    display: inline-block;
+    text-align: right;
+    width: 60%;
+}
+
+.locationAndFunc .allFunc .func {
+    margin-left: 5%;
+    display: inline-block;
+}
+
+.comment {
+    width: 90%;
+    margin: auto;
+    border: 1px solid black;
+}
+
+.comment .likePeople {
+    border-bottom: 1px solid black;
+    font-size: 0.7em;
+}
+
+.comment .reply {
+    padding: 0.2em;
+}
+
+.comment .replyMessage {
+    font-size: 0.7em;
+}
+
+.foot {
+    position: relative;
+    height: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font: 1em "Microsoft Sans Serif";
+}
+
+.aaa {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
