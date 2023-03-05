@@ -4,7 +4,7 @@
 
 .absoluteFieldBox {
     margin-top: 60px;
-    height: 230px;
+    height: 220px;
 }
 
 .absoluteField {
@@ -14,7 +14,7 @@
     left: 0;
     width: 100%;
     background-color: #fff;
-    border-bottom: solid 1px var(--adm-color-border);
+    border-bottom: solid 5px #427b38;
 }
 
 .filterField {
@@ -66,17 +66,28 @@
     font-size: 100px;
 }
 
-.capRenderField {
-    padding-bottom: 90px;
+.eventListField, .statsListField {
+    width: 100%;
+    background-color: #71b298;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
-.eventListField {
-    width: 100%;
+.statsListField {
+    padding-bottom: 100px;
+}
+
+.statsListField {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .stats_timescroll {
     position: fixed;
     z-index: 1;
+    top: -100px;
     left: 35px;
     width: 10px;
     height: 1000px;
@@ -114,4 +125,17 @@
     font: bolder 20px/2 "Microsoft Sans Serif";
     border-radius: 20px;
     background-color: #9fe774;
+}
+
+.stats_statsBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #fff;
+    width: 80%;
+    height: 300px;
+    margin: 20px 0;
+    border-radius: 20px;
 }
