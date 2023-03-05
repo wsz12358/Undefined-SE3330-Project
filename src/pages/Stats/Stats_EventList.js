@@ -1,6 +1,7 @@
 import React from 'react'
 import './Stats.css'
 import {RightOutline} from "antd-mobile-icons";
+import {useHistory} from "react-router-dom";
 
 const divstyle = {
     display: 'flex',
@@ -16,7 +17,13 @@ const divstyle = {
     font: 'bold 30px Microsoft-YaHei',
 }//change position
 
-const stats_eventList = (eventlist) => {
+const Stats_eventList = (props) => {
+    const history = useHistory();
+
+    const {eventlist, goAddr} = props;
+
+    const onClickEvent = () => history.push(goAddr)
+
     return (<div className="eventListField" align="right">
         <div className="stats_timescroll"/>
         {eventlist.map((sgevent, idx) => (
@@ -26,7 +33,8 @@ const stats_eventList = (eventlist) => {
                 </div>
                 <div className="stats_sgEventIcon"/>
                 <div className={"sgEventBox" + eventlist[idx].key + " sgEventBox"}
-                     style={divstyle}>
+                     style={divstyle}
+                     onClick={onClickEvent}>
                     Event {eventlist[idx].key}
                     <div className="stats_sgEventArrow">
                         <RightOutline fontSize={50}/>
@@ -37,4 +45,4 @@ const stats_eventList = (eventlist) => {
     </div>)
 }
 
-export default stats_eventList
+export default Stats_eventList

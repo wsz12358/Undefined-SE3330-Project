@@ -2,6 +2,7 @@ import React from 'react'
 import {CapsuleTabs, Selector} from "antd-mobile";
 import "./Stats.css"
 import Stats_eventList from './Stats_EventList'
+import Stats_statsList from "./Stats_statsList";
 import HeaderBar from "../../components/HeaderBar";
 import OnClickBack from "../../utils/OnClickBack";
 
@@ -38,17 +39,20 @@ const eventList = [{key: '1', date: 'Dec.12'}, {key: '2', date: 'Dec.11'}, {key:
 
 class Stats extends React.Component {
     state = {
-        activekey: "cap1"
+        activekey: "event"
     }
 
     backAddr = '/home'
 
     capRender = () => {
-        if (this.state.activekey === "cap1")
+        if (this.state.activekey === "event")
             return <div>
-                {Stats_eventList(eventList)}
+                <Stats_eventList eventlist={eventList} goAddr = '/stats/details'/>
             </div>
-        else return <div>you</div>
+        else
+            return <div>
+                {Stats_statsList()}
+        </div>
     }
     onCapChange = (activeKey) => {
         this.setState({activekey: activeKey})
@@ -62,13 +66,13 @@ class Stats extends React.Component {
                     <div className="filterField">
                         <div className="filterModeBox">
                             <CapsuleTabs onChange={this.onCapChange}>
-                                <CapsuleTabs.Tab title="Yes" key="cap1">
+                                <CapsuleTabs.Tab title="Yes" key="event">
                                     <Selector columns={3} options={options}
                                               showCheckMark={false}
                                               multiple={true}
                                               className="selectorBox"/>
                                 </CapsuleTabs.Tab>
-                                <CapsuleTabs.Tab title="No" key="cap2">
+                                <CapsuleTabs.Tab title="No" key="stats">
 
                                 </CapsuleTabs.Tab>
                             </CapsuleTabs>
