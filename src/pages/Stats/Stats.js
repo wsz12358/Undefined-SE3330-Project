@@ -1,7 +1,9 @@
 import React from 'react'
-import {NavBar, CapsuleTabs, Collapse, SwipeAction, Selector} from "antd-mobile";
+import {CapsuleTabs, Selector} from "antd-mobile";
 import "./Stats.css"
 import Stats_eventList from './Stats_EventList'
+import HeaderBar from "../../components/HeaderBar";
+import OnClickBack from "../../utils/OnClickBack";
 
 const options = [
     {
@@ -32,13 +34,14 @@ const options = [
 
 const eventList = [{key: '1', date: 'Dec.12'}, {key: '2', date: 'Dec.11'}, {key: '3', date: 'Dec.6'},
     {key: '4', date: 'Dec.1'}, {key: '5', date: 'Nov.20'}, {key: '6', date: 'Nov.10'}, {key: '7', date: 'Nov.1'},
-    {key: '8', date: 'Sept.9'} ]
-
+    {key: '8', date: 'Sept.9'}]
 
 class Stats extends React.Component {
     state = {
         activekey: "cap1"
     }
+
+    backAddr = '/home'
 
     capRender = () => {
         if (this.state.activekey === "cap1")
@@ -55,9 +58,7 @@ class Stats extends React.Component {
         return (<div className="statsBody">
             <div className="absoluteFieldBox">
                 <div className="absoluteField">
-                    <div className="navBarField">
-                        <NavBar onBack={this.onClickBack} className="navBar">回顾</NavBar>
-                    </div>
+                    <HeaderBar backFunc={OnClickBack.bind(this)} title='回顾'/>
                     <div className="filterField">
                         <div className="filterModeBox">
                             <CapsuleTabs onChange={this.onCapChange}>
@@ -65,7 +66,7 @@ class Stats extends React.Component {
                                     <Selector columns={3} options={options}
                                               showCheckMark={false}
                                               multiple={true}
-                                    className="selectorBox"/>
+                                              className="selectorBox"/>
                                 </CapsuleTabs.Tab>
                                 <CapsuleTabs.Tab title="No" key="cap2">
 
