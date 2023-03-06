@@ -4,15 +4,16 @@
     flex-direction: column;
 }
 
-.appBody {
+.app_body {
     display: flex;
     height: calc(100% - 76px);
     width: 100%;
 }
 
-.appBottom {
+.app_bottom {
     position: fixed;
     bottom: 0;
+    z-index: 100;
     width: 100%;
     padding: 1em 0;
     background-color: white;

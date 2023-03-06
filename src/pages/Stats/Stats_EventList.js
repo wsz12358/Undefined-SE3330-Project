@@ -24,7 +24,7 @@ const Stats_eventList = (props) => {
 
     const onClickEvent = (value) => history.push(goAddr, {id: value})
 
-    return (<div className="eventListField" align="right">
+    return (<div className="event_listField" align="right">
         <div className="stats_timescroll"/>
         {eventlist.map((sgevent, idx) => (
             <div className="stats_sgEventField" key={idx}>
@@ -32,7 +32,7 @@ const Stats_eventList = (props) => {
                     {eventlist[idx].date}
                 </div>
                 <div className="stats_sgEventIcon"/>
-                <div className={"sgEventBox" + eventlist[idx].key + " sgEventBox"}
+                <div className={"stats_sgEventBox" + eventlist[idx].key + " stats_sgEventBox"}
                      style={divstyle}
                      onClick={() => onClickEvent(eventlist[idx].key)}>
                     Event {eventlist[idx].key}
