@@ -17,9 +17,9 @@ This is the repo for SEP&amp;Practice project 2023.
 这波我的，自己没看清楚就点了apply，还好少的东西不多。给大家提个醒。<br><br>
 
 **23.3.6 influ3nza: 更新依赖包。**<br><br>
-
+## <font color=red>注意此行有修改</font>
 请在控制台中运行
-    `npm install --save-dev react-router-dom`
+    `npm install --save-dev @types/react-router-dom`
 从而正常编译运行。<br><br>
 
 **23.3.3 influ3nza: 有关git pull的注意事项。**<br><br>
