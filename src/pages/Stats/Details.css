@@ -1,24 +1,30 @@
-.deBody {
+.detail_body {
     height: 100%;
     width: 100%;
-    position: relative;
 }
 
-.detailsHead {
+.detail_absoluteField {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #fff;
+}
+
+.detail_eventField {
+    margin-top: 60px;
+    overflow: hidden;
 }
 
 .deTime {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     width: 100%;
     padding: 1%;
+    margin-top: 20px;
 
-    font: 2em "微软雅黑 Light";
+    font: 3em "微软雅黑 Light";
 }
 
 .deTag {

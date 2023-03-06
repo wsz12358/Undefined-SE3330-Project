@@ -1,18 +1,21 @@
-.disBody {
+.discuv_body {
     height: 100%;
     width: 100%;
     position: relative;
     font: 2em "Microsoft Sans Serif";
 }
 
-.head {
-    position: relative;
-    height: 2em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font: 2em "Microsoft Sans Serif";
-    background-color: lawngreen;
+.discuv_head {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+}
+
+.discuv_field {
+    margin-top: 60px;
+    padding-bottom: 100px;
 }
 
 .bottomLine {
