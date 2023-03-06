@@ -22,7 +22,7 @@ const Stats_eventList = (props) => {
 
     const {eventlist, goAddr} = props;
 
-    const onClickEvent = () => history.push(goAddr)
+    const onClickEvent = (value) => history.push(goAddr, {id: value})
 
     return (<div className="eventListField" align="right">
         <div className="stats_timescroll"/>
@@ -34,7 +34,7 @@ const Stats_eventList = (props) => {
                 <div className="stats_sgEventIcon"/>
                 <div className={"sgEventBox" + eventlist[idx].key + " sgEventBox"}
                      style={divstyle}
-                     onClick={onClickEvent}>
+                     onClick={() => onClickEvent(eventlist[idx].key)}>
                     Event {eventlist[idx].key}
                     <div className="stats_sgEventArrow">
                         <RightOutline fontSize={50}/>
