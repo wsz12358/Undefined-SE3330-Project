@@ -3,11 +3,14 @@ import './Home.css'
 import {Button} from 'antd-mobile'
 import {AddOutline, UndoOutline} from "antd-mobile-icons";
 import Timer from "../utils/Timer";
+import OnClickRoute from "../utils/OnClickRoute";
 
 class Home extends React.Component {
     state = {
         showsDate: true,
     }
+
+    goAddr = '/mine'
 
     onTagBtnClick = () => {
         this.setState({showsDate: !this.state.showsDate});
@@ -28,7 +31,7 @@ class Home extends React.Component {
         return (<div className="home_body">
             <div className="home_avatarField">
                 Title here.
-                <div className="home_avatar">
+                <div className="home_avatar" onClick={OnClickRoute.bind(this, this.goAddr)}>
                 </div>
             </div>
             <div className="home_frontField">

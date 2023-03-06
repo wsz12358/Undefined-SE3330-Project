@@ -1,6 +1,6 @@
 import React from 'react'
 import HeaderBar from "../../components/HeaderBar";
-import OnClickBack from "../../utils/OnClickBack";
+import OnClickRoute from "../../utils/OnClickRoute";
 import './Details.css'
 
 class Details extends React.Component {
@@ -9,7 +9,7 @@ class Details extends React.Component {
     render() {
         return (<div className="detailBody">
             <div className="detail_absoluteField">
-                <HeaderBar backFunc={OnClickBack.bind(this)} title="详细"/>
+                <HeaderBar backFunc={OnClickRoute.bind(this, this.backAddr)} title="详细"/>
             </div>
             Clicked event{this.props.location.state.id}.
         </div>)

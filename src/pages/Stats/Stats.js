@@ -4,7 +4,7 @@ import "./Stats.css"
 import Stats_eventList from './Stats_EventList'
 import Stats_StatsList from "./Stats_StatsList";
 import HeaderBar from "../../components/HeaderBar";
-import OnClickBack from "../../utils/OnClickBack";
+import OnClickRoute from "../../utils/OnClickRoute";
 
 const options = [
     {
@@ -62,7 +62,7 @@ class Stats extends React.Component {
         return (<div className="stats_body">
             <div className="stats_absoluteFieldBox">
                 <div className="stats_absoluteField">
-                    <HeaderBar backFunc={OnClickBack.bind(this)} title='回顾'/>
+                    <HeaderBar backFunc={OnClickRoute.bind(this, this.backAddr)} title='回顾'/>
                     <div className="stats_filterField">
                         <div className="stats_filterModeBox">
                             <CapsuleTabs onChange={this.onCapChange}>
