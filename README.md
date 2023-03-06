@@ -6,6 +6,12 @@ This is the repo for SEP&amp;Practice project 2023.
 
 ## 按照时间倒序排列，记得常来看一眼！！！
 
+**23.3.6 influ3nza: 更新依赖包。**<br><br>
+
+请在控制台中运行
+    `npm install --save-dev react-router-dom`
+从而正常编译运行。<br><br>
+
 **23.3.3 influ3nza: 有关git pull的注意事项。**<br><br>
 
 在每次写代码之前，请先git pull以更新最新的样式修改。如果显示untracked branch警告，点击下方蓝字，手动修改为origin-main。<br><br>
