@@ -1,20 +1,21 @@
 import React from 'react'
-import "./Details.css"
-import OnClickBack from "../../utils/OnClickBack";
 import HeaderBar from "../../components/HeaderBar";
+import OnClickRoute from "../../utils/OnClickRoute";
+import './Details.css'
+
 import {Badge, Button, Collapse, Image, Tag} from "antd-mobile";
 import jntm from "../../assets/jntm.png"
 import {AddCircleOutline} from "antd-mobile-icons";
+
 
 class Details extends React.Component {
 
     backAddr = "./stats"
 
     render() {
-        return (
-        <div className='deBody'>
-            <div className="detailsHead">
-                <HeaderBar backFunc={OnClickBack.bind(this)} title='详细'/>
+        return (<div className="detailBody">
+            <div className="detail_absoluteField">
+                <HeaderBar backFunc={OnClickRoute.bind(this, this.backAddr)} title="详细"/>
             </div>
             <div className='deTime'>
                     2023/3/6 12:00
