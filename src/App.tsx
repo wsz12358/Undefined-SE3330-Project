@@ -10,11 +10,10 @@ import {useLocation, Route, Switch} from 'react-router-dom'
 
 function App() {
     const location = useLocation();
-    console.log(location.pathname)
 
     return (
         <div className="app">
-            <div className="appBody">
+            <div className="app_body">
                 <Switch>
                     <Route exact path='/stats/details' component={Details}/>
 
@@ -29,7 +28,7 @@ function App() {
                 </Switch>
             </div>
             {!(location.pathname === '/stats/details') &&
-            <div className="appBottom">
+            <div className="app_bottom">
                 <BottomBar/>
             </div>}
         </div>

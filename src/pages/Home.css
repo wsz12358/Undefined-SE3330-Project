@@ -1,10 +1,10 @@
-.homeBody {
+.home_body {
     height: 100%;
     width: 100%;
     background-color: #4fd7b0;
 }
 
-.avatarField {
+.home_avatarField {
     position: relative;
     height: 3em;
     display: flex;
@@ -13,7 +13,7 @@
     font: 2em "Microsoft Sans Serif";
 }
 
-.avatar {
+.home_avatar {
     position: absolute;
     height: 2em;
     width: 2em;
@@ -29,7 +29,7 @@
     box-shadow: 0 0 .3em .05em rgba(0, 0, 0, .3);
 }
 
-.frontField {
+.home_frontField {
     display: flex;
     height: calc(100% - 6em);
     flex-direction: column;
@@ -38,23 +38,23 @@
     padding-top: 3em;
 }
 
-.frontBox {
+.home_frontBox {
     overflow: hidden;
     width: 300px;
     height: 300px;
     margin:0 auto;
     border: .5em solid;
     border-radius: 50%;
-    animation: frontBoxBorderAnim 6s infinite;
+    animation: home_frontBoxBorderAnim 6s infinite;
 }
 
-@keyframes frontBoxBorderAnim {
+@keyframes home_frontBoxBorderAnim {
     0% {border-color: rgba(0, 0, 0, 1);}
     50% {border-color: rgba(0, 0, 0,.3);}
     100% {border-color: rgba(0, 0, 0, 1);}
 }
 
-.timeBox {
+.home_timeBox {
     display: flex;
     height: 150px;
     justify-content: center;
@@ -65,7 +65,7 @@
     background-color: #88f183;
 }
 
-.noteBox, .dateBox {
+.home_noteBox, .home_dateBox {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -79,34 +79,34 @@
     font: 700 1.5em sans-serif;
 }
 
-.noteBox {
+.home_noteBox {
     padding-left: 15%;
     padding-right: 15%;
 }
 
-.dateBox {
+.home_dateBox {
     font: bolder 2.5em/64px "Book Antiqua";
     color: white;
     background-image: url(../assets/roxy.png);
     background-size: 100%;
 }
 
-.noteBoxDisp {
+.home_noteBoxDisp {
     display: none;
 }
 
-.dateBoxDisp {
+.home_dateBoxDisp {
     display: none;
 }
 
-.tagBtn {
+.home_tagBtn {
     width: 30%;
     margin: 2em auto;
     border-color: black;
     background-color: transparent;
 }
 
-.countBox {
+.home_countBox {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -114,7 +114,7 @@
     font: 100 2em "Microsoft Sans Serif";
 }
 
-.startBtn {
+.home_startBtn {
     width: 50%;
     margin: 3em auto;
     border-radius: 1em;
