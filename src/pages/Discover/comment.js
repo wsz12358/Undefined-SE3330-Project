@@ -21,19 +21,19 @@ const DiscoverCommentList = () => {
                     </div>
                     <div className='allFunc'>
                         <div className={"func"}>
-                            <LikeOutline />
+                            <LikeOutline/>
                         </div>
                         <div className={"func"}>
-                            <MessageOutline />
+                            <MessageOutline/>
                         </div>
                         <div className={"func"}>
-                            <SendOutline />
+                            <SendOutline/>
                         </div>
                     </div>
                 </div>
                 <div className={"comment"}>
                     <div className={"likePeople"}>
-                        <LikeOutline />
+                        <LikeOutline/>
                         纯鹿仁
                         梅素汁
                         共2人点赞

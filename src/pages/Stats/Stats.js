@@ -5,37 +5,11 @@ import Stats_eventList from './Stats_EventList'
 import Stats_StatsList from "./Stats_StatsList";
 import HeaderBar from "../../components/HeaderBar";
 import OnClickRoute from "../../utils/OnClickRoute";
+import eventListDemo from "../../utils/EventListDemo";
 
-const options = [
-    {
-        label: 'Keep',
-        value: '1',
-    },
-    {
-        label: 'calm',
-        value: '2',
-    },
-    {
-        label: 'and',
-        value: '3',
-    },
-    {
-        label: 'carry',
-        value: '4',
-    },
-    {
-        label: 'on',
-        value: '5',
-    },
-    {
-        label: 'six',
-        value: '6',
-    },
-]
+const options = [{label: 'Keep', value: '1',}, {label: 'calm', value: '2',}, {label: 'and', value: '3',},
+    {label: 'carry', value: '4',}, {label: 'on', value: '5',}, {label: 'six', value: '6',},]
 
-const eventList = [{key: '1', date: 'Dec.12'}, {key: '2', date: 'Dec.11'}, {key: '3', date: 'Dec.6'},
-    {key: '4', date: 'Dec.1'}, {key: '5', date: 'Nov.20'}, {key: '6', date: 'Nov.10'}, {key: '7', date: 'Nov.1'},
-    {key: '8', date: 'Sept.9'}]
 
 class Stats extends React.Component {
     state = {
@@ -43,16 +17,17 @@ class Stats extends React.Component {
     }
 
     backAddr = '/home'
+    goAddr = '/stats/details'
 
     capRender = () => {
         if (this.state.activekey === "event")
             return <div>
-                <Stats_eventList eventlist={eventList} goAddr = '/stats/details'/>
+                <Stats_eventList eventlist={eventListDemo} goAddr={this.goAddr}/>
             </div>
         else
             return <div>
                 {Stats_StatsList()}
-        </div>
+            </div>
     }
     onCapChange = (activeKey) => {
         this.setState({activekey: activeKey})
