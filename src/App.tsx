@@ -6,31 +6,33 @@ import Stats from "./pages/Stats/Stats";
 import Discover from "./pages/Discover/Discover";
 import Mine from "./pages/Mine";
 import Details from "./pages/Stats/Details";
-
-const {Route, Switch, MemoryRouter} = require('react-router-dom');
+import {useLocation, Route, Switch} from 'react-router-dom'
 
 function App() {
-    return (<MemoryRouter initialEntries={['/home']}>
+    const location = useLocation();
+
+    return (
         <div className="app">
-            <div className="appBody">
+            <div className="app_body">
                 <Switch>
-                    <Route exact path='/stats/details' component={Details} />
+                    <Route exact path='/stats/details' component={Details}/>
 
-                    <Route path='/stats' component={Stats} />
+                    <Route path='/stats' component={Stats}/>
 
-                    <Route path='/home' component={Home} />
+                    <Route path='/home' component={Home}/>
 
-                    <Route path='/discover' component={Discover} />
+                    <Route path='/discover' component={Discover}/>
 
-                    <Route path='/mine' component={Mine} />
+                    <Route path='/mine' component={Mine}/>
 
                 </Switch>
             </div>
-            <div className="appBottom">
-                <BottomBar />
-            </div>
+            {!(location.pathname === '/stats/details') &&
+            <div className="app_bottom">
+                <BottomBar/>
+            </div>}
         </div>
-    </MemoryRouter>)
+    )
 }
 
 export default App;

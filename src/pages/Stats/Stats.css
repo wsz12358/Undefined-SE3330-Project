@@ -1,13 +1,13 @@
-.statsBody {
+.stats_body {
     width: 100%;
 }
 
-.absoluteFieldBox {
+.stats_absoluteFieldBox {
     margin-top: 60px;
     height: 220px;
 }
 
-.absoluteField {
+.stats_absoluteField {
     position: fixed;
     z-index: 2;
     top: 0;
@@ -17,7 +17,7 @@
     border-bottom: solid 5px #427b38;
 }
 
-.filterField {
+.stats_filterField {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,11 +31,11 @@
     box-shadow: 0 0 5px 3px #666;
 }
 
-.filterModeBox {
+.stats_filterModeBox {
     width: 70%;
 }
 
-.selectorBox {
+.stats_selectorBox {
     padding: 3px 2px;
     --border-radius: 20px;
 }
@@ -52,36 +52,19 @@
     border: #427b38 2px solid;
 }
 
-.appBottom {
-    position: fixed;
-    z-index: 100;
-    bottom: 0;
-    width: 100%;
-    padding: 1em 0;
-    background-color: white;
-    border-top: solid 1px var(--adm-color-border);
-}
-
-.set {
-    font-size: 100px;
-}
-
-.eventListField, .statsListField {
+.event_listField, .stats_listField {
     width: 100%;
     background-color: #71b298;
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
-.statsListField {
-    padding-bottom: 100px;
-}
-
-.statsListField {
+.stats_listField {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    padding-bottom: 100px;
 }
 
 .stats_timescroll {
@@ -100,7 +83,7 @@
     right: 20px;
 }
 
-.sgEventBox:active {
+.stats_sgEventBox:active {
     opacity: 70%;
 }
 

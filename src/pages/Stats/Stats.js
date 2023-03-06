@@ -2,7 +2,7 @@ import React from 'react'
 import {CapsuleTabs, Selector} from "antd-mobile";
 import "./Stats.css"
 import Stats_eventList from './Stats_EventList'
-import Stats_statsList from "./Stats_statsList";
+import Stats_StatsList from "./Stats_StatsList";
 import HeaderBar from "../../components/HeaderBar";
 import OnClickBack from "../../utils/OnClickBack";
 
@@ -51,7 +51,7 @@ class Stats extends React.Component {
             </div>
         else
             return <div>
-                {Stats_statsList()}
+                {Stats_StatsList()}
         </div>
     }
     onCapChange = (activeKey) => {
@@ -59,18 +59,18 @@ class Stats extends React.Component {
     }
 
     render() {
-        return (<div className="statsBody">
-            <div className="absoluteFieldBox">
-                <div className="absoluteField">
+        return (<div className="stats_body">
+            <div className="stats_absoluteFieldBox">
+                <div className="stats_absoluteField">
                     <HeaderBar backFunc={OnClickBack.bind(this)} title='回顾'/>
-                    <div className="filterField">
-                        <div className="filterModeBox">
+                    <div className="stats_filterField">
+                        <div className="stats_filterModeBox">
                             <CapsuleTabs onChange={this.onCapChange}>
                                 <CapsuleTabs.Tab title="Yes" key="event">
                                     <Selector columns={3} options={options}
                                               showCheckMark={false}
                                               multiple={true}
-                                              className="selectorBox"/>
+                                              className="stats_selectorBox"/>
                                 </CapsuleTabs.Tab>
                                 <CapsuleTabs.Tab title="No" key="stats">
 
@@ -80,7 +80,7 @@ class Stats extends React.Component {
                     </div>
                 </div>
             </div>
-            <div className="capRenderField">
+            <div className="stats_capRenderField">
                 {this.capRender()}
             </div>
         </div>);
