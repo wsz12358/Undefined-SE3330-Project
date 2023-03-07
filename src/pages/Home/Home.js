@@ -2,8 +2,9 @@ import React from 'react'
 import './Home.css'
 import {Button} from 'antd-mobile'
 import {AddOutline, UndoOutline} from "antd-mobile-icons";
-import Timer from "../utils/Timer";
-import OnClickRoute from "../utils/OnClickRoute";
+import Timer from "../../utils/Timer";
+import OnClickRoute from "../../utils/OnClickRoute";
+import FocusUser from "../../utils/UserDemo";
 
 class Home extends React.Component {
     state = {
@@ -18,11 +19,11 @@ class Home extends React.Component {
     renderDate = () => {
         if (this.state.showsDate) {
             return (<div className="home_noteBox">
-                May your power brings rage.
+                {FocusUser.facade_memo}
             </div>)
         } else {
             return (<div className="home_dateBox">
-                Dec. 12
+                Dec. 31
             </div>)
         }
     }

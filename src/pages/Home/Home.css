@@ -24,7 +24,7 @@
     border-radius: 50%;
     border: black .1em solid;
     background-color: greenyellow;
-    background-image: url('../assets/miyu.jpg');
+    background-image: url('../../assets/miyu.jpg');
     background-size: 100%;
     box-shadow: 0 0 .3em .05em rgba(0, 0, 0, .3);
 }
@@ -85,10 +85,10 @@
 }
 
 .home_dateBox {
-    font: bolder 2.5em/64px "Book Antiqua";
     color: white;
-    background-image: url(../assets/roxy.png);
+    background-image: url(../../assets/roxy.png);
     background-size: 100%;
+    font: 500 50px "Adobe Arabic";
 }
 
 .home_noteBoxDisp {

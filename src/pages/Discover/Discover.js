@@ -1,6 +1,7 @@
 import React from 'react'
 import "./Discover.css"
-import DiscoverCommentList from "./comment";
+// @ts-ignore
+import DiscoverCommentList from "./Comment";
 import HeaderBar from "../../components/HeaderBar";
 import OnClickRoute from "../../utils/OnClickRoute";
 
