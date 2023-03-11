@@ -12,6 +12,7 @@ class Home extends React.Component {
     }
 
     goAddr = '/mine'
+    recordAddr = '/home/record'
 
     onTagBtnClick = () => {
         this.setState({showsDate: !this.state.showsDate});
@@ -49,7 +50,8 @@ class Home extends React.Component {
                     本月已记录<em>$0$</em>次
                 </div>
                 <Button className="home_startBtn" size='large'
-                        fill='solid' color='primary'>
+                        fill='solid' color='primary'
+                        onClick={OnClickRoute.bind(this, this.recordAddr)}>
                     <AddOutline fontSize={30}/>
                 </Button>
             </div>

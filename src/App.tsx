@@ -6,6 +6,7 @@ import Stats from "./pages/Stats/Stats";
 import Discover from "./pages/Discover/Discover";
 import Mine from "./pages/Mine/Mine";
 import Details from "./pages/Stats/Details";
+import Record from "./pages/Home/Record";
 import {useLocation, Route, Switch} from 'react-router-dom'
 
 function App() {
@@ -15,6 +16,8 @@ function App() {
         <div className="app">
             <div className="app_body">
                 <Switch>
+                    <Route exact path='/home/record' component={Record} />
+
                     <Route exact path='/stats/details' component={Details}/>
 
                     <Route path='/stats' component={Stats}/>
@@ -28,6 +31,7 @@ function App() {
                 </Switch>
             </div>
             {!(location.pathname === '/stats/details') &&
+                !(location.pathname === '/home/record') &&
             <div className="app_bottom">
                 <BottomBar/>
             </div>}

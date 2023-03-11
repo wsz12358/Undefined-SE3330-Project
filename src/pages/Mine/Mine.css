@@ -1,6 +1,7 @@
 .mine_body {
     width: 100%;
     overflow: hidden;
+    background-color: #4fd7b0;
 }
 
 .mine_avatarField {
@@ -34,7 +35,7 @@
 
 .mine_setList {
     margin-top: 100px;
-    --font-size: 22px
+    --font-size: 22px;
 }
 
 .mine_logout {

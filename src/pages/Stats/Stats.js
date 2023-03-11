@@ -7,8 +7,8 @@ import HeaderBar from "../../components/HeaderBar";
 import OnClickRoute from "../../utils/OnClickRoute";
 import eventListDemo from "../../utils/EventListDemo";
 
-const options = [{label: 'Keep', value: '1',}, {label: 'calm', value: '2',}, {label: 'and', value: '3',},
-    {label: 'carry', value: '4',}, {label: 'on', value: '5',}, {label: 'six', value: '6',},]
+const options = [{label: 'Label1', value: '1',}, {label: 'Label2', value: '2',}, {label: 'Label3', value: '3',},
+    {label: 'Label4', value: '4',}, {label: 'Label5', value: '5',}, {label: 'Label6', value: '6',},]
 
 
 class Stats extends React.Component {
@@ -41,13 +41,13 @@ class Stats extends React.Component {
                     <div className="stats_filterField">
                         <div className="stats_filterModeBox">
                             <CapsuleTabs onChange={this.onCapChange}>
-                                <CapsuleTabs.Tab title="Yes" key="event">
+                                <CapsuleTabs.Tab title="1" key="event">
                                     <Selector columns={3} options={options}
                                               showCheckMark={false}
                                               multiple={true}
                                               className="stats_selectorBox"/>
                                 </CapsuleTabs.Tab>
-                                <CapsuleTabs.Tab title="No" key="stats">
+                                <CapsuleTabs.Tab title="2" key="stats">
 
                                 </CapsuleTabs.Tab>
                             </CapsuleTabs>
