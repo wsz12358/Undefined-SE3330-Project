@@ -1,0 +1,124 @@
+.stats_body {
+    width: 100%;
+}
+
+.stats_absoluteFieldBox {
+    margin-top: 60px;
+    height: 220px;
+}
+
+.stats_absoluteField {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border-bottom: solid 5px #427b38;
+}
+
+.stats_filterField {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 200px;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: #7fe279;
+    box-shadow: 0 0 5px 3px #666;
+}
+
+.stats_filterModeBox {
+    width: 70%;
+}
+
+.stats_selectorBox {
+    padding: 3px 2px;
+    --border-radius: 20px;
+}
+
+.adm-selector-item-active,
+.adm-selector-item-multiple-active {
+    box-shadow: 0 0 2px 2px;
+    color: green;
+    background-color: #c0d5c0;
+}
+
+.adm-capsule-tabs-tab-active {
+    background-color: #5ce077;
+    border: #427b38 2px solid;
+}
+
+.event_listField, .stats_listField {
+    width: 100%;
+    background-color: #71b298;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.stats_listField {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-bottom: 100px;
+}
+
+.stats_timescroll {
+    position: fixed;
+    z-index: 1;
+    top: -100px;
+    left: 35px;
+    width: 10px;
+    height: 1000px;
+    background-color: #bbdfbb;
+}
+
+.stats_sgEventArrow {
+    position: absolute;
+    z-index: 1;
+    right: 20px;
+}
+
+.stats_sgEventBox:active {
+    opacity: 70%;
+}
+
+.stats_sgEventIcon {
+    position: absolute;
+    z-index: 1;
+    left: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: green;
+    background-image: url(../../assets/miyu.jpg);
+    background-size: 100%;
+    border: black 2px solid;
+}
+
+.stats_dateBox {
+    margin: 10px;
+    margin-right: calc(50% + 50px);
+    width: 100px;
+    text-align: center;
+    font: bolder 20px/2 "Microsoft Sans Serif";
+    border-radius: 20px;
+    background-color: #9fe774;
+}
+
+.stats_statsBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #fff;
+    width: 80%;
+    height: 300px;
+    margin: 20px 0;
+    border-radius: 20px;
+}
