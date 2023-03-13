@@ -11,7 +11,7 @@ import eventListDemo from "../../utils/EventListDemo";
 
 class Details extends React.Component {
 
-    backAddr = "./stats"
+    backAddr = "/stats"
     eventId = this.props.location.state.id - 1
     focusEvent = eventListDemo[this.eventId]
 
