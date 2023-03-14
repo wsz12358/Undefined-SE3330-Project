@@ -1,5 +1,6 @@
 import React from 'react'
 import {Selector, Tabs} from "antd-mobile";
+import {UndoOutline} from "antd-mobile-icons";
 import "./Stats.css"
 import Stats_eventList from './Stats_EventList'
 import Stats_StatsList from "./Stats_StatsList";
@@ -13,14 +14,15 @@ const options = [{label: 'Label1', value: '1',}, {label: 'Label2', value: '2',},
 
 class Stats extends React.Component {
     state = {
-        activekey: "event"
+        category: "event",
+        filterOpen: true
     }
 
     backAddr = '/home'
     goAddr = '/stats/details'
 
     capRender = () => {
-        if (this.state.activekey === "event")
+        if (this.state.category === "event")
             return <div>
                 <Stats_eventList eventlist={eventListDemo} goAddr={this.goAddr}/>
             </div>
@@ -30,23 +32,46 @@ class Stats extends React.Component {
             </div>
     }
     onCapChange = (activeKey) => {
-        this.setState({activekey: activeKey})
+        this.setState({category: activeKey})
+    }
+
+    onFilterGrow = () => {
+        this.setState({filterOpen: !this.state.filterOpen});
+
+        if (this.state.filterOpen) {
+            this.filter.classList.add('stats_filterAdd');
+            this.filter.classList.remove('stats_filterRemove');
+        }
+        else {
+            this.filter.classList.add('stats_filterRemove');
+            this.filter.classList.remove('stats_filterAdd');
+        }
     }
 
     render() {
         return (<div className="stats_body">
             <div className="stats_absoluteField">
                 <HeaderBar backFunc={OnClickRoute.bind(this, this.backAddr)} title='回顾'/>
-                <div className="stats_filterField">
+                <div className="stats_filterField"
+                     ref={(e) => {this.filter = e}}>
                     <div className="stats_filterModeBox">
                         <Tabs onChange={this.onCapChange}>
-                            <Tabs.Tab title="1" key="event">
+                            <Tabs.Tab title="Events" key="event">
+                                <div className="stats_sift"
+                                     style={{position:'relative'}}>
+                                    所有
+                                    <div className="stats_siftArrow"
+                                         style={{position:'absolute', right:'10px', top:'0'}}
+                                         onClick={this.onFilterGrow}>
+                                        <UndoOutline/>
+                                    </div>
+                                </div>
                                 <Selector columns={3} options={options}
                                           showCheckMark={false}
                                           multiple={true}
                                           className="stats_selectorBox"/>
                             </Tabs.Tab>
-                            <Tabs.Tab title="2" key="stats"/>
+                            <Tabs.Tab title="Statistics" key="stats"/>
                         </Tabs>
                     </div>
                 </div>

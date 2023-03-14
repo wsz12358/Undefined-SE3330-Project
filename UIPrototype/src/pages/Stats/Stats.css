@@ -21,23 +21,44 @@
     border-radius: 30px;
     background-color: #52b48d;
     box-shadow: 0 0 5px 1px #fff;
-    
-    /*animation: stats_filterAnim 3s infinite;*/
+
+    height: 100px;
+}
+
+.stats_filterAdd {
+    animation: stats_filterAnim .5s forwards;
+}
+
+.stats_filterRemove {
+    animation: stats_filterAnimBack .5s forwards;
 }
 
 @keyframes stats_filterAnim {
-    0% {height: 50px;}
-    50% {height: 300px;}
-    100% {height: 50px;}
+    0% {height: 100px;}
+    100% {height: 300px;}
+}
+
+@keyframes stats_filterAnimBack {
+    0% {height: 300px;}
+    100% {height: 100px;}
 }
 
 .stats_filterModeBox {
     width: 70%;
+    padding: 5px 0;
+}
+
+.stats_sift {
+    margin-bottom: 15px;
+    font: 600 20px/1.5 "Microsoft YaHei UI";
+    background-color: rgba(0, 0, 0, .3);
+    text-align: center;
+    color: #fff;
+    border-radius: 20px;
 }
 
 .stats_selectorBox {
     padding: 3px 2px;
-    --border-radius: 20px;
 }
 
 .adm-selector-item-active,
@@ -52,8 +73,16 @@
     border: #427b38 2px solid;
 }
 
+.adm-tabs-tab-active {
+    color: #fad15b;
+}
+
+.adm-tabs-tab-line {
+    background-color: #fad15b;
+}
+
 .stats_capRenderField {
-    margin-top: 50px;
+    margin-top: 180px;
 }
 
 .event_listField, .stats_listField {
