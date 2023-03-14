@@ -1,7 +1,7 @@
 .home_body {
     height: 100%;
     width: 100%;
-    background-color: #4fd7b0;
+    background-color: rgba(255, 223, 180, 0.66);
 }
 
 .home_avatarField {

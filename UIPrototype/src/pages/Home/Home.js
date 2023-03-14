@@ -32,7 +32,7 @@ class Home extends React.Component {
     render() {
         return (<div className="home_body">
             <div className="home_avatarField">
-                Title here.
+                ProLiferate
                 <div className="home_avatar" onClick={OnClickRoute.bind(this, this.goAddr)}>
                 </div>
             </div>
@@ -47,7 +47,7 @@ class Home extends React.Component {
                     <UndoOutline fontSize={18}/>
                 </Button>
                 <div className="home_countBox">
-                    本月已记录<em>$0$</em>次
+                    本月已记录10次
                 </div>
                 <Button className="home_startBtn" size='large'
                         fill='solid' color='primary'

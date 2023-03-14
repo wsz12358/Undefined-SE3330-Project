@@ -1,5 +1,5 @@
 import React from 'react'
-import {CapsuleTabs, Selector} from "antd-mobile";
+import {Selector, Tabs} from "antd-mobile";
 import "./Stats.css"
 import Stats_eventList from './Stats_EventList'
 import Stats_StatsList from "./Stats_StatsList";
@@ -35,23 +35,19 @@ class Stats extends React.Component {
 
     render() {
         return (<div className="stats_body">
-            <div className="stats_absoluteFieldBox">
-                <div className="stats_absoluteField">
-                    <HeaderBar backFunc={OnClickRoute.bind(this, this.backAddr)} title='回顾'/>
-                    <div className="stats_filterField">
-                        <div className="stats_filterModeBox">
-                            <CapsuleTabs onChange={this.onCapChange}>
-                                <CapsuleTabs.Tab title="1" key="event">
-                                    <Selector columns={3} options={options}
-                                              showCheckMark={false}
-                                              multiple={true}
-                                              className="stats_selectorBox"/>
-                                </CapsuleTabs.Tab>
-                                <CapsuleTabs.Tab title="2" key="stats">
-
-                                </CapsuleTabs.Tab>
-                            </CapsuleTabs>
-                        </div>
+            <div className="stats_absoluteField">
+                <HeaderBar backFunc={OnClickRoute.bind(this, this.backAddr)} title='回顾'/>
+                <div className="stats_filterField">
+                    <div className="stats_filterModeBox">
+                        <Tabs onChange={this.onCapChange}>
+                            <Tabs.Tab title="1" key="event">
+                                <Selector columns={3} options={options}
+                                          showCheckMark={false}
+                                          multiple={true}
+                                          className="stats_selectorBox"/>
+                            </Tabs.Tab>
+                            <Tabs.Tab title="2" key="stats"/>
+                        </Tabs>
                     </div>
                 </div>
             </div>
