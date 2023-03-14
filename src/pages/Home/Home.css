@@ -86,7 +86,7 @@
 
 .home_dateBox {
     color: white;
-    background-image: url(../../assets/roxy.png);
+    background-image: url('../../assets/roxy.png');
     background-size: 100%;
     font: 500 50px "Adobe Arabic";
 }

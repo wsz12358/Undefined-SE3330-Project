@@ -57,8 +57,32 @@
     border-radius: 20px;
 }
 
+.stats_filterTags {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font: 550 12px/1.5 "Microsoft YaHei UI";
+    background-color: rgba(255, 255, 255, .3);
+    border-radius: 20px;
+}
+
+.stats_tagsTitle {
+    padding: 5px 0;
+}
+
+.stats_tagsReset {
+    position: absolute;
+    right: 15px;
+    top: 5px;
+}
+
 .stats_selectorBox {
     padding: 3px 2px;
+}
+
+.stats_tagsSelector {
+    margin: 10px 20px;
 }
 
 .adm-selector-item-active,
@@ -129,7 +153,7 @@
     height: 60px;
     border-radius: 50%;
     background-color: green;
-    background-image: url(../../assets/miyu.jpg);
+    background-image: url('../../assets/miyu.jpg');
     background-size: 100%;
     border: black 2px solid;
 }
@@ -151,7 +175,7 @@
 .stats_sgPic {
     height: 100%;
     width: 100%;
-    background-image: url("../../assets/clock.png");
+    background-image: url('../../assets/clock.png');
     background-repeat: no-repeat;
     background-size: 100%;
 }
