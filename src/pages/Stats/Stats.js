@@ -6,6 +6,7 @@ import Stats_eventList from './Stats_EventList'
 import Stats_StatsList from "./Stats_StatsList";
 import HeaderBar from "../../components/HeaderBar";
 import OnClickRoute from "../../utils/OnClickRoute";
+import FilterCalendar from "../../components/FilterCalendar";
 import eventListDemo from "../../utils/EventListDemo";
 
 const options = [{label: 'Label1', value: '1',}, {label: 'Label2', value: '2',}, {label: 'Label3', value: '3',},
@@ -17,12 +18,15 @@ class Stats extends React.Component {
         category: "event",
         filterOpen: true,
         filterTagStatus: [],
-        filterTimeStatus: []
+        filterTimeStatus: false,
+        filterTimeFrom: null,
+        filterTimeTo: null,
     }
 
     backAddr = '/home'
     goAddr = '/stats/details'
     filterTagBuf = []
+    //siftTextBuf = ''
 
     capRender = () => {
         if (this.state.category === "event")
@@ -71,6 +75,32 @@ class Stats extends React.Component {
         this.setState({filterTagStatus: []});
     }
 
+    setFilterTime = (type, time) => {
+        this.setState({filterTimeStatus: true});
+
+        if (type === 'from') {
+            this.setState({filterTimeFrom: time},
+                () => {
+                    if (this.state.filterTimeTo == null && this.state.filterTimeFrom == null) {
+                        this.setState({filterTimeStatus: false});
+                    }
+                })
+        } else if (type === 'to') {
+            this.setState({filterTimeTo: time},
+                () => {
+                    if (this.state.filterTimeTo == null && this.state.filterTimeFrom == null) {
+                        this.setState({filterTimeStatus: false});
+                    }
+                })
+        }
+    }
+
+    setSiftText = () => {
+        return (this.state.filterTagStatus.length ?
+            ((this.state.filterTimeStatus) ? '混合筛选' : '按标签筛选: ' + this.filterTagText) :
+            ((this.state.filterTimeStatus) ? '按时间筛选' : '显示所有'));
+    }
+
     render() {
         return (<div className="stats_body">
             <div className="stats_absoluteField">
@@ -84,9 +114,7 @@ class Stats extends React.Component {
                             <Tabs.Tab title="Events" key="event">
                                 <div className="stats_sift"
                                      style={{position: 'relative'}}>
-                                    {this.state.filterTagStatus.length ?
-                                        (this.state.filterTimeStatus.length ? '混合' : '标签: ' + this.filterTagText) :
-                                        (this.state.filterTimeStatus.length ? '时间: ' : '所有')}
+                                    {this.setSiftText()}
                                     <div className="stats_siftArrow"
                                          style={{position: 'absolute', right: '10px', top: '0'}}
                                          onClick={this.onFilterGrow}>
@@ -97,6 +125,8 @@ class Stats extends React.Component {
                                     <div className="stats_tagsTitle">标签</div>
                                     <div className="stats_tagsReset"
                                          onClick={this.onTagReset}>
+                                        {/*TODO: deal with the visibility of the calendar*/}
+
                                         <UndoOutline/>
                                     </div>
                                     <div className="stats_tagsSelector">
@@ -106,6 +136,23 @@ class Stats extends React.Component {
                                                   className="stats_selectorBox"
                                                   value={this.filterTagBuf}
                                                   onChange={this.onTagSelectorChange}/>
+                                    </div>
+                                </div>
+                                <div className="stats_filterTimes">
+                                    <div className="stats_timesTitle">时间</div>
+                                    <div className="stats_timesRange">
+                                        从 &nbsp;&nbsp;
+                                        <FilterCalendar type="from"
+                                                        timeFrom={this.state.filterTimeFrom}
+                                                        timeTo={this.state.filterTimeTo}
+                                                        setFilterTime={this.setFilterTime.bind(this)}/>
+                                        &nbsp;&nbsp; <UndoOutline onClick={this.setFilterTime.bind(this, 'from', null)}/> <br/>
+                                        到 &nbsp;&nbsp;
+                                        <FilterCalendar type="to"
+                                                        timeFrom={this.state.filterTimeFrom}
+                                                        timeTo={this.state.filterTimeTo}
+                                                        setFilterTime={this.setFilterTime.bind(this)}/>
+                                        &nbsp;&nbsp; <UndoOutline onClick={this.setFilterTime.bind(this, 'to', null)}/>
                                     </div>
                                 </div>
                             </Tabs.Tab>
@@ -123,21 +170,3 @@ class Stats extends React.Component {
 }
 
 export default Stats
-
-
-// <Collapse defaultActiveKey={['1']}>
-//     <Collapse.Panel key='1' title='第一项'>
-//     <SwipeAction
-// key="a"
-// rightActions={[{
-//             key: 'unsubscribe',
-//             text: '取消关注',
-//             color: 'light',
-//         }]}>
-//     AAA
-//     </SwipeAction>
-// </Collapse.Panel>
-// <Collapse.Panel key='2' title='第二项'>
-//     BBB.
-// </Collapse.Panel>
-// </Collapse>
