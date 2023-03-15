@@ -1,0 +1,6 @@
+.navBarField { /*see HeaderBar.js*/
+    height: 50px;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: solid 1px gray;
+}
