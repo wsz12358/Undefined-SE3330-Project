@@ -6,6 +6,10 @@ This is the repo for SEP&amp;Practice project 2023.
 
 ## 按照时间倒序排列，记得常来看一眼！！！
 
+**23.3.11 还原项目结构。**<br><br>
+
+多此一举。不过我会尝试寻找更好的办法的。<br><br>
+
 **23.3.11 更新项目结构。**<br><br>
 
 可以试着去git pull，我不清楚会发生什么。理想状况是除了node_modules以外的所有文件都被移进了UIPrototype文件夹里。如果不是请自己修改，但要注意（这点很重要）：不要在cLion中refractor修改位置，而是直接在文件夹内移动，否则有些地方会出错。<br><br>
