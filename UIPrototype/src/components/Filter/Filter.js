@@ -7,9 +7,12 @@ import FilterTags from "./FilterTags";
 import FilterTimes from "./FilterTimes";
 
 class Filter extends React.Component {
-    onFilterGrow = () => {
+    onFilterGrow = (flag) => {
         const ret = store.getState().filterOpen;
-        store.dispatch(setFilterOpen(!ret))
+        store.dispatch(setFilterOpen(!ret || flag));
+
+        if (ret && flag)
+            return;
 
         if (ret) {
             this.filter.classList.add('stats_filterAdd');
@@ -27,15 +30,18 @@ class Filter extends React.Component {
             <div className="stats_filterField" ref={(e) => this.filter = e}>
                 <div className="stats_filterModeBox">
                     <Tabs onChange={(e) => {
-                        store.dispatch(setCategory(e))
+                        store.dispatch(setCategory(e));
+                        this.onFilterGrow(true);
                     }}>
-                        <Tabs.Tab title="Events" key="event">
-                            <FilterHeader filterGrow={this.onFilterGrow.bind(this)}/>
-                            <FilterTags/>
-                            <FilterTimes/>
-                        </Tabs.Tab>
-                        <Tabs.Tab title="Statistics" key="stats"/>
+                        <Tabs.Tab title="Events" key="event"/>
+                        <Tabs.Tab title="Map" key="map"/>
+                        <Tabs.Tab title="Stats" key="stats"/>
                     </Tabs>
+                    <div style={{marginTop:10}}>
+                        <FilterHeader filterGrow={this.onFilterGrow.bind(this, false)}/>
+                        <FilterTags/>
+                        <FilterTimes/>
+                    </div>
                 </div>
             </div>
         )

@@ -35,19 +35,21 @@ const Stats_eventList = (props) => {
                 <div className="stats_dateBox">
                     {eventlist[idx].date} / Wed.
                 </div>
-                <div className="stats_sgEventIcon"/>
-                <div className={"stats_sgEventBox" + eventlist[idx].key + " stats_sgEventBox"}
-                     style={divstyle}
-                     onClick={() => onClickEvent(eventlist[idx].key)}>
-                    <div className="stats_sgLapse">
-                        22:18 - 23:18 &nbsp;&nbsp;&nbsp; <ClockCircleOutline/> 60
-                    </div>
-                    <div className="stats_sgPic" />
-                    <div className="stats_sgTag">
-                        <ClockCircleOutline/>Category &nbsp;&nbsp;&nbsp; #Tag1 &nbsp;&nbsp; #Tag2
-                    </div>
-                    <div className="stats_sgEventArrow">
-                        <RightOutline fontSize={50}/>
+                <div style={{width:'100%', position:'relative'}}>
+                    <div className="stats_sgEventIcon"/>
+                    <div className={"stats_sgEventBox" + eventlist[idx].key + " stats_sgEventBox"}
+                         style={divstyle}
+                         onClick={() => onClickEvent(eventlist[idx].key)}>
+                        <div className="stats_sgLapse">
+                            22:18 - 23:18 &nbsp;&nbsp;&nbsp; <ClockCircleOutline/> 60
+                        </div>
+                        <div className="stats_sgPic"/>
+                        <div className="stats_sgTag">
+                            <ClockCircleOutline/>Category &nbsp;&nbsp;&nbsp; #Tag1 &nbsp;&nbsp; #Tag2
+                        </div>
+                        <div className="stats_sgEventArrow">
+                            <RightOutline fontSize={50}/>
+                        </div>
                     </div>
                 </div>
             </div>

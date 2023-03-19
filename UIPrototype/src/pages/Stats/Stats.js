@@ -2,16 +2,24 @@ import React from 'react'
 import "./Stats.css"
 import Stats_eventList from './Stats_EventList'
 import Stats_StatsList from "./Stats_StatsList";
+import Stats_Map from "./Stats_Map";
 import HeaderBar from "../../components/HeaderBar";
 import OnClickRoute from "../../utils/OnClickRoute";
 import Filter from "../../components/Filter/Filter";
 import eventListDemo from "../../utils/EventListDemo";
 import store from "../../redux/Store";
+import {setCategory, setFilterOpen} from "../../redux/FilterActions";
 
 
 class Stats extends React.Component {
     backAddr = '/home'
     goAddr = '/stats/details'
+
+    constructor(props) {
+        super(props);
+        store.dispatch(setFilterOpen(true));
+        store.dispatch(setCategory('event'));
+    }
 
     componentDidMount() {
         store.subscribe(() => {
@@ -20,10 +28,14 @@ class Stats extends React.Component {
     }
 
     capRender = () => {
-        if (store.getState().category === "event")
+        const category = store.getState().category;
+
+        if (category === "event")
             return (<Stats_eventList eventlist={eventListDemo} goAddr={this.goAddr}/>)
-        else
+        else if (category === "stats")
             return (<Stats_StatsList/>)
+        else
+            return (<Stats_Map onClickRoute={OnClickRoute.bind(this, '/home')}/>)
 
     }
 
