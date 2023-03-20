@@ -6,6 +6,23 @@ This is the repo for SEP&amp;Practice project 2023.
 
 ## 按照时间倒序排列，记得常来看一眼！！！
 
+**23.3.20 新增百度地图API的说明。**<br><br>
+这次Commit修复了几个bug，包括Stats_EventList上下滚动时的滚轮范围，Stats界面切换查看内容时的筛选器伸缩动画。<br>
+
+```diff
+@@ 存在的bug： 点开日历的情况下直接切换底部路由会导致切回的时候日历仍然正常显示。 @@
+```
+
+接下来说一下百度地图API在使用前还需要进行的配置：<br>
+首先`npm install`，随后在node_modules文件夹中找到react-scripts/config/webpack.config.js文件，在倒数第三行的地方插入如下语句：<br>
+```
+externals: {
+    'BMap':'BMap',
+ }
+ ```
+ 随后就可以正常使用。<br><br>
+ 
+
 **23.3.15 更新项目结构。**<br><br>
 
 我搞定了，现在就像往常一样git pull也没事。所有文件也已经在UIPrototype文件夹中了。<br><br>
