@@ -15,8 +15,8 @@ function App() {
     return (
         <div className="app">
             <div className="app_body">
-                <Switch>
-                    <Route exact path='/home/record' component={Record} />
+                <Switch location={location}>
+                    <Route exact path='/home/record' component={Record}/>
 
                     <Route exact path='/stats/details' component={Details}/>
 
@@ -32,9 +32,9 @@ function App() {
             </div>
             {!(location.pathname === '/stats/details') &&
                 !(location.pathname === '/home/record') &&
-            <div className="app_bottom">
-                <BottomBar/>
-            </div>}
+                <div className="app_bottom">
+                    <BottomBar/>
+                </div>}
         </div>
     )
 }

@@ -18,7 +18,7 @@ class Stats extends React.Component {
     constructor(props) {
         super(props);
         store.dispatch(setFilterOpen(true));
-        store.dispatch(setCategory('event'));
+        // store.dispatch(setCategory('event'));
     }
 
     componentDidMount() {
@@ -30,12 +30,12 @@ class Stats extends React.Component {
     capRender = () => {
         const category = store.getState().category;
 
-        if (category === "event")
-            return (<Stats_eventList eventlist={eventListDemo} goAddr={this.goAddr}/>)
+        if (category === "map")
+            return (<Stats_Map onClickRoute={OnClickRoute.bind(this, '/home')}/>)
         else if (category === "stats")
             return (<Stats_StatsList/>)
         else
-            return (<Stats_Map onClickRoute={OnClickRoute.bind(this, '/home')}/>)
+            return (<Stats_eventList eventlist={eventListDemo} goAddr={this.goAddr}/>)
 
     }
 

@@ -32,12 +32,12 @@ class Filter extends React.Component {
                     <Tabs onChange={(e) => {
                         store.dispatch(setCategory(e));
                         this.onFilterGrow(true);
-                    }}>
+                    }} activeKey={store.getState().category}>
                         <Tabs.Tab title="Events" key="event"/>
                         <Tabs.Tab title="Map" key="map"/>
                         <Tabs.Tab title="Stats" key="stats"/>
                     </Tabs>
-                    <div style={{marginTop:10}}>
+                    <div style={{marginTop: 10}}>
                         <FilterHeader filterGrow={this.onFilterGrow.bind(this, false)}/>
                         <FilterTags/>
                         <FilterTimes/>

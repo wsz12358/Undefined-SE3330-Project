@@ -1,9 +1,6 @@
 import React from "react";
 import BMap from 'BMap'
 import {Button} from "antd-mobile";
-import OnClickRoute from "../../utils/OnClickRoute";
-import {useHistory} from "react-router-dom";
-import PropTypes from 'prop-types'
 import {withRouter} from "react-router-dom";
 import data from '../../utils/EventListDemo'
 
@@ -27,7 +24,7 @@ class Stats_Map extends React.Component {
                          }}>
                         {data[this.state.showIdx].lat}, {data[this.state.showIdx].mul}
                         <Button onClick={() => {
-                            this.props.history.push('/home')
+                            this.props.history.push({pathname: '/stats/details', state:{id: this.state.showIdx}})
                         }}>
                             Click
                         </Button>
