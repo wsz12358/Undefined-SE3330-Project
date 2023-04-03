@@ -1,8 +1,10 @@
 import React from "react";
 import {ClockCircleOutline, CloseOutline, RightOutline} from "antd-mobile-icons";
+import {useHistory} from "react-router-dom";
 
 export default function Marker(props) {
     const event = props.event;
+    const history = useHistory();
 
     return (
         <div id="markerBody">
@@ -17,8 +19,10 @@ export default function Marker(props) {
                 </div>
 
                 <div id="markerOps">
-                    <div onClick={props.setVis(false)}><CloseOutline fontSize={30}/></div>
-                    <div onClick={onProceedClick}><RightOutline fontSize={30}/></div>
+                    <div onClick={props.setVis}><CloseOutline fontSize={30}/></div>
+                    <div onClick={() => {
+                        history.push('/stats/details', {id: event.key})
+                    }}><RightOutline fontSize={30}/></div>
                 </div>
             </div>
 

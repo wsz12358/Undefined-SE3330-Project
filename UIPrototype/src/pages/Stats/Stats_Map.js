@@ -3,19 +3,27 @@ import BMap from 'BMap'
 import Marker from "../../components/MapMarker";
 import {withRouter} from "react-router-dom";
 import data from '../../utils/EventListDemo'
+import "./Stats.css"
+import store from "../../redux/Store";
 
 class Stats_Map extends React.Component {
+    constructor(props) {
+        super(props);
+        this.markerI = React.createRef();
+    }
     state = {
-        showInfo: false,
         showIdx: 0,
     }
 
     setMarkerVis = (e) => {
-        this.setState({showInfo: e});
-    }
+        const flag = store.getState().filterOpen;
 
-    transitDetail = () => {
-
+        if (e && flag) {
+            this.markerI.current.classList.add('markerShow');
+        }
+        else {
+            this.markerI.current.classList.remove('markerShow');
+        }
     }
 
     render() {
@@ -24,15 +32,10 @@ class Stats_Map extends React.Component {
                 height: '100%', width: '100%',
                 position: 'relative'
             }}>
-                {this.state.showInfo &&
-                    <div className="markerInfoBox"
-                         style={{
-                             position: 'absolute', top: '50px',
-                             zIndex: 3, height: '200px', width: '100%'
-                         }}>
-                        <Marker event={data[this.state.showIdx]}
-                                setVis={this.setMarkerVis.bind(this)}/>
-                    </div>}
+                <div className="markerInfoBox" ref={this.markerI}>
+                    <Marker event={data[this.state.showIdx]}
+                            setVis={() => this.setMarkerVis(false)}/>
+                </div>
                 <div id="address" style={{height: '100%', width: '100%', overflow: 'hidden'}}/>
             </div>
 
@@ -58,7 +61,8 @@ class Stats_Map extends React.Component {
 
             marker.addEventListener("click", () => {
                 map.panTo(point);
-                this.setState({showInfo: true, showIdx: idx});
+                this.setState({showIdx: idx});
+                this.setMarkerVis(true);
             })
         })
     }

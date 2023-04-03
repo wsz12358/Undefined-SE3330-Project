@@ -18,7 +18,6 @@ class Stats extends React.Component {
     constructor(props) {
         super(props);
         store.dispatch(setFilterOpen(true));
-        // store.dispatch(setCategory('event'));
     }
 
     componentDidMount() {
@@ -35,7 +34,7 @@ class Stats extends React.Component {
         else if (category === "stats")
             return (<Stats_StatsList/>)
         else
-            return (<Stats_eventList eventlist={eventListDemo} goAddr={this.goAddr}/>)
+            return (<Stats_eventList eventList={eventListDemo} goAddr={this.goAddr}/>)
 
     }
 

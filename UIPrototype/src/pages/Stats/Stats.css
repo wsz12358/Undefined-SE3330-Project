@@ -162,10 +162,21 @@
     border-radius: 20px;
 }
 
-.stats_markInfoShow {
-    display: block;
+.markerInfoBox {
+    display: none;
+    position: absolute;
+    top: 25px;
+    z-index: 3;
+    height: 0;
+    width: 100%;
 }
 
-.stats_markInfoHide {
-    display: none;
+.markerShow {
+    display: block;
+    animation: stats_markerAnim .5s forwards;
+}
+
+@keyframes stats_markerAnim {
+    0% {height: 0;}
+    100% {height: 200px;}
 }
