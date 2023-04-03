@@ -14,22 +14,22 @@ export default function BottomBar() {
         {
             key: '/home',
             title: '首页',
-            icon: <AppOutline />,
+            icon: <AppOutline/>,
         },
         {
             key: '/stats',
             title: '回顾',
-            icon: <PieOutline />,
+            icon: <PieOutline/>,
         },
         {
             key: '/discover',
             title: '发现',
-            icon: <StarOutline />,
+            icon: <StarOutline/>,
         },
         {
             key: '/mine',
             title: '我的',
-            icon: <UserOutline />,
+            icon: <UserOutline/>,
         },
     ];
     return (

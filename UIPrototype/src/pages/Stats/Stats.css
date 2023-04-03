@@ -124,7 +124,7 @@
     overflow: scroll;
 }
 
-.event_listField, .stats_listField {
+#event_listField, .stats_listField {
     width: 100%;
     background-color: rgb(248, 233, 208);
     padding-top: 10px;
@@ -139,7 +139,7 @@
     padding-bottom: 100px;
 }
 
-.stats_timescroll {
+#stats_timeScroll {
     position: absolute;
     z-index: 1;
     top: -100px;
@@ -147,60 +147,6 @@
     width: 10px;
     height: 1000px;
     background-color: #bbdfbb;
-}
-
-.stats_sgEventArrow {
-    position: absolute;
-    z-index: 1;
-    right: 0;
-    top: calc(50% - 25px);
-}
-
-.stats_sgEventBox:active {
-    opacity: 70%;
-}
-
-.stats_sgEventIcon {
-    position: absolute;
-    z-index: 1;
-    left: 10px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: green;
-    background-image: url('../../assets/miyu.jpg');
-    background-size: 100%;
-    border: black 2px solid;
-}
-
-.stats_dateBox {
-    margin: 20px auto;
-    width: 120px;
-    text-align: center;
-    font: bolder 15px/2 "Microsoft Sans Serif";
-    border-radius: 20px;
-    background-color: #9fe774;
-}
-
-.stats_sgLapse {
-    padding: 5px 0;
-    font: 500 10px/1.5 "Microsoft YaHei UI"
-}
-
-.stats_sgPic {
-    height: 100%;
-    width: 100%;
-    background-image: url('../../assets/clock.png');
-    background-repeat: no-repeat;
-    background-size: 100%;
-}
-
-.stats_sgTag {
-    font: 750 15px/1.5 "Microsoft YaHei UI";
-    background-color: #fff;
-    width: 100%;
-    padding: 5px 20px;
-    text-align: left;
 }
 
 .stats_statsBox {

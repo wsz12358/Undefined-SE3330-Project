@@ -1,6 +1,6 @@
 import React from "react";
 import BMap from 'BMap'
-import {Button} from "antd-mobile";
+import Marker from "../../components/MapMarker";
 import {withRouter} from "react-router-dom";
 import data from '../../utils/EventListDemo'
 
@@ -10,6 +10,14 @@ class Stats_Map extends React.Component {
         showIdx: 0,
     }
 
+    setMarkerVis = (e) => {
+        this.setState({showInfo: e});
+    }
+
+    transitDetail = () => {
+
+    }
+
     render() {
         return (
             <div style={{
@@ -17,17 +25,13 @@ class Stats_Map extends React.Component {
                 position: 'relative'
             }}>
                 {this.state.showInfo &&
-                    <div className="markerInfo"
+                    <div className="markerInfoBox"
                          style={{
-                             height: '100px', width: '100%', backgroundColor: 'red',
-                             position: 'absolute', top: '100px', zIndex: 3
+                             position: 'absolute', top: '50px',
+                             zIndex: 3, height: '200px', width: '100%'
                          }}>
-                        {data[this.state.showIdx].lat}, {data[this.state.showIdx].mul}
-                        <Button onClick={() => {
-                            this.props.history.push({pathname: '/stats/details', state:{id: this.state.showIdx}})
-                        }}>
-                            Click
-                        </Button>
+                        <Marker event={data[this.state.showIdx]}
+                                setVis={this.setMarkerVis.bind(this)}/>
                     </div>}
                 <div id="address" style={{height: '100%', width: '100%', overflow: 'hidden'}}/>
             </div>
