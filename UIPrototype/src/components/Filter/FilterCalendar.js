@@ -5,9 +5,9 @@ import {setFromCalVis, setToCalVis} from "../../redux/FilterActions";
 
 export default function FilterCalendar(props) {
     const isFrom = props.type === 'from';
-    const visible = isFrom ? store.getState().fromCalVis : store.getState().toCalVis
-    const timeFrom = store.getState().filterTimeFrom;
-    const timeTo = store.getState().filterTimeTo;
+    const visible = isFrom ? store.getState().filter.fromCalVis : store.getState().filter.toCalVis;
+    const timeFrom = store.getState().filter.filterTimeFrom;
+    const timeTo = store.getState().filter.filterTimeTo;
 
     return (
         <Popover content={

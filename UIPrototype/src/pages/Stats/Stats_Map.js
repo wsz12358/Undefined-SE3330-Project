@@ -16,7 +16,7 @@ class Stats_Map extends React.Component {
     }
 
     setMarkerVis = (e) => {
-        const flag = store.getState().filterOpen;
+        const flag = store.getState().filter.filterOpen;
 
         if (e && flag) {
             this.markerI.current.classList.add('markerShow');

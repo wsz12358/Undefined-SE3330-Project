@@ -26,7 +26,7 @@ class Stats extends React.Component {
     }
 
     capRender = () => {
-        const category = store.getState().category;
+        const category = store.getState().filter.category;
 
         if (category === "map")
             return (<Stats_Map onClickRoute={OnClickRoute.bind(this, '/home')}

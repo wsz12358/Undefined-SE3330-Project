@@ -8,7 +8,7 @@ import FilterTimes from "./FilterTimes";
 
 class Filter extends React.Component {
     onFilterGrow = (flag) => {
-        const ret = store.getState().filterOpen;
+        const ret = store.getState().filter.filterOpen;
         store.dispatch(setFilterOpen(!ret || flag));
 
         if (ret && flag)
@@ -32,7 +32,8 @@ class Filter extends React.Component {
                     <Tabs onChange={(e) => {
                         store.dispatch(setCategory(e));
                         this.onFilterGrow(true);
-                    }} activeKey={store.getState().category}>
+                    }}
+                          activeKey={store.getState().filter.category}>
                         <Tabs.Tab title="Events" key="event"/>
                         <Tabs.Tab title="Map" key="map"/>
                         <Tabs.Tab title="Stats" key="stats"/>

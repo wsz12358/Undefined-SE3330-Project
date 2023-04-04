@@ -4,11 +4,11 @@ import {UndoOutline} from "antd-mobile-icons";
 
 class FilterHeader extends React.Component {
     setSiftText = () => {
-        const tags = store.getState().filterTagStatus;
-        const times = store.getState().filterTimeStatus;
+        const tags = store.getState().filter.filterTagStatus;
+        const times = store.getState().filter.filterTimeStatus;
 
         return (tags.length ?
-            (times ? '混合筛选' : '按标签筛选: ' + store.getState().filterTagText) :
+            (times ? '混合筛选' : '按标签筛选: ' + store.getState().filter.filterTagText) :
             (times ? '按时间筛选' : '显示所有'));
     }
 

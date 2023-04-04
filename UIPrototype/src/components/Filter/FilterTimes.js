@@ -10,12 +10,12 @@ class FilterTimes extends React.Component {
 
         if (type === 'from') {
             store.dispatch(setTimeFrom(time));
-            if (store.getState().filterTimeTo == null && time == null) {
+            if (store.getState().filter.filterTimeTo == null && time == null) {
                 store.dispatch(setTimeStatus(false));
             }
         } else if (type === 'to') {
             store.dispatch(setTimeTo(time));
-            if (time == null && store.getState().filterTimeFrom == null) {
+            if (time == null && store.getState().filter.filterTimeFrom == null) {
                 store.dispatch(setTimeStatus(false));
             }
         }

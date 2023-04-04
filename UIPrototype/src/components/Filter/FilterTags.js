@@ -37,7 +37,7 @@ class FilterTags extends React.Component {
                               showCheckMark={false}
                               multiple={true}
                               className="stats_selectorBox"
-                              value={store.getState().filterTagStatus}
+                              value={store.getState().filter.filterTagStatus}
                               onChange={this.onTagSelectorChange}/>
                 </div>
             </div>

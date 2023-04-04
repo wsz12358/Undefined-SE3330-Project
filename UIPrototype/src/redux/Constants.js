@@ -7,3 +7,7 @@ export const SET_TIME_TO = 'set_time_to';
 export const SET_TAG_TEXT = 'set_tag_text';
 export const SET_FROMCAL_VIS = 'set_fromcal_vis';
 export const SET_TOCAL_VIS = 'set_tocal_vis';
+export const SET_USERNAME = 'set_username';
+export const SET_PASSWORD = 'set_password';
+export const SET_IS_LOGIN = 'set_is_login';
+export const SET_AVATAR = 'set_avatar';
