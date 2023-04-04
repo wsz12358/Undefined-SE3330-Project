@@ -1,10 +1,10 @@
-.home_body {
+#home_body {
     height: 100%;
     width: 100%;
     background-color: rgba(255, 223, 180, 0.66);
 }
 
-.home_avatarField {
+#home_avatarField {
     position: relative;
     height: 3em;
     display: flex;
@@ -13,7 +13,8 @@
     font: 2em "Microsoft Sans Serif";
 }
 
-.home_avatar {
+#home_avatar {
+    overflow: hidden;
     position: absolute;
     height: 2em;
     width: 2em;
@@ -24,12 +25,10 @@
     border-radius: 50%;
     border: black .1em solid;
     background-color: greenyellow;
-    background-image: url('../../assets/miyu.jpg');
-    background-size: 100%;
     box-shadow: 0 0 .3em .05em rgba(0, 0, 0, .3);
 }
 
-.home_frontField {
+#home_frontField {
     display: flex;
     height: calc(100% - 6em);
     flex-direction: column;
@@ -38,7 +37,7 @@
     padding-top: 3em;
 }
 
-.home_frontBox {
+#home_frontBox {
     overflow: hidden;
     width: 300px;
     height: 300px;
@@ -54,7 +53,7 @@
     100% {border-color: rgba(0, 0, 0, 1);}
 }
 
-.home_timeBox {
+#home_timeBox {
     display: flex;
     height: 150px;
     justify-content: center;
@@ -65,7 +64,7 @@
     background-color: #88f183;
 }
 
-.home_noteBox, .home_dateBox {
+#home_noteBox, #home_dateBox {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -79,23 +78,23 @@
     font: 700 1.5em sans-serif;
 }
 
-.home_noteBox {
+#home_noteBox {
     padding-left: 15%;
     padding-right: 15%;
 }
 
-.home_dateBox {
+#home_dateBox {
     color: white;
     background-image: url('../../assets/roxy.png');
     background-size: 100%;
     font: 500 50px "Adobe Arabic";
 }
 
-.home_noteBoxDisp {
+#home_noteBoxDisp {
     display: none;
 }
 
-.home_dateBoxDisp {
+#home_dateBoxDisp {
     display: none;
 }
 
@@ -106,7 +105,7 @@
     background-color: transparent;
 }
 
-.home_countBox {
+#home_countBox {
     display: flex;
     align-items: center;
     justify-content: center;

@@ -5,57 +5,79 @@ import {AddOutline, UndoOutline} from "antd-mobile-icons";
 import Timer from "../../utils/Timer";
 import OnClickRoute from "../../utils/OnClickRoute";
 import FocusUser from "../../utils/UserDemo";
+import store from "../../redux/Store";
+import avatar from "../../assets/miyu.jpg";
+import nullAvatar from "../../assets/null_avatar.png";
 
 class Home extends React.Component {
     state = {
         showsDate: true,
+        isLogin: store.getState().user.isLogin
     }
 
     goAddr = '/mine'
     recordAddr = '/home/record'
 
     onTagBtnClick = () => {
-        this.setState({showsDate: !this.state.showsDate});
+        if (this.state.isLogin)
+            this.setState({showsDate: !this.state.showsDate});
     }
+
+    onRecordBtnClick = () => {
+        if (this.state.isLogin)
+            this.props.history.push(this.recordAddr);
+    }
+
     renderDate = () => {
         if (this.state.showsDate) {
-            return (<div className="home_noteBox">
-                {FocusUser.facade_memo}
-            </div>)
+            return (
+                <div id="home_noteBox">
+                    {this.state.isLogin && FocusUser.facade_memo}
+                    {!this.state.isLogin && "Please go login."}
+                </div>
+            )
         } else {
-            return (<div className="home_dateBox">
-                Dec. 31
-            </div>)
+            return (
+                <div id="home_dateBox">
+                    Dec. 31
+                </div>
+            )
         }
     }
 
     render() {
-        return (<div className="home_body">
-            <div className="home_avatarField">
-                ProLiferate
-                <div className="home_avatar" onClick={OnClickRoute.bind(this, this.goAddr)}>
-                </div>
-            </div>
-            <div className="home_frontField">
-                <div className="home_frontBox">
-                    <div className="home_timeBox">
-                        <Timer/>
+        return (
+            <div id="home_body">
+                <div id="home_avatarField">
+                    ProLiferate
+                    <div id="home_avatar"
+                         onClick={OnClickRoute.bind(this, this.goAddr)}>
+                        <img alt="avatar"
+                             src={this.state.isLogin ? avatar : nullAvatar}
+                             height="100%" width="100%"/>
                     </div>
-                    {this.renderDate()}
                 </div>
-                <Button className="home_tagBtn" shape='rounded' onClick={this.onTagBtnClick}>
-                    <UndoOutline fontSize={18}/>
-                </Button>
-                <div className="home_countBox">
-                    本月已记录10次
+                <div id="home_frontField">
+                    <div id="home_frontBox">
+                        <div id="home_timeBox">
+                            <Timer/>
+                        </div>
+                        {this.renderDate()}
+                    </div>
+                    <Button className="home_tagBtn" shape='rounded' onClick={this.onTagBtnClick}>
+                        <UndoOutline fontSize={18}/>
+                    </Button>
+                    <div id="home_countBox">
+                        {this.state.isLogin && "本月已记录10次"}
+                        {!this.state.isLogin && "请进行登录"}
+                    </div>
+                    <Button className="home_startBtn" size='large'
+                            fill='solid' color='primary'
+                            onClick={this.onRecordBtnClick}>
+                        <AddOutline fontSize={30}/>
+                    </Button>
                 </div>
-                <Button className="home_startBtn" size='large'
-                        fill='solid' color='primary'
-                        onClick={OnClickRoute.bind(this, this.recordAddr)}>
-                    <AddOutline fontSize={30}/>
-                </Button>
-            </div>
-        </div>);
+            </div>);
         //TODO: your code here
     }
 }

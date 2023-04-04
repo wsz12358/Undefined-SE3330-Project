@@ -1,20 +1,30 @@
-import {TabBar} from 'antd-mobile'
+import {Dialog, TabBar} from 'antd-mobile'
 import React from 'react'
 import {StarOutline, AppOutline, PieOutline, UserOutline} from "antd-mobile-icons";
 import {useHistory, useLocation} from 'react-router-dom'
+import store from "../redux/Store";
 
 
 export default function BottomBar() {
     const history = useHistory();
     const location = useLocation();
     const {pathname} = location;
-    const setRouteActive = value => history.push(value);
+    const setRouteActive = value => {
+        if (value === '/home' || value === '/mine' ||
+                store.getState().user.isLogin)
+            history.push(value)
+        else {
+            Dialog.alert({
+                content: "Please go login.",
+            });
+        }
+    };
 
     const tabs = [
         {
             key: '/home',
             title: '首页',
-            icon: <AppOutline/>,
+            icon: <AppOutline/>
         },
         {
             key: '/stats',
@@ -32,6 +42,7 @@ export default function BottomBar() {
             icon: <UserOutline/>,
         },
     ];
+
     return (
         <TabBar activeKey={pathname}
                 onChange={value => setRouteActive(value)}>
