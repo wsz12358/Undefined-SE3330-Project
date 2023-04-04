@@ -8,8 +8,7 @@ import OnClickRoute from "../../utils/OnClickRoute";
 import Filter from "../../components/Filter/Filter";
 import eventListDemo from "../../utils/EventListDemo";
 import store from "../../redux/Store";
-import {setCategory, setFilterOpen} from "../../redux/FilterActions";
-
+import {setFilterOpen} from "../../redux/FilterActions";
 
 class Stats extends React.Component {
     backAddr = '/home'
@@ -30,11 +29,13 @@ class Stats extends React.Component {
         const category = store.getState().category;
 
         if (category === "map")
-            return (<Stats_Map onClickRoute={OnClickRoute.bind(this, '/home')}/>)
+            return (<Stats_Map onClickRoute={OnClickRoute.bind(this, '/home')}
+                               eventList={eventListDemo}/>)
         else if (category === "stats")
             return (<Stats_StatsList/>)
         else
-            return (<Stats_eventList eventList={eventListDemo} goAddr={this.goAddr}/>)
+            return (<Stats_eventList eventList={eventListDemo}
+                                     goAddr={this.goAddr}/>)
 
     }
 

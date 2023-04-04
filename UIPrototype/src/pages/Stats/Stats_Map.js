@@ -2,7 +2,6 @@ import React from "react";
 import BMap from 'BMap'
 import Marker from "../../components/MapMarker";
 import {withRouter} from "react-router-dom";
-import data from '../../utils/EventListDemo'
 import "./Stats.css"
 import store from "../../redux/Store";
 
@@ -11,6 +10,7 @@ class Stats_Map extends React.Component {
         super(props);
         this.markerI = React.createRef();
     }
+
     state = {
         showIdx: 0,
     }
@@ -20,8 +20,7 @@ class Stats_Map extends React.Component {
 
         if (e && flag) {
             this.markerI.current.classList.add('markerShow');
-        }
-        else {
+        } else {
             this.markerI.current.classList.remove('markerShow');
         }
     }
@@ -33,7 +32,7 @@ class Stats_Map extends React.Component {
                 position: 'relative'
             }}>
                 <div className="markerInfoBox" ref={this.markerI}>
-                    <Marker event={data[this.state.showIdx]}
+                    <Marker event={this.props.eventList[this.state.showIdx]}
                             setVis={() => this.setMarkerVis(false)}/>
                 </div>
                 <div id="address" style={{height: '100%', width: '100%', overflow: 'hidden'}}/>
@@ -44,7 +43,6 @@ class Stats_Map extends React.Component {
 
     componentDidMount() {
         const map = new BMap.Map("address");
-        map.centerAndZoom(new BMap.Point(121.44329, 31.03201), 15);
         map.addControl(new BMap.MapTypeControl({
             mapTypes: [
                 BMAP_NORMAL_MAP,
@@ -53,8 +51,29 @@ class Stats_Map extends React.Component {
         }));
         map.setCurrentCity("上海"); // 设置地图显示的城市 此项是必须设置的
         map.addControl(new BMap.NavigationControl());
+        map.enableScrollWheelZoom();
 
-        data.map((e, idx) => {
+        const geolocation = new BMap.Geolocation();      // my location
+        geolocation.getCurrentPosition((r) => {
+            const mk = new BMap.Marker(r.point, {
+                // 初始化五角星symbol
+                icon: new BMap.Symbol(BMap_Symbol_SHAPE_STAR, {
+                    scale: 1,
+                    fillColor: "#1f1e33",
+                    fillOpacity: 0.8,
+                })
+            });
+            map.addOverlay(mk);
+            map.centerAndZoom(r.point, 15);
+            mk.addEventListener("click", () => {
+                map.panTo(r.point);
+                this.setMarkerVis(false);
+            });
+        }, {
+            enableHighAccuracy: true,
+        });
+
+        this.props.eventList.map((e, idx) => {
             const point = new BMap.Point(e.lat, e.mul);
             const marker = new BMap.Marker(point);
             map.addOverlay(marker);
