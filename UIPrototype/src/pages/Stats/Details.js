@@ -9,11 +9,26 @@ import {AddCircleOutline} from "antd-mobile-icons";
 import eventListDemo from "../../utils/EventListDemo";
 
 
+const allThoughts = ["全民制作人大家好，我是练习时长两年半的个人练习生蔡徐坤，喜欢唱、跳、rap、篮球，music",
+    "🐔👈，🗿⬇️☯️😋",
+    "🤮👶，🗿⬇️🗿☯️😋",
+    "🌸1️⃣👀🍺👌💥",
+    "🥇🤏🥢🥃"
+]
+
 class Details extends React.Component {
 
     backAddr = "/stats"
     eventId = this.props.location.state.id - 1
     focusEvent = eventListDemo[this.eventId]
+
+    renderThoughts = (value) => {
+        return (
+            <div className="thought">
+                {value}
+            </div>
+        )
+    }
 
     render() {
         return (<div className="detail_body">
@@ -37,27 +52,13 @@ class Details extends React.Component {
                     <Collapse.Panel key='感想' title='感想'>
                         {
                             <div className='allThoughts'>
-                                <div className='thought'>
-                                    全民制作人大家好，我是练习时长两年半的个人练习生蔡徐坤，喜欢唱、跳、rap、篮球，music
-                                </div>
-                                <div className='thought'>
-                                    🐔👈，🗿⬇️☯️😋
-                                </div>
-                                <div className='thought'>
-                                    🤮👶，🗿⬇️🗿☯️😋
-                                </div>
-                                <div className='thought'>
-                                    🌸1️⃣👀🍺👌💥
-                                </div>
-                                <div className='thought'>
-                                    🥇🤏🥢🥃
-                                </div>
+                                {allThoughts.map(this.renderThoughts)}
                             </div>
                         }
                     </Collapse.Panel>
                     <Collapse.Panel key='图片' title='图片'>
                         {
-                            <div className='allPicture'>
+                            <div className='allPictures'>
                                 <div className='picture'>
                                     <Badge content='-' className='removeContent'>
                                         <Image src={jntm} width={100} height={100} fit='fill'/>
