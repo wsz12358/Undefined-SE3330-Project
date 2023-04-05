@@ -16,11 +16,19 @@ const allThoughts = ["全民制作人大家好，我是练习时长两年半的�
     "🥇🤏🥢🥃"
 ]
 
+const allPictures = []
+
 class Details extends React.Component {
 
     backAddr = "/stats"
     eventId = this.props.location.state.id - 1
     focusEvent = eventListDemo[this.eventId]
+
+    btnShare = (
+        <button className="btnShare">
+            分享
+        </button>
+    );
 
     renderThoughts = (value) => {
         return (
@@ -30,10 +38,14 @@ class Details extends React.Component {
         )
     }
 
+    renderPictures = () => {
+
+    }
+
     render() {
         return (<div className="detail_body">
             <div className="detail_absoluteField">
-                <HeaderBar backFunc={OnClickRoute.bind(this, this.backAddr)} title="详细"/>
+                <HeaderBar backFunc={OnClickRoute.bind(this, this.backAddr)} title="详细" right = {this.btnShare}/>
             </div>
 
             <div className="detail_eventField">
@@ -79,12 +91,6 @@ class Details extends React.Component {
                 <div className='deLocation'>
                     地点：美国
                 </div>
-                <Button className='btnEdit' block>
-                    编辑
-                </Button>
-                <Button className='btnShare' block>
-                    分享
-                </Button>
             </div>
         </div>);
     }
