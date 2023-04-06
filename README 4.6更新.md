@@ -23,3 +23,5 @@ npm install react-animated-router --save<br/>
 项目运行方法：<br/>
 先从intellij里打开项目,file-open-Undefined-SE3330-Project/backend,配置一下启动方法：在run的小三角左边那个框选择edit configuration，选择spring boot，在build and run里选择java8，路径选择com.backendApplication就可以了<br/>
 然后在UIprototype里正常打开前端就可以了（在UIPrototype目录里输npm start）<br/>
+****注意注意！！！***<br/>
+记得后端resource的properties文件里的password改成自己的数据库账号密码，因为暂时还没有搞好共享数据库所以目前得这么操作x <br/>
