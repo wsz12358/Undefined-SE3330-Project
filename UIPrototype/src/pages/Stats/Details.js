@@ -46,7 +46,7 @@ class Details extends React.Component {
     render() {
         return (<div className="detail_body">
             <div className="detail_absoluteField">
-                <HeaderBar backFunc={OnClickRoute.bind(this, this.backAddr)} title="详细" right = {this.btnShare}/>
+                <HeaderBar backFunc={OnClickRoute.bind(this, this.backAddr, "pop")} title="详细"/>
             </div>
 
             <div className="detail_eventField">

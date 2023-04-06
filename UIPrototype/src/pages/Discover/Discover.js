@@ -10,7 +10,7 @@ class Discover extends React.Component {
     render() {
         return (<div className="discuv_body">
             <div className="discuv_head">
-                <HeaderBar backFunc={OnClickRoute.bind(this, this.backAddr)} title="发现"/>
+                <HeaderBar backFunc={OnClickRoute.bind(this, this.backAddr, "pop")} title="发现"/>
             </div>
             <div className="discuv_field">
                 <div className='aaa'>

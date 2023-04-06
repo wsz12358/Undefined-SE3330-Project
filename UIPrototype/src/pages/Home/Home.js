@@ -51,7 +51,7 @@ class Home extends React.Component {
                 <div id="home_avatarField">
                     ProLiferate
                     <div id="home_avatar"
-                         onClick={OnClickRoute.bind(this, this.goAddr)}>
+                         onClick={OnClickRoute.bind(this, this.goAddr, "push")}>
                         <img alt="avatar"
                              src={this.state.isLogin ? avatar : nullAvatar}
                              height="100%" width="100%"/>

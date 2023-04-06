@@ -12,7 +12,7 @@ class Stats_Map extends React.Component {
     }
 
     state = {
-        showIdx: 0,
+        showIdx: 0
     }
 
     setMarkerVis = (e) => {
@@ -35,38 +35,37 @@ class Stats_Map extends React.Component {
                     <Marker event={this.props.eventList[this.state.showIdx]}
                             setVis={() => this.setMarkerVis(false)}/>
                 </div>
-                <div id="address" style={{height: '100%', width: '100%', overflow: 'hidden'}}/>
+                <div id="address" style={{height: 'calc(100% - 76px)', width: '100%', overflow: 'hidden'}}/>
             </div>
-
         )
     }
 
     componentDidMount() {
-        const map = new BMap.Map("address");
-        map.addControl(new BMap.MapTypeControl({
+        this.map = new window.BMap.Map("address");
+        this.map.addControl(new window.BMap.MapTypeControl({
             mapTypes: [
-                BMAP_NORMAL_MAP,
-                BMAP_HYBRID_MAP
+                window.BMAP_NORMAL_MAP,
+                window.BMAP_HYBRID_MAP
             ]
         }));
-        map.setCurrentCity("上海"); // 设置地图显示的城市 此项是必须设置的
-        map.addControl(new BMap.NavigationControl());
-        map.enableScrollWheelZoom();
+        this.map.setCurrentCity("上海"); // 设置地图显示的城市 此项是必须设置的
+        this.map.addControl(new BMap.NavigationControl());
+        this.map.enableScrollWheelZoom();
 
-        const geolocation = new BMap.Geolocation();      // my location
+        const geolocation = new window.BMap.Geolocation();      // my location
         geolocation.getCurrentPosition((r) => {
-            const mk = new BMap.Marker(r.point, {
+            const mk = new window.BMap.Marker(r.point, {
                 // 初始化五角星symbol
-                icon: new BMap.Symbol(BMap_Symbol_SHAPE_STAR, {
+                icon: new window.BMap.Symbol(window.BMap_Symbol_SHAPE_STAR, {
                     scale: 1,
                     fillColor: "#1f1e33",
                     fillOpacity: 0.8,
                 })
             });
-            map.addOverlay(mk);
-            map.centerAndZoom(r.point, 15);
+            this.map.addOverlay(mk);
+            this.map.centerAndZoom(r.point, 15);
             mk.addEventListener("click", () => {
-                map.panTo(r.point);
+                this.map.panTo(r.point);
                 this.setMarkerVis(false);
             });
         }, {
@@ -74,12 +73,12 @@ class Stats_Map extends React.Component {
         });
 
         this.props.eventList.map((e, idx) => {
-            const point = new BMap.Point(e.lat, e.mul);
-            const marker = new BMap.Marker(point);
-            map.addOverlay(marker);
+            const point = new window.BMap.Point(e.lat, e.mul);
+            const marker = new window.BMap.Marker(point);
+            this.map.addOverlay(marker);
 
             marker.addEventListener("click", () => {
-                map.panTo(point);
+                this.map.panTo(point);
                 this.setState({showIdx: idx});
                 this.setMarkerVis(true);
             })

@@ -7,7 +7,7 @@ class Record extends React.Component {
 
     render() {
         return (
-            <div className="record_body" onClick={OnClickRoute.bind(this, this.backAddr)}>
+            <div className="record_body" onClick={OnClickRoute.bind(this, this.backAddr, "pop")}>
                 {/*TODO: Your code here.*/}
             </div>
         );
