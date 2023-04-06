@@ -79,3 +79,47 @@
     justify-content: center;
     flex-direction: column;
 }
+
+/**************************************************************/
+/*                                                            */
+/*                          FRIENDS                           */
+/*                                                            */
+/**************************************************************/
+
+#friend_body {
+    height: 100%;
+    width: 100%;
+}
+
+#friend_absolute {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#friend_content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#friend_tab {
+    width: 80%;
+    margin-top: 10px;
+    background-color: #2d8ae8;
+    border-radius: 20px;
+    font: 600 20px/1.5 "Microsoft YaHei UI";
+}
+
+#friend_tab .adm-tabs-tab {
+    color: #ffffff;
+}
+
+#friend_tab .adm-tabs-tab-active {
+    color: #fad15b;
+}

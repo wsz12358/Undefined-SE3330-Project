@@ -4,24 +4,30 @@ import store from "../../redux/Store";
 import {setIsLogin, setUsername} from "../../redux/FilterActions";
 import {username, password} from "../../utils/LoginDemo";
 import user from "./User";
+import {login} from "../../service/loginService";
 
 
 class Login extends React.Component {
     onFinish = (e) => {
-        if (e.username === username && e.password === password) {
-            const u = e.username.toString();
-            Dialog.alert({
-                content: "Welcome! Dear " + u + ".",
-            });
-            store.dispatch(setIsLogin(true));
-            store.dispatch(setUsername(e.username));
-            // password shall not be stored in Front
-            // if access to password is required, program should fetch from Backend
-        } else {
-            Dialog.alert({
-                content: "Wrong username or password",
-            });
+        const callback = (ret) => {
+                console.log(ret);
+            if (ret) {
+                const u = e.username.toString();
+                Dialog.alert({
+                    content: "Welcome! Dear " + u + ".",
+                });
+                store.dispatch(setIsLogin(true));
+                store.dispatch(setUsername(e.username));
+                // password shall not be stored in Front
+                // if access to password is required, program should fetch from Backend
+            } else {
+                Dialog.alert({
+                    content: "Wrong username or password",
+                });
+            }
         }
+
+        login({username: e.username, password: e.password}, callback);
     }
 
     render() {

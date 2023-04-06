@@ -4,6 +4,8 @@ import {Dialog, List} from "antd-mobile";
 import {SetOutline, TeamOutline} from "antd-mobile-icons";
 import {setIsLogin} from "../../redux/FilterActions";
 import store from "../../redux/Store";
+import OnClickRoute from "../../utils/OnClickRoute";
+import {withRouter} from "react-router-dom";
 
 class User extends React.Component {
     render() {
@@ -19,8 +21,7 @@ class User extends React.Component {
                     </div>
                 </div>
                 <List className="user_setList">
-                    <List.Item prefix={<TeamOutline/>} onClick={() => {
-                    }}>
+                    <List.Item prefix={<TeamOutline/>} onClick={OnClickRoute.bind(this, "/mine/friends", "push")}>
                         好友
                     </List.Item>
                     <List.Item prefix={<SetOutline/>} onClick={() => {
@@ -51,4 +52,4 @@ class User extends React.Component {
     }
 }
 
-export default User;
+export default withRouter(User);

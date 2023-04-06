@@ -7,6 +7,7 @@ import Discover from "./pages/Discover/Discover";
 import Mine from "./pages/Mine/Mine";
 import Details from "./pages/Stats/Details";
 import Record from "./pages/Home/Record";
+import Mine_Friends from "./pages/Mine/Mine_Friends";
 import {useLocation, Route, Switch, useHistory} from 'react-router-dom'
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 
@@ -26,7 +27,8 @@ function App() {
                                  childFactory={e => React.cloneElement(
                                      e, {classNames: anim_actions[action]}
                                  )}>
-                    <CSSTransition timeout={500} key={location.pathname}>
+                    <CSSTransition timeout={500} key={location.pathname}
+                                   mountOnEnter unmountOnExit>
                         <Switch location={location}>
                             <Route exact path='/home/record' component={Record}/>
 
@@ -37,6 +39,8 @@ function App() {
                             <Route path='/home' component={Home}/>
 
                             <Route path='/discover' component={Discover}/>
+
+                            <Route path='/mine/friends' component={Mine_Friends}/>
 
                             <Route path='/mine' component={Mine}/>
                         </Switch>

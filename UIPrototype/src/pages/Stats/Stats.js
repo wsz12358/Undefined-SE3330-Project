@@ -53,7 +53,7 @@ class Stats extends React.Component {
                 </div>
                 <div className="stats_capRenderField">
                     {this.capRender()}
-                </div>
+                </div>  
             </div>
         );
         //TODO: your code here
