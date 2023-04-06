@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Suspense} from 'react'
 import "./Stats.css"
 import Stats_eventList from './Stats_EventList'
 import Stats_StatsList from "./Stats_StatsList";
@@ -29,13 +29,17 @@ class Stats extends React.Component {
         const category = store.getState().filter.category;
 
         if (category === "map")
-            return (<Stats_Map onClickRoute={OnClickRoute.bind(this, '/home')}
-                               eventList={eventListDemo}/>)
+            return (
+                <Stats_Map onClickRoute={OnClickRoute.bind(this, '/home', "pop")}
+                           eventList={eventListDemo}/>
+            )
         else if (category === "stats")
             return (<Stats_StatsList/>)
         else
-            return (<Stats_eventList eventList={eventListDemo}
-                                     goAddr={this.goAddr}/>)
+            return (
+                <Stats_eventList eventList={eventListDemo}
+                                 goAddr={this.goAddr}/>
+            )
 
     }
 
@@ -43,7 +47,7 @@ class Stats extends React.Component {
         return (
             <div className="stats_body">
                 <div className="stats_absoluteField">
-                    <HeaderBar backFunc={OnClickRoute.bind(this, this.backAddr)}
+                    <HeaderBar backFunc={OnClickRoute.bind(this, this.backAddr, "replace")}
                                title='回顾'/>
                     <Filter/>
                 </div>

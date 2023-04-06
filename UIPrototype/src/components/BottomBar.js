@@ -9,10 +9,19 @@ export default function BottomBar() {
     const history = useHistory();
     const location = useLocation();
     const {pathname} = location;
+    const hierarchy = {
+        home: 1,
+        stats: 2,
+        discover: 3,
+        mine: 4
+    }
     const setRouteActive = value => {
         if (value === '/home' || value === '/mine' ||
                 store.getState().user.isLogin)
-            history.push(value)
+            if (hierarchy[value.substring(1)] > hierarchy[pathname.substring(1)])
+                history.push(value);
+            else
+                history.replace(value);
         else {
             Dialog.alert({
                 content: "Please go login.",
