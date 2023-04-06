@@ -7,6 +7,8 @@
 
 如果要拉取新项目 先在git上进入自己的仓库界面，在sync fork里进行一下update branch再从intellij上拉取！<br/>
 
+在commit&push之后去github，会跳出来一个通知说自己是1commit ahead，从通知点进去可以add pull request，写好标题和评论就可以提交到main仓库了 <br/>
+
 4.6 update by acoustic <br/>
 关于一些插件报错react-transition-group报错的说明：<br/> 
 在UIPrototype文件夹的终端中依次输入：<br/>
