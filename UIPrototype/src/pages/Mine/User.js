@@ -1,5 +1,4 @@
 import React from "react";
-import FocusUser from "../../utils/UserDemo";
 import {Dialog, List} from "antd-mobile";
 import {SetOutline, TeamOutline} from "antd-mobile-icons";
 import {setIsLogin} from "../../redux/FilterActions";
@@ -14,10 +13,10 @@ class User extends React.Component {
                 <div className="user_avatarField">
                     <div className="user_avatarBox"/>
                     <div className="user_nameBox">
-                        {FocusUser.name}
+                        {store.getState().user.username}
                     </div>
                     <div className="user_idBox">
-                        id: {FocusUser.id}
+                        id: 12138
                     </div>
                 </div>
                 <List className="user_setList">
