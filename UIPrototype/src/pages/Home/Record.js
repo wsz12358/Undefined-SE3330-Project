@@ -3,6 +3,8 @@ import './Record.css';
 import OnClickRoute from "../../utils/OnClickRoute";
 import amiya from "../../assets/bunny.jpg"
 import naxida from  "../../assets/naxida.png"
+import {DashOutlined} from "@ant-design/icons"
+import {Button} from "antd"
 const ChatMessage = ({ user, message, profileImage }) => (
     <div style={{ display: 'flex', flexDirection: user === 'You' ? 'row-reverse' : 'row', alignItems: 'flex-end' }}>
         <img
@@ -53,18 +55,22 @@ class Record extends React.Component {
                     <h2 style={{ margin: 0, position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
                         {"Untitled"}
                     </h2>
-                    <button
+                    <Button
                         style={{
-                            backgroundColor: '#007bff',
+                            backgroundColor: '#B0E0E6',
                             color: 'white',
                             borderRadius: 5,
                             padding: '8px 12px',
                             border: 'none',
-                            cursor: 'pointer'
+                            cursor: 'pointer',
+                            position: 'absolute',
+                            left: '80%'
                         }}
-                        onClick={OnClickRoute.bind(this, this.backAddr)}
+                        onClick={OnClickRoute.bind(this, this.backAddr, "pop")}
+                        icon={<DashOutlined />}
                     >
-                    </button>
+                    </Button>
+
                 </header>
                 <div style={{ maxHeight: 'calc(100vh - 140px)', overflowY: 'auto', paddingTop: 24 }}>
                     <div style={{ maxWidth: 500, margin: '0 auto' }}>
