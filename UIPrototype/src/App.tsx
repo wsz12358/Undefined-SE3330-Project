@@ -7,28 +7,41 @@ import Discover from "./pages/Discover/Discover";
 import Mine from "./pages/Mine/Mine";
 import Details from "./pages/Stats/Details";
 import Record from "./pages/Home/Record";
-import {useLocation, Route, Switch} from 'react-router-dom'
+import {useLocation, Route, Switch, useHistory} from 'react-router-dom'
+import {CSSTransition, TransitionGroup} from "react-transition-group";
 
 function App() {
     const location = useLocation();
+    const action = useHistory().action;
+    const anim_actions = {
+        PUSH: 'forward',
+        POP: 'back',
+        REPLACE: 'back'
+    }
 
     return (
         <div className="app">
             <div className="app_body">
-                <Switch location={location}>
-                    <Route exact path='/home/record' component={Record}/>
+                <TransitionGroup className="router_wrapper"
+                                 childFactory={e => React.cloneElement(
+                                     e, {classNames: anim_actions[action]}
+                                 )}>
+                    <CSSTransition timeout={500} key={location.pathname}>
+                        <Switch location={location}>
+                            <Route exact path='/home/record' component={Record}/>
 
-                    <Route exact path='/stats/details' component={Details}/>
+                            <Route exact path='/stats/details' component={Details}/>
 
-                    <Route path='/stats' component={Stats}/>
+                            <Route path='/stats' component={Stats}/>
 
-                    <Route path='/home' component={Home}/>
+                            <Route path='/home' component={Home}/>
 
-                    <Route path='/discover' component={Discover}/>
+                            <Route path='/discover' component={Discover}/>
 
-                    <Route path='/mine' component={Mine}/>
-
-                </Switch>
+                            <Route path='/mine' component={Mine}/>
+                        </Switch>
+                    </CSSTransition>
+                </TransitionGroup>
             </div>
             {!(location.pathname === '/stats/details') &&
                 !(location.pathname === '/home/record') &&

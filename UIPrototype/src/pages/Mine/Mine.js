@@ -17,7 +17,7 @@ class Mine extends React.Component {
     render() {
         const login = store.getState().user.isLogin;
         return (
-            <div style={{height: '100%', width: '100%'}}>
+            <div id="mine_body">
                 {login &&
                     <User/>}
                 {!login &&
