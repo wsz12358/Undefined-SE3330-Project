@@ -96,6 +96,7 @@ class Record extends React.Component {
                 </div>
             </div>
 
+
         );
     }
 }
