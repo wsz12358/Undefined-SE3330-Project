@@ -125,3 +125,21 @@
     color: white;
     font-weight: 600;
 }
+
+/**************************************************************/
+/*                                                            */
+/*                        GotoTop                             */
+/*                                                            */
+/**************************************************************/
+
+#gotoTop {
+    position: absolute;
+    background-color: rgb(31, 133, 66);
+    bottom: 130px;
+    right: 30px;
+    padding: 10px 10px;
+    border-radius: 20px;
+    border: #05e3fa 2px solid;
+    z-index: 5;
+    color: white;
+}
