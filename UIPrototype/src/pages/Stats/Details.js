@@ -3,25 +3,24 @@ import HeaderBar from "../../components/HeaderBar";
 import OnClickRoute from "../../utils/OnClickRoute";
 import './Details.css'
 
-import {Badge, Button, Collapse, Image, List, Tag} from "antd-mobile";
+import {Badge, Collapse, Dialog, Grid, Image, List, SwipeAction} from "antd-mobile";
 import jntm from "../../assets/jntm.png"
 import {AddCircleOutline, ClockCircleOutline, EnvironmentOutline, EyeOutline, UserOutline} from "antd-mobile-icons";
 import eventListDemo from "../../utils/EventListDemo";
 import {ListItem} from "antd-mobile/es/components/list/list-item";
+import {GridItem} from "antd-mobile/es/components/grid/grid";
 
-
-const allThoughts = ["全民制作人大家好，我是练习时长两年半的个人练习生蔡徐坤，喜欢唱、跳、rap、篮球，music",
-    "🐔👈，🗿⬇️☯️😋",
-    "🤮👶，🗿⬇️🗿☯️😋",
-    "🌸1️⃣👀🍺👌💥",
-    "🥇🤏🥢🥃"
-]
-
-const allPictures = []
 
 class Details extends React.Component {
     state = {
-        showTag: true
+        allThoughts: ["全民制作人大家好，我是练习时长两年半的个人练习生蔡徐坤，喜欢唱、跳、rap、篮球，music",
+            "🐔👈，🗿⬇️☯️😋",
+            "🤮👶，🗿⬇️🗿☯️😋",
+            "🌸1️⃣👀🍺👌💥",
+            "🥇🤏🥢🥃"
+        ],
+        allPictures: [jntm, jntm, jntm, jntm, jntm, jntm, jntm, jntm, jntm],
+        allTags: ["吃饭", "睡觉", "打篮球"]
     }
 
     backAddr = "/stats"
@@ -34,22 +33,60 @@ class Details extends React.Component {
         </button>
     );
 
-    renderThoughts = (value) => {
+
+    renderThoughts = (value, idx) => {
         return (
-            <div className="thought">
-                {value}
-            </div>
+            <SwipeAction key={value} rightActions={[{key: 'delete',
+                text: '删除',
+                color: 'danger',
+                onClick: () => {
+                    Dialog.confirm(
+                        {content: "确定要删除吗？",
+                            onConfirm: () => {
+                                this.setState(this.state.allThoughts.splice(idx, 1));
+                            }}
+                    );
+                }
+            }]}>
+                <ListItem>
+                    {value}
+                </ListItem>
+            </SwipeAction>
         )
     }
 
-    renderPictures = () => {
+    renderPictures = (pic, idx) => {
+        return <GridItem className='picture' key={idx}>
+            <Badge content='-' className='removeContent'>
+                <Image src={pic} width={100} height={100} fit='fill' onContainerClick={() => {
+                    Dialog.confirm(
+                        {content: "确定要删除吗？",
+                            onConfirm: () => {
+                                this.setState(this.state.allPictures.splice(idx, 1));
+                            }}
+                    );
+                }}/>
+            </Badge>
+        </GridItem>
+    }
 
+    renderTags = (tag, idx) => {
+        return (<div className="deTag" key={idx} onClick={() => {
+            Dialog.confirm(
+                {content: "确定要删除吗？",
+                    onConfirm: () => {
+                        this.setState(this.state.allTags.splice(idx, 1));
+                    }}
+            );
+        }}>
+            {tag}
+        </div>)
     }
 
     render() {
         return (<div className="detail_body">
             <div className="detail_absoluteField">
-                <HeaderBar backFunc={OnClickRoute.bind(this, this.backAddr, "pop")} title="详细" right={this.btnShare}/>
+                <HeaderBar backFunc={OnClickRoute.bind(this, this.backAddr, "replace")} title="详细" right={this.btnShare}/>
             </div>
 
             <div className="detail_eventField">
@@ -60,70 +97,43 @@ class Details extends React.Component {
                     {this.focusEvent.date} 2023
                 </div>
 
-                {/*<div className='deTag'>*/}
-                {/*    <Tag color='primary' className='chTag'>唱</Tag>*/}
-                {/*    <Tag color='blue' className='chTag'>跳</Tag>*/}
-                {/*    <Tag color='red' className='chTag'>rap</Tag>*/}
-                {/*    <Tag color='green' className='chTag'>篮球</Tag>*/}
-                {/*</div>*/}
-
                 <Collapse defaultActiveKey={['1']} className="myCollapse">
                     <Collapse.Panel key='感想' title='感想' className="myCollapsePanel">
                         {
-                            <div className='allThoughts'>
-                                {allThoughts.map(this.renderThoughts)}
-                            </div>
+                            <List>
+                                {this.state.allThoughts.map(this.renderThoughts)}
+                            </List>
                         }
                     </Collapse.Panel>
                     <Collapse.Panel key='图片' title='图片' className="myCollapsePanel">
                         {
-                            <div className='allPictures'>
-                                <div className='picture'>
-                                    <Badge content='-' className='removeContent'>
-                                        <Image src={jntm} width={100} height={100} fit='fill'/>
-                                    </Badge>
-                                </div>
-                                <div className='picture'>
-                                    <Badge content='-' className='removeContent'>
-                                        <Image src={jntm} width={100} height={100} fit='fill'/>
-                                    </Badge>
-                                </div>
-                                <div className='addPicture'>
+                            <div>
+                                <Grid columns={3}>
+                                    {this.state.allPictures.map(this.renderPictures)}
+                                </Grid>
+                                {/*<div className='addPicture'>
                                     <AddCircleOutline className='addCircle'/>
-                                </div>
+                                </div>*/}
                             </div>
                         }
                     </Collapse.Panel>
                     <Collapse.Panel key='tag' title='tag' className="myCollapsePanel">
                         {
                             <div className="allTags">
-                                {this.state.showTag &&
-                                    <div className="deTag"
-                                         onClick={() => {
-                                             this.setState({showTag: false})
-                                         }}>
-                                        吃饭
-                                    </div>}
-                                <div className="deTag">
-                                    睡觉
-                                </div>
-                                <div className="deTag">
-                                    打篮球
-                                </div>
-
+                                {this.state.allTags.map(this.renderTags)}
                             </div>
                         }
                     </Collapse.Panel>
                 </Collapse>
 
-                <List>
-                    <ListItem prefix={<EnvironmentOutline/>} onClick={() => {
+                <List className={"deList"}>
+                    <ListItem key={1} prefix={<EnvironmentOutline/>} onClick={() => {
                     }}>所在位置</ListItem>
-                    <ListItem prefix={<EyeOutline/>} onClick={() => {
+                    <ListItem key={2} prefix={<EyeOutline/>} onClick={() => {
                     }}>谁可以看</ListItem>
-                    <ListItem prefix={<UserOutline/>} onClick={() => {
+                    <ListItem key={3} prefix={<UserOutline/>} onClick={() => {
                     }}>提醒谁看</ListItem>
-                    <ListItem prefix={<ClockCircleOutline/>} onClick={() => {
+                    <ListItem key={4} prefix={<ClockCircleOutline/>} onClick={() => {
                     }}>定时</ListItem>
                 </List>
 
