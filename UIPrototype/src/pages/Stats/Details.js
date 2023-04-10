@@ -3,25 +3,24 @@ import HeaderBar from "../../components/HeaderBar";
 import OnClickRoute from "../../utils/OnClickRoute";
 import './Details.css'
 
-import {Badge, Button, Collapse, Image, List, Tag} from "antd-mobile";
+import {Badge, Collapse, Dialog, Image, List, SwipeAction} from "antd-mobile";
 import jntm from "../../assets/jntm.png"
 import {AddCircleOutline, ClockCircleOutline, EnvironmentOutline, EyeOutline, UserOutline} from "antd-mobile-icons";
 import eventListDemo from "../../utils/EventListDemo";
 import {ListItem} from "antd-mobile/es/components/list/list-item";
 
 
-const allThoughts = ["全民制作人大家好，我是练习时长两年半的个人练习生蔡徐坤，喜欢唱、跳、rap、篮球，music",
-    "🐔👈，🗿⬇️☯️😋",
-    "🤮👶，🗿⬇️🗿☯️😋",
-    "🌸1️⃣👀🍺👌💥",
-    "🥇🤏🥢🥃"
-]
-
 const allPictures = []
 
 class Details extends React.Component {
     state = {
-        showTag: true
+        showTag: true,
+        allThoughts: ["全民制作人大家好，我是练习时长两年半的个人练习生蔡徐坤，喜欢唱、跳、rap、篮球，music",
+            "🐔👈，🗿⬇️☯️😋",
+            "🤮👶，🗿⬇️🗿☯️😋",
+            "🌸1️⃣👀🍺👌💥",
+            "🥇🤏🥢🥃"
+        ]
     }
 
     backAddr = "/stats"
@@ -34,11 +33,26 @@ class Details extends React.Component {
         </button>
     );
 
+    rightAction = [{key: 'delete',
+        text: '删除',
+        color: 'danger',
+        onClick: (a) => {
+            console.log(a)
+            Dialog.confirm(
+                {content: "确定要删除吗？",
+                onConfirm: () => {
+                }}
+            );
+        }
+    }]
+
     renderThoughts = (value) => {
         return (
-            <div className="thought">
-                {value}
-            </div>
+            <SwipeAction key={value} rightActions={this.rightAction}>
+                <ListItem>
+                    {value}
+                </ListItem>
+            </SwipeAction>
         )
     }
 
@@ -70,9 +84,12 @@ class Details extends React.Component {
                 <Collapse defaultActiveKey={['1']} className="myCollapse">
                     <Collapse.Panel key='感想' title='感想' className="myCollapsePanel">
                         {
-                            <div className='allThoughts'>
+                            /*<div className='allThoughts'>
                                 {allThoughts.map(this.renderThoughts)}
-                            </div>
+                            </div>*/
+                            <List>
+                                {this.state.allThoughts.map(this.renderThoughts)}
+                            </List>
                         }
                     </Collapse.Panel>
                     <Collapse.Panel key='图片' title='图片' className="myCollapsePanel">
@@ -116,14 +133,14 @@ class Details extends React.Component {
                     </Collapse.Panel>
                 </Collapse>
 
-                <List>
-                    <ListItem prefix={<EnvironmentOutline/>} onClick={() => {
+                <List className={"deList"}>
+                    <ListItem key={1} prefix={<EnvironmentOutline/>} onClick={() => {
                     }}>所在位置</ListItem>
-                    <ListItem prefix={<EyeOutline/>} onClick={() => {
+                    <ListItem key={2} prefix={<EyeOutline/>} onClick={() => {
                     }}>谁可以看</ListItem>
-                    <ListItem prefix={<UserOutline/>} onClick={() => {
+                    <ListItem key={3} prefix={<UserOutline/>} onClick={() => {
                     }}>提醒谁看</ListItem>
-                    <ListItem prefix={<ClockCircleOutline/>} onClick={() => {
+                    <ListItem key={4} prefix={<ClockCircleOutline/>} onClick={() => {
                     }}>定时</ListItem>
                 </List>
 
