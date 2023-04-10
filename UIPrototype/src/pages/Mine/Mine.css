@@ -89,30 +89,21 @@
 #friend_body {
     height: 100%;
     width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
-#friend_absolute {
+#friend_absoluteField {
     width: 100%;
-    position: absolute;
-    top: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    background-color: #fff;
+    border-bottom: solid 5px #427b38;
 }
 
-#friend_content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-#friend_tab {
-    width: 80%;
-    margin-top: 10px;
-    background-color: #2d8ae8;
-    border-radius: 20px;
+#friend_tabField {
     font: 600 20px/1.5 "Microsoft YaHei UI";
 }
 
@@ -123,3 +114,31 @@
 #friend_tab .adm-tabs-tab-active {
     color: #fad15b;
 }
+
+#friend_content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow: scroll;
+    height: 100%;
+}
+
+#friendTabs {
+    width: 80%;
+    margin: 0 auto;
+    background-color: #52b48d;
+    border-radius: 30px;
+}
+
+#friend_search {
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 15px;
+}
+
+#mine_friendList {
+    width: 100%;
+    height: 100%;
+}
+

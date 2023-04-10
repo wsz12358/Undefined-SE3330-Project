@@ -20,6 +20,9 @@ const allThoughts = ["全民制作人大家好，我是练习时长两年半的�
 const allPictures = []
 
 class Details extends React.Component {
+    state = {
+        showTag: true
+    }
 
     backAddr = "/stats"
     eventId = this.props.location.state.id - 1
@@ -46,7 +49,7 @@ class Details extends React.Component {
     render() {
         return (<div className="detail_body">
             <div className="detail_absoluteField">
-                <HeaderBar backFunc={OnClickRoute.bind(this, this.backAddr, "pop")} title="详细"/>
+                <HeaderBar backFunc={OnClickRoute.bind(this, this.backAddr, "pop")} title="详细" right={this.btnShare}/>
             </div>
 
             <div className="detail_eventField">
@@ -94,9 +97,13 @@ class Details extends React.Component {
                     <Collapse.Panel key='tag' title='tag' className="myCollapsePanel">
                         {
                             <div className="allTags">
-                                <div className="deTag">
-                                    吃饭
-                                </div>
+                                {this.state.showTag &&
+                                    <div className="deTag"
+                                         onClick={() => {
+                                             this.setState({showTag: false})
+                                         }}>
+                                        吃饭
+                                    </div>}
                                 <div className="deTag">
                                     睡觉
                                 </div>
@@ -110,10 +117,14 @@ class Details extends React.Component {
                 </Collapse>
 
                 <List>
-                    <ListItem prefix={<EnvironmentOutline />} onClick={()=>{}}>所在位置</ListItem>
-                    <ListItem prefix={<EyeOutline />} onClick={()=>{}}>谁可以看</ListItem>
-                    <ListItem prefix={<UserOutline />} onClick={()=>{}}>提醒谁看</ListItem>
-                    <ListItem prefix={<ClockCircleOutline />} onClick={()=>{}}>定时</ListItem>
+                    <ListItem prefix={<EnvironmentOutline/>} onClick={() => {
+                    }}>所在位置</ListItem>
+                    <ListItem prefix={<EyeOutline/>} onClick={() => {
+                    }}>谁可以看</ListItem>
+                    <ListItem prefix={<UserOutline/>} onClick={() => {
+                    }}>提醒谁看</ListItem>
+                    <ListItem prefix={<ClockCircleOutline/>} onClick={() => {
+                    }}>定时</ListItem>
                 </List>
 
             </div>

@@ -15,11 +15,11 @@ class Filter extends React.Component {
             return;
 
         if (ret) {
-            this.filter.classList.add('stats_filterAdd');
-            this.filter.classList.remove('stats_filterRemove');
+            this.filter.classList.add('filterAdd');
+            this.filter.classList.remove('filterRemove');
         } else {
-            this.filter.classList.add('stats_filterRemove');
-            this.filter.classList.remove('stats_filterAdd');
+            this.filter.classList.add('filterRemove');
+            this.filter.classList.remove('filterAdd');
             store.dispatch(setToCalVis(false));
             store.dispatch(setFromCalVis(false));
         }
@@ -27,8 +27,8 @@ class Filter extends React.Component {
 
     render() {
         return (
-            <div className="stats_filterField" ref={(e) => this.filter = e}>
-                <div className="stats_filterModeBox">
+            <div id="filterField" ref={(e) => this.filter = e}>
+                <div id="filterModeBox">
                     <Tabs onChange={(e) => {
                         store.dispatch(setCategory(e));
                         this.onFilterGrow(true);

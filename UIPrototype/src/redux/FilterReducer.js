@@ -1,7 +1,8 @@
 import {
     SET_FILTER_OPEN, SET_CATEGORY, SET_TAG_STATUS,
     SET_TIME_STATUS, SET_TIME_FROM, SET_TIME_TO,
-    SET_TAG_TEXT, SET_FROMCAL_VIS, SET_TOCAL_VIS, SET_PASSWORD, SET_USERNAME, SET_IS_LOGIN, SET_AVATAR,
+    SET_TAG_TEXT, SET_FROMCAL_VIS, SET_TOCAL_VIS,
+    SET_PASSWORD, SET_USERNAME, SET_IS_LOGIN
 } from "./Constants";
 
 const initialState = {
@@ -21,6 +22,7 @@ const initialState = {
         password: null,
         isLogin: false,
         avatar: "",
+        r_avatar: "",
     }
 }
 
@@ -121,14 +123,6 @@ export default function filterReducer(prevState = initialState, action) {
                 user: {
                     ...prevState.user,
                     isLogin: data,
-                },
-            }
-        case SET_AVATAR:
-            return {
-                ...prevState,
-                user: {
-                    ...prevState.user,
-                    avatar: data,
                 },
             }
         default:

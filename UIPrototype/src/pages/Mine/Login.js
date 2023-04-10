@@ -1,16 +1,16 @@
 import React from "react";
-import {Button, Card, Dialog, Form, Input} from "antd-mobile";
+import {Button, Card, Dialog, DotLoading, Form, Input} from "antd-mobile";
 import store from "../../redux/Store";
 import {setIsLogin, setUsername} from "../../redux/FilterActions";
-import {username, password} from "../../utils/LoginDemo";
-import user from "./User";
 import {login} from "../../service/loginService";
 
 
 class Login extends React.Component {
+    state = {
+        waitLogin: false
+    }
     onFinish = (e) => {
         const callback = (ret) => {
-                console.log(ret);
             if (ret) {
                 const u = e.username.toString();
                 Dialog.alert({
@@ -24,10 +24,13 @@ class Login extends React.Component {
                 Dialog.alert({
                     content: "Wrong username or password",
                 });
+                this.setState({waitLogin: false})
             }
         }
 
-        login({username: e.username, password: e.password}, callback);
+        this.setState({waitLogin: true});
+        login({username: e.username, password: e.password}, callback,
+            () => this.setState({waitLogin: false}));
     }
 
     render() {
@@ -42,18 +45,25 @@ class Login extends React.Component {
                           style={{width: '90%'}}
                           footer={
                               <Button block type='login' color='primary' size='large'>
-                                  Login
+                                  {this.state.waitLogin &&
+                                      <div>
+                                          Loading <DotLoading color='white'/>
+                                      </div>}
+                                  {!this.state.waitLogin &&
+                                      "Login"}
                               </Button>
                           }
                     >
                         <Form.Header>Login</Form.Header>
                         <Form.Item name='username'
                                    label='Username'
+                                   initialValue='group7'
                                    rules={[{required: true, message: 'username must not be null'}]}>
                             <Input clearable/>
                         </Form.Item>
                         <Form.Item name='password'
-                                   label='Password'>
+                                   label='Password'
+                                   initialValue='sjtuse2021'>
                             <Input clearable type='password'/>
                         </Form.Item>
                     </Form>

@@ -1,19 +1,19 @@
 .detail_body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     height: 100%;
     width: 100%;
     font-family: Helvetica, Tahoma, Arial, STXihei, 华文细黑, "“Microsoft YaHei”", 微软雅黑, sans-serif;
 }
 
 .detail_absoluteField {
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
 }
 
 .detail_eventField {
-    margin-top: 60px;
-    overflow: hidden;
+    width: 100%;
+    overflow: scroll;
 }
 
 .deTime {
