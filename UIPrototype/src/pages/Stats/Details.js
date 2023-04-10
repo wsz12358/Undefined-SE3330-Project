@@ -33,22 +33,24 @@ class Details extends React.Component {
         </button>
     );
 
-    rightAction = [{key: 'delete',
-        text: '删除',
-        color: 'danger',
-        onClick: (a) => {
-            console.log(a)
-            Dialog.confirm(
-                {content: "确定要删除吗？",
-                onConfirm: () => {
-                }}
-            );
-        }
-    }]
 
-    renderThoughts = (value) => {
+    renderThoughts = (value, idx) => {
         return (
-            <SwipeAction key={value} rightActions={this.rightAction}>
+            <SwipeAction key={value} rightActions={[{key: 'delete',
+                text: '删除',
+                color: 'danger',
+                onClick: () => {
+                    Dialog.confirm(
+                        {content: "确定要删除吗？",
+                            onConfirm: () => {
+                                console.log(idx)
+                                console.log(this.state)
+                                this.setState(this.state.allThoughts.splice(idx, 1));
+                                console.log(this.state)
+                            }}
+                    );
+                }
+            }]}>
                 <ListItem>
                     {value}
                 </ListItem>
