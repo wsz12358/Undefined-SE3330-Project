@@ -13,14 +13,14 @@ import {GridItem} from "antd-mobile/es/components/grid/grid";
 
 class Details extends React.Component {
     state = {
-        showTag: true,
         allThoughts: ["全民制作人大家好，我是练习时长两年半的个人练习生蔡徐坤，喜欢唱、跳、rap、篮球，music",
             "🐔👈，🗿⬇️☯️😋",
             "🤮👶，🗿⬇️🗿☯️😋",
             "🌸1️⃣👀🍺👌💥",
             "🥇🤏🥢🥃"
         ],
-        allPictures: [jntm, jntm, jntm, jntm, jntm, jntm, jntm, jntm, jntm]
+        allPictures: [jntm, jntm, jntm, jntm, jntm, jntm, jntm, jntm, jntm],
+        allTags: ["吃饭", "睡觉", "打篮球"]
     }
 
     backAddr = "/stats"
@@ -70,6 +70,19 @@ class Details extends React.Component {
         </GridItem>
     }
 
+    renderTags = (tag, idx) => {
+        return (<div className="deTag" key={idx} onClick={() => {
+            Dialog.confirm(
+                {content: "确定要删除吗？",
+                    onConfirm: () => {
+                        this.setState(this.state.allTags.splice(idx, 1));
+                    }}
+            );
+        }}>
+            {tag}
+        </div>)
+    }
+
     render() {
         return (<div className="detail_body">
             <div className="detail_absoluteField">
@@ -114,20 +127,7 @@ class Details extends React.Component {
                     <Collapse.Panel key='tag' title='tag' className="myCollapsePanel">
                         {
                             <div className="allTags">
-                                {this.state.showTag &&
-                                    <div className="deTag"
-                                         onClick={() => {
-                                             this.setState({showTag: false})
-                                         }}>
-                                        吃饭
-                                    </div>}
-                                <div className="deTag">
-                                    睡觉
-                                </div>
-                                <div className="deTag">
-                                    打篮球
-                                </div>
-
+                                {this.state.allTags.map(this.renderTags)}
                             </div>
                         }
                     </Collapse.Panel>
