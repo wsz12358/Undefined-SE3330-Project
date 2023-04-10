@@ -63,7 +63,7 @@ class Details extends React.Component {
     render() {
         return (<div className="detail_body">
             <div className="detail_absoluteField">
-                <HeaderBar backFunc={OnClickRoute.bind(this, this.backAddr, "pop")} title="详细" right={this.btnShare}/>
+                <HeaderBar backFunc={OnClickRoute.bind(this, this.backAddr, "replace")} title="详细" right={this.btnShare}/>
             </div>
 
             <div className="detail_eventField">
@@ -73,13 +73,6 @@ class Details extends React.Component {
                 <div className='deTime'>
                     {this.focusEvent.date} 2023
                 </div>
-
-                {/*<div className='deTag'>*/}
-                {/*    <Tag color='primary' className='chTag'>唱</Tag>*/}
-                {/*    <Tag color='blue' className='chTag'>跳</Tag>*/}
-                {/*    <Tag color='red' className='chTag'>rap</Tag>*/}
-                {/*    <Tag color='green' className='chTag'>篮球</Tag>*/}
-                {/*</div>*/}
 
                 <Collapse defaultActiveKey={['1']} className="myCollapse">
                     <Collapse.Panel key='感想' title='感想' className="myCollapsePanel">

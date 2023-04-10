@@ -3,6 +3,7 @@ import './Record.css';
 import HeaderBar from "../../components/HeaderBar";
 import ChatMessage from "../../components/ChatMessage";
 import {Button, Dialog, SearchBar} from "antd-mobile";
+import moment from "moment/moment";
 
 class Record extends React.Component {
     state = {
@@ -12,12 +13,27 @@ class Record extends React.Component {
             {myType: true, message: 'I am good, thank you!', key: 3},
             {myType: false, message: 'That\'s great to hear!', key: 4},
         ],
-        isStart: false
+        isStart: 0, //0 new, 1 start, 2 end
+    }
+
+    addMsg = (e, type) => {
+        const tmp = [...this.state.messages];
+        tmp.push({
+            myType: type,
+            message: e,
+            key: tmp.length + 1
+        })
+        this.setState({
+            messages: [...tmp]
+        })
     }
 
     onClickBack = () => {
-        if (this.state.isStart) {
+        if (this.state.isStart === 1) {
             Dialog.show({
+                style: {
+                    textAlign: 'center'
+                },
                 content: '还在记录中，退出将不会保存，继续吗？',
                 closeOnAction: true,
                 actions: [[
@@ -29,8 +45,53 @@ class Record extends React.Component {
                         this.props.history.goBack();
                 }
             })
-        } else
+        } else if (this.state.isStart === 2)
+            this.saveQuit(false);
+        else
             this.props.history.goBack();
+    }
+
+    onClickBtn = () => {
+        if (!this.state.isStart) {
+            this.bottom.classList.add("bottom_up");
+            this.bottom.classList.remove("bottom_down");
+            this.header.classList.add("white2green");
+            this.addMsg("开始记录。现在是" +
+                moment(new Date().getTime()).format('HH:mm:ss').toString() +
+                "，专心致志才能有所收获哦！", false);
+        } else if (this.state.isStart === 1) {
+            this.bottom.classList.remove("bottom_up");
+            this.bottom.classList.add("bottom_down");
+            this.header.classList.add("green2orange");
+            this.addMsg("结束记录。现在是" +
+                moment(new Date().getTime()).format('HH:mm:ss').toString() +
+                "，将美好的事物记录下来，然后去放松一下吧。", false);
+        } else {
+            this.saveQuit(true, 1);
+        }
+        this.setState({isStart: this.state.isStart + 1})
+    }
+
+    saveQuit = (type, idx) => {
+        Dialog.show({
+            style: {
+                textAlign: 'center'
+            },
+            content: '保存记录并退出？',
+            closeOnAction: true,
+            actions: [[
+                {key: 'cancel', text: '继续编辑'},
+                {key: 'confirm', text: '确认', bold: true, danger: true},
+            ]],
+            onAction: (e) => {
+                if (e.key === 'confirm') {
+                    if (type)
+                        this.props.history.push('/stats/details', {id: idx});
+                    else
+                        this.props.history.goBack();
+                }
+            }
+        })
     }
 
     clearInput = () => {
@@ -39,11 +100,12 @@ class Record extends React.Component {
     }
 
     render() {
-        const msgFieldMBottom = this.state.isStart ? 170 : 90;
+        const msgFieldMBottom = this.state.isStart ? 160 : 90;
 
         return (
             <div id="record_body">
-                <div id="record_absoluteField">
+                <div id="record_absoluteField"
+                     ref={e => this.header = e}>
                     <HeaderBar title="记录"
                                backFunc={this.onClickBack}/>
                 </div>
@@ -64,37 +126,21 @@ class Record extends React.Component {
                     <div id="record_btn">
                         <Button color={"primary"}
                                 style={{fontSize: 25, width: 100}}
-                                onClick={() => {
-                                    if (!this.state.isStart) {
-                                        this.bottom.classList.add("bottom_up");
-                                        this.bottom.classList.remove("bottom_down");
-                                    } else {
-                                        this.bottom.classList.remove("bottom_up");
-                                        this.bottom.classList.add("bottom_down");
-                                    }
-                                    this.setState({isStart: !this.state.isStart})
-                                }}>{this.state.isStart ? "Stop" : "Start"}</Button>
+                                onClick={this.onClickBtn}>
+                            {!this.state.isStart ? "Start" :
+                                this.state.isStart === 1 ? "Stop" : "Save"}</Button>
                     </div>
                     <div id="record_utils">
                         <SearchBar icon={null} placeholder='请输入内容'
                                    ref={e => this.inputMsg = e}
                                    style={{
-                                       width: 260, marginBottom: 40,
+                                       width: 260, marginBottom: 30,
                                        '--height': '40px'
                                    }}
                                    onSearch={(e) => {
-                                       if (e === "")
-                                           return;
-                                       const tmp = [...this.state.messages];
-                                       tmp.push({
-                                           myType: true,
-                                           message: e,
-                                           key: 1
-                                       })
+                                       if (e === "") return;
+                                       this.addMsg(e, true);
                                        this.clearInput();
-                                       this.setState({
-                                           messages: [...tmp]
-                                       })
                                    }}/>
                     </div>
                 </div>

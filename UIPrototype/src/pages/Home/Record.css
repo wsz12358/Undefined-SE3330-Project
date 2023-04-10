@@ -28,6 +28,12 @@
     bottom: 0;
 }
 
+/**************************************************************/
+/*                                                            */
+/*                      Animations                            */
+/*                                                            */
+/**************************************************************/
+
 .bottom_up {
     animation: bottom_upAnim .5s forwards;
 }
@@ -37,11 +43,49 @@
 }
 
 @keyframes bottom_upAnim {
-    0% {height: 90px;}
-    100% {height: 170px;}
+    0% {
+        height: 90px;
+        background-color: #fff;
+    }
+    100% {
+        height: 160px;
+        background-color: #5ce077;
+    }
 }
 
 @keyframes bottom_downAnim {
-    0% {height: 170px;}
-    100% {height: 90px;}
+    0% {
+        height: 160px;
+        background-color: #5ce077;
+    }
+    100% {
+        height: 90px;
+        background-color: #fad15b;
+    }
+}
+
+.white2green {
+    animation: w2gAnim .5s forwards;
+}
+
+.green2orange {
+    animation: g2oAnim .5s forwards;
+}
+
+@keyframes w2gAnim {
+    0% {
+        background-color: #fff;
+    }
+    100% {
+        background-color: #5ce077;
+    }
+}
+
+@keyframes g2oAnim {
+    0% {
+        background-color: #5ce077;
+    }
+    100% {
+        background-color: #fad15b;
+    }
 }
