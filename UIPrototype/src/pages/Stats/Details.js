@@ -43,10 +43,7 @@ class Details extends React.Component {
                     Dialog.confirm(
                         {content: "确定要删除吗？",
                             onConfirm: () => {
-                                console.log(idx)
-                                console.log(this.state)
                                 this.setState(this.state.allThoughts.splice(idx, 1));
-                                console.log(this.state)
                             }}
                     );
                 }
