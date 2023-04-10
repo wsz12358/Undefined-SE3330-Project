@@ -72,6 +72,7 @@
 
 .thought {
     font-size: 1.5em;
+    border-bottom: #5ce077 1px groove;
 }
 
 .allPictures {
@@ -123,4 +124,8 @@
     display: inline-block;
     font-size: 1.2em;
     border-radius: 10px;
+}
+
+.deList {
+    margin-top: 30%;
 }
