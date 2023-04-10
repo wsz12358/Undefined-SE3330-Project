@@ -1,109 +1,113 @@
 import React from 'react';
 import './Record.css';
-import OnClickRoute from "../../utils/OnClickRoute";
-import amiya from "../../assets/bunny.jpg"
-import naxida from  "../../assets/naxida.png"
-import {DashOutlined} from "@ant-design/icons"
-import {Button} from "antd"
-const ChatMessage = ({ user, message, profileImage }) => (
-    <div style={{ display: 'flex', flexDirection: user === 'You' ? 'row-reverse' : 'row', alignItems: 'flex-end' }}>
-        <img
-            src={profileImage}
-            alt={`${user}'s profile`}
-            style={{
-                borderRadius: '50%',
-                width: 40,
-                height: 40,
-                margin: '0 8px'
-            }}
-        />
-        <div style={{
-            backgroundColor: user === 'You' ? '#007bff' : '#e9e9e9',
-            color: user === 'You' ? 'white' : 'black',
-            borderRadius: 10,
-            padding: '8px 12px',
-            maxWidth: '60%',
-            marginTop: 8,
-            marginBottom: 8
-        }}>
-            <strong>{user}: </strong> {message}
-        </div>
-    </div>
-);
+import HeaderBar from "../../components/HeaderBar";
+import ChatMessage from "../../components/ChatMessage";
+import {Button, Dialog, SearchBar} from "antd-mobile";
 
 class Record extends React.Component {
-    backAddr = '/home';
+    state = {
+        messages: [
+            {myType: true, message: 'Hello , Amiya!', key: 1},
+            {myType: false, message: 'Hi, how are you doctor?', key: 2},
+            {myType: true, message: 'I am good, thank you!', key: 3},
+            {myType: false, message: 'That\'s great to hear!', key: 4},
+        ],
+        isStart: false
+    }
+
+    onClickBack = () => {
+        if (this.state.isStart) {
+            Dialog.show({
+                content: '还在记录中，退出将不会保存，继续吗？',
+                closeOnAction: true,
+                actions: [[
+                    {key: 'cancel', text: '取消'},
+                    {key: 'confirm', text: '确认', bold: true, danger: true,},
+                ]],
+                onAction: (e) => {
+                    if (e.key === 'confirm')
+                        this.props.history.goBack();
+                }
+            })
+        } else
+            this.props.history.goBack();
+    }
+
+    clearInput = () => {
+        this.inputMsg.clear();
+        this.inputMsg.focus();
+    }
 
     render() {
-        const messages = [
-            { user: 'You', message: 'Hello , Amiya!', profileImage: naxida },
-            { user: 'Amiya', message: 'Hi, how are you doctor?', profileImage: amiya },
-            { user: 'You', message: 'I am good, thank you!', profileImage: naxida },
-            { user: 'Amiya', message: 'That\'s great to hear!', profileImage: amiya },
-        ];
+        const msgFieldMBottom = this.state.isStart ? 170 : 90;
 
         return (
-            <div className="record_body">
-                <header style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    padding: '16px 24px',
-                    backgroundColor: '#f8f9fa',
-                    borderBottom: '1px solid #e9ecef'
-                }}>
-                    <h2 style={{ margin: 0, position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
-                        {"Untitled"}
-                    </h2>
-                    <Button
-                        style={{
-                            backgroundColor: '#B0E0E6',
-                            color: 'white',
-                            borderRadius: 5,
-                            padding: '8px 12px',
-                            border: 'none',
-                            cursor: 'pointer',
-                            position: 'absolute',
-                            left: '80%'
-                        }}
-                        onClick={OnClickRoute.bind(this, this.backAddr, "pop")}
-                        icon={<DashOutlined />}
-                    >
-                    </Button>
+            <div id="record_body">
+                <div id="record_absoluteField">
+                    <HeaderBar title="记录"
+                               backFunc={this.onClickBack}/>
+                </div>
 
-                </header>
-                <div style={{ maxHeight: 'calc(100vh - 140px)', overflowY: 'auto', paddingTop: 24 }}>
-                    <div style={{ maxWidth: 500, margin: '0 auto' }}>
-                        {messages.map((msg, index) => (
-                            <ChatMessage key={index} user={msg.user} message={msg.message} profileImage={msg.profileImage} />
+
+                <div id="record_msgField"
+                     style={{overflow: 'scroll', paddingTop: 24, marginBottom: msgFieldMBottom}}>
+                    <div>
+                        {this.state.messages.map((msg, index) => (
+                            <ChatMessage key={index} msg={msg}/>
                         ))}
                     </div>
                 </div>
-                <div style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    position: 'fixed',
-                    bottom: 0,
-                    width: '100%',
-                    backgroundColor: 'white',
-                    padding: '16px 0',
-                    borderTop: '1px solid #e9ecef'
-                }}>
-                    <input
-                        type="text"
-                        style={{
-                            width: '80%',
-                            padding: '8px 12px',
-                            borderRadius: 10,
-                            border: '1px solid #ccc'
-                        }}
-                        placeholder="记录下当下的想法和生活吧~"
-                    />
+
+
+                <div id="record_bottom"
+                     ref={e => this.bottom = e}>
+                    <div id="record_btn">
+                        <Button color={"primary"}
+                                style={{fontSize: 25, width: 100}}
+                                onClick={() => {
+                                    if (!this.state.isStart) {
+                                        this.bottom.classList.add("bottom_up");
+                                        this.bottom.classList.remove("bottom_down");
+                                    } else {
+                                        this.bottom.classList.remove("bottom_up");
+                                        this.bottom.classList.add("bottom_down");
+                                    }
+                                    this.setState({isStart: !this.state.isStart})
+                                }}>{this.state.isStart ? "Stop" : "Start"}</Button>
+                    </div>
+                    <div id="record_utils">
+                        <SearchBar icon={null} placeholder='请输入内容'
+                                   ref={e => this.inputMsg = e}
+                                   style={{
+                                       width: 260, marginBottom: 40,
+                                       '--height': '40px'
+                                   }}
+                                   onSearch={(e) => {
+                                       if (e === "")
+                                           return;
+                                       const tmp = [...this.state.messages];
+                                       tmp.push({
+                                           myType: true,
+                                           message: e,
+                                           key: 1
+                                       })
+                                       this.clearInput();
+                                       this.setState({
+                                           messages: [...tmp]
+                                       })
+                                   }}/>
+                    </div>
                 </div>
             </div>
-
-
         );
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const e = document.getElementById("record_msgField");
+        e.scrollTo({
+            top: e.scrollHeight,
+            behavior: 'smooth'
+        })
     }
 }
 

@@ -3,16 +3,25 @@ import HeaderBar from "../../components/HeaderBar";
 import OnClickRoute from "../../utils/OnClickRoute";
 import FriendTabs from "../../components/Friend/FriendTabs";
 import Mine_FriendList from "./Mine_FriendList";
+import {SearchBar} from "antd-mobile";
+import GotoTop from "../../components/GotoTop";
 
 class Mine_Friends extends React.Component {
     state = {
-        activeKey: "myFriends"
+        activeKey: "myFriends",
+        searchText: ""
+    }
+
+    placeholderText = () => {
+        if (this.state.activeKey === "myFriends")
+            return "查找好友";
+        else return "寻找用户";
     }
 
     tabRender = () => {
         if (this.state.activeKey === "myFriends")
             return (
-                <Mine_FriendList/>
+                <Mine_FriendList filter={this.state.searchText}/>
             )
         else if (this.state.activeKey === "addFriends")
             return (
@@ -34,10 +43,19 @@ class Mine_Friends extends React.Component {
                         <FriendTabs activekey={this.state.activeKey}
                                     setState={(e) => this.setState(e)}/>
                     </div>
+                    <div id="friend_search" className="alpha_bg">
+                        <SearchBar placeholder={this.placeholderText()}
+                                   style={{width: '80%', margin: '0 auto'}}
+                                   onChange={(e) => {
+                                       this.setState({searchText: e})
+                                   }}/>
+                    </div>
                 </div>
                 <div id="friend_content" className="alpha_bg">
                     {this.tabRender()}
                 </div>
+                {this.state.activeKey === "myFriends" &&
+                    <GotoTop object="friend_content"/>}
             </div>
         )
     }

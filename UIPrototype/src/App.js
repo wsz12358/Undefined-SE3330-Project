@@ -49,6 +49,7 @@ function App() {
             </div>
             {!(location.pathname === '/stats/details') &&
                 !(location.pathname === '/home/record') &&
+                !(location.pathname === '/mine/friends') &&
                 <div className="app_bottom">
                     <BottomBar/>
                 </div>}

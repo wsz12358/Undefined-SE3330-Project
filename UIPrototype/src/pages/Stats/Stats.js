@@ -47,6 +47,8 @@ class Stats extends React.Component {
     }
 
     render() {
+        const category = store.getState().filter.category;
+
         return (
             <div id="stats_body">
                 <div id="stats_absoluteField">
@@ -59,7 +61,7 @@ class Stats extends React.Component {
                     </div>
                 </div>
 
-                <GotoTop object="stats_capRenderField"/>
+                {category === "event" && <GotoTop object="stats_capRenderField"/>}
 
                 <div id="stats_capRenderField" className="alpha_bg"
                      ref={this.capRenderField}>
