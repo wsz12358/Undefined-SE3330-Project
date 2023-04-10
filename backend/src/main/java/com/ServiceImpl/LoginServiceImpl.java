@@ -1,7 +1,11 @@
 package com.ServiceImpl;
 
+import com.Constant.LoginConstant;
+import com.Dao.UserDao;
+import com.Entity.User;
 import com.Entity.UserAuth;
 import com.Service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -9,15 +13,12 @@ import java.util.Objects;
 @Service
 public class LoginServiceImpl implements LoginService {
 
+    @Autowired
+    UserDao userDao;
+
     @Override
-    public UserAuth checkUser(String username, String password) {
-        if (Objects.equals(username, "group7") && Objects.equals(password, "sjtuse2021"))
-        {
-            UserAuth userAuth = new UserAuth();
-            userAuth.setUsername(username);
-            userAuth.setPassword(password);
-            return userAuth;
-        }
-        return null;
+    public User checkUser(String username, String password) {
+        User user = userDao.checkUser(username, password);
+        return user;
     }
 }

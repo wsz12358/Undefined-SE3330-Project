@@ -1,4 +1,5 @@
 package com.Controller;
+import com.Dao.UserDao;
 import com.Entity.User;
 import com.Service.LoginService;
 import com.Constant.LoginConstant;
@@ -13,20 +14,19 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class LoginController {
+public class TestController {
 
     @Autowired
-    LoginService loginService;
-
+    private UserDao userDao;
 
     //acoustic:
     //登陆服务 使用fetch通过body发送请求 post类型为"POST"
-    @RequestMapping("/login")
-    public boolean login(@RequestBody Map<String, String> params)
+    @RequestMapping("/test")
+    public boolean test(@RequestBody Map<String, String>params)
     {
         String username = params.get(LoginConstant.USERNAME);
         String password = params.get(LoginConstant.PASSWORD);
-        User user = loginService.checkUser(username, password);
+        User user = userDao.checkUser(username, password);
         return user != null;
     }
 

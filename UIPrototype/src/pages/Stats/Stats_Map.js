@@ -1,5 +1,5 @@
 import React from "react";
-import BMap from 'BMap'
+import BMap from 'BMap';
 import Marker from "../../components/MapMarker";
 import {withRouter} from "react-router-dom";
 import "./Stats.css"
