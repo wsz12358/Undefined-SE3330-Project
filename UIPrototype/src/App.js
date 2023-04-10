@@ -27,7 +27,7 @@ function App() {
                                  childFactory={e => React.cloneElement(
                                      e, {classNames: anim_actions[action]}
                                  )}>
-                    <CSSTransition timeout={500} key={location.pathname}
+                    <CSSTransition timeout={300} key={location.pathname}
                                    mountOnEnter unmountOnExit>
                         <Switch location={location}>
                             <Route exact path='/home/record' component={Record}/>
@@ -49,6 +49,7 @@ function App() {
             </div>
             {!(location.pathname === '/stats/details') &&
                 !(location.pathname === '/home/record') &&
+                !(location.pathname === '/mine/friends') &&
                 <div className="app_bottom">
                     <BottomBar/>
                 </div>}

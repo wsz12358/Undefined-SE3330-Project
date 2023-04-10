@@ -1,4 +1,4 @@
-import React, {Suspense} from 'react'
+import React from 'react'
 import "./Stats.css"
 import Stats_eventList from './Stats_EventList'
 import Stats_StatsList from "./Stats_StatsList";
@@ -9,6 +9,8 @@ import Filter from "../../components/Filter/Filter";
 import eventListDemo from "../../utils/EventListDemo";
 import store from "../../redux/Store";
 import {setFilterOpen} from "../../redux/FilterActions";
+import {UpOutline} from "antd-mobile-icons";
+import GotoTop from "../../components/GotoTop";
 
 class Stats extends React.Component {
     backAddr = '/home'
@@ -17,6 +19,7 @@ class Stats extends React.Component {
     constructor(props) {
         super(props);
         store.dispatch(setFilterOpen(true));
+        this.capRenderField = React.createRef();
     }
 
     componentDidMount() {
@@ -44,16 +47,26 @@ class Stats extends React.Component {
     }
 
     render() {
+        const category = store.getState().filter.category;
+
         return (
-            <div className="stats_body">
-                <div className="stats_absoluteField">
+            <div id="stats_body">
+                <div id="stats_absoluteField">
                     <HeaderBar backFunc={OnClickRoute.bind(this, this.backAddr, "replace")}
                                title='回顾'/>
-                    <Filter/>
+
+                    <div id="stats_filterField" className="alpha_bg"
+                         style={{width: '100%', padding: '10px 0'}}>
+                        <Filter/>
+                    </div>
                 </div>
-                <div className="stats_capRenderField">
+
+                {category === "event" && <GotoTop object="stats_capRenderField"/>}
+
+                <div id="stats_capRenderField" className="alpha_bg"
+                     ref={this.capRenderField}>
                     {this.capRender()}
-                </div>  
+                </div>
             </div>
         );
         //TODO: your code here

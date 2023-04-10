@@ -35,7 +35,7 @@
 .forward-enter-active {
     opacity: 1;
     transform: translateX(0);
-    transition: all .5s;
+    transition: all .3s;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -49,7 +49,7 @@
 .forward-exit-active {
     opacity: 0;
     transform: translateX(-100%);
-    transition: all .5s;
+    transition: all .3s;
     position: absolute;
     width: 100%;
 }
@@ -63,7 +63,7 @@
 .back-enter-active {
     opacity: 1;
     transform: translateX(0);
-    transition: all .5s;
+    transition: all .3s;
     position: absolute;
     width: 100%;
 }
@@ -76,7 +76,7 @@
 .back-exit-active {
     opacity: 0;
     transform: translate(100%);
-    transition: all .5s;
+    transition: all .3s;
     position: absolute;
     width: 100%;
 }
