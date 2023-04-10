@@ -2,8 +2,10 @@ import React from 'react';
 import './Record.css';
 import HeaderBar from "../../components/HeaderBar";
 import ChatMessage from "../../components/ChatMessage";
-import {Button, Dialog, SearchBar} from "antd-mobile";
+import {Button, Dialog, Popover, SearchBar} from "antd-mobile";
 import moment from "moment/moment";
+import Stopwatch from "../../utils/Stopwatch";
+import {AddCircleOutline, ClockCircleOutline} from "antd-mobile-icons";
 
 class Record extends React.Component {
     state = {
@@ -14,6 +16,7 @@ class Record extends React.Component {
             {myType: false, message: 'That\'s great to hear!', key: 4},
         ],
         isStart: 0, //0 new, 1 start, 2 end
+        isExtd: false,
     }
 
     addMsg = (e, type) => {
@@ -60,8 +63,14 @@ class Record extends React.Component {
                 moment(new Date().getTime()).format('HH:mm:ss').toString() +
                 "，专心致志才能有所收获哦！", false);
         } else if (this.state.isStart === 1) {
-            this.bottom.classList.remove("bottom_up");
-            this.bottom.classList.add("bottom_down");
+            if (!this.state.isExtd) {
+                this.bottom.classList.remove("bottom_up");
+                this.bottom.classList.remove("bottom_edown");
+                this.bottom.classList.add("bottom_down");
+            } else {
+                this.bottom.classList.remove("bottom_extd");
+                this.bottom.classList.add("bottom_bigdown");
+            }
             this.header.classList.add("green2orange");
             this.addMsg("结束记录。现在是" +
                 moment(new Date().getTime()).format('HH:mm:ss').toString() +
@@ -70,6 +79,18 @@ class Record extends React.Component {
             this.saveQuit(true, 1);
         }
         this.setState({isStart: this.state.isStart + 1})
+    }
+
+    onClickExtd = () => {
+        if (!this.state.isExtd) {
+            this.bottom.classList.remove("bottom_up");
+            this.bottom.classList.remove("bottom_edown");
+            this.bottom.classList.add("bottom_extd");
+        } else {
+            this.bottom.classList.remove("bottom_extd");
+            this.bottom.classList.add("bottom_edown");
+        }
+        this.setState({isExtd: !this.state.isExtd});
     }
 
     saveQuit = (type, idx) => {
@@ -100,7 +121,8 @@ class Record extends React.Component {
     }
 
     render() {
-        const msgFieldMBottom = this.state.isStart ? 160 : 90;
+        const msgFieldMBottom = this.state.isStart === 1 ?
+            (this.state.isExtd ? 220 : 160) : 90;
 
         return (
             <div id="record_body">
@@ -109,7 +131,6 @@ class Record extends React.Component {
                     <HeaderBar title="记录"
                                backFunc={this.onClickBack}/>
                 </div>
-
 
                 <div id="record_msgField"
                      style={{overflow: 'scroll', paddingTop: 24, marginBottom: msgFieldMBottom}}>
@@ -130,7 +151,8 @@ class Record extends React.Component {
                             {!this.state.isStart ? "Start" :
                                 this.state.isStart === 1 ? "Stop" : "Save"}</Button>
                     </div>
-                    <div id="record_utils">
+                    <div id="record_searchBar"
+                         style={{position: 'relative'}}>
                         <SearchBar icon={null} placeholder='请输入内容'
                                    ref={e => this.inputMsg = e}
                                    style={{
@@ -142,6 +164,26 @@ class Record extends React.Component {
                                        this.addMsg(e, true);
                                        this.clearInput();
                                    }}/>
+                        <div id="record_extd"
+                             style={{
+                                 position: 'absolute', right: '-50px', top: '5px'
+                             }}
+                             onClick={this.onClickExtd}>
+                            <AddCircleOutline fontSize={30}/>
+                        </div>
+                    </div>
+                    <div id="record_utils"
+                         style={{
+                             display: 'flex', alignItems: 'center', justifyItems: 'center'
+                         }}>
+                        <div style={{
+                            display: 'flex', flexDirection: 'column',
+                            alignItems: 'center', justifyContent: 'center'
+                        }}>
+                            <Stopwatch flag={this.state.isStart === 1}/>
+                            <ClockCircleOutline fontSize={40}/>
+                            <span>时长</span>
+                        </div>
                     </div>
                 </div>
             </div>

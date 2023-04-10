@@ -42,6 +42,19 @@
     animation: bottom_downAnim .5s forwards;
 }
 
+.bottom_bigdown {
+    animation: bottom_bigdownAnim .5s forwards;
+}
+
+.bottom_extd {
+    animation: bottom_extdAnim .5s forwards;
+}
+
+.bottom_edown {
+    animation: bottom_edownAnim .5s forwards;
+}
+
+
 @keyframes bottom_upAnim {
     0% {
         height: 90px;
@@ -61,6 +74,39 @@
     100% {
         height: 90px;
         background-color: #fad15b;
+    }
+}
+
+@keyframes bottom_bigdownAnim {
+    0% {
+        height: 220px;
+        background-color: #5ce077;
+    }
+    100% {
+        height: 90px;
+        background-color: #fad15b;
+    }
+}
+
+@keyframes bottom_extdAnim {
+    0% {
+        height: 160px;
+        background-color: #5ce077;
+    }
+    100% {
+        height: 220px;
+        background-color: #5ce077;
+    }
+}
+
+@keyframes bottom_edownAnim {
+    0% {
+        height: 220px;
+        background-color: #5ce077;
+    }
+    100% {
+        height: 160px;
+        background-color: #5ce077;
     }
 }
 

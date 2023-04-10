@@ -13,9 +13,7 @@ const Timer = () => {
         }, 200)
     }, [refresh])
 
-    return (<div>
-        {timer}
-    </div>)
+    return timer;
 }
 
 export default Timer
