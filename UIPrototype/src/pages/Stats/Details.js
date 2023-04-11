@@ -3,9 +3,16 @@ import HeaderBar from "../../components/HeaderBar";
 import OnClickRoute from "../../utils/OnClickRoute";
 import './Details.css'
 
-import {Badge, Collapse, Dialog, Grid, Image, List, SwipeAction} from "antd-mobile";
+import {Collapse, Dialog, Grid, Image, List, SwipeAction, Button, Modal} from "antd-mobile";
 import jntm from "../../assets/jntm.png"
-import {AddCircleOutline, ClockCircleOutline, EnvironmentOutline, EyeOutline, UserOutline} from "antd-mobile-icons";
+import {
+    AddCircleOutline,
+    ClockCircleOutline,
+    CloseOutline,
+    EnvironmentOutline,
+    EyeOutline,
+    UserOutline
+} from "antd-mobile-icons";
 import eventListDemo from "../../utils/EventListDemo";
 import {ListItem} from "antd-mobile/es/components/list/list-item";
 import {GridItem} from "antd-mobile/es/components/grid/grid";
@@ -13,13 +20,14 @@ import {GridItem} from "antd-mobile/es/components/grid/grid";
 
 class Details extends React.Component {
     state = {
+        onEdit: false,
         allThoughts: ["全民制作人大家好，我是练习时长两年半的个人练习生蔡徐坤，喜欢唱、跳、rap、篮球，music",
             "🐔👈，🗿⬇️☯️😋",
             "🤮👶，🗿⬇️🗿☯️😋",
             "🌸1️⃣👀🍺👌💥",
             "🥇🤏🥢🥃"
         ],
-        allPictures: [jntm, jntm, jntm, jntm, jntm, jntm, jntm, jntm, jntm],
+        allPictures: [jntm, jntm, jntm, jntm, jntm, jntm, ],
         allTags: ["吃饭", "睡觉", "打篮球"]
     }
 
@@ -28,7 +36,34 @@ class Details extends React.Component {
     focusEvent = eventListDemo[this.eventId]
 
     btnShare = (
-        <button className="btnShare">
+        <button className="btnShare" onClick={() => {
+            Dialog.show({
+                closeOnMaskClick: true,
+                closeOnAction: true,
+                actions: [
+                    [
+                        {
+                            key: 'cancel',
+                            text: '取消'
+                        },
+                        {
+                            key: 'confirm',
+                            text: '确定',
+                        }
+                    ]
+                ],
+                content: (<List className={"deList"}>
+                    <ListItem key={1} prefix={<EnvironmentOutline/>} onClick={() => {
+                    }}>所在位置</ListItem>
+                    <ListItem key={2} prefix={<EyeOutline/>} onClick={() => {
+                    }}>谁可以看</ListItem>
+                    <ListItem key={3} prefix={<UserOutline/>} onClick={() => {
+                    }}>提醒谁看</ListItem>
+                    <ListItem key={4} prefix={<ClockCircleOutline/>} onClick={() => {
+                    }}>定时</ListItem>
+                </List>)
+            })
+        }}>
             分享
         </button>
     );
@@ -36,7 +71,7 @@ class Details extends React.Component {
 
     renderThoughts = (value, idx) => {
         return (
-            <SwipeAction key={value} rightActions={[{key: 'delete',
+            <SwipeAction key={value} rightActions={this.state.onEdit ? [{key: 'delete',
                 text: '删除',
                 color: 'danger',
                 onClick: () => {
@@ -47,7 +82,7 @@ class Details extends React.Component {
                             }}
                     );
                 }
-            }]}>
+            }] : []}>
                 <ListItem>
                     {value}
                 </ListItem>
@@ -57,28 +92,36 @@ class Details extends React.Component {
 
     renderPictures = (pic, idx) => {
         return <GridItem className='picture' key={idx}>
-            <Badge content='-' className='removeContent'>
-                <Image src={pic} width={100} height={100} fit='fill' onContainerClick={() => {
-                    Dialog.confirm(
-                        {content: "确定要删除吗？",
-                            onConfirm: () => {
-                                this.setState(this.state.allPictures.splice(idx, 1));
-                            }}
-                    );
-                }}/>
-            </Badge>
+            {this.state.onEdit && <Button className={"btnDeletePic"} onClick={() => {
+                Dialog.confirm(
+                    {content: "确定要删除吗？",
+                        onConfirm: () => {
+                            this.setState(this.state.allPictures.splice(idx, 1));
+                        }}
+                );
+            }
+            }><CloseOutline/></Button>}
+            <Image src={pic} width={100} height={100} fit='fill' onClick={() => {
+                Modal.show({
+                    image: jntm,
+                    content: "jntm",
+                    closeOnMaskClick: true,
+                    actions: []
+                })
+            }
+            }/>
         </GridItem>
     }
 
     renderTags = (tag, idx) => {
-        return (<div className="deTag" key={idx} onClick={() => {
+        return (<div className="deTag" key={idx} onClick={this.state.onEdit ? () => {
             Dialog.confirm(
                 {content: "确定要删除吗？",
                     onConfirm: () => {
                         this.setState(this.state.allTags.splice(idx, 1));
                     }}
             );
-        }}>
+        } : () => {}}>
             {tag}
         </div>)
     }
@@ -110,10 +153,16 @@ class Details extends React.Component {
                             <div>
                                 <Grid columns={3}>
                                     {this.state.allPictures.map(this.renderPictures)}
+                                    {this.state.onEdit && <div className='addPicture' onClick={() => {
+                                        this.setState(state => {
+                                            state.allPictures.push(jntm)
+                                            return {}
+                                        })
+                                        }
+                                    }>
+                                        <AddCircleOutline className='addCircle'/>
+                                    </div>}
                                 </Grid>
-                                {/*<div className='addPicture'>
-                                    <AddCircleOutline className='addCircle'/>
-                                </div>*/}
                             </div>
                         }
                     </Collapse.Panel>
@@ -126,7 +175,7 @@ class Details extends React.Component {
                     </Collapse.Panel>
                 </Collapse>
 
-                <List className={"deList"}>
+                {/*<List className={"deList"}>
                     <ListItem key={1} prefix={<EnvironmentOutline/>} onClick={() => {
                     }}>所在位置</ListItem>
                     <ListItem key={2} prefix={<EyeOutline/>} onClick={() => {
@@ -135,8 +184,18 @@ class Details extends React.Component {
                     }}>提醒谁看</ListItem>
                     <ListItem key={4} prefix={<ClockCircleOutline/>} onClick={() => {
                     }}>定时</ListItem>
-                </List>
+                </List>*/}
 
+                {!this.state.onEdit && <Button block className={"btnEdit"} size={"large"} onClick={() => {
+                    this.setState({onEdit: true})
+                }}>
+                    编辑
+                </Button>}
+                {this.state.onEdit && <Button block className={"btnQuitEdit"} size={"large"} onClick={() => {
+                    this.setState({onEdit: false})
+                }}>
+                    退出编辑
+                </Button>}
             </div>
         </div>);
     }
