@@ -39,8 +39,7 @@
 }
 
 .allTags {
-    display: flex;
-    flex-direction: row;
+
 }
 
 .deTag {
@@ -48,6 +47,20 @@
     font-size: 1.2em;
     font-weight: 400;
     background-color: #06c261;
+    border: none;
+    color: white;
+    padding: 5px 11px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 10px;
+}
+
+.addTag {
+    margin: 0 1%;
+    font-size: 1.2em;
+    font-weight: 400;
+    background-color: red;
     border: none;
     color: white;
     padding: 5px 11px;
@@ -128,10 +141,12 @@
 }
 
 .btnEdit {
+    margin-top: 30%;
     background-color: #7fe279;
 }
 
 .btnQuitEdit{
+    margin-top: 30%;
     background-color: red;
     color: white;
 }
