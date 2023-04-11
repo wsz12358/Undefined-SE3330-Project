@@ -26,4 +26,4 @@
     "location": "Shanghai",</br>
     "user": 2</br>
 }</br>
-    message有msg和img两种类型（目前），timestamp采取24小时制，除user_id为int外其他数据类型均为字符串
+    message有msg和img两种类型（目前），timestamp采取24小时制，除user_id为int外其他数据类型均为字符串 
