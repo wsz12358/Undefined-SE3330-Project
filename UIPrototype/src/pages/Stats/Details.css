@@ -83,12 +83,28 @@
 }
 
 .picture {
-    margin: 1%;
+    margin-bottom: 20%;
     width: fit-content;
 }
 
+.btnDeletePic {
+    float: right;
+    width: 30px;
+    height: 30px;
+    border-radius: 60px;
+    position: relative;
+    left: -5px;
+    bottom: -15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: red;
+    color: white;
+}
+
 .removeContent {
-    display: none;
+
 }
 
 .addPicture {
@@ -112,6 +128,11 @@
 
 .btnEdit {
     background-color: #7fe279;
+}
+
+.btnQuitEdit{
+    background-color: red;
+    color: white;
 }
 
 .btnShare {

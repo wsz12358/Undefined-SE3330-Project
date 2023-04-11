@@ -3,9 +3,16 @@ import HeaderBar from "../../components/HeaderBar";
 import OnClickRoute from "../../utils/OnClickRoute";
 import './Details.css'
 
-import {Badge, Collapse, Dialog, Grid, Image, List, SwipeAction} from "antd-mobile";
+import {Collapse, Dialog, Grid, Image, List, SwipeAction} from "antd-mobile";
 import jntm from "../../assets/jntm.png"
-import {AddCircleOutline, ClockCircleOutline, EnvironmentOutline, EyeOutline, UserOutline} from "antd-mobile-icons";
+import {
+    AddCircleOutline,
+    ClockCircleOutline,
+    CloseOutline,
+    EnvironmentOutline,
+    EyeOutline,
+    UserOutline
+} from "antd-mobile-icons";
 import eventListDemo from "../../utils/EventListDemo";
 import {ListItem} from "antd-mobile/es/components/list/list-item";
 import {GridItem} from "antd-mobile/es/components/grid/grid";
@@ -59,28 +66,28 @@ class Details extends React.Component {
 
     renderPictures = (pic, idx) => {
         return <GridItem className='picture' key={idx}>
-            <Badge content='-' className='removeContent'>
-                <Image src={pic} width={100} height={100} fit='fill' onContainerClick={() => {
-                    Dialog.confirm(
-                        {content: "确定要删除吗？",
-                            onConfirm: () => {
-                                this.setState(this.state.allPictures.splice(idx, 1));
-                            }}
-                    );
-                }}/>
-            </Badge>
+            {this.state.onEdit && <Button className={"btnDeletePic"} onClick={() => {
+                Dialog.confirm(
+                    {content: "确定要删除吗？",
+                        onConfirm: () => {
+                            this.setState(this.state.allPictures.splice(idx, 1));
+                        }}
+                );
+            }
+            }><CloseOutline/></Button>}
+            <Image src={pic} width={100} height={100} fit='fill'/>
         </GridItem>
     }
 
     renderTags = (tag, idx) => {
-        return (<div className="deTag" key={idx} onClick={() => {
+        return (<div className="deTag" key={idx} onClick={this.state.onEdit ? () => {
             Dialog.confirm(
                 {content: "确定要删除吗？",
                     onConfirm: () => {
                         this.setState(this.state.allTags.splice(idx, 1));
                     }}
             );
-        }}>
+        } : {}}>
             {tag}
         </div>)
     }
@@ -98,13 +105,6 @@ class Details extends React.Component {
                 <div className='deTime'>
                     {this.focusEvent.date} 2023
                 </div>
-
-                {/*<div className='deTag'>*/}
-                {/*    <Tag color='primary' className='chTag'>唱</Tag>*/}
-                {/*    <Tag color='blue' className='chTag'>跳</Tag>*/}
-                {/*    <Tag color='red' className='chTag'>rap</Tag>*/}
-                {/*    <Tag color='green' className='chTag'>篮球</Tag>*/}
-                {/*</div>*/}
 
                 <Collapse defaultActiveKey={['1']} className="myCollapse">
                     <Collapse.Panel key='感想' title='感想' className="myCollapsePanel">
@@ -151,7 +151,7 @@ class Details extends React.Component {
                 }}>
                     编辑
                 </Button>}
-                {this.state.onEdit && <Button block className={"btnEdit"} size={"large"} onClick={() => {
+                {this.state.onEdit && <Button block className={"btnQuitEdit"} size={"large"} onClick={() => {
                     this.setState({onEdit: false})
                 }}>
                     退出编辑
