@@ -1,9 +1,12 @@
 package com.Service;
 
-import com.Entity.Flag;
 import com.Entity.Message;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.List;
 
 public interface MessageService {
 
-    public Flag AddMessage(Message message);
+    public void AddMessage(Message message);
+    public List<Message> GetMessages(Integer user, Integer event);
 }
