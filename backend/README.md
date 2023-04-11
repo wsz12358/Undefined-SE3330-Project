@@ -15,14 +15,15 @@
 2023.4.11 acoustic更新：
   登录功能返回值调整，现在可以直接拿到登录者的所有信息（返回一个User类），如果没有查找到User则返回的为null
   单条消息插入功能已实现，使用方法如下：
-  1.在登录时将User的user_id保存在前端
-  2.在插入时将user_id作为user属性放入RequestBody中
+  1. 在登录时将User的user_id保存在前端
+  2. 在插入时将user_id作为user属性放入RequestBody中</br>
    其他数据格式见附例
-   附例：
-{
-    "timestamp": "2023/4/11/10/18/20",
-    "datatype": "msg",
-    "message": "my message",
-    "location": "Shanghai",
-    "user": 2
-}
+   附例：</br>
+{</br>
+    "timestamp": "2023/4/11/10/18/20",</br>
+    "datatype": "msg",</br>
+    "message": "my message",</br>
+    "location": "Shanghai",</br>
+    "user": 2</br>
+}</br>
+    message有msg和img两种类型（目前），timestamp采取24小时制，除user_id为int外其他数据类型均为字符串
