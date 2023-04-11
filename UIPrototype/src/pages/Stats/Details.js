@@ -27,7 +27,7 @@ class Details extends React.Component {
             "🌸1️⃣👀🍺👌💥",
             "🥇🤏🥢🥃"
         ],
-        allPictures: [jntm, jntm, jntm, jntm, jntm, jntm, jntm, jntm, jntm],
+        allPictures: [jntm, jntm, jntm, jntm, jntm, jntm, ],
         allTags: ["吃饭", "睡觉", "打篮球"]
     }
 
@@ -153,10 +153,16 @@ class Details extends React.Component {
                             <div>
                                 <Grid columns={3}>
                                     {this.state.allPictures.map(this.renderPictures)}
+                                    {this.state.onEdit && <div className='addPicture' onClick={() => {
+                                        this.setState(state => {
+                                            state.allPictures.push(jntm)
+                                            return {}
+                                        })
+                                        }
+                                    }>
+                                        <AddCircleOutline className='addCircle'/>
+                                    </div>}
                                 </Grid>
-                                {/*<div className='addPicture'>
-                                    <AddCircleOutline className='addCircle'/>
-                                </div>*/}
                             </div>
                         }
                     </Collapse.Panel>

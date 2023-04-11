@@ -110,10 +110,11 @@
 .addPicture {
     width: 100px;
     height: 100px;
+    margin-top: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: darkgrey;
+    border: 1px solid black;
 }
 
 .addCircle {
