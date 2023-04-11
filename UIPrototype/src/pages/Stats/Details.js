@@ -94,7 +94,7 @@ class Details extends React.Component {
                         this.setState(this.state.allTags.splice(idx, 1));
                     }}
             );
-        } : {}}>
+        } : () => {}}>
             {tag}
         </div>)
     }
