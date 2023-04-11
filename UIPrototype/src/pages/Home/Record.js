@@ -5,7 +5,8 @@ import ChatMessage from "../../components/ChatMessage";
 import {Button, Dialog, Popover, SearchBar} from "antd-mobile";
 import moment from "moment/moment";
 import Stopwatch from "../../utils/Stopwatch";
-import {AddCircleOutline, ClockCircleOutline} from "antd-mobile-icons";
+import {AddCircleOutline, ClockCircleOutline, PicturesOutline, SmileOutline, TagOutline} from "antd-mobile-icons";
+import PChecklist from "../../components/PopupChecklist";
 
 class Record extends React.Component {
     state = {
@@ -122,7 +123,7 @@ class Record extends React.Component {
 
     render() {
         const msgFieldMBottom = this.state.isStart === 1 ?
-            (this.state.isExtd ? 220 : 160) : 90;
+            (this.state.isExtd ? 240 : 160) : 90;
 
         return (
             <div id="record_body">
@@ -174,15 +175,27 @@ class Record extends React.Component {
                     </div>
                     <div id="record_utils"
                          style={{
-                             display: 'flex', alignItems: 'center', justifyItems: 'center'
+                             display: 'flex', alignItems: 'center', justifyContent: 'space-evenly',
+                             marginBottom: '10px', width: '100%'
                          }}>
-                        <div style={{
-                            display: 'flex', flexDirection: 'column',
-                            alignItems: 'center', justifyContent: 'center'
-                        }}>
+                        <div className="record_gadgets">
                             <Stopwatch flag={this.state.isStart === 1}/>
                             <ClockCircleOutline fontSize={40}/>
                             <span>时长</span>
+                        </div>
+                        <PChecklist/>
+                        <div className="record_gadgets bordered"
+                             style={{paddingTop: 15}}>
+                            <PicturesOutline fontSize={40}/>
+                            <span>图片</span>
+                        </div>
+                        <div className="record_gadgets bordered"
+                             style={{paddingTop: 15}}
+                             onClick={() => {
+                                 this.addMsg("玩原神玩的。", false)
+                             }}>
+                            <SmileOutline fontSize={40}/>
+                            <span>戳戳</span>
                         </div>
                     </div>
                 </div>
