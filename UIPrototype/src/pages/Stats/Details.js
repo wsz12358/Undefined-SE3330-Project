@@ -9,10 +9,12 @@ import {AddCircleOutline, ClockCircleOutline, EnvironmentOutline, EyeOutline, Us
 import eventListDemo from "../../utils/EventListDemo";
 import {ListItem} from "antd-mobile/es/components/list/list-item";
 import {GridItem} from "antd-mobile/es/components/grid/grid";
+import {Button} from "antd";
 
 
 class Details extends React.Component {
     state = {
+        onEdit: false,
         allThoughts: ["全民制作人大家好，我是练习时长两年半的个人练习生蔡徐坤，喜欢唱、跳、rap、篮球，music",
             "🐔👈，🗿⬇️☯️😋",
             "🤮👶，🗿⬇️🗿☯️😋",
@@ -36,7 +38,7 @@ class Details extends React.Component {
 
     renderThoughts = (value, idx) => {
         return (
-            <SwipeAction key={value} rightActions={[{key: 'delete',
+            <SwipeAction key={value} rightActions={this.state.onEdit ? [{key: 'delete',
                 text: '删除',
                 color: 'danger',
                 onClick: () => {
@@ -47,7 +49,7 @@ class Details extends React.Component {
                             }}
                     );
                 }
-            }]}>
+            }] : []}>
                 <ListItem>
                     {value}
                 </ListItem>
@@ -144,6 +146,16 @@ class Details extends React.Component {
                     }}>定时</ListItem>
                 </List>
 
+                {!this.state.onEdit && <Button block className={"btnEdit"} size={"large"} onClick={() => {
+                    this.setState({onEdit: true})
+                }}>
+                    编辑
+                </Button>}
+                {this.state.onEdit && <Button block className={"btnEdit"} size={"large"} onClick={() => {
+                    this.setState({onEdit: false})
+                }}>
+                    退出编辑
+                </Button>}
             </div>
         </div>);
     }
