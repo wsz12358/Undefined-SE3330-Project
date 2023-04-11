@@ -3,7 +3,7 @@ import HeaderBar from "../../components/HeaderBar";
 import OnClickRoute from "../../utils/OnClickRoute";
 import './Details.css'
 
-import {Collapse, Dialog, Grid, Image, List, SwipeAction} from "antd-mobile";
+import {Collapse, Dialog, Grid, Image, List, SwipeAction, Button, Modal} from "antd-mobile";
 import jntm from "../../assets/jntm.png"
 import {
     AddCircleOutline,
@@ -16,7 +16,6 @@ import {
 import eventListDemo from "../../utils/EventListDemo";
 import {ListItem} from "antd-mobile/es/components/list/list-item";
 import {GridItem} from "antd-mobile/es/components/grid/grid";
-import {Button} from "antd";
 
 
 class Details extends React.Component {
@@ -75,7 +74,15 @@ class Details extends React.Component {
                 );
             }
             }><CloseOutline/></Button>}
-            <Image src={pic} width={100} height={100} fit='fill'/>
+            <Image src={pic} width={100} height={100} fit='fill' onClick={() => {
+                Modal.show({
+                    image: jntm,
+                    content: "jntm",
+                    closeOnMaskClick: true,
+                    actions: []
+                })
+            }
+            }/>
         </GridItem>
     }
 
