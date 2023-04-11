@@ -16,6 +16,37 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `events`
+--
+
+DROP TABLE IF EXISTS `events`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `events` (
+  `event_id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `tags` varchar(255) DEFAULT NULL,
+  `begintime` varchar(255) DEFAULT NULL,
+  `finishtime` varchar(255) DEFAULT NULL,
+  `duration` varchar(255) DEFAULT NULL,
+  `user` int DEFAULT NULL,
+  PRIMARY KEY (`event_id`),
+  KEY `event_user` (`user`),
+  CONSTRAINT `event_user` FOREIGN KEY (`user`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `events`
+--
+
+LOCK TABLES `events` WRITE;
+/*!40000 ALTER TABLE `events` DISABLE KEYS */;
+INSERT INTO `events` VALUES (1,'test','test/study','2023/4/10/23/13/55','2023/4/10/23/14/55','0/0/0/0/1/0',1),(2,'firstevent','love/death/robot','2023/4/10/23/13/55','2023/4/11/23/13/55','0/0/1/0/0/0',1),(3,'secondevent','study','2023/4/10/23/13/55','2023/4/11/23/13/55','0/0/1/0/0/0',2),(4,'empty','tags','begintime','finishtime','duration',2),(5,'empty','tags','begintime','finishtime','duration',2),(6,'empty','tags','begintime','finishtime','duration',2);
+/*!40000 ALTER TABLE `events` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `hibernate_sequence`
 --
 
@@ -51,10 +82,13 @@ CREATE TABLE `messages` (
   `Location` varchar(255) DEFAULT NULL,
   `user` int DEFAULT NULL,
   `message_id` int NOT NULL AUTO_INCREMENT,
+  `event` int DEFAULT NULL,
   PRIMARY KEY (`message_id`),
-  KEY `messages_user_user_id_fk` (`user`),
-  CONSTRAINT `messages_user_user_id_fk` FOREIGN KEY (`user`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `event_` (`event`),
+  KEY `user_` (`user`),
+  CONSTRAINT `event_` FOREIGN KEY (`event`) REFERENCES `events` (`event_id`),
+  CONSTRAINT `user_` FOREIGN KEY (`user`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,7 +97,7 @@ CREATE TABLE `messages` (
 
 LOCK TABLES `messages` WRITE;
 /*!40000 ALTER TABLE `messages` DISABLE KEYS */;
-INSERT INTO `messages` VALUES ('2023/4/10/14/58/55','message','test success','Shanghai',1,1),('2023/4/11/9/33/52','message','the first message','Shanghai',NULL,2),('2023/4/11/9/33/52','message','the first message','Shanghai',1,3);
+INSERT INTO `messages` VALUES ('2023/4/10/14/58/55','message','test success','Shanghai',1,1,1),('2023/4/11/9/33/52','message','the first message','Shanghai',NULL,2,1),('2023/4/11/9/33/52','message','the first message','Shanghai',1,3,1),('2023/4/11/10/18/20','msg','my message','Shanghai',2,4,1);
 /*!40000 ALTER TABLE `messages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -128,4 +162,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-11 10:09:14
+-- Dump completed on 2023-04-11 17:25:05
