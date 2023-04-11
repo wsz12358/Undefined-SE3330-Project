@@ -1,6 +1,7 @@
 package com.Controller;
 
 import com.Constant.MessageConstant;
+import com.Entity.Flag;
 import com.Entity.Message;
 import com.Service.MessageService;
 import com.utils.sessionutils.SessionUtil;
@@ -26,7 +27,7 @@ public class MessageController {
     @Autowired
     MessageService messageService;
     @RequestMapping("/SetMessage")
-    public void SetMessage(@RequestBody Map<String, String> params) {
+    public Flag SetMessage(@RequestBody Map<String, String> params) {
         String timestamp = params.get(MessageConstant.TIMESTAMP);
         String datatype = params.get(MessageConstant.DATATYPE);
         String message = params.get(MessageConstant.MESSAGE);
@@ -38,6 +39,6 @@ public class MessageController {
         mes.setMessage(message);
         mes.setLocation(location);
         mes.setUser(Integer.valueOf(user));
-        messageService.AddMessage(mes);
+        return messageService.AddMessage(mes);
     }
 }

@@ -15,9 +15,11 @@ export const postRequest = (url, json, callback, errback) => {
             return e.json();
         })
         .then((e) => {
+            console.log(e);
             callback(e);
         })
         .catch((e) => {
+            console.log(e);
             Dialog.alert({
                 content: "Error Internet connection.",
             });

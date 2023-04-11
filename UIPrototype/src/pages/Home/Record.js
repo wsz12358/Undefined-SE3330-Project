@@ -2,19 +2,17 @@ import React from 'react';
 import './Record.css';
 import HeaderBar from "../../components/HeaderBar";
 import ChatMessage from "../../components/ChatMessage";
-import {Button, Dialog, Popover, SearchBar} from "antd-mobile";
+import {Button, Dialog, SearchBar} from "antd-mobile";
 import moment from "moment/moment";
 import Stopwatch from "../../utils/Stopwatch";
-import {AddCircleOutline, ClockCircleOutline, PicturesOutline, SmileOutline, TagOutline} from "antd-mobile-icons";
+import {AddCircleOutline, ClockCircleOutline, PicturesOutline, SmileOutline} from "antd-mobile-icons";
 import PChecklist from "../../components/PopupChecklist";
+import {saveMsg} from "../../service/loginService";
 
 class Record extends React.Component {
     state = {
         messages: [
-            {myType: true, message: 'Hello , Amiya!', key: 1},
-            {myType: false, message: 'Hi, how are you doctor?', key: 2},
-            {myType: true, message: 'I am good, thank you!', key: 3},
-            {myType: false, message: 'That\'s great to hear!', key: 4},
+            {myType: false, message: '快给我玩原神。', key: 2},
         ],
         isStart: 0, //0 new, 1 start, 2 end
         isExtd: false,
@@ -95,6 +93,13 @@ class Record extends React.Component {
     }
 
     saveQuit = (type, idx) => {
+        const callback = () => {
+            if (type)
+                this.props.history.push('/stats/details', {id: idx});
+            else
+                this.props.history.goBack();
+        }
+
         Dialog.show({
             style: {
                 textAlign: 'center'
@@ -107,10 +112,20 @@ class Record extends React.Component {
             ]],
             onAction: (e) => {
                 if (e.key === 'confirm') {
-                    if (type)
-                        this.props.history.push('/stats/details', {id: idx});
-                    else
-                        this.props.history.goBack();
+                    this.state.messages.map((msg, idx) => {
+                        if (msg.myType) {
+                            const tmp = {
+                                timestamp: "2023/2/29/",
+                                datatype: "message",
+                                message: msg.message,
+                                location: "testFlight",
+                                user: "1"
+                            };
+                            saveMsg(tmp, callback, () => {
+                                this.setState({isStart: 2});
+                            });
+                        }
+                    })
                 }
             }
         })
