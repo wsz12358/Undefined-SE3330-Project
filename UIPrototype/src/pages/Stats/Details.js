@@ -36,7 +36,34 @@ class Details extends React.Component {
     focusEvent = eventListDemo[this.eventId]
 
     btnShare = (
-        <button className="btnShare">
+        <button className="btnShare" onClick={() => {
+            Dialog.show({
+                closeOnMaskClick: true,
+                closeOnAction: true,
+                actions: [
+                    [
+                        {
+                            key: 'cancel',
+                            text: '取消'
+                        },
+                        {
+                            key: 'confirm',
+                            text: '确定',
+                        }
+                    ]
+                ],
+                content: (<List className={"deList"}>
+                    <ListItem key={1} prefix={<EnvironmentOutline/>} onClick={() => {
+                    }}>所在位置</ListItem>
+                    <ListItem key={2} prefix={<EyeOutline/>} onClick={() => {
+                    }}>谁可以看</ListItem>
+                    <ListItem key={3} prefix={<UserOutline/>} onClick={() => {
+                    }}>提醒谁看</ListItem>
+                    <ListItem key={4} prefix={<ClockCircleOutline/>} onClick={() => {
+                    }}>定时</ListItem>
+                </List>)
+            })
+        }}>
             分享
         </button>
     );
@@ -142,7 +169,7 @@ class Details extends React.Component {
                     </Collapse.Panel>
                 </Collapse>
 
-                <List className={"deList"}>
+                {/*<List className={"deList"}>
                     <ListItem key={1} prefix={<EnvironmentOutline/>} onClick={() => {
                     }}>所在位置</ListItem>
                     <ListItem key={2} prefix={<EyeOutline/>} onClick={() => {
@@ -151,7 +178,7 @@ class Details extends React.Component {
                     }}>提醒谁看</ListItem>
                     <ListItem key={4} prefix={<ClockCircleOutline/>} onClick={() => {
                     }}>定时</ListItem>
-                </List>
+                </List>*/}
 
                 {!this.state.onEdit && <Button block className={"btnEdit"} size={"large"} onClick={() => {
                     this.setState({onEdit: true})
