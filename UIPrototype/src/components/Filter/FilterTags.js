@@ -11,6 +11,7 @@ class FilterTags extends React.Component {
     onTagReset = () => {
         store.dispatch(setTagText(''));
         store.dispatch(setTagStatus([]))
+        this.props.onChange();
     }
 
     onTagSelectorChange = (arr, extend) => {
@@ -20,6 +21,7 @@ class FilterTags extends React.Component {
 
         store.dispatch(setTagText(temp));
         store.dispatch(setTagStatus(arr));
+        this.props.onChange();
     }
 
     render() {

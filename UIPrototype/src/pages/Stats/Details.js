@@ -16,24 +16,28 @@ import {
 import eventListDemo from "../../utils/EventListDemo";
 import {ListItem} from "antd-mobile/es/components/list/list-item";
 import {GridItem} from "antd-mobile/es/components/grid/grid";
+import {getMsgs} from "../../service/loginService";
+import store from "../../redux/Store";
+import {call} from "moment";
+import {withRouter} from "react-router-dom";
 
 
 class Details extends React.Component {
     state = {
         onEdit: false,
-        allThoughts: ["全民制作人大家好，我是练习时长两年半的个人练习生蔡徐坤，喜欢唱、跳、rap、篮球，music",
-            "🐔👈，🗿⬇️☯️😋",
-            "🤮👶，🗿⬇️🗿☯️😋",
-            "🌸1️⃣👀🍺👌💥",
-            "🥇🤏🥢🥃"
-        ],
-        allPictures: [jntm, jntm, jntm, jntm, jntm, jntm, ],
+        allThoughts: [],
+        allPictures: [jntm, jntm, jntm, jntm, jntm, jntm,],
         allTags: ["吃饭", "睡觉", "篮球"]
     }
 
+    constructor(props) {
+        super(props);
+        this.refreshThoughts();
+    }
+
+    eventId = this.props.location.state.id;
     backAddr = "/stats"
-    eventId = this.props.location.state.id - 1
-    focusEvent = eventListDemo[this.eventId]
+    focusEvent = eventListDemo[this.eventId - 1]
     selectTags = []
 
     btnShare = (
@@ -69,23 +73,37 @@ class Details extends React.Component {
         </button>
     );
 
+    refreshThoughts = () => {
+        const callback = (e) => {
+            this.setState({allThoughts: [...e]});
+        }
+        const u = store.getState().user.userid.toString();
+        const v = this.eventId.toString();
+
+        getMsgs({user: u, event: v}, callback,
+            () => {
+            })
+    }
 
     renderThoughts = (value, idx) => {
         return (
-            <SwipeAction key={idx} rightActions={this.state.onEdit ? [{key: 'delete',
+            <SwipeAction key={idx} rightActions={this.state.onEdit ? [{
+                key: 'delete',
                 text: '删除',
                 color: 'danger',
                 onClick: () => {
                     Dialog.confirm(
-                        {content: "确定要删除吗？",
+                        {
+                            content: "确定要删除吗？",
                             onConfirm: () => {
-                                this.setState(this.state.allThoughts.splice(idx, 1));
-                            }}
+                                this.setState({allThoughts: this.state.allThoughts.splice(idx, 1)});
+                            }
+                        }
                     );
                 }
             }] : []}>
                 <ListItem>
-                    {value}
+                    {value.message}
                 </ListItem>
             </SwipeAction>
         )
@@ -95,10 +113,12 @@ class Details extends React.Component {
         return <GridItem className='picture' key={idx}>
             {this.state.onEdit && <Button className={"btnDeletePic"} onClick={() => {
                 Dialog.confirm(
-                    {content: "确定要删除吗？",
+                    {
+                        content: "确定要删除吗？",
                         onConfirm: () => {
-                            this.setState(this.state.allPictures.splice(idx, 1));
-                        }}
+                            this.setState({allPictures: this.state.allPictures.splice(idx, 1)});
+                        }
+                    }
                 );
             }
             }><CloseOutline/></Button>}
@@ -117,12 +137,15 @@ class Details extends React.Component {
     renderTags = (tag, idx) => {
         return (<GridItem className="deTag" key={idx} onClick={this.state.onEdit ? () => {
             Dialog.confirm(
-                {content: "确定要删除吗？",
+                {
+                    content: "确定要删除吗？",
                     onConfirm: () => {
-                        this.setState(this.state.allTags.splice(idx, 1));
-                    }}
+                        this.setState({allTags: this.state.allTags.splice(idx, 1)});
+                    }
+                }
             );
-        } : () => {}}>
+        } : () => {
+        }}>
             {tag}
         </GridItem>)
     }
@@ -130,7 +153,8 @@ class Details extends React.Component {
     render() {
         return (<div className="detail_body">
             <div className="detail_absoluteField">
-                <HeaderBar backFunc={OnClickRoute.bind(this, this.backAddr, "replace")} title="详细" right={this.btnShare}/>
+                <HeaderBar backFunc={OnClickRoute.bind(this, this.backAddr, "replace")} title="详细"
+                           right={this.btnShare}/>
             </div>
 
             <div className="detail_eventField">
@@ -147,13 +171,16 @@ class Details extends React.Component {
                             <List>
                                 {this.state.allThoughts.map(this.renderThoughts)}
                                 {this.state.onEdit &&
-                                <Form name={"form"} layout={"horizontal"} onFinish={(v)=>{
-                                    this.setState(()=>{this.state.allThoughts.push(v.inputValue);return{}})
-                                }}>
-                                    <Form.Item name={"inputValue"}>
-                                        <Input placeholder={"请输入内容"} clearable/>
-                                    </Form.Item>
-                                </Form>}
+                                    <Form name={"form"} layout={"horizontal"} onFinish={(v) => {
+                                        this.setState(() => {
+                                            this.state.allThoughts.push(v.inputValue);
+                                            return {}
+                                        })
+                                    }}>
+                                        <Form.Item name={"inputValue"}>
+                                            <Input placeholder={"请输入内容"} clearable/>
+                                        </Form.Item>
+                                    </Form>}
                             </List>
                         }
                     </Collapse.Panel>
@@ -167,7 +194,7 @@ class Details extends React.Component {
                                             state.allPictures.push(jntm)
                                             return {}
                                         })
-                                        }
+                                    }
                                     }>
                                         <AddCircleOutline className='addCircle'/>
                                     </div>}
@@ -179,7 +206,7 @@ class Details extends React.Component {
                         {
                             <Grid columns={5}>
                                 {this.state.allTags.map(this.renderTags)}
-                                {this.state.onEdit && <div className={"addTag"} onClick={()=>{
+                                {this.state.onEdit && <div className={"addTag"} onClick={() => {
                                     Dialog.show({
                                         closeOnMaskClick: true,
                                         closeOnAction: true,
@@ -192,22 +219,26 @@ class Details extends React.Component {
                                                 {
                                                     key: 'confirm',
                                                     text: '确定',
-                                                    onClick: ()=>{this.setState(()=>{
-                                                        console.log(this.selectTags)
-                                                        this.selectTags.map((value)=>{if (!this.state.allTags.includes(value.label)) this.state.allTags.push(value.label)})
-                                                        this.selectTags = []
-                                                        return{};
-                                                    })}
+                                                    onClick: () => {
+                                                        this.setState(() => {
+                                                            console.log(this.selectTags)
+                                                            this.selectTags.map((value) => {
+                                                                if (!this.state.allTags.includes(value.label)) this.state.allTags.push(value.label)
+                                                            })
+                                                            this.selectTags = []
+                                                            return {};
+                                                        })
+                                                    }
                                                 }
                                             ]
                                         ],
                                         content: (
-                                                <Selector onChange={(a, extend)=>{
-                                                    this.selectTags = extend.items;
-                                                }}
-                                                multiple={true}
-                                                columns={3}
-                                                showCheckMark={false}
+                                            <Selector onChange={(a, extend) => {
+                                                this.selectTags = extend.items;
+                                            }}
+                                                      multiple={true}
+                                                      columns={3}
+                                                      showCheckMark={false}
                                                 /*style={{
                                                     '--border-radius': '100px',
                                                     '--border': 'solid black 1px',
@@ -217,15 +248,15 @@ class Details extends React.Component {
                                                     '--color': 'white',
                                                     '--text-color': 'red'
                                                 }}*/
-                                                options={[
-                                                    {label: '唱', value: 1},
-                                                    {label: '跳', value: 2},
-                                                    {label: 'rap', value: 3},
-                                                    {label: '篮球', value: 4},
-                                                    {label: 'music', value: 5},
-                                                    {label: '吃饭', value: 6},
-                                                    {label: '睡觉', value: 7}
-                                                ]}/>
+                                                      options={[
+                                                          {label: '唱', value: 1},
+                                                          {label: '跳', value: 2},
+                                                          {label: 'rap', value: 3},
+                                                          {label: '篮球', value: 4},
+                                                          {label: 'music', value: 5},
+                                                          {label: '吃饭', value: 6},
+                                                          {label: '睡觉', value: 7}
+                                                      ]}/>
                                         )
                                     })
                                 }}>添加</div>}
@@ -249,4 +280,4 @@ class Details extends React.Component {
     }
 }
 
-export default Details
+export default withRouter(Details)

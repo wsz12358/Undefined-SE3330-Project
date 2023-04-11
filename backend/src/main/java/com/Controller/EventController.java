@@ -44,7 +44,7 @@ public class EventController {
     }
 
     @RequestMapping("/get")
-    public JSONArray GetMessages(@RequestBody Map<String, String> params)
+    public JSONArray GetEvents(@RequestBody Map<String, String> params)
     {
         String user =  params.get(EventConstant.USER);
         List<Event> mes = eventService.GetEvents(Integer.valueOf(user));

@@ -2,7 +2,7 @@ import {
     SET_FILTER_OPEN, SET_CATEGORY, SET_TAG_STATUS,
     SET_TIME_STATUS, SET_TIME_FROM, SET_TIME_TO,
     SET_TAG_TEXT, SET_FROMCAL_VIS, SET_TOCAL_VIS,
-    SET_PASSWORD, SET_USERNAME, SET_IS_LOGIN
+    SET_USERID, SET_USERNAME, SET_IS_LOGIN
 } from "./Constants";
 
 const initialState = {
@@ -19,7 +19,7 @@ const initialState = {
     },
     user: {
         username: null,
-        password: null,
+        userid: null,
         isLogin: false,
         avatar: "",
         r_avatar: "",
@@ -101,12 +101,12 @@ export default function filterReducer(prevState = initialState, action) {
                     toCalVis: data
                 },
             }
-        case SET_PASSWORD:
+        case SET_USERID:
             return {
                 ...prevState,
                 user: {
                     ...prevState.user,
-                    password: data,
+                    userid: data,
                 },
             }
         case SET_USERNAME:

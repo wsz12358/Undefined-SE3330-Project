@@ -6,13 +6,16 @@ import Stats_Map from "./Stats_Map";
 import HeaderBar from "../../components/HeaderBar";
 import OnClickRoute from "../../utils/OnClickRoute";
 import Filter from "../../components/Filter/Filter";
-import eventListDemo from "../../utils/EventListDemo";
 import store from "../../redux/Store";
 import {setFilterOpen} from "../../redux/FilterActions";
-import {UpOutline} from "antd-mobile-icons";
 import GotoTop from "../../components/GotoTop";
+import {getEvents} from "../../service/loginService";
 
 class Stats extends React.Component {
+    state = {
+        eventList: []
+    }
+
     backAddr = '/home'
     goAddr = '/stats/details'
 
@@ -20,6 +23,7 @@ class Stats extends React.Component {
         super(props);
         store.dispatch(setFilterOpen(true));
         this.capRenderField = React.createRef();
+        this.refreshEventList();
     }
 
     componentDidMount() {
@@ -28,19 +32,28 @@ class Stats extends React.Component {
         })
     }
 
+    refreshEventList = () => {
+        const callback = (e) => {
+            this.setState({eventList: [...e]});
+        }
+        getEvents({user: store.getState().user.userid}, callback,
+            () => {
+            });
+    }
+
     capRender = () => {
         const category = store.getState().filter.category;
 
         if (category === "map")
             return (
                 <Stats_Map onClickRoute={OnClickRoute.bind(this, '/home', "pop")}
-                           eventList={eventListDemo}/>
+                           eventList={this.state.eventList}/>
             )
         else if (category === "stats")
             return (<Stats_StatsList/>)
         else
             return (
-                <Stats_eventList eventList={eventListDemo}
+                <Stats_eventList eventList={this.state.eventList}
                                  goAddr={this.goAddr}/>
             )
 
@@ -57,7 +70,7 @@ class Stats extends React.Component {
 
                     <div id="stats_filterField" className="alpha_bg"
                          style={{width: '100%', padding: '10px 0'}}>
-                        <Filter/>
+                        <Filter onChange={this.refreshEventList.bind(this)}/>
                     </div>
                 </div>
 

@@ -1,7 +1,7 @@
 import React from "react";
 import {Button, Card, Dialog, DotLoading, Form, Input} from "antd-mobile";
 import store from "../../redux/Store";
-import {setIsLogin, setUsername} from "../../redux/FilterActions";
+import {setIsLogin, setUserId, setUsername} from "../../redux/FilterActions";
 import {login} from "../../service/loginService";
 
 
@@ -18,6 +18,7 @@ class Login extends React.Component {
                 });
                 store.dispatch(setIsLogin(true));
                 store.dispatch(setUsername(e.username));
+                store.dispatch(setUserId(ret.userId));
                 // password shall not be stored in Front
                 // if access to password is required, program should fetch from Backend
             } else {

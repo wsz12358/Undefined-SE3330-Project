@@ -2,7 +2,7 @@ import {
     SET_FILTER_OPEN, SET_CATEGORY, SET_TAG_STATUS,
     SET_TIME_STATUS, SET_TIME_FROM, SET_TIME_TO,
     SET_TAG_TEXT, SET_TOCAL_VIS, SET_FROMCAL_VIS,
-    SET_PASSWORD, SET_USERNAME, SET_IS_LOGIN,
+    SET_USERID, SET_USERNAME, SET_IS_LOGIN,
 } from "./Constants";
 
 export const setFilterOpen = e => {
@@ -68,9 +68,9 @@ export const setToCalVis = e => {
     }
 }
 
-export const setPassword = e => {
+export const setUserId = e => {
     return {
-        type: SET_PASSWORD,
+        type: SET_USERID,
         data: e,
     }
 }

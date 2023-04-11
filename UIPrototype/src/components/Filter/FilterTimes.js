@@ -19,6 +19,8 @@ class FilterTimes extends React.Component {
                 store.dispatch(setTimeStatus(false));
             }
         }
+
+        this.props.onChange();
     }
 
     render() {
