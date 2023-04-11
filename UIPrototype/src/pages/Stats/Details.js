@@ -3,7 +3,7 @@ import HeaderBar from "../../components/HeaderBar";
 import OnClickRoute from "../../utils/OnClickRoute";
 import './Details.css'
 
-import {Collapse, Dialog, Grid, Image, List, SwipeAction, Button, Modal} from "antd-mobile";
+import {Collapse, Dialog, Grid, Image, List, SwipeAction, Button, Modal, Input, Form, Selector} from "antd-mobile";
 import jntm from "../../assets/jntm.png"
 import {
     AddCircleOutline,
@@ -28,12 +28,13 @@ class Details extends React.Component {
             "🥇🤏🥢🥃"
         ],
         allPictures: [jntm, jntm, jntm, jntm, jntm, jntm, ],
-        allTags: ["吃饭", "睡觉", "打篮球"]
+        allTags: ["吃饭", "睡觉", "篮球"]
     }
 
     backAddr = "/stats"
     eventId = this.props.location.state.id - 1
     focusEvent = eventListDemo[this.eventId]
+    selectTags = []
 
     btnShare = (
         <button className="btnShare" onClick={() => {
@@ -71,7 +72,7 @@ class Details extends React.Component {
 
     renderThoughts = (value, idx) => {
         return (
-            <SwipeAction key={value} rightActions={this.state.onEdit ? [{key: 'delete',
+            <SwipeAction key={idx} rightActions={this.state.onEdit ? [{key: 'delete',
                 text: '删除',
                 color: 'danger',
                 onClick: () => {
@@ -114,7 +115,7 @@ class Details extends React.Component {
     }
 
     renderTags = (tag, idx) => {
-        return (<div className="deTag" key={idx} onClick={this.state.onEdit ? () => {
+        return (<GridItem className="deTag" key={idx} onClick={this.state.onEdit ? () => {
             Dialog.confirm(
                 {content: "确定要删除吗？",
                     onConfirm: () => {
@@ -123,7 +124,7 @@ class Details extends React.Component {
             );
         } : () => {}}>
             {tag}
-        </div>)
+        </GridItem>)
     }
 
     render() {
@@ -145,6 +146,14 @@ class Details extends React.Component {
                         {
                             <List>
                                 {this.state.allThoughts.map(this.renderThoughts)}
+                                {this.state.onEdit &&
+                                <Form name={"form"} layout={"horizontal"} onFinish={(v)=>{
+                                    this.setState(()=>{this.state.allThoughts.push(v.inputValue);return{}})
+                                }}>
+                                    <Form.Item name={"inputValue"}>
+                                        <Input placeholder={"请输入内容"} clearable/>
+                                    </Form.Item>
+                                </Form>}
                             </List>
                         }
                     </Collapse.Panel>
@@ -168,23 +177,62 @@ class Details extends React.Component {
                     </Collapse.Panel>
                     <Collapse.Panel key='tag' title='tag' className="myCollapsePanel">
                         {
-                            <div className="allTags">
+                            <Grid columns={5}>
                                 {this.state.allTags.map(this.renderTags)}
-                            </div>
+                                {this.state.onEdit && <div className={"addTag"} onClick={()=>{
+                                    Dialog.show({
+                                        closeOnMaskClick: true,
+                                        closeOnAction: true,
+                                        actions: [
+                                            [
+                                                {
+                                                    key: 'cancel',
+                                                    text: '取消'
+                                                },
+                                                {
+                                                    key: 'confirm',
+                                                    text: '确定',
+                                                    onClick: ()=>{this.setState(()=>{
+                                                        console.log(this.selectTags)
+                                                        this.selectTags.map((value)=>{if (!this.state.allTags.includes(value.label)) this.state.allTags.push(value.label)})
+                                                        this.selectTags = []
+                                                        return{};
+                                                    })}
+                                                }
+                                            ]
+                                        ],
+                                        content: (
+                                                <Selector onChange={(a, extend)=>{
+                                                    this.selectTags = extend.items;
+                                                }}
+                                                multiple={true}
+                                                columns={3}
+                                                showCheckMark={false}
+                                                /*style={{
+                                                    '--border-radius': '100px',
+                                                    '--border': 'solid black 1px',
+                                                    '--checked-border': 'solid black 1px',
+                                                    '--padding': '8px 24px',
+                                                    '--checked-color': 'white',
+                                                    '--color': 'white',
+                                                    '--text-color': 'red'
+                                                }}*/
+                                                options={[
+                                                    {label: '唱', value: 1},
+                                                    {label: '跳', value: 2},
+                                                    {label: 'rap', value: 3},
+                                                    {label: '篮球', value: 4},
+                                                    {label: 'music', value: 5},
+                                                    {label: '吃饭', value: 6},
+                                                    {label: '睡觉', value: 7}
+                                                ]}/>
+                                        )
+                                    })
+                                }}>添加</div>}
+                            </Grid>
                         }
                     </Collapse.Panel>
                 </Collapse>
-
-                {/*<List className={"deList"}>
-                    <ListItem key={1} prefix={<EnvironmentOutline/>} onClick={() => {
-                    }}>所在位置</ListItem>
-                    <ListItem key={2} prefix={<EyeOutline/>} onClick={() => {
-                    }}>谁可以看</ListItem>
-                    <ListItem key={3} prefix={<UserOutline/>} onClick={() => {
-                    }}>提醒谁看</ListItem>
-                    <ListItem key={4} prefix={<ClockCircleOutline/>} onClick={() => {
-                    }}>定时</ListItem>
-                </List>*/}
 
                 {!this.state.onEdit && <Button block className={"btnEdit"} size={"large"} onClick={() => {
                     this.setState({onEdit: true})
