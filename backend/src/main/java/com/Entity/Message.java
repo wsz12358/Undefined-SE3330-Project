@@ -21,7 +21,8 @@ import javax.persistence.*;
 public class Message {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "MessageId")
     private Integer MessageId;
 
     private String timestamp;
@@ -31,6 +32,8 @@ public class Message {
     private String message;
 
     private String location;
+
+    private Integer user;
 
 
     public Integer getMessageId() {
@@ -71,5 +74,8 @@ public class Message {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+    public void setUser(Integer user) {
+        this.user = user;
     }
 }

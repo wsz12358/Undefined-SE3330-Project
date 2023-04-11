@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -23,6 +24,7 @@ import javax.persistence.Table;
 public class User {
 
     @Id
+    @Column(name = "userId")
     private int userId;
     private String nickname;
     private String name;

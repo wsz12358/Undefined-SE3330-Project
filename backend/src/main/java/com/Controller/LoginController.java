@@ -22,12 +22,12 @@ public class LoginController {
     //acoustic:
     //登陆服务 使用fetch通过body发送请求 post类型为"POST"
     @RequestMapping("/login")
-    public boolean login(@RequestBody Map<String, String> params)
+    public User login(@RequestBody Map<String, String> params)
     {
         String username = params.get(LoginConstant.USERNAME);
         String password = params.get(LoginConstant.PASSWORD);
         User user = loginService.checkUser(username, password);
-        return user != null;
+        return user;
     }
 
 }
