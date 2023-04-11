@@ -24,7 +24,6 @@ import javax.persistence.Table;
 public class User {
 
     @Id
-    @Column(name = "userId")
     private int userId;
     private String nickname;
     private String name;

@@ -6,4 +6,7 @@ public class MessageConstant {
     public static final String MESSAGE = "message";
     public static final String LOCATION = "location";
     public static final String USER = "user";
+    public static final String EVENT = "event";
+    public static final String MESSAGE_MSG = "msg";
+    public static final String MESSAGE_IMG = "img";
 }

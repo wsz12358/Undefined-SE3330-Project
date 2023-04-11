@@ -22,7 +22,6 @@ public class Message {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "MessageId")
     private Integer MessageId;
 
     private String timestamp;
@@ -34,6 +33,8 @@ public class Message {
     private String location;
 
     private Integer user;
+
+    private Integer event;
 
 
     public Integer getMessageId() {
