@@ -1,6 +1,5 @@
 package com.Dao;
 
-import com.Entity.Flag;
 import com.Entity.Message;
 
 import java.util.List;

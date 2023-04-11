@@ -12,6 +12,7 @@ export const postRequest = (url, json, callback, errback) => {
 
     fetch(url, opts)
         .then((e) => {
+            console.log(e);
             return e.json();
         })
         .then((e) => {

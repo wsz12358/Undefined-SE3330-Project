@@ -1,7 +1,6 @@
 package com.ServiceImpl;
 
 import com.Dao.MessageDao;
-import com.Entity.Flag;
 import com.Entity.Message;
 import com.Service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +15,12 @@ public class MessageServiceImpl implements MessageService {
     MessageDao messageDao;
 
     @Override
-    public Flag AddMessage(Message message)
-    {
-        return messageDao.AddMessage(message);
+    public void AddMessage(Message message) {
+        messageDao.AddMessage(message);
     }
 
     @Override
-    public List<Message> GetMessages(Integer user, Integer event){return messageDao.GetMessages(user, event);}
+    public List<Message> GetMessages(Integer user, Integer event) {
+        return messageDao.GetMessages(user, event);
+    }
 }
