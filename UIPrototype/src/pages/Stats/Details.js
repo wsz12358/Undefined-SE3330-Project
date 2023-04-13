@@ -149,9 +149,10 @@ class Details extends React.Component {
                                 {this.state.onEdit &&
                                 <Form name={"form"} layout={"horizontal"} onFinish={(v)=>{
                                     this.setState(()=>{this.state.allThoughts.push(v.inputValue);return{}})
+                                    this.thoughtInput.clear();
                                 }}>
                                     <Form.Item name={"inputValue"}>
-                                        <Input placeholder={"请输入内容"} clearable/>
+                                        <Input ref={currentNode => this.thoughtInput = currentNode} placeholder={"请输入内容"} clearable/>
                                     </Form.Item>
                                 </Form>}
                             </List>
