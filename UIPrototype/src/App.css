@@ -80,3 +80,7 @@
     position: absolute;
     width: 100%;
 }
+
+.appBottom_disable {
+    pointer-events: none;
+}
