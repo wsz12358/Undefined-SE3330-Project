@@ -1,5 +1,5 @@
 import React from "react";
-import "./UniStyle.css"
+import "../css/UniStyle.css"
 import {ClockCircleOutline, RightOutline} from "antd-mobile-icons";
 import {useHistory} from "react-router-dom";
 

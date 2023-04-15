@@ -1,5 +1,5 @@
 import React from 'react'
-import "./Stats.css"
+import "../../css/Stats.css"
 import Stats_eventList from './Stats_EventList'
 import Stats_StatsList from "./Stats_StatsList";
 import Stats_Map from "./Stats_Map";
@@ -10,6 +10,7 @@ import store from "../../redux/Store";
 import {setFilterOpen} from "../../redux/FilterActions";
 import GotoTop from "../../components/GotoTop";
 import {getEvents} from "../../service/loginService";
+import eventListDemo from "../../utils/EventListDemo";
 
 class Stats extends React.Component {
     state = {
@@ -47,7 +48,7 @@ class Stats extends React.Component {
         if (category === "map")
             return (
                 <Stats_Map onClickRoute={OnClickRoute.bind(this, '/home', "pop")}
-                           eventList={this.state.eventList}/>
+                           eventList={eventListDemo}/>
             )
         else if (category === "stats")
             return (<Stats_StatsList/>)

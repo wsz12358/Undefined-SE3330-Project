@@ -1,7 +1,7 @@
-import React, {useMemo, useState} from 'react'
-import {Button, CheckList, Popup, SearchBar, Space} from 'antd-mobile'
+import React, {useState} from 'react'
+import {CheckList, Popup} from 'antd-mobile'
 import {TagOutline} from "antd-mobile-icons";
-import "../pages/Home/Record.css"
+import "../../css/Record.css"
 
 const items = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 

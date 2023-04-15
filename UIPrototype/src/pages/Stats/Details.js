@@ -1,7 +1,7 @@
 import React from 'react'
 import HeaderBar from "../../components/HeaderBar";
 import OnClickRoute from "../../utils/OnClickRoute";
-import './Details.css'
+import '../../css/Details.css'
 
 import {Collapse, Dialog, Grid, Image, List, SwipeAction, Button, Modal, Input, Form, Selector} from "antd-mobile";
 import jntm from "../../assets/jntm.png"

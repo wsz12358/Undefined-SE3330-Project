@@ -1,5 +1,5 @@
 import React from 'react'
-import './Mine.css'
+import '../../css/Mine.css'
 import User from "./User";
 import Login from "./Login";
 import store from "../../redux/Store";

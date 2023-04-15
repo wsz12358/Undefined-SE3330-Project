@@ -1,5 +1,5 @@
-import avatar from "../assets/miyu.jpg";
-import r_avatar from "../assets/naxida.png";
+import avatar from "../../assets/miyu.jpg";
+import r_avatar from "../../assets/naxida.png";
 import React from "react";
 
 const ChatMessage = (props) => {
@@ -25,7 +25,11 @@ const ChatMessage = (props) => {
                      maxWidth: '60%', marginTop: 12,
                      marginBottom: 12, font: '400 20px/1.5 "Microsoft YaHei UI"'
                  }}>
-                {msg.message}
+                {msg.msgType === "msg" &&
+                    <>{msg.message}</>}
+                {msg.msgType === "img" &&
+                    <img src={msg.message} style={{maxWidth: 200}}/>
+                }
             </div>
         </div>
     )

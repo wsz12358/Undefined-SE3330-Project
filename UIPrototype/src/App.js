@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import './App.css';
+import './css/App.css';
 import BottomBar from "./components/BottomBar";
 import Home from "./pages/Home/Home";
 import Stats from "./pages/Stats/Stats";
@@ -24,6 +24,8 @@ function App() {
     const [bottomEnable, setBottomEnable] = useState(true);
 
     useEffect(() => {
+        if (appBottom === null) return;
+
         if (!bottomEnable) {
             appBottom.current.classList.add("appBottom_disable");
         } else {
@@ -40,10 +42,11 @@ function App() {
                                  )}>
                     <CSSTransition timeout={300} key={location.pathname}
                                    mountOnEnter unmountOnExit
-                                   onEnter={() => setBottomEnable(false)}
+                                   // onEnter={() => setBottomEnable(false)}
                                    // onEnter={() => {}}
                                    // onEntered={() => {}}
-                                   onEntered={() => setBottomEnable(true)}>
+                                   // onEntered={() => setBottomEnable(true)}
+                        >
                         <Switch location={location}>
                             <Route exact path='/home/record' component={Record}/>
 

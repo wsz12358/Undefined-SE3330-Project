@@ -1,27 +1,32 @@
 import React from 'react';
-import './Record.css';
+import '../../css/Record.css';
 import HeaderBar from "../../components/HeaderBar";
-import ChatMessage from "../../components/ChatMessage";
+import ChatMessage from "../../components/Record/ChatMessage";
 import {Button, Dialog, SearchBar} from "antd-mobile";
 import moment from "moment/moment";
 import Stopwatch from "../../utils/Stopwatch";
 import {AddCircleOutline, ClockCircleOutline, PicturesOutline, SmileOutline} from "antd-mobile-icons";
-import PChecklist from "../../components/PopupChecklist";
+import PChecklist from "../../components/Record/PopupChecklist";
 import {saveMsg} from "../../service/loginService";
+import RecordUtils from "../../components/Record/RecordUtils";
 
 class Record extends React.Component {
     state = {
         messages: [
-            {myType: false, message: '快给我玩原神。', key: 2},
+            {
+                myType: false, msgType: "msg",
+                message: '快给我玩原神。', key: 2
+            },
         ],
         isStart: 0, //0 new, 1 start, 2 end
         isExtd: false,
     }
 
-    addMsg = (e, type) => {
+    addMsg = (e, myType, msgType) => {
         const tmp = [...this.state.messages];
         tmp.push({
-            myType: type,
+            myType: myType,
+            msgType: msgType,
             message: e,
             key: tmp.length + 1
         })
@@ -60,7 +65,7 @@ class Record extends React.Component {
             this.header.classList.add("white2green");
             this.addMsg("开始记录。现在是" +
                 moment(new Date().getTime()).format('HH:mm:ss').toString() +
-                "，专心致志才能有所收获哦！", false);
+                "，专心致志才能有所收获哦！", false, "msg");
         } else if (this.state.isStart === 1) {
             if (!this.state.isExtd) {
                 this.bottom.classList.remove("bottom_up");
@@ -73,7 +78,7 @@ class Record extends React.Component {
             this.header.classList.add("green2orange");
             this.addMsg("结束记录。现在是" +
                 moment(new Date().getTime()).format('HH:mm:ss').toString() +
-                "，将美好的事物记录下来，然后去放松一下吧。", false);
+                "，将美好的事物记录下来，然后去放松一下吧。", false, "msg");
         } else {
             this.saveQuit(true, 1);
         }
@@ -177,7 +182,7 @@ class Record extends React.Component {
                                    }}
                                    onSearch={(e) => {
                                        if (e === "") return;
-                                       this.addMsg(e, true);
+                                       this.addMsg(e, true, "msg");
                                        this.clearInput();
                                    }}/>
                         <div id="record_extd"
@@ -188,31 +193,8 @@ class Record extends React.Component {
                             <AddCircleOutline fontSize={30}/>
                         </div>
                     </div>
-                    <div id="record_utils"
-                         style={{
-                             display: 'flex', alignItems: 'center', justifyContent: 'space-evenly',
-                             marginBottom: '10px', width: '100%'
-                         }}>
-                        <div className="record_gadgets">
-                            <Stopwatch flag={this.state.isStart === 1}/>
-                            <ClockCircleOutline fontSize={40}/>
-                            <span>时长</span>
-                        </div>
-                        <PChecklist/>
-                        <div className="record_gadgets bordered"
-                             style={{paddingTop: 15}}>
-                            <PicturesOutline fontSize={40}/>
-                            <span>图片</span>
-                        </div>
-                        <div className="record_gadgets bordered"
-                             style={{paddingTop: 15}}
-                             onClick={() => {
-                                 this.addMsg("玩原神玩的。", false)
-                             }}>
-                            <SmileOutline fontSize={40}/>
-                            <span>戳戳</span>
-                        </div>
-                    </div>
+                    <RecordUtils flag={this.state.isStart === 1}
+                                 addMsg={this.addMsg.bind(this)}/>
                 </div>
             </div>
         );

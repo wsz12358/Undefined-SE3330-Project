@@ -1,6 +1,6 @@
 import {Avatar, Space, Tag} from "antd-mobile";
 import {LikeOutline, MessageOutline, SendOutline} from "antd-mobile-icons";
-import "./Discover.css"
+import "../../css/Discover.css"
 
 const DiscoverCommentList = () => {
     return (
