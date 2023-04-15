@@ -18,7 +18,7 @@ export default function Pictures(props) {
         reader.onload = () => {
             props.addMsg(reader.result, true, "img");
         }
-
+        setVisible(false);
     }
 
     return (

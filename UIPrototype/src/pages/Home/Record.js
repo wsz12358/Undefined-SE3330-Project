@@ -203,7 +203,11 @@ class Record extends React.Component {
     componentDidUpdate(prevProps, prevState, snapshot) {
         const e = document.getElementById("record_msgField");
         e.scrollTo({
-            top: e.scrollHeight,
+            top: e.scrollHeight - 10,
+            behavior: 'smooth'
+        })
+        e.scrollTo({
+            top: e.scrollHeight - 10,
             behavior: 'smooth'
         })
     }
