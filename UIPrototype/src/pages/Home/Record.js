@@ -13,10 +13,7 @@ import RecordUtils from "../../components/Record/RecordUtils";
 class Record extends React.Component {
     state = {
         messages: [
-            {
-                myType: false, msgType: "msg",
-                message: '快给我玩原神。', key: 2
-            },
+
         ],
         isStart: 0, //0 new, 1 start, 2 end
         isExtd: false,
@@ -24,16 +21,20 @@ class Record extends React.Component {
 
     addMsg = (e, myType, msgType) => {
         const tmp = [...this.state.messages];
+        const timestamp = new Date().getTime(); // Get the current time
+
         tmp.push({
             myType: myType,
             msgType: msgType,
             message: e,
-            key: tmp.length + 1
-        })
+            key: tmp.length + 1,
+            timestamp: timestamp, // Add the timestamp property
+        });
         this.setState({
             messages: [...tmp]
-        })
-    }
+        });
+    };
+
 
     onClickBack = () => {
         if (this.state.isStart === 1) {
@@ -142,6 +143,10 @@ class Record extends React.Component {
     }
 
     render() {
+        {this.state.messages.map((msg, index) => (
+            <ChatMessage key={index} msg={msg} timestamp={msg.timestamp} />
+        ))}
+
         const msgFieldMBottom = this.state.isStart === 1 ?
             (this.state.isExtd ? 240 : 160) : 90;
 
