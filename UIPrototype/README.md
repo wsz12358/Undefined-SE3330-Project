@@ -7,7 +7,7 @@ This is the repo for SEP&amp;Practice project 2023.
 ## 按照时间倒序排列，记得常来看一眼！！！
 
 **23.4.24 更换了上传图片的方法, 请运行下面的install**<br><br>
-'npm install react react-dropzone superagent --save'
+`npm install react react-dropzone superagent --save`
 
 
 **23.3.20 新增百度地图API的说明。**<br><br>
