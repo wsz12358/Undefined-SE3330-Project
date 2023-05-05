@@ -6,9 +6,11 @@ import com.Service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class MessageServiceImpl implements MessageService {
 
     @Autowired
@@ -20,7 +22,18 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<Message> GetMessages(Integer user, Integer event) {
-        return messageDao.GetMessages(user, event);
+    public List<Message> GetMessages(Integer event) {
+        return messageDao.GetMessages(event);
     }
+
+    @Override
+    public void UpdateMessage(String mes, Integer id){messageDao.UpdateMessage(mes, id);}
+
+    @Override
+    public Message GetMessage(Integer id)
+    {
+        return messageDao.GetMessage(id);
+    }
+
+
 }

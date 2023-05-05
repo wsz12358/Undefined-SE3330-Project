@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "events")
@@ -20,8 +21,15 @@ public class Event {
     String begintime;
     String finishtime;
     String duration;
-    Integer user;
+    Double mul;
+    Double lat;
 
+    @ManyToOne
+    @JoinColumn(name = "user")
+    User user;
+    @OneToMany
+    @JoinColumn(name = "event")
+    List<Message> messages;
 
     public Integer getEventid() {
         return EventId;
@@ -71,7 +79,32 @@ public class Event {
         this.duration = duration;
     }
 
-    public Integer getUser() {return user;}
+    public User getUser() {return user;}
 
-    public void setUser(Integer user) {this.user = user;}
+    public void setUser(User user) {this.user = user;}
+
+    public Double getLat() {
+        return lat;
+    }
+
+    public void setLat(Double lat)
+    {
+        this.lat = lat;
+    }
+
+    public Double getMul() {
+        return mul;
+    }
+
+    public void setMul(Double mul) {
+        this.mul = mul;
+    }
+
+    public void setMessages(Message message) {
+        this.messages.add(message);
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
 }

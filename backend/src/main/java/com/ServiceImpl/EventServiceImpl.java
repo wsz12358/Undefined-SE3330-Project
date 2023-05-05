@@ -22,4 +22,10 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public List<Event> GetEvents(Integer user) {return eventDao.GetEvents(user);}
+
+    @Override
+    public Event GetEvent(Integer event)
+    {
+        return eventDao.GetEvent(event);
+    }
 }

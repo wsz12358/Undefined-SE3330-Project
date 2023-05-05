@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.Map;
 
@@ -26,14 +27,13 @@ public class MessageController {
         String timestamp = params.get(MessageConstant.TIMESTAMP);
         String datatype = params.get(MessageConstant.DATATYPE);
         String message = params.get(MessageConstant.MESSAGE);
-        String location = params.get(MessageConstant.LOCATION);
         String user = params.get(MessageConstant.USER);
+        String event = params.get(MessageConstant.EVENT);
         Message mes = new Message();
         mes.setTimestamp(timestamp);
         mes.setDatatype(datatype);
         mes.setMessage(message);
-        mes.setLocation(location);
-        mes.setUser(Integer.valueOf(user));
+//        mes.setEvent(Integer.valueOf(event));
         messageService.AddMessage(mes);
         return (JSONObject) JSON.toJSON(mes);
     }
@@ -43,7 +43,16 @@ public class MessageController {
     {
         String user =  params.get(MessageConstant.USER);
         String event = params.get(MessageConstant.EVENT);
-        List<Message> mes = messageService.GetMessages(Integer.valueOf(user), Integer.valueOf(event));
+        List<Message> mes = messageService.GetMessages(Integer.valueOf(event));
         return JSONArray.parseArray(JSON.toJSONString(mes));
+    }
+
+    @RequestMapping("/update")
+    public JSONObject UpdateMessage(@RequestBody Map<String, String> params)
+    {
+        String id = params.get(MessageConstant.MESSAGEID);
+        String mes = params.get(MessageConstant.MESSAGE);
+        messageService.UpdateMessage(mes, Integer.valueOf(id));
+        return (JSONObject) JSON.toJSON(messageService.GetMessage(Integer.valueOf(id)));
     }
 }

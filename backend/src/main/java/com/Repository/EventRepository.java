@@ -11,7 +11,10 @@ import java.util.List;
 
 public interface EventRepository extends JpaRepository<Event, Integer> {
 
-    @Query(value = "from Event where user = :user")
+    @Query(value = "from Event where user.userId = :user")
     List<Event> findByUser(@Param("user") Integer user);
+
+    @Query(value = "from Event  where EventId = :event")
+    Event findEventByEventId(@Param("event") Integer event);
 
 }
