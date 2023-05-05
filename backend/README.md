@@ -49,3 +49,30 @@
   6. 所有的传参都用RequestBody传！我之后也会都统一用接受RequestBody的方式编写后端
   7. 如果发现有报错 试试看刷新一下maven 因为我添加了新的依赖 pom.xml文件有变化
   另外 请重新导入数据库 project.database.sql文件有变化
+
+2023.5.5 acoustic更新：</br>
+1. 增加curevent数据库，里面存着本次事件的所有信息，前端用户每发一条就将其存进curevent数据库内
+    格式如下例：</br>
+    {</br>
+        "timestamp": "1234/5/6",</br>
+        "datatype": "msg",</br>
+        "message": "test content"</br>
+    }</br>
+2. 当一件事情记录结束，用户结束记录，此时前端应向后端发的消息如下例：
+    {</br>
+        "name": "this",</br>
+        "tags": "study/play",</br>
+        "begintime": "1234/5/6",</br>
+        "finishtime": "1234/5/6",</br>
+        "duration": "1234/5/6",</br>
+        "user": "1"  //传userid,</br>
+        "lat":  "123.4",</br>
+        "mul":  "567.8"</br>
+    }</br>
+此时后端会自动将curevent内的数据全部放进message数据库内并新增一个event,并清空curevent</br>
+3. 当前端请求拿到一个用户的所有event/通过eventid拿到一个event时，该event类中会包含有所有的message，一步到位</br>
+4. 前端需要修改message时，传参格式如下：</br>
+{</br>
+    "messageid": "1",</br>
+    "message": "test123"</br>
+}</br>

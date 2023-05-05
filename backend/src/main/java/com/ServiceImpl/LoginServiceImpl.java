@@ -21,4 +21,10 @@ public class LoginServiceImpl implements LoginService {
         User user = userDao.checkUser(username, password);
         return user;
     }
+
+    @Override
+    public User getUser(Integer id)
+    {
+        return  userDao.getUser(id);
+    }
 }

@@ -2,6 +2,7 @@ package com.DaoImpl;
 
 import com.Dao.EventDao;
 import com.Entity.Event;
+import com.Entity.Message;
 import com.Repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -22,4 +23,10 @@ public class EventDaoImpl implements EventDao {
 
     @Override
     public List<Event> GetEvents(Integer user){return eventRepository.findByUser(user);}
+
+    @Override
+    public Event GetEvent(Integer event)
+    {
+        return eventRepository.findEventByEventId(event);
+    }
 }

@@ -10,4 +10,6 @@ public interface EventDao {
     public void AddEvent(Event event);
 
     public List<Event> GetEvents(Integer user);
+
+    public Event GetEvent(Integer event);
 }

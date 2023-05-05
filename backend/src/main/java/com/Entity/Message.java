@@ -1,11 +1,13 @@
 package com.Entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 
 /**
  * @ClassName UserAuth
@@ -16,7 +18,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "messages")
-@JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler"})
+@JsonIgnoreProperties(value = {"handler","hibernateLazyInitializer","fieldHandler", "event"})
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "MessageId")
 public class Message {
 
@@ -30,11 +32,10 @@ public class Message {
 
     private String message;
 
-    private String location;
-
-    private Integer user;
-
-    private Integer event;
+    @JSONField(serialize = false)
+    @ManyToOne
+    @JoinColumn(name = "event")
+    private Event event;
 
 
     public Integer getMessageId() {
@@ -69,14 +70,6 @@ public class Message {
         this.message = message;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-    public void setUser(Integer user) {
-        this.user = user;
-    }
+    public Event getEvent() {return event;}
+    public void setEvent(Event event) {this.event = event;}
 }

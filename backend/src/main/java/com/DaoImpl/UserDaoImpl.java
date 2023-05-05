@@ -19,4 +19,9 @@ public class UserDaoImpl implements UserDao {
         return user;
     }
 
+    @Override
+    public User getUser(Integer id)
+    {
+        return userRepository.getUserById(id);
+    }
 }
