@@ -12,15 +12,15 @@ export const postRequest = (url, json, callback, errback) => {
 
     fetch(url, opts)
         .then((e) => {
-            console.log(e);
+            //console.log(e);
             return e.json();
         })
         .then((e) => {
-            console.log(e);
+            //console.log(e);
             callback(e);
         })
         .catch((e) => {
-            console.log(e);
+            //console.log(e);
             Dialog.alert({
                 content: "Error Internet connection.",
             });

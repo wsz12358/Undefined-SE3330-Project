@@ -51,8 +51,10 @@ class Stats extends React.Component {
                            eventList={eventListDemo}/>
             )
         else if (category === "stats")
-            return (<Stats_StatsList/>)
-        else
+            return (
+                <Stats_StatsList/>
+            )
+        else if (category === "event")
             return (
                 <Stats_eventList eventList={this.state.eventList}
                                  goAddr={this.goAddr}/>

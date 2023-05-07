@@ -19,3 +19,8 @@ export const getMsgs = (data, callback, errback) => {
     const url = "http://localhost:8080/message/get";
     postRequest(url, data, callback, errback);
 }
+
+export const saveCurMsg = (data, callback, errback) => {
+    const url = "http://localhost:8080/curevent/save";
+    postRequest(url, data, callback, errback);
+}

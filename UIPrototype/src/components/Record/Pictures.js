@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react";
-import { ActionSheet } from "antd-mobile";
-import { PicturesOutline } from "antd-mobile-icons";
+import React, {useRef, useState} from "react";
+import {ActionSheet} from "antd-mobile";
+import {PicturesOutline} from "antd-mobile-icons";
 import Dropzone from "react-dropzone";
 import request from "superagent";
 
@@ -13,15 +13,15 @@ const Pictures = (props) => {
     const fileInputRef = useRef();
 
     const actions = [
-        { text: "从相册中上传", key: "upload" },
-        { text: "摄像头拍摄", key: "camera" },
+        {text: "从相册中上传", key: "upload"},
+        {text: "摄像头拍摄", key: "camera"},
     ];
 
     const onImageDrop = (files) => {
         handleImageUpload(files[0]);
     };
 
-    const handleImageUpload = (file) => {
+    const handleImageUpload = (file, collect) => {
         let upload = request
             .post(CLOUDINARY_UPLOAD_URL)
             .field("upload_preset", CLOUDINARY_UPLOAD_PRESET)
@@ -34,45 +34,42 @@ const Pictures = (props) => {
 
             if (response.body.secure_url !== "") {
                 setUploadedFileCloudinaryUrl(response.body.secure_url);
-                props.addMsg(response.body.secure_url, true, "img");
+                props.addMsg(response.body.secure_url, "img", collect);
                 console.log("Image URL:", response.body.secure_url); // Log the image URL
             }
         });
     };
 
     const handleFileInputChange = (e) => {
+        props.setUploading(true);  // start uploading, must not be interrupted
+        props.addMsg("", "pend");  // add a fake message for loading
         const file = e.target.files[0];
-        handleImageUpload(file);
+        handleImageUpload(file, props.collect);  // and then upload
     };
 
     return (
         <>
-            <div
-                className="record_gadgets bordered"
-                style={{ paddingTop: 15 }}
-                onClick={() => setVisible(true)}
-            >
-                <PicturesOutline fontSize={40} />
+            <div className="record_gadgets bordered"
+                 style={{paddingTop: 15}}
+                 onClick={() => setVisible(true)}>
+                <PicturesOutline fontSize={40}/>
                 <span>图片</span>
             </div>
-            <input
-                type="file"
-                ref={fileInputRef}
-                style={{ display: "none" }}
-                accept="image/*"
-                onChange={handleFileInputChange}
+            <input type="file"
+                   ref={fileInputRef}
+                   style={{display: "none"}}
+                   accept="image/*"
+                   onChange={handleFileInputChange}
             />
-            <ActionSheet
-                visible={visible}
-                actions={actions}
-                onClose={() => setVisible(false)}
-                onAction={(action) => {
-                    if (action.key === "upload") {
-                        setVisible(false);
-                        fileInputRef.current.click();
-                    }
-                }}
-            />
+            <ActionSheet visible={visible}
+                         actions={actions}
+                         onClose={() => setVisible(false)}
+                         onAction={(action) => {
+                             if (action.key === "upload") {
+                                 setVisible(false);
+                                 fileInputRef.current.click();
+                             }
+                         }}/>
         </>
     );
 };
