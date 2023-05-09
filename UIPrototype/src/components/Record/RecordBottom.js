@@ -42,7 +42,6 @@ const RecordBottom = forwardRef((props, ref) => {
             </div>
             <RecordUtils flag={props.state.isStart === 1}
                          addMsg={props.addMsg}
-                         setCamera={props.setCamera}
                          setUploading={props.setUploading}
                          collect={props.state.messages.length}
                          ini_time={props.ini_time}/>

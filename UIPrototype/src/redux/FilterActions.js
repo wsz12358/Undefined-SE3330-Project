@@ -3,6 +3,7 @@ import {
     SET_TIME_STATUS, SET_TIME_FROM, SET_TIME_TO,
     SET_TAG_TEXT, SET_TOCAL_VIS, SET_FROMCAL_VIS,
     SET_USERID, SET_USERNAME, SET_IS_LOGIN,
+    SET_CUR_DURATION
 } from "./Constants";
 
 export const setFilterOpen = e => {
@@ -85,6 +86,13 @@ export const setUsername = e => {
 export const setIsLogin = e => {
     return {
         type: SET_IS_LOGIN,
+        data: e,
+    }
+}
+
+export const setCurDuration = e => {
+    return {
+        type: SET_CUR_DURATION,
         data: e,
     }
 }

@@ -1,15 +1,13 @@
 import React, {useRef, useState} from "react";
 import {ActionSheet} from "antd-mobile";
 import {PicturesOutline} from "antd-mobile-icons";
-import Dropzone from "react-dropzone";
-import request from "superagent";
+import HandleImageUpload from "../../utils/HandleImageUpload";
+import Camera from "./Camera";
 
-const CLOUDINARY_UPLOAD_PRESET = "m2gc5zz5";
-const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/dqqesuzb8/upload";
 
 const Pictures = (props) => {
-    const [uploadedFileCloudinaryUrl, setUploadedFileCloudinaryUrl] = useState("");
     const [visible, setVisible] = useState(false);
+    const [isCamera, setIsCamera] = useState(false);
     const fileInputRef = useRef();
 
     const actions = [
@@ -17,34 +15,11 @@ const Pictures = (props) => {
         {text: "摄像头拍摄", key: "camera"},
     ];
 
-    const onImageDrop = (files) => {
-        handleImageUpload(files[0]);
-    };
-
-    const handleImageUpload = (file, collect) => {
-        let upload = request
-            .post(CLOUDINARY_UPLOAD_URL)
-            .field("upload_preset", CLOUDINARY_UPLOAD_PRESET)
-            .field("file", file);
-
-        upload.end((err, response) => {
-            if (err) {
-                console.error(err);
-            }
-
-            if (response.body.secure_url !== "") {
-                setUploadedFileCloudinaryUrl(response.body.secure_url);
-                props.addMsg(response.body.secure_url, "img", collect);
-                console.log("Image URL:", response.body.secure_url); // Log the image URL
-            }
-        });
-    };
-
     const handleFileInputChange = (e) => {
         props.setUploading(true);  // start uploading, must not be interrupted
         props.addMsg("", "pend");  // add a fake message for loading
         const file = e.target.files[0];
-        handleImageUpload(file, props.collect);  // and then upload
+        HandleImageUpload(file, props.collect, props.addMsg);  // and then upload
     };
 
     return (
@@ -68,8 +43,25 @@ const Pictures = (props) => {
                              if (action.key === "upload") {
                                  setVisible(false);
                                  fileInputRef.current.click();
+                             } else if (action.key === "camera") {
+                                 setVisible(false);
+                                 setIsCamera(true);
                              }
                          }}/>
+
+            {/*Camera component*/}
+            {isCamera &&
+                <div style={{
+                    width: '100%',
+                    zIndex: 5, position: 'absolute',
+                    backgroundColor: 'white'
+                }}>
+                    <Camera setUploading={props.setUploading}
+                            addMsg={props.addMsg}
+                            collect={props.collect}
+                            setIsCamera={setIsCamera.bind(this)}
+                    />
+                </div>}
         </>
     );
 };

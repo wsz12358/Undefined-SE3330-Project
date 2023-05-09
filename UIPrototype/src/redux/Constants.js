@@ -10,3 +10,4 @@ export const SET_TOCAL_VIS = 'set_tocal_vis';
 export const SET_USERNAME = 'set_username';
 export const SET_USERID = 'set_userid';
 export const SET_IS_LOGIN = 'set_is_login';
+export const SET_CUR_DURATION = 'set_cur_duration';

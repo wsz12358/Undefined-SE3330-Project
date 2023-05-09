@@ -6,7 +6,7 @@ import {Dialog} from "antd-mobile";
 import moment from "moment/moment";
 import {saveCurMsg} from "../../service/loginService";
 import store from "../../redux/Store";
-import {setCategory} from "../../redux/FilterActions";
+import {setCategory, setCurDuration} from "../../redux/FilterActions";
 import RecordBottom from "../../components/Record/RecordBottom";
 
 class Record extends React.Component {
@@ -14,12 +14,7 @@ class Record extends React.Component {
         messages: [],
         isStart: 0, //0 new, 1 start, 2 end
         isExtd: false,
-        isCamera: false,
         inUploading: 0
-    }
-
-    setCamera = (e) => {
-        this.setState({isCamera: e});
     }
 
     setUploading = (e) => {
@@ -87,10 +82,11 @@ class Record extends React.Component {
                     {key: 'confirm', text: '确认', bold: true, danger: true,},
                 ]],
                 onAction: (e) => {
-                    if (e.key === 'confirm')
+                    if (e.key === 'confirm') {
                         // TODO: 保存至curevent表，本地记录未完成的事件
                         this.setState({isStart: this.state.isStart + 1});
                         this.props.history.goBack();
+                    }
                 }
             })
         } else if (this.state.isStart === 2)
@@ -150,26 +146,26 @@ class Record extends React.Component {
             }
         }
         Dialog.show({
-                style: {
-                    textAlign: 'center'
-                },
-                content: '保存记录并退出？',
-                closeOnAction: true,
-                actions: [[
-                    {key: 'cancel', text: '继续编辑'},
-                    {key: 'confirm', text: '确认', bold: true, danger: true},
-                ]],
-                onAction: (e) => {
-                    if (e.key === 'confirm') {
-                        // set duration time in local storage to 0
-                        localStorage.setItem("cur_duration", JSON.stringify(0));
+            style: {
+                textAlign: 'center'
+            },
+            content: '保存记录并退出？',
+            closeOnAction: true,
+            actions: [[
+                {key: 'cancel', text: '继续编辑'},
+                {key: 'confirm', text: '确认', bold: true, danger: true},
+            ]],
+            onAction: (e) => {
+                if (e.key === 'confirm') {
+                    // set duration time in local storage to 0
+                    store.dispatch(setCurDuration(0));
 
-                        callback();  // TODO: had better build a new table. This is hard.
-                        // Current event of various users should not be stored in local storage.
-                        // A table: tags, begintime, userid and messages as well.
-                    }
+                    callback();  // TODO: had better build a new table. This is hard.
+                    // Current event of various users should not be stored in local storage.
+                    // A table: tags, begintime, userid and messages as well.
                 }
-            })
+            }
+        })
     }
 
     render() {
@@ -193,10 +189,7 @@ class Record extends React.Component {
                     </div>
                 </div>
 
-                {/*Camera component*/}
-                {/*<div style={{width: 200, height: 500, zIndex: 500, position: 'absolute'}}>*/}
-                {/*    {this.state.isCamera && <Camera/>}*/}
-                {/*</div>*/}
+
 
                 <div id="record_b">
                     <RecordBottom ref={e => this.bottom = e}
@@ -205,8 +198,7 @@ class Record extends React.Component {
                                   setUploading={this.setUploading.bind(this)}
                                   addMsg={this.addMsg.bind(this)}
                                   onClickExtd={this.onClickExtd.bind(this)}
-                                  setCamera={this.setCamera.bind(this)}
-                                  ini_time={JSON.parse(localStorage.getItem("cur_duration"))}/>
+                                  ini_time={store.getState().event.cur_duration}/>
                 </div>
             </div>
         );

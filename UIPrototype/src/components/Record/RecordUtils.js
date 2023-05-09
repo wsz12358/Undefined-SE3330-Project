@@ -15,7 +15,6 @@ export default function RecordUtils(props) {
             </div>
             <PChecklist/>
             <Pictures addMsg={props.addMsg}
-                      setCamera={props.setCamera}
                       setUploading={props.setUploading}
                       collect={props.collect}
             />
