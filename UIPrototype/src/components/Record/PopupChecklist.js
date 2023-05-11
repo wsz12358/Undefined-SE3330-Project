@@ -5,9 +5,9 @@ import "../../css/Record.css"
 
 const items = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 
-export default function PChecklist() {
+export default function PChecklist(props) {
     const [visible, setVisible] = useState(false)
-    const [selected, setSelected] = useState([])
+    const {select, setSelect} = props;
 
     return (
         <div id="popupChecklist">
@@ -35,16 +35,16 @@ export default function PChecklist() {
                         textAlign: 'center', font: '400 15px/1.5 "Microsoft YaHei UI"',
                         padding: '5px 0', backgroundColor: '#5ce077'
                     }}>
-                        {selected.map((e) => {
+                        {select.map((e) => {
                             return (
                                 <span>{e} &nbsp;</span>
                             )
                         })}
-                        {!selected.length && "无"}
+                        {!select.length && "无"}
                     </div>
-                    <CheckList defaultValue={selected}
+                    <CheckList defaultValue={select}
                                onChange={val => {
-                                   setSelected(val)
+                                   setSelect(val)
                                }}
                                multiple>
                         {items.map(item => (

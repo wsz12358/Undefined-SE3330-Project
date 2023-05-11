@@ -9,11 +9,14 @@ export default function RecordUtils(props) {
     return (
         <div id="record_utils">
             <div className="record_gadgets">
-                <Stopwatch flag={props.flag} ini_time={props.ini_time}/>
+                <Stopwatch flag={props.flag}
+                           time={props.dur_time}
+                           setDurTime={props.setDurTime}/>
                 <ClockCircleOutline fontSize={40}/>
                 <span>时长</span>
             </div>
-            <PChecklist/>
+            <PChecklist select={props.select}
+                        setSelect={props.setSelect}/>
             <Pictures addMsg={props.addMsg}
                       setUploading={props.setUploading}
                       collect={props.collect}

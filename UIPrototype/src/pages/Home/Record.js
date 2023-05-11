@@ -4,17 +4,29 @@ import HeaderBar from "../../components/HeaderBar";
 import ChatMessage from "../../components/Record/ChatMessage";
 import {Dialog} from "antd-mobile";
 import moment from "moment/moment";
-import {saveCurMsg} from "../../service/loginService";
+import {pauseEvent, saveCurMsg} from "../../service/loginService";
 import store from "../../redux/Store";
-import {setCategory, setCurDuration} from "../../redux/FilterActions";
+import {setCategory} from "../../redux/FilterActions";
 import RecordBottom from "../../components/Record/RecordBottom";
+import SaveEvent from "../../utils/SaveEvent";
 
 class Record extends React.Component {
     state = {
         messages: [],
         isStart: 0, //0 new, 1 start, 2 end
         isExtd: false,
-        inUploading: 0
+        inUploading: 0,
+        beginTime: "",
+        durTime: 0,
+        select: [],
+    }
+
+    setSelect = (e) => {
+        this.setState({select: [...e]});
+    }
+
+    setDurTime = () => {
+        this.setState({durTime: this.state.durTime + 1});
     }
 
     setUploading = (e) => {
@@ -51,9 +63,28 @@ class Record extends React.Component {
         if (msgType === "pend") {  // pend need not be saved in the database, and need not change inUploading as well
             this.setState({messages: [...tmp]});
         } else {
-            saveCurMsg({timestamp: formattedTime, datatype: msgType, message: e}, callback);
+            saveCurMsg({
+                timestamp: formattedTime,
+                datatype: msgType,
+                message: e,
+                user: store.getState().user.userid.toString(),
+            }, callback);
         }
     };
+
+    saveCur = () => {
+        let durT = this.state.durTime;
+        console.log(durT);
+
+        pauseEvent({
+            begintime: this.state.beginTime,
+            duration: durT.toString(),
+            tags: this.state.select.join("/"),
+            user: store.getState().user.userid.toString(),
+        }, () => {
+            this.props.history.goBack();
+        });
+    }
 
     onClickBack = () => {
         if (this.state.inUploading) {
@@ -79,13 +110,14 @@ class Record extends React.Component {
                 closeOnAction: true,
                 actions: [[
                     {key: 'cancel', text: '取消'},
-                    {key: 'confirm', text: '确认', bold: true, danger: true,},
+                    {key: 'confirm', text: '确认', bold: true, danger: true},
                 ]],
                 onAction: (e) => {
                     if (e.key === 'confirm') {
-                        // TODO: 保存至curevent表，本地记录未完成的事件
-                        this.setState({isStart: this.state.isStart + 1});
-                        this.props.history.goBack();
+                        // save to tempevent table, which includes:
+                        // begintime, duration, tags and userid.
+                        this.setState({isStart: this.state.isStart + 1}, this.saveCur);
+                        // this.props.history.goBack();
                     }
                 }
             })
@@ -101,8 +133,12 @@ class Record extends React.Component {
             this.bottom.classList.remove("bottom_down");
             this.header.classList.add("white2green");
             this.setUploading(true);
+
+            const beginT = new Date().getTime();
+            this.setState({beginTime: moment(beginT).format('YYYY/MM/DD/HH/mm/ss')});
+
             this.addMsg("开始记录。现在是" +
-                moment(new Date().getTime()).format('HH:mm:ss').toString() +
+                moment(beginT).format('HH:mm:ss') +
                 "，专心致志才能有所收获哦！", "system");
         } else if (this.state.isStart === 1) {
             if (!this.state.isExtd) {
@@ -158,9 +194,9 @@ class Record extends React.Component {
             onAction: (e) => {
                 if (e.key === 'confirm') {
                     // set duration time in local storage to 0
-                    store.dispatch(setCurDuration(0));
-
-                    callback();  // TODO: had better build a new table. This is hard.
+                    // store.dispatch(setCurDuration(0));
+                    SaveEvent(this.state, callback);
+                    // TODO: had better build a new table. This is hard.
                     // Current event of various users should not be stored in local storage.
                     // A table: tags, begintime, userid and messages as well.
                 }
@@ -189,16 +225,15 @@ class Record extends React.Component {
                     </div>
                 </div>
 
-
-
                 <div id="record_b">
                     <RecordBottom ref={e => this.bottom = e}
-                                  onClickBtn={this.onClickBtn.bind(this)}
                                   state={this.state}
+                                  onClickBtn={this.onClickBtn.bind(this)}
                                   setUploading={this.setUploading.bind(this)}
                                   addMsg={this.addMsg.bind(this)}
                                   onClickExtd={this.onClickExtd.bind(this)}
-                                  ini_time={store.getState().event.cur_duration}/>
+                                  setDurTime={this.setDurTime.bind(this)}
+                                  setSelect={this.setSelect.bind(this)}/>
                 </div>
             </div>
         );

@@ -26,7 +26,8 @@ const initialState = {
         r_avatar: "",
     },
     event: {
-        cur_duration: 0,
+        cur_duration: 0,  // not used.
+        // not sure whether to add more here.
     }
 }
 

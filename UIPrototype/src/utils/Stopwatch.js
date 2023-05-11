@@ -3,23 +3,20 @@ import store from "../redux/Store";
 import {setCurDuration} from "../redux/FilterActions";
 
 const Stopwatch = (props) => {
-    const [time, setTime] = useState(props.ini_time);
+    const {flag, time, setDurTime} = props;
     useEffect(() => {
         let interval;
-        if (props.flag) {
+        if (flag) {
             interval = setInterval(() => {
-                setTime((prevTime) => prevTime + 1);
+                setDurTime();
             }, 1000);
-        } else if (!props.flag) {
-            store.dispatch(setCurDuration(time)) // save the duration time in the local storage
-            clearInterval(interval);
         }
         return () => clearInterval(interval);
-    }, [props.flag]);
+    }, [flag]);
 
     return (
         <div>
-            {Math.floor(time/60)}:{time-Math.floor(time/60)*60}
+            {Math.floor(time / 60)}:{time - Math.floor(time / 60) * 60}
         </div>
     )
 }

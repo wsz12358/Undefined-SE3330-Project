@@ -53,7 +53,7 @@ const Pictures = (props) => {
             {isCamera &&
                 <div style={{
                     width: '100%',
-                    zIndex: 5, position: 'absolute',
+                    position: 'absolute',
                     backgroundColor: 'white'
                 }}>
                     <Camera setUploading={props.setUploading}

@@ -44,7 +44,10 @@ const RecordBottom = forwardRef((props, ref) => {
                          addMsg={props.addMsg}
                          setUploading={props.setUploading}
                          collect={props.state.messages.length}
-                         ini_time={props.ini_time}/>
+                         dur_time={props.state.dur_time}
+                         setDurTime={props.setDurTime}
+                         select={props.state.select}
+                         setSelect={props.setSelect}/>
         </div>
     )
 });
