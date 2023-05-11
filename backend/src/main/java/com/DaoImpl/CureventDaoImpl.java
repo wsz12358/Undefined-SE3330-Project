@@ -15,9 +15,9 @@ public class CureventDaoImpl implements CureventDao {
     CureventRepository cureventRepository;
 
     @Override
-    public List<Curevent> GetAll()
+    public List<Curevent> GetUserEvent(Integer user)
     {
-        return cureventRepository.findAll();
+        return cureventRepository.findCureventsByCureventId(user);
     }
     @Override
     public void AddCurevent(Curevent curevent)

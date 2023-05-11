@@ -17,9 +17,9 @@ public class CureventServiceImpl implements CureventService {
     CureventDao cureventDao;
 
     @Override
-    public List<Curevent> GetAll()
+    public List<Curevent> GetUserEvent(Integer user)
     {
-        return cureventDao.GetAll();
+        return cureventDao.GetUserEvent(user);
     }
 
     @Override

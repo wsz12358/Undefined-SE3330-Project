@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @Entity
@@ -20,7 +21,7 @@ public class Event {
     String tags;
     String begintime;
     String finishtime;
-    String duration;
+    Integer duration;
     Double mul;
     Double lat;
 
@@ -71,11 +72,11 @@ public class Event {
         this.finishtime = finishtime;
     }
 
-    public String getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(Integer duration) {
         this.duration = duration;
     }
 

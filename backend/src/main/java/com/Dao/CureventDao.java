@@ -9,5 +9,5 @@ public interface CureventDao {
     void AddCurevent(Curevent curevent);
     void DeleteAll();
 
-    List<Curevent> GetAll();
+    List<Curevent> GetUserEvent(Integer user);
 }
