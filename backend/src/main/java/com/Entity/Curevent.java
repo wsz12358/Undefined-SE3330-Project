@@ -23,6 +23,10 @@ public class Curevent {
 
     String message;
 
+    @ManyToOne
+    @JoinColumn(name = "user")
+    User user;
+
 
     public void setCureventId(Integer CureventId)
     {
@@ -62,5 +66,13 @@ public class Curevent {
     public String getMessage()
     {
         return message;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
     }
 }

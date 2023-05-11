@@ -4,6 +4,7 @@ import com.Constant.EventConstant;
 import com.Constant.MessageConstant;
 import com.Entity.Curevent;
 import com.Service.CureventService;
+import com.Service.LoginService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -21,10 +22,14 @@ public class CureventController {
     @Autowired
     CureventService cureventService;
 
+    @Autowired
+    LoginService loginService;
+
     @RequestMapping("/get")
-    public JSONArray GetCurEvent()
+    public JSONArray GetCurEvent(@RequestBody Map<String, String> params)
     {
-        return JSONArray.parseArray(JSON.toJSONString(cureventService.GetAll()));
+        String user = params.get(EventConstant.USER);
+        return JSONArray.parseArray(JSON.toJSONString(cureventService.GetUserEvent(Integer.valueOf(user))));
     }
 
     @RequestMapping("/save")
@@ -33,11 +38,13 @@ public class CureventController {
         String timestamp = params.get(MessageConstant.TIMESTAMP);
         String datatype = params.get(MessageConstant.DATATYPE);
         String message = params.get(MessageConstant.MESSAGE);
+        String user = params.get(MessageConstant.USER);
 
         Curevent curevent = new Curevent();
         curevent.setTimestamp(timestamp);
         curevent.setDatatype(datatype);
         curevent.setMessage(message);
+        curevent.setUser(loginService.getUser(Integer.valueOf(user)));
 
         cureventService.AddCurevent(curevent);
         return (JSONObject) JSON.toJSON(curevent);

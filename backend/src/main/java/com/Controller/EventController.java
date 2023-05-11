@@ -5,6 +5,7 @@ import com.Constant.MessageConstant;
 import com.Entity.Curevent;
 import com.Entity.Event;
 import com.Entity.Message;
+import com.Entity.Tempevent;
 import com.Service.CureventService;
 import com.Service.EventService;
 import com.Service.LoginService;
@@ -52,14 +53,14 @@ public class EventController {
         event.setTags(tags);
         event.setBegintime(begintime);
         event.setFinishtime(finishtime);
-        event.setDuration(duration);
+        event.setDuration(Integer.valueOf(duration));
         event.setLat(Double.valueOf(lat));
         event.setMul(Double.valueOf(mul));
 
         event.setUser(loginService.getUser(Integer.valueOf(user)));
         eventService.AddEvent(event);
 
-        List<Curevent> curs = cureventService.GetAll();
+        List<Curevent> curs = cureventService.GetUserEvent(Integer.valueOf(user));
 
         for (Curevent cur: curs)
         {
@@ -92,5 +93,30 @@ public class EventController {
         String eventid =  params.get(EventConstant.EVENTID);
         Event mes = eventService.GetEvent(Integer.valueOf(eventid));
         return (JSONObject) JSON.toJSON(mes);
+    }
+
+    @RequestMapping("/pause")
+    public JSONObject PauseEvent(@RequestBody Map<String, String> params)
+    {
+        String begintime = params.get(EventConstant.BEGINTIME);
+        String duration = params.get(EventConstant.DURATION);
+        String tag = params.get(EventConstant.TAGS);
+        String user = params.get(EventConstant.USER);
+
+        Tempevent tempevent = new Tempevent();
+        tempevent.setBegintime(begintime);
+        tempevent.setDuration(Integer.valueOf(duration));
+        tempevent.setTag(tag);
+        tempevent.setUser(loginService.getUser(Integer.valueOf(user)));
+
+        eventService.PauseEvent(tempevent);
+        return (JSONObject) JSON.toJSON(tempevent);
+    }
+
+    @RequestMapping("/continue")
+    public JSONObject ContinueEvent(@RequestBody Map<String, String> params)
+    {
+        String user = params.get(EventConstant.USER);
+        return (JSONObject) JSON.toJSON(eventService.ContinueEvent(Integer.valueOf(user)));
     }
 }

@@ -76,3 +76,27 @@
     "messageid": "1",</br>
     "message": "test123"</br>
 }</br>
+
+2023.5.11 acoustic更新：</br>
+1. 修改curevent数据库 现在每个curevent的条目和一个用户关联 存的时候需要userid</br>
+    格式如下</br>
+   {</br>
+   "timestamp": "1234/5/6",</br>
+   "datatype": "msg",</br>
+   "message": "test content"</br>
+   "user": "1"</br>
+   }</br>
+2. 新增tempevent数据库 存放临时暂停的事件 通过调用/event/pause进行存储，通过调用/event/continue进行拿出tempevent并删除相应元素的操作
+每个账号只能存一个临时事件存多了会报错</br>
+    /event/pause的body格式如下</br>
+   {</br>
+   "begintime": "1234/5/6",</br>
+   "duration": "123",</br>
+   "tag": "test/test2"</br>
+   "user": "1"</br>
+   }</br>
+    /event/continue的body格式如下</br>
+   {</br>
+   "user": "1"</br>
+   }</br>
+3. duration改为使用Int存在数据库里 前端仍使用原来的方式传入参数 不需要改动

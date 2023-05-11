@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CureventService {
 
-    List<Curevent> GetAll();
+    List<Curevent> GetUserEvent(Integer user);
 
     void AddCurevent(Curevent curevent);
 
