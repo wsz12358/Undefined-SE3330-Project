@@ -92,7 +92,7 @@
    {</br>
    "begintime": "1234/5/6",</br>
    "duration": "123",</br>
-   "tag": "test/test2"</br>
+   "tags": "test/test2"</br>
    "user": "1"</br>
    }</br>
     /event/continue的body格式如下</br>
