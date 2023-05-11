@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @RequestMapping("/event")
 @RestController
@@ -64,17 +65,19 @@ public class EventController {
 
         for (Curevent cur: curs)
         {
-            Message message = new Message();
-            message.setTimestamp(cur.getTimestamp());
-            message.setDatatype(cur.getDatatype());
-            message.setMessage(cur.getMessage());
-            message.setEvent(event);
-            messageService.AddMessage(message);
+            if (!Objects.equals(cur.getDatatype(), "system")) {
+                Message message = new Message();
+                message.setTimestamp(cur.getTimestamp());
+                message.setDatatype(cur.getDatatype());
+                message.setMessage(cur.getMessage());
+                message.setEvent(event);
+                messageService.AddMessage(message);
 //            event.setMessages(message);
+            }
         }
 
         eventService.AddEvent(event);
-//        cureventService.DeleteAll();
+        cureventService.DeleteCurevent(Integer.valueOf(user));
 
         return (JSONObject) JSON.toJSON(event);
     }

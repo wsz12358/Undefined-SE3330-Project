@@ -13,9 +13,9 @@ import java.util.List;
 public interface CureventRepository extends JpaRepository<Curevent, Integer> {
 
     @Modifying
-    @Query(value = "delete from Curevent where CureventId >= 0")
-    void deleteAllByCureventId();
+    @Query(value = "delete from Curevent where user.userId = :user ")
+    void deleteCureventsByUser(@Param("user") Integer user);
 
     @Query(value = "from Curevent where user.userId = :user")
-    List<Curevent> findCureventsByCureventId(@Param("user") Integer user);
+    List<Curevent> findCureventsByUser(@Param("user") Integer user);
 }
