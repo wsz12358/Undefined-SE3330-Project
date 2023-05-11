@@ -29,8 +29,8 @@ public class CureventServiceImpl implements CureventService {
     }
 
     @Override
-    public void DeleteAll()
+    public void DeleteCurevent(Integer user)
     {
-        cureventDao.DeleteAll();
+        cureventDao.DeleteCurevent(user);
     }
 }

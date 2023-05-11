@@ -10,5 +10,5 @@ public interface CureventService {
 
     void AddCurevent(Curevent curevent);
 
-    void DeleteAll();
+    void DeleteCurevent(Integer user);
 }
