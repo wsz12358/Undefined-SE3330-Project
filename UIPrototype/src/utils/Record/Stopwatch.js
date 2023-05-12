@@ -1,6 +1,4 @@
-import {useEffect, useState} from "react";
-import store from "../redux/Store";
-import {setCurDuration} from "../redux/FilterActions";
+import {useEffect} from "react";
 
 const Stopwatch = (props) => {
     const {flag, time, setDurTime} = props;

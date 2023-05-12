@@ -34,3 +34,13 @@ export const addEvent = (data, callback, errback) => {
     const url = "http://localhost:8080/event/add";
     postRequest(url, data, callback, errback);
 }
+
+export const continueEvent = (data, callback, errback) => {
+    const url = "http://localhost:8080/event/continue";
+    postRequest(url, data, callback, errback);
+}
+
+export const getCurEvent = (data, callback, errback) => {
+    const url = "http://localhost:8080/curevent/get";
+    postRequest(url, data, callback, errback);
+}

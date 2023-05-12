@@ -7,11 +7,16 @@ import {Image, SpinLoading} from "antd-mobile";
 
 const ChatMessage = (props) => {
     const {msg} = props;
-    const {message, msgType, timestamp} = msg; // Destructure the 'msg' object
-    const myType = (msgType !== "system");
+    const {message, datatype, timestamp} = msg; // Destructure the 'msg' object
+    const myType = (datatype !== "system");
     const t_avatar = myType ? avatar : r_avatar;
+    let formattedTime;
 
-    const formattedTime = moment(timestamp).format('HH:mm:ss');
+    if (typeof timestamp === 'string') {
+        const arr = timestamp.split('/');
+        formattedTime = arr[3]+':'+arr[4]+':'+arr[5];
+    } else formattedTime = moment(timestamp).format('HH:mm:ss');
+
     return (
         <div id="message_field">
             <div className="time_tag" style={{textAlign: 'center'}}>{formattedTime}</div>
@@ -28,11 +33,11 @@ const ChatMessage = (props) => {
                          color: myType ? 'white' : 'black',
                          marginLeft: myType ? '0' : '52px', marginRight: myType ? '52px' : '0'
                      }}>
-                    {(msgType === "msg" || msgType === "system") &&
+                    {(datatype === "msg" || datatype === "system") &&
                         <>{message}</>}
-                    {msgType === "img" &&
+                    {datatype === "img" &&
                         <Image src={message} style={{maxWidth: 200}}/>}
-                    {msgType === "pend" &&
+                    {datatype === "pend" &&
                         <SpinLoading/>}
                 </div>
             </div>

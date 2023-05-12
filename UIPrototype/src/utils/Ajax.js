@@ -1,6 +1,6 @@
 import {Dialog} from "antd-mobile";
 
-export const postRequest = (url, json, callback, errback) => {
+export const postRequest = (url, json, callback, errback=()=>{}) => {
     const opts = {
         method: "POST",
         body: JSON.stringify(json),
@@ -21,9 +21,9 @@ export const postRequest = (url, json, callback, errback) => {
         })
         .catch((e) => {
             //console.log(e);
-            Dialog.alert({
-                content: "Error Internet connection.",
-            });
+            // Dialog.alert({
+            //     content: "Error Internet connection.",
+            // });
             errback();
         })
 }
