@@ -16,7 +16,7 @@ import {
 import eventListDemo from "../../utils/EventListDemo";
 import {ListItem} from "antd-mobile/es/components/list/list-item";
 import {GridItem} from "antd-mobile/es/components/grid/grid";
-import {getEvents, getMsgs} from "../../service/loginService";
+import {getMsgs} from "../../service/loginService";
 import store from "../../redux/Store";
 import {call} from "moment";
 import {withRouter} from "react-router-dom";
@@ -75,23 +75,17 @@ class Details extends React.Component {
 
     refreshThoughts = () => {
         const callback = (e) => {
-            /*console.log(e)*/
-            this.setState(() => {
-                e.messages.map((v)=>{
-                    this.state.allThoughts.push(v)
-                })
-            });
-            console.log(this.state.allThoughts)
+            this.setState({allThoughts: [...e]});
         }
         const u = store.getState().user.userid.toString();
         const v = this.eventId.toString();
 
-        getMsgs({user: u, eventid: v}, callback,
+        getMsgs({user: u, event: v}, callback,
             () => {
             })
     }
 
-    renderThoughts = (value, idx) => {console.log("render:", value)
+    renderThoughts = (value, idx) => {
         return (
             <SwipeAction key={idx} rightActions={this.state.onEdit ? [{
                 key: 'delete',

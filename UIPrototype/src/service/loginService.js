@@ -16,7 +16,7 @@ export const getEvents = (data, callback, errback) => {
 }
 
 export const getMsgs = (data, callback, errback) => {
-    const url = "http://localhost:8080/event/getbyid";
+    const url = "http://localhost:8080/message/get";
     postRequest(url, data, callback, errback);
 }
 
