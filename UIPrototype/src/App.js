@@ -1,5 +1,5 @@
-import React from 'react';
-import './App.css';
+import React, {useEffect, useRef, useState} from 'react';
+import './css/App.css';
 import BottomBar from "./components/BottomBar";
 import Home from "./pages/Home/Home";
 import Stats from "./pages/Stats/Stats";
@@ -14,11 +14,24 @@ import {CSSTransition, TransitionGroup} from "react-transition-group";
 function App() {
     const location = useLocation();
     const action = useHistory().action;
+    const appBottom = useRef(null);
     const anim_actions = {
         PUSH: 'forward',
         POP: 'back',
         REPLACE: 'back'
     }
+
+    const [bottomEnable, setBottomEnable] = useState(true);
+
+    useEffect(() => {
+        if (appBottom === null) return;
+
+        if (!bottomEnable) {
+            appBottom.current.classList.add("appBottom_disable");
+        } else {
+            appBottom.current.classList.remove("appBottom_disable");
+        }
+    }, [bottomEnable])
 
     return (
         <div className="app">
@@ -28,7 +41,12 @@ function App() {
                                      e, {classNames: anim_actions[action]}
                                  )}>
                     <CSSTransition timeout={300} key={location.pathname}
-                                   mountOnEnter unmountOnExit>
+                                   mountOnEnter unmountOnExit
+                                   // onEnter={() => setBottomEnable(false)}
+                                   // onEnter={() => {}}
+                                   // onEntered={() => {}}
+                                   // onEntered={() => setBottomEnable(true)}
+                        >
                         <Switch location={location}>
                             <Route exact path='/home/record' component={Record}/>
 
@@ -50,7 +68,8 @@ function App() {
             {!(location.pathname === '/stats/details') &&
                 !(location.pathname === '/home/record') &&
                 !(location.pathname === '/mine/friends') &&
-                <div className="app_bottom">
+                <div className="app_bottom"
+                     ref={appBottom}>
                     <BottomBar/>
                 </div>}
         </div>

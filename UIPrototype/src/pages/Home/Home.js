@@ -1,5 +1,5 @@
 import React from 'react'
-import './Home.css'
+import '../../css/Home.css'
 import {Button} from 'antd-mobile'
 import {AddOutline, UndoOutline} from "antd-mobile-icons";
 import Timer from "../../utils/Timer";

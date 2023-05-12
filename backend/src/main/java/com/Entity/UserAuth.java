@@ -5,10 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 /**
  * @ClassName UserAuth
@@ -24,6 +21,7 @@ import javax.persistence.Transient;
 public class UserAuth {
 
     @Id
+    @Column(name = "userId")
     private Integer userId;
     private String username;
 

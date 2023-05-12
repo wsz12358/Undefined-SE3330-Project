@@ -1,6 +1,17 @@
 const eventListDemo = [
-    {key: '1', date: 'Dec.12', lat: 121.44329, mul: 31.03201},
-    {key: '2', date: 'Dec.11', lat: 121.44429, mul: 31.03201},
+    {
+        event_id: 1,
+        begintime: "",
+        // java.Date().toString()
+        finishtime: "",
+        duration: 121,
+        lat: 121.44529,
+        mul: 31.03201,
+        user_id: 1,
+    },
+    {
+        key: '2', date: 'Dec.11', lat: 121.44429, mul: 31.03201
+    },
     {key: '3', date: 'Dec.6', lat: 121.44529, mul: 31.03201},
     {key: '4', date: 'Dec.1', lat: 121.44629, mul: 31.03201},
     {key: '5', date: 'Nov.20', lat: 121.44329, mul: 31.03301},

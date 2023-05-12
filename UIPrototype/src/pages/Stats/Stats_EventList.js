@@ -1,5 +1,5 @@
 import React from 'react'
-import './Stats.css'
+import '../../css/Stats.css'
 import SingleEvent from "../../components/SingleEvent";
 
 const Stats_eventList = (props) => {

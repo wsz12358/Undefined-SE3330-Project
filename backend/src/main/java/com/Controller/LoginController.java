@@ -1,4 +1,5 @@
 package com.Controller;
+import com.Entity.User;
 import com.Service.LoginService;
 import com.Constant.LoginConstant;
 import com.Entity.UserAuth;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Map;
 
+@RequestMapping("/log")
 @RestController
 public class LoginController {
 
@@ -21,12 +23,13 @@ public class LoginController {
     //acoustic:
     //登陆服务 使用fetch通过body发送请求 post类型为"POST"
     @RequestMapping("/login")
-    public boolean login(@RequestBody Map<String, String> params)
+    public User login(@RequestBody Map<String, String> params)
     {
         String username = params.get(LoginConstant.USERNAME);
         String password = params.get(LoginConstant.PASSWORD);
-        UserAuth auth = loginService.checkUser(username, password);
-        return auth != null;
+        User user = loginService.checkUser(username, password);
+        return user;
     }
+
 
 }

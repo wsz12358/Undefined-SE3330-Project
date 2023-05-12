@@ -40,8 +40,8 @@ class Filter extends React.Component {
                     </Tabs>
                     <div style={{marginTop: 10}}>
                         <FilterHeader filterGrow={this.onFilterGrow.bind(this, false)}/>
-                        <FilterTags/>
-                        <FilterTimes/>
+                        <FilterTags onChange={this.props.onChange}/>
+                        <FilterTimes onChange={this.props.onChange}/>
                     </div>
                 </div>
             </div>

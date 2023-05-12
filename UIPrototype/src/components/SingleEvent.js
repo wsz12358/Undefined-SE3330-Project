@@ -1,5 +1,5 @@
 import React from "react";
-import "./UniStyle.css"
+import "../css/UniStyle.css"
 import {ClockCircleOutline, RightOutline} from "antd-mobile-icons";
 import {useHistory} from "react-router-dom";
 
@@ -18,7 +18,7 @@ export default function SingleEvent(props) {
                 <div className="sgEventIcon"/>
 
                 <div className="sgEventBox"
-                     onClick={() => onClickEvent(event.key)}>
+                     onClick={() => onClickEvent(event.eventid)}>
                     <div style={{
                         padding: '5px 0', font: '500 10px/1.5 "Microsoft YaHei UI"'
                     }}>

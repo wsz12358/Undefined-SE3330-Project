@@ -143,3 +143,17 @@
     z-index: 5;
     color: white;
 }
+
+/**************************************************************/
+/*                                                            */
+/*                      RecordUtils                           */
+/*                                                            */
+/**************************************************************/
+
+#record_utils {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 10px;
+    width: 100%;
+}

@@ -1,9 +1,10 @@
 import React from "react";
-import BMap from 'BMap'
-import Marker from "../../components/MapMarker";
+import BMap from 'BMap';
+import Marker from "../../components/Map/MapMarker";
 import {withRouter} from "react-router-dom";
-import "./Stats.css"
+import "../../css/Stats.css"
 import store from "../../redux/Store";
+import eventListDemo from "../../utils/EventListDemo";
 
 class Stats_Map extends React.Component {
     constructor(props) {
@@ -32,7 +33,7 @@ class Stats_Map extends React.Component {
                 position: 'relative'
             }}>
                 <div className="markerInfoBox" ref={this.markerI}>
-                    <Marker event={this.props.eventList[this.state.showIdx]}
+                    <Marker event={eventListDemo[this.state.showIdx]}
                             setVis={() => this.setMarkerVis(false)}/>
                 </div>
                 <div id="address" style={{height: 'calc(100% - 76px)', width: '100%', overflow: 'hidden'}}/>
@@ -72,7 +73,8 @@ class Stats_Map extends React.Component {
             enableHighAccuracy: true,
         });
 
-        this.props.eventList.map((e, idx) => {
+        // TODO: need to be changed into independent data int the future
+        eventListDemo.map((e, idx) => {
             const point = new window.BMap.Point(e.lat, e.mul);
             const marker = new window.BMap.Marker(point);
             this.map.addOverlay(marker);

@@ -1,6 +1,6 @@
 import {NavBar} from 'antd-mobile'
 import React from 'react'
-import './UniStyle.css'
+import '../css/UniStyle.css'
 
 export default function HeaderBar(props) {
     const {title, backFunc, right} = props;
