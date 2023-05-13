@@ -37,7 +37,6 @@ class Details extends React.Component {
 
     eventId = this.props.location.state.id;
     backAddr = "/stats"
-    focusEvent = eventListDemo[this.eventId - 1]
     selectTags = []
 
     btnShare = (
@@ -81,7 +80,7 @@ class Details extends React.Component {
                     this.state.allThoughts.push(v)
                 })
             });
-            console.log(this.state.allThoughts)
+            // console.log(this.state.allThoughts)
         }
         const u = store.getState().user.userid.toString();
         const v = this.eventId.toString();
@@ -165,10 +164,10 @@ class Details extends React.Component {
 
             <div className="detail_eventField">
                 <div className="deTitle">
-                    This is event {this.focusEvent.key}.
+                    This is event .
                 </div>
                 <div className='deTime'>
-                    {this.focusEvent.date} 2023
+                     2023
                 </div>
 
                 <Collapse defaultActiveKey={['1']} className="myCollapse">

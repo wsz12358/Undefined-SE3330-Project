@@ -4,7 +4,6 @@ import Marker from "../../components/Map/MapMarker";
 import {withRouter} from "react-router-dom";
 import "../../css/Stats.css"
 import store from "../../redux/Store";
-import eventListDemo from "../../utils/EventListDemo";
 
 class Stats_Map extends React.Component {
     constructor(props) {
@@ -33,8 +32,7 @@ class Stats_Map extends React.Component {
                 position: 'relative'
             }}>
                 <div className="markerInfoBox" ref={this.markerI}>
-                    <Marker event={eventListDemo[this.state.showIdx]}
-                            setVis={() => this.setMarkerVis(false)}/>
+                    <Marker event={this.props.eventList[this.state.showIdx]}/>
                 </div>
                 <div id="address" style={{height: 'calc(100% - 76px)', width: '100%', overflow: 'hidden'}}/>
             </div>
@@ -59,7 +57,7 @@ class Stats_Map extends React.Component {
                 // 初始化五角星symbol
                 icon: new window.BMap.Symbol(window.BMap_Symbol_SHAPE_STAR, {
                     scale: 1,
-                    fillColor: "#1f1e33",
+                    fillColor: "#4037d0",
                     fillOpacity: 0.8,
                 })
             });
@@ -74,8 +72,8 @@ class Stats_Map extends React.Component {
         });
 
         // TODO: need to be changed into independent data int the future
-        eventListDemo.map((e, idx) => {
-            const point = new window.BMap.Point(e.lat, e.mul);
+        this.props.eventList.map((e, idx) => {
+            const point = new window.BMap.Point(e.mul, e.lat);
             const marker = new window.BMap.Marker(point);
             this.map.addOverlay(marker);
 

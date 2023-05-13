@@ -14,7 +14,8 @@ import eventListDemo from "../../utils/EventListDemo";
 
 class Stats extends React.Component {
     state = {
-        eventList: []
+        eventList: [],
+        isLoaded: false,
     }
 
     backAddr = '/home'
@@ -35,11 +36,13 @@ class Stats extends React.Component {
 
     refreshEventList = () => {
         const callback = (e) => {
-            this.setState({eventList: [...e]});
+            this.setState({eventList: [...e]},
+                () => {
+                    this.setState({isLoaded: true})
+                });
         }
-        getEvents({user: store.getState().user.userid}, callback,
-            () => {
-            });
+
+        getEvents({user: store.getState().user.userid.toString()}, callback);
     }
 
     capRender = () => {
@@ -48,7 +51,7 @@ class Stats extends React.Component {
         if (category === "map")
             return (
                 <Stats_Map onClickRoute={OnClickRoute.bind(this, '/home', "pop")}
-                           eventList={eventListDemo}/>
+                           eventList={this.state.eventList}/>
             )
         else if (category === "stats")
             return (
@@ -67,22 +70,26 @@ class Stats extends React.Component {
 
         return (
             <div id="stats_body">
-                <div id="stats_absoluteField">
-                    <HeaderBar backFunc={OnClickRoute.bind(this, this.backAddr, "replace")}
-                               title='回顾'/>
+                {!this.state.isLoaded && <div>Loading</div>}
+                {this.state.isLoaded &&
+                    <>
+                        <div id="stats_absoluteField">
+                            <HeaderBar backFunc={OnClickRoute.bind(this, this.backAddr, "replace")}
+                                       title='回顾'/>
 
-                    <div id="stats_filterField" className="alpha_bg"
-                         style={{width: '100%', padding: '10px 0'}}>
-                        <Filter onChange={this.refreshEventList.bind(this)}/>
-                    </div>
-                </div>
+                            <div id="stats_filterField" className="alpha_bg"
+                                 style={{width: '100%', padding: '10px 0'}}>
+                                <Filter onChange={this.refreshEventList.bind(this)}/>
+                            </div>
+                        </div>
 
-                {category === "event" && <GotoTop object="stats_capRenderField"/>}
+                        {category === "event" && <GotoTop object="stats_capRenderField"/>}
 
-                <div id="stats_capRenderField" className="alpha_bg"
-                     ref={this.capRenderField}>
-                    {this.capRender()}
-                </div>
+                        <div id="stats_capRenderField" className="alpha_bg"
+                             ref={this.capRenderField}>
+                            {this.capRender()}
+                        </div>
+                    </>}
             </div>
         );
         //TODO: your code here
