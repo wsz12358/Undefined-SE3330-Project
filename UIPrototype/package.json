@@ -20,11 +20,13 @@
     "react-animated-router": "^1.2.4",
     "react-bmapgl": "^0.2.17",
     "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
     "react-router-dom": "^5.3.4",
     "react-scripts": "5.0.1",
     "react-transition-group": "^2.3.0",
     "redux": "^4.2.1",
     "save-dev": "^0.0.1-security",
+    "superagent": "^8.0.9",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
