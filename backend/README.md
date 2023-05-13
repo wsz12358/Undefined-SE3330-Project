@@ -101,3 +101,22 @@
    }</br>
 3. duration改为使用Int存在数据库里 前端仍使用原来的方式传入参数 不需要改动
 4. 目前system的消息不会被传进最终event里，之后可以修改
+
+5.13 acoustic更新
+1. 增加language数据库，通过/sentence/get获得所有某个机器人的所有语料，请求格式如下：
+{
+    "robot_id": "1"（机器人的id）
+}
+2. /sentence/getone获得机器人对应某个tag的随机一句话（随机功能好像有点问题，但返回一条是没问题的）
+格式如下
+{
+    "robot_id": "1",（机器人的的id）
+    "tag": "study"
+}
+3. /sentence/update可以更新机器人说的话
+格式如下
+
+{
+    "id": "1",(sentence的id)
+    "sentence": "study"
+}

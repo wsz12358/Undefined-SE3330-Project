@@ -31,7 +31,7 @@ CREATE TABLE `curevent` (
   PRIMARY KEY (`curevent_id`),
   KEY `curevent_user_user_id_fk` (`user`),
   CONSTRAINT `curevent_user_user_id_fk` FOREIGN KEY (`user`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `curevent` (
 
 LOCK TABLES `curevent` WRITE;
 /*!40000 ALTER TABLE `curevent` DISABLE KEYS */;
-INSERT INTO `curevent` VALUES (5,'1','2','3',1),(6,'4','5','6',2);
+INSERT INTO `curevent` VALUES (6,'4','5','6',2);
 /*!40000 ALTER TABLE `curevent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -64,7 +64,7 @@ CREATE TABLE `events` (
   PRIMARY KEY (`event_id`),
   KEY `event_user` (`user`),
   CONSTRAINT `event_user` FOREIGN KEY (`user`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +73,7 @@ CREATE TABLE `events` (
 
 LOCK TABLES `events` WRITE;
 /*!40000 ALTER TABLE `events` DISABLE KEYS */;
-INSERT INTO `events` VALUES (1,'test','test/study','2023/4/10/23/13/55','2023/4/10/23/14/55',1,50.00,50.00,1),(2,'firstevent','love/death/robot','2023/4/10/23/13/55','2023/4/11/23/13/55',1,55.00,55.00,2),(3,'secondevent','study','2023/4/10/23/13/55','2023/4/11/23/13/55',2,60.00,60.00,3),(4,'empty','tags','begintime','finishtime',2,65.00,65.00,5),(5,'empty','tags','begintime','finishtime',2,70.00,70.00,7),(6,'empty','tags','begintime','finishtime',2,75.00,75.00,9),(10,NULL,NULL,NULL,NULL,1,234.20,123.10,7),(13,NULL,NULL,NULL,NULL,1,234.20,123.10,6);
+INSERT INTO `events` VALUES (1,'test','test/study','2023/4/10/23/13/55','2023/4/10/23/14/55',1,50.00,50.00,1),(2,'firstevent','love/death/robot','2023/4/10/23/13/55','2023/4/11/23/13/55',1,55.00,55.00,2),(3,'secondevent','study','2023/4/10/23/13/55','2023/4/11/23/13/55',2,60.00,60.00,3),(4,'empty','tags','begintime','finishtime',2,65.00,65.00,5),(5,'empty','tags','begintime','finishtime',2,70.00,70.00,7),(6,'empty','tags','begintime','finishtime',2,75.00,75.00,9),(14,NULL,NULL,NULL,NULL,1,345.60,123.40,3),(15,'group7','E','2023/05/11/21/37/57','2023/05/11/21/39/10',1,121.48,31.24,68);
 /*!40000 ALTER TABLE `events` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -115,7 +115,7 @@ CREATE TABLE `messages` (
   PRIMARY KEY (`message_id`),
   KEY `event_` (`event`),
   CONSTRAINT `event_` FOREIGN KEY (`event`) REFERENCES `events` (`event_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,7 +124,7 @@ CREATE TABLE `messages` (
 
 LOCK TABLES `messages` WRITE;
 /*!40000 ALTER TABLE `messages` DISABLE KEYS */;
-INSERT INTO `messages` VALUES ('2023/4/10/14/58/55','msg','test1234567',1,1),('2023/4/11/9/33/52','msg','the first message',2,1),('2023/4/11/9/33/52','msg','the first message',3,1),('2023/4/11/10/18/20','msg','my message',4,1),('2023/2/29/','msg','pizza and more',5,NULL),('2023/2/29/','msg','不许喝百事',6,NULL),('123','test','test',12,10),('456','test2','pepsi tastes bad',13,10),('1','2','3',16,13),('4','5','6',17,13);
+INSERT INTO `messages` VALUES ('2023/4/10/14/58/55','msg','test1234567',1,1),('2023/4/11/9/33/52','msg','the first message',2,1),('2023/4/11/9/33/52','msg','the first message',3,1),('2023/4/11/10/18/20','msg','my message',4,1),('2023/2/29/','msg','pizza and more',5,NULL),('2023/2/29/','msg','不许喝百事',6,NULL),('1','msg','123',18,14),('2023/05/11/21/38/07','msg','123',19,15),('2023/05/11/21/38/21','img','https://res.cloudinary.com/dqqesuzb8/image/upload/v1683812302/a1hlnzhehundqsqqqd1g.png',20,15),('2023/05/11/21/38/35','img','https://res.cloudinary.com/dqqesuzb8/image/upload/v1683812315/tr2kg3cggzlxj8niveo1.jpg',21,15);
 /*!40000 ALTER TABLE `messages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,7 +141,7 @@ CREATE TABLE `sentence_` (
   `sentence_id` int NOT NULL AUTO_INCREMENT,
   `tag` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`sentence_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,6 +150,7 @@ CREATE TABLE `sentence_` (
 
 LOCK TABLES `sentence_` WRITE;
 /*!40000 ALTER TABLE `sentence_` DISABLE KEYS */;
+INSERT INTO `sentence_` VALUES ('test',1,1,'study'),('运动开始，要开始留点汗了~',1,2,'exercise'),('已经学习两个小时了，加油噢~',1,3,'study'),('运动半小时了，注意休息哦~',1,4,'exercise');
 /*!40000 ALTER TABLE `sentence_` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -242,4 +243,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-11 17:56:13
+-- Dump completed on 2023-05-13 15:03:12
