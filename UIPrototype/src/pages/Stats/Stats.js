@@ -10,7 +10,7 @@ import store from "../../redux/Store";
 import {setFilterOpen} from "../../redux/FilterActions";
 import GotoTop from "../../components/GotoTop";
 import {getEvents} from "../../service/loginService";
-import eventListDemo from "../../utils/EventListDemo";
+import FilterEvents from "../../utils/Stats/FilterEvents";
 
 class Stats extends React.Component {
     state = {
@@ -25,18 +25,19 @@ class Stats extends React.Component {
         super(props);
         store.dispatch(setFilterOpen(true));
         this.capRenderField = React.createRef();
-        this.refreshEventList();
     }
 
     componentDidMount() {
         store.subscribe(() => {
             this.setState({})
         })
+        this.refreshEventList();
     }
 
     refreshEventList = () => {
         const callback = (e) => {
-            this.setState({eventList: [...e]},
+            const filtered = FilterEvents(e);
+            this.setState({eventList: [...filtered]},
                 () => {
                     this.setState({isLoaded: true})
                 });

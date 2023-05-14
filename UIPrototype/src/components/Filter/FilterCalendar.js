@@ -16,7 +16,6 @@ export default function FilterCalendar(props) {
                       max={!isFrom ? null : timeTo}
                       value={isFrom ? timeFrom : timeTo}
                       onChange={val => {
-                          console.log(val);
                           props.setFilterTime(props.type, val);
                           isFrom ? store.dispatch(setFromCalVis(!visible)) :
                               store.dispatch(setToCalVis(!visible))

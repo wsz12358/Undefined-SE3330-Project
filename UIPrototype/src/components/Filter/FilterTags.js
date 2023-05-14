@@ -4,8 +4,8 @@ import {Selector} from "antd-mobile";
 import store from "../../redux/Store";
 import {setTagStatus, setTagText} from "../../redux/FilterActions";
 
-const options = [{label: 'Label1', value: '1',}, {label: 'Label2', value: '2',}, {label: 'Label3', value: '3',},
-    {label: 'Label4', value: '4',}, {label: 'Label5', value: '5',}, {label: 'Label6', value: '6',},]
+const options = [{label: 'A', value: 'A',}, {label: 'B', value: 'B',}, {label: 'C', value: 'C',},
+    {label: 'D', value: 'D',}, {label: 'E', value: 'E',}, {label: 'F', value: 'F',},]
 
 class FilterTags extends React.Component {
     onTagReset = () => {
@@ -21,6 +21,7 @@ class FilterTags extends React.Component {
 
         store.dispatch(setTagText(temp));
         store.dispatch(setTagStatus(arr));
+        console.log(arr);
         this.props.onChange();
     }
 
