@@ -140,7 +140,7 @@ class Record extends React.Component {
                 moment(new Date().getTime()).format('HH:mm:ss').toString() +
                 "，将美好的事物记录下来，然后去放松一下吧。", "system");
         } else {
-            this.SaveQuitDialog(true, 1);
+            this.SaveQuitDialog(true);
         }
         this.setState({isStart: this.state.isStart + 1}); // scroll problem
     }

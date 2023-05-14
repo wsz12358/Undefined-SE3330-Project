@@ -32,7 +32,8 @@ class Stats_Map extends React.Component {
                 position: 'relative'
             }}>
                 <div className="markerInfoBox" ref={this.markerI}>
-                    <Marker event={this.props.eventList[this.state.showIdx]}/>
+                    {this.props.eventList.length &&
+                        <Marker event={this.props.eventList[this.state.showIdx]}/>}
                 </div>
                 <div id="address" style={{height: 'calc(100% - 76px)', width: '100%', overflow: 'hidden'}}/>
             </div>

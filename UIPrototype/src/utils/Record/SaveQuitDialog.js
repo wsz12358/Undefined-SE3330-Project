@@ -3,10 +3,11 @@ import SaveEvent from "./SaveEvent";
 import store from "../../redux/Store";
 import {setCategory} from "../../redux/FilterActions";
 
-export default function SaveQuitDialog (type, idx) {
-    const callback = () => {
+export default function SaveQuitDialog (type) {
+    const callback = (data) => {
+        console.log(data);
         if (type)
-            this.props.history.push('/stats/details', {id: idx});
+            this.props.history.push('/stats/details', {id: data.eventid});
         else {
             store.dispatch(setCategory("event"))
             this.props.history.goBack();
@@ -27,7 +28,7 @@ export default function SaveQuitDialog (type, idx) {
             if (e.key === 'confirm') {
                 // set duration time in local storage to 0
                 // store.dispatch(setCurDuration(0));
-                SaveEvent(this.state, callback);
+                SaveEvent(this.state, callback.bind(this));
                 // Current event of various users should not be stored in local storage.
                 // A table: tags, begintime, userid and messages as well.
             }
