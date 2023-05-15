@@ -1,9 +1,22 @@
-import React from 'react'
+import React, {createRef} from 'react'
 import HeaderBar from "../../components/HeaderBar";
 import OnClickRoute from "../../utils/OnClickRoute";
 import '../../css/Details.css'
 
-import {Collapse, Dialog, Grid, Image, List, SwipeAction, Button, Modal, Input, Form, Selector} from "antd-mobile";
+import {
+    Collapse,
+    Dialog,
+    Grid,
+    Image,
+    List,
+    SwipeAction,
+    Button,
+    Modal,
+    Input,
+    Form,
+    Selector,
+    ActionSheet
+} from "antd-mobile";
 import jntm from "../../assets/jntm.png"
 import {
     AddCircleOutline,
@@ -13,31 +26,38 @@ import {
     EyeOutline,
     UserOutline
 } from "antd-mobile-icons";
-import eventListDemo from "../../utils/EventListDemo";
 import {ListItem} from "antd-mobile/es/components/list/list-item";
 import {GridItem} from "antd-mobile/es/components/grid/grid";
-import {getEvents, getMsgs} from "../../service/loginService";
+import {getMsgs, saveCurMsg, saveMsg} from "../../service/loginService";
 import store from "../../redux/Store";
-import {call} from "moment";
 import {withRouter} from "react-router-dom";
-
-
+import moment from "moment/moment";
+import HandleImageUpload from "../../utils/Record/HandleImageUpload";
 class Details extends React.Component {
     state = {
         onEdit: false,
-        allThoughts: [],
-        allPictures: [jntm, jntm, jntm, jntm, jntm, jntm,],
+        visible: false,
+        isCamera: false,
+        inUploading: 0,
+        messages: [],
         allTags: ["吃饭", "睡觉", "篮球"]
     }
 
     constructor(props) {
         super(props);
-        this.refreshThoughts();
+        this.refresh();
     }
 
     eventId = this.props.location.state.id;
     backAddr = "/stats"
     selectTags = []
+    fileInputRef = createRef();
+    msgInputRef = createRef();
+
+    setUploading = (e) => {
+        if (e) this.setState({inUploading: this.state.inUploading + 1});
+        else this.setState({inUploading: this.state.inUploading - 1});
+    }
 
     btnShare = (
         <button className="btnShare" onClick={() => {
@@ -72,12 +92,58 @@ class Details extends React.Component {
         </button>
     );
 
-    refreshThoughts = () => {
+    addMsg = (e, datatype, collect = 0) => {console.log(`e: ${e}, dt: ${datatype}, coll: ${collect}`);
+        let tmp = [...this.state.messages];
+        let pend = null;  //used for pending image, popped from the array
+        const timestamp = new Date().getTime(); // Get the current time
+        const callback = () => {
+            this.setState({messages: [...tmp]}, () => this.setState({scrollSwitch: true}));
+            this.setUploading(false);
+        }
+
+        if (tmp.length && datatype === "img") {
+            pend = tmp[collect]; // remove the pending message
+        }
+
+        const newMsg = { // Update this.state
+            datatype: datatype,
+            message: e,
+            key: tmp.length + 1,
+            timestamp: pend === null ? timestamp : pend.timestamp,
+            // use the earlier timestamp when it comes to img
+        }
+
+        if (datatype !== "img") tmp.push(newMsg);
+        else tmp[collect] = newMsg;
+
+        const formattedTime = moment(timestamp).format("YYYY/MM/DD/HH/mm/ss");console.log(tmp)
+
+        if (datatype === "pend") {  // pend need not be saved in the database, and need not change inUploading as well
+            this.setState({messages: [...tmp]}, () => this.setState({scrollSwitch: true}));
+        } else {
+            console.log("save");
+            /*saveMsg({
+                timestamp: formattedTime,
+                datatype: datatype,
+                message: e,
+                user: store.getState().user.userid.toString(),
+            }, callback);*/
+        }
+    };
+
+    handleFileInputChange = (e) => {
+        this.setUploading(true);  // start uploading, must not be interrupted
+        this.addMsg("", "pend");  // add a fake message for loading
+        const file = e.target.files[0];
+        HandleImageUpload(file, this.state.messages.length, this.addMsg);  // and then upload
+    };
+
+    refresh = () => {
         const callback = (e) => {
             /*console.log(e)*/
             this.setState(() => {
                 e.messages.map((v)=>{
-                    this.state.allThoughts.push(v)
+                    this.state.messages.push(v)
                 })
             });
             // console.log(this.state.allThoughts)
@@ -90,7 +156,8 @@ class Details extends React.Component {
             })
     }
 
-    renderThoughts = (value, idx) => {console.log("render:", value)
+    renderThoughts = (value, idx) => {
+        if (value.datatype === "img") return ;
         return (
             <SwipeAction key={idx} rightActions={this.state.onEdit ? [{
                 key: 'delete',
@@ -101,7 +168,7 @@ class Details extends React.Component {
                         {
                             content: "确定要删除吗？",
                             onConfirm: () => {
-                                this.setState({allThoughts: this.state.allThoughts.splice(idx, 1)});
+                                this.setState({messages: this.state.messages.splice(idx, 1)});
                             }
                         }
                     );
@@ -114,22 +181,22 @@ class Details extends React.Component {
         )
     }
 
-    renderPictures = (pic, idx) => {
+    renderPictures = (pic, idx) => {if (pic.datatype === "msg") return;
         return <GridItem className='picture' key={idx}>
             {this.state.onEdit && <Button className={"btnDeletePic"} onClick={() => {
                 Dialog.confirm(
                     {
                         content: "确定要删除吗？",
                         onConfirm: () => {
-                            this.setState({allPictures: this.state.allPictures.splice(idx, 1)});
+                            this.setState({messages: this.state.messages.splice(idx, 1)});
                         }
                     }
                 );
             }
             }><CloseOutline/></Button>}
-            <Image src={pic} width={100} height={100} fit='fill' onClick={() => {
+            <Image src={pic.message} width={100} height={100} fit='fill' onClick={() => {
                 Modal.show({
-                    image: jntm,
+                    image: pic.message,
                     content: "jntm",
                     closeOnMaskClick: true,
                     actions: []
@@ -155,10 +222,14 @@ class Details extends React.Component {
         </GridItem>)
     }
 
+    OnClickBack = () => {
+        this.props.history.replace(this.backAddr);
+    }
+
     render() {
         return (<div className="detail_body">
             <div className="detail_absoluteField">
-                <HeaderBar backFunc={OnClickRoute.bind(this, this.backAddr, "replace")} title="详细"
+                <HeaderBar backFunc={this.OnClickBack} title="详细"
                            right={this.btnShare}/>
             </div>
 
@@ -174,16 +245,14 @@ class Details extends React.Component {
                     <Collapse.Panel key='感想' title='感想' className="myCollapsePanel">
                         {
                             <List>
-                                {this.state.allThoughts.map(this.renderThoughts)}
+                                {this.state.messages.map(this.renderThoughts)}
                                 {this.state.onEdit &&
                                     <Form name={"form"} layout={"horizontal"} onFinish={(v) => {
-                                        this.setState(() => {
-                                            this.state.allThoughts.push(v.inputValue);
-                                            return {}
-                                        })
+                                        this.addMsg(v.inputValue, "msg", this.state.messages.length);
+                                        this.msgInputRef.current.clear();
                                     }}>
                                         <Form.Item name={"inputValue"}>
-                                            <Input placeholder={"请输入内容"} clearable/>
+                                            <Input ref={this.msgInputRef} placeholder={"请输入内容"} clearable/>
                                         </Form.Item>
                                     </Form>}
                             </List>
@@ -193,14 +262,32 @@ class Details extends React.Component {
                         {
                             <div>
                                 <Grid columns={3}>
-                                    {this.state.allPictures.map(this.renderPictures)}
+                                    {this.state.messages.map(this.renderPictures)}
+                                    <input type="file"
+                                           ref={this.fileInputRef}
+                                           style={{display: "none"}}
+                                           accept="image/*"
+                                           onChange={this.handleFileInputChange}
+                                    />
                                     {this.state.onEdit && <div className='addPicture' onClick={() => {
-                                        this.setState(state => {
-                                            state.allPictures.push(jntm)
-                                            return {}
-                                        })
+                                        this.setState({visible: true})
                                     }
                                     }>
+                                        <ActionSheet visible={this.state.visible}
+                                                     actions={[
+                                                         {text: "从相册中上传", key: "upload"},
+                                                         {text: "摄像头拍摄", key: "camera"},
+                                                     ]}
+                                                     onClose={() => this.setState({visible: false})}
+                                                     onAction={(action) => {
+                                                         if (action.key === "upload") {
+                                                             this.setState({visible: false})
+                                                             this.fileInputRef.current.click();
+                                                         } else if (action.key === "camera") {
+                                                             this.setState({visible: false})
+                                                             this.setState({isCamera: true})
+                                                         }
+                                                     }}/>
                                         <AddCircleOutline className='addCircle'/>
                                     </div>}
                                 </Grid>
@@ -244,15 +331,6 @@ class Details extends React.Component {
                                                       multiple={true}
                                                       columns={3}
                                                       showCheckMark={false}
-                                                /*style={{
-                                                    '--border-radius': '100px',
-                                                    '--border': 'solid black 1px',
-                                                    '--checked-border': 'solid black 1px',
-                                                    '--padding': '8px 24px',
-                                                    '--checked-color': 'white',
-                                                    '--color': 'white',
-                                                    '--text-color': 'red'
-                                                }}*/
                                                       options={[
                                                           {label: '唱', value: 1},
                                                           {label: '跳', value: 2},
