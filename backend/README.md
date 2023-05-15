@@ -71,11 +71,7 @@
     }</br>
 此时后端会自动将curevent内的数据全部放进message数据库内并新增一个event,并清空curevent</br>
 3. 当前端请求拿到一个用户的所有event/通过eventid拿到一个event时，该event类中会包含有所有的message，一步到位</br>
-4. 前端需要修改message时，传参格式如下：</br>
-{</br>
-    "messageid": "1",</br>
-    "message": "test123"</br>
-}</br>
+
 
 2023.5.11 acoustic更新：</br>
 1. 修改curevent数据库 现在每个curevent的条目和一个用户关联 存的时候需要userid</br>
@@ -102,21 +98,39 @@
 3. duration改为使用Int存在数据库里 前端仍使用原来的方式传入参数 不需要改动
 4. 目前system的消息不会被传进最终event里，之后可以修改
 
-5.13 acoustic更新
-1. 增加language数据库，通过/sentence/get获得所有某个机器人的所有语料，请求格式如下：
-{
-    "robot_id": "1"（机器人的id）
-}
+5.13 acoustic更新</br>
+1. 增加language数据库，通过/sentence/get获得所有某个机器人的所有语料，请求格式如下：</br>
+{</br>
+    "robot_id": "1"（机器人的id）</br>
+}</br>
 2. /sentence/getone获得机器人对应某个tag的随机一句话（随机功能好像有点问题，但返回一条是没问题的）
-格式如下
-{
-    "robot_id": "1",（机器人的的id）
-    "tag": "study"
-}
+格式如下</br>
+{</br>
+    "robot_id": "1",（机器人的的id）</br>
+    "tag": "study"</br>
+}</br>
 3. /sentence/update可以更新机器人说的话
-格式如下
+格式如下</br>
+{</br>
+    "id": "1",(sentence的id)</br>
+    "sentence": "study"</br>
+}</br>
 
-{
-    "id": "1",(sentence的id)
-    "sentence": "study"
-}
+2023.5.15 acoustic 更新：</br>
+1. 可通过messageid删改数据 messageid在getevent的时候那个message的list里有
+2. /message/delete删除数据，格式如下</br>
+{</br>
+    "id" : "1"</br>
+}</br>
+3. /message/update修改数据，格式如下</br>
+   {</br>
+    "id" : "1",</br>
+    "message": "test"</br>
+   }</br>
+4. /message/add添加数据，格式如下</br>
+   {</br>
+   "timestamp": "test",</br>
+   "datatype": "img",</br>
+   "message": "12",</br>
+   "event": "1"</br>
+   }</br>
