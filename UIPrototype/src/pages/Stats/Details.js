@@ -16,7 +16,7 @@ import {
 import eventListDemo from "../../utils/EventListDemo";
 import {ListItem} from "antd-mobile/es/components/list/list-item";
 import {GridItem} from "antd-mobile/es/components/grid/grid";
-import {getMsgs} from "../../service/loginService";
+import {getEvents, getMsgs} from "../../service/loginService";
 import store from "../../redux/Store";
 import {call} from "moment";
 import {withRouter} from "react-router-dom";
@@ -37,7 +37,6 @@ class Details extends React.Component {
 
     eventId = this.props.location.state.id;
     backAddr = "/stats"
-    focusEvent = eventListDemo[this.eventId - 1]
     selectTags = []
 
     btnShare = (
@@ -75,17 +74,23 @@ class Details extends React.Component {
 
     refreshThoughts = () => {
         const callback = (e) => {
-            this.setState({allThoughts: [...e]});
+            /*console.log(e)*/
+            this.setState(() => {
+                e.messages.map((v)=>{
+                    this.state.allThoughts.push(v)
+                })
+            });
+            // console.log(this.state.allThoughts)
         }
         const u = store.getState().user.userid.toString();
         const v = this.eventId.toString();
 
-        getMsgs({user: u, event: v}, callback,
+        getMsgs({user: u, eventid: v}, callback,
             () => {
             })
     }
 
-    renderThoughts = (value, idx) => {
+    renderThoughts = (value, idx) => {console.log("render:", value)
         return (
             <SwipeAction key={idx} rightActions={this.state.onEdit ? [{
                 key: 'delete',
@@ -159,10 +164,10 @@ class Details extends React.Component {
 
             <div className="detail_eventField">
                 <div className="deTitle">
-                    This is event {this.focusEvent.key}.
+                    This is event .
                 </div>
                 <div className='deTime'>
-                    {this.focusEvent.date} 2023
+                     2023
                 </div>
 
                 <Collapse defaultActiveKey={['1']} className="myCollapse">

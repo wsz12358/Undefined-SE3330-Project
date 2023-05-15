@@ -12,7 +12,8 @@ import nullAvatar from "../../assets/null_avatar.png";
 class Home extends React.Component {
     state = {
         showsDate: true,
-        isLogin: store.getState().user.isLogin
+        isLogin: store.getState().user.isLogin,
+
     }
 
     goAddr = '/mine'

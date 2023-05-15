@@ -1,4 +1,4 @@
-import Stopwatch from "../../utils/Stopwatch";
+import Stopwatch from "../../utils/Record/Stopwatch";
 import {ClockCircleOutline, PicturesOutline, SmileOutline} from "antd-mobile-icons";
 import PChecklist from "./PopupChecklist";
 import React from "react";
@@ -10,7 +10,7 @@ export default function RecordUtils(props) {
         <div id="record_utils">
             <div className="record_gadgets">
                 <Stopwatch flag={props.flag}
-                           time={props.dur_time}
+                           time={props.durTime}
                            setDurTime={props.setDurTime}/>
                 <ClockCircleOutline fontSize={40}/>
                 <span>时长</span>
@@ -24,6 +24,7 @@ export default function RecordUtils(props) {
             <div className="record_gadgets bordered"
                  style={{paddingTop: 15}}
                  onClick={() => {
+                     props.setUploading(true);
                      props.addMsg("玩原神玩的。", "system");
                  }}>
                 <SmileOutline fontSize={40}/>

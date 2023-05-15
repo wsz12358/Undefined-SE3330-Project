@@ -1,5 +1,5 @@
-import {addEvent} from "../service/loginService";
-import store from "../redux/Store";
+import {addEvent} from "../../service/loginService";
+import store from "../../redux/Store";
 import moment from "moment"
 import BMap from 'BMap';
 

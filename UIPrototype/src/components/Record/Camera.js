@@ -1,6 +1,6 @@
 import React, {useRef} from "react";
 import {Button} from "antd-mobile";
-import HandleImageUpload from "../../utils/HandleImageUpload";
+import HandleImageUpload from "../../utils/Record/HandleImageUpload";
 
 export default function Camera(props) {
     const c_video = useRef(null);

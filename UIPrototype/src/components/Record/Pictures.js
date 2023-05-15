@@ -1,7 +1,7 @@
 import React, {useRef, useState} from "react";
 import {ActionSheet} from "antd-mobile";
 import {PicturesOutline} from "antd-mobile-icons";
-import HandleImageUpload from "../../utils/HandleImageUpload";
+import HandleImageUpload from "../../utils/Record/HandleImageUpload";
 import Camera from "./Camera";
 
 
