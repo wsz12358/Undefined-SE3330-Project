@@ -35,5 +35,8 @@ public class MessageServiceImpl implements MessageService {
         return messageDao.GetMessage(id);
     }
 
+    @Override
+    public void DeleteMessage(Integer id){messageDao.DeleteMessage(id);}
+
 
 }

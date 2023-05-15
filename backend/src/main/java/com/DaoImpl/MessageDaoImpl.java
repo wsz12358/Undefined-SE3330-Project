@@ -38,4 +38,10 @@ public class MessageDaoImpl implements MessageDao {
     {
         return messageRepository.findByMessageId(id);
     }
+
+    @Override
+    public void DeleteMessage(Integer id)
+    {
+        messageRepository.deleteMessageByMessageId(id);
+    }
 }
