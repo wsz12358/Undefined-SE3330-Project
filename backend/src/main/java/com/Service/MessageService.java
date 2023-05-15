@@ -13,4 +13,6 @@ public interface MessageService {
     public void UpdateMessage(String mes, Integer id);
 
     public Message GetMessage(Integer id);
+
+    public void DeleteMessage(Integer id);
 }

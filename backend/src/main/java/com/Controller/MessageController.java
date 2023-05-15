@@ -2,6 +2,7 @@ package com.Controller;
 
 import com.Constant.MessageConstant;
 import com.Entity.Message;
+import com.Service.EventService;
 import com.Service.MessageService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -22,18 +23,20 @@ public class MessageController {
 
     @Autowired
     MessageService messageService;
+
+    @Autowired
+    EventService eventService;
     @RequestMapping("/add")
     public JSONObject AddMessage(@RequestBody Map<String, String> params) {
         String timestamp = params.get(MessageConstant.TIMESTAMP);
         String datatype = params.get(MessageConstant.DATATYPE);
         String message = params.get(MessageConstant.MESSAGE);
-        String user = params.get(MessageConstant.USER);
         String event = params.get(MessageConstant.EVENT);
         Message mes = new Message();
         mes.setTimestamp(timestamp);
         mes.setDatatype(datatype);
         mes.setMessage(message);
-//        mes.setEvent(Integer.valueOf(event));
+        mes.setEvent(eventService.GetEvent(Integer.valueOf(event)));
         messageService.AddMessage(mes);
         return (JSONObject) JSON.toJSON(mes);
     }
@@ -54,5 +57,13 @@ public class MessageController {
         String mes = params.get(MessageConstant.MESSAGE);
         messageService.UpdateMessage(mes, Integer.valueOf(id));
         return (JSONObject) JSON.toJSON(messageService.GetMessage(Integer.valueOf(id)));
+    }
+
+    @RequestMapping("/delete")
+    public String DeleteMessage(@RequestBody Map<String, String> params)
+    {
+        String id = params.get(MessageConstant.MESSAGEID);
+        messageService.DeleteMessage(Integer.valueOf(id));
+        return "success";
     }
 }
