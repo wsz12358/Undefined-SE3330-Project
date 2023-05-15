@@ -1,5 +1,5 @@
 import Stopwatch from "../../utils/Record/Stopwatch";
-import {ClockCircleOutline, PicturesOutline, SmileOutline} from "antd-mobile-icons";
+import {ClockCircleOutline, PicturesOutline, CloseCircleOutline,HeartOutline} from "antd-mobile-icons";
 import PChecklist from "./PopupChecklist";
 import React from "react";
 import "../../css/UniStyle.css"
@@ -25,10 +25,18 @@ export default function RecordUtils(props) {
                  style={{paddingTop: 15}}
                  onClick={() => {
                      props.setUploading(true);
-                     props.addMsg("玩原神玩的。", "system");
+                     props.addMsg("博士，辛苦了！累了的话请休息一会儿吧。", "system");
                  }}>
-                <SmileOutline fontSize={40}/>
+                <HeartOutline fontSize={40}/>
                 <span>戳戳</span>
+            </div>
+            <div className="record_gadgets bordered"
+                 style={{paddingTop: 15}}
+                 onClick={() => {
+                     props.hideMessages();
+                 }}>
+                <CloseCircleOutline fontSize={40}/>
+                <span>纯净</span>
             </div>
         </div>
     )

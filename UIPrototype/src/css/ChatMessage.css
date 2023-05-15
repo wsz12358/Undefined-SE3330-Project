@@ -38,4 +38,7 @@
     margin-bottom: 12px;
     font: 400 20px/1.5 "Microsoft YaHei UI";
 }
-
+/*隐藏*/
+.hidden {
+    display: none;
+}

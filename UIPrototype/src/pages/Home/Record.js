@@ -28,7 +28,7 @@ class Record extends React.Component {
         beginTime: "",
         durTime: 0,
         select: [],
-
+        pureMode:false,
         isLoaded: false,
         needRefresh: false,
         scrollSwitch: false,
@@ -47,7 +47,32 @@ class Record extends React.Component {
         else this.setState({inUploading: this.state.inUploading - 1});
     }
 
+    hideMessages() {
+        if(this.state.pureMode){
+            let updatedMessages = [...this.state.messages]; // Create a copy of current state
+            updatedMessages = updatedMessages.map(msg =>
+                msg.datatype === "system" ? { ...msg, isVisible: true } : msg
+            );
+            this.setState({ messages: updatedMessages });
+            this.setState({ pureMode : false });
+        }
+        else
+        {
+            let updatedMessages = [...this.state.messages]; // Create a copy of current state
+            updatedMessages = updatedMessages.map(msg =>
+                msg.datatype === "system" ? { ...msg, isVisible: false } : msg
+            );
+            this.setState({ messages: updatedMessages });
+            console.log(updatedMessages.filter(msg => msg.isVisible === false));
+            this.setState({ pureMode : true });
+        }
+    }
+
+
     addMsg = (e, datatype, collect = 0) => {
+        if(this.state.pureMode && datatype === "system"){
+            return;
+        }
         let tmp = [...this.state.messages];
         let pend = null;  //used for pending image, popped from the array
         const timestamp = new Date().getTime(); // Get the current time
@@ -175,7 +200,7 @@ class Record extends React.Component {
                              style={{overflow: 'scroll', paddingTop: 24, marginBottom: msgFieldMBottom}}>
                             <div>
                                 {this.state.messages.map((msg, index) => (
-                                    <ChatMessage key={index} msg={msg}/>
+                                    msg.isVisible !== false && <ChatMessage key={index} msg={msg}/>  // Only render visible messages
                                 ))}
                             </div>
                         </div>
@@ -188,7 +213,9 @@ class Record extends React.Component {
                                           addMsg={this.addMsg.bind(this)}
                                           onClickExtd={this.onClickExtd.bind(this)}
                                           setDurTime={this.setDurTime.bind(this)}
+                                          hideMessages={this.hideMessages.bind(this)}
                                           setSelect={this.setSelect.bind(this)}/>
+
                         </div>
                     </>}
             </div>
