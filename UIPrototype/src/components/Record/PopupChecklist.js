@@ -3,7 +3,7 @@ import {CheckList, Popup} from 'antd-mobile'
 import {TagOutline} from "antd-mobile-icons";
 import "../../css/Record.css"
 
-const items = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+const items = ['学习', '工作', '运动', '社交', '休闲', '娱乐','其他']
 
 export default function PChecklist(props) {
     const [visible, setVisible] = useState(false)
