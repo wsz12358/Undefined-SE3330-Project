@@ -40,7 +40,7 @@ class Details extends React.Component {
         isCamera: false,
         inUploading: 0,
         messages: [],
-        allTags: ["吃饭", "睡觉", "篮球"]
+        allTags: []
     }
 
     constructor(props) {
@@ -146,6 +146,7 @@ class Details extends React.Component {
                     this.state.messages.push(v)
                 })
             });
+            this.setState({allTags: e.tags.split('/')});
             // console.log(this.state.allThoughts)
         }
         const u = store.getState().user.userid.toString();
