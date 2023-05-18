@@ -60,10 +60,18 @@ public class MessageController {
     }
 
     @RequestMapping("/delete")
-    public String DeleteMessage(@RequestBody Map<String, String> params)
+    public JSONObject DeleteMessage(@RequestBody Map<String, String> params)
     {
         String id = params.get(MessageConstant.MESSAGEID);
+        if (messageService.GetMessage(Integer.valueOf(id)) == null)
+        {
+            JSONObject obj = new JSONObject();
+            obj.put("message", "fail");
+            return obj;
+        }
         messageService.DeleteMessage(Integer.valueOf(id));
-        return "success";
+        JSONObject obj = new JSONObject();
+        obj.put("message", "success");
+        return obj;
     }
 }
