@@ -28,7 +28,7 @@ import {
 } from "antd-mobile-icons";
 import {ListItem} from "antd-mobile/es/components/list/list-item";
 import {GridItem} from "antd-mobile/es/components/grid/grid";
-import {getMsgs, saveCurMsg, saveMsg} from "../../service/loginService";
+import {addMsg, delMsg, getMsgs} from "../../service/loginService";
 import store from "../../redux/Store";
 import {withRouter} from "react-router-dom";
 import moment from "moment/moment";
@@ -96,9 +96,11 @@ class Details extends React.Component {
         let tmp = [...this.state.messages];
         let pend = null;  //used for pending image, popped from the array
         const timestamp = new Date().getTime(); // Get the current time
-        const callback = () => {
+        const callback = (e) => {console.log("addMsg callback:", e);
+            tmp.pop();
+            tmp.push(e);
             this.setState({messages: [...tmp]}, () => this.setState({scrollSwitch: true}));
-            this.setUploading(false);
+            if (e.datatype === "img") this.setUploading(false);
         }
 
         if (tmp.length && datatype === "img") {
@@ -116,20 +118,30 @@ class Details extends React.Component {
         if (datatype !== "img") tmp.push(newMsg);
         else tmp[collect] = newMsg;
 
-        const formattedTime = moment(timestamp).format("YYYY/MM/DD/HH/mm/ss");console.log(tmp)
+        const formattedTime = moment(timestamp).format("YYYY/MM/DD/HH/mm/ss");
 
         if (datatype === "pend") {  // pend need not be saved in the database, and need not change inUploading as well
             this.setState({messages: [...tmp]}, () => this.setState({scrollSwitch: true}));
         } else {
             console.log("save");
-            /*saveMsg({
+            addMsg({
                 timestamp: formattedTime,
                 datatype: datatype,
                 message: e,
-                user: store.getState().user.userid.toString(),
-            }, callback);*/
+                event: this.eventId
+            }, callback);
         }
     };
+
+    deleteMsg = (id, idx) => {
+        let tmp = [...this.state.messages];
+        const callback = (e) => {console.log(e);
+            tmp.splice(idx, 1);
+            this.setState({messages: [...tmp]}, ()=>{console.log("state:", this.state.messages)})
+        }
+        const e = id.toString();
+        delMsg({id: e}, callback, (e)=>{console.log("error: ", e)})
+    }
 
     handleFileInputChange = (e) => {
         this.setUploading(true);  // start uploading, must not be interrupted
@@ -140,25 +152,23 @@ class Details extends React.Component {
 
     refresh = () => {
         const callback = (e) => {
-            /*console.log(e)*/
-            this.setState(() => {
+            this.setState(/*() => {
                 e.messages.map((v)=>{
                     this.state.messages.push(v)
                 })
-            });
+            }*/{messages: [...e.messages]});
             this.setState({allTags: e.tags.split('/')});
-            // console.log(this.state.allThoughts)
         }
         const u = store.getState().user.userid.toString();
         const v = this.eventId.toString();
 
         getMsgs({user: u, eventid: v}, callback,
-            () => {
+            (e) => {console.log("get msg error:", e)
             })
     }
 
     renderThoughts = (value, idx) => {
-        if (value.datatype === "img") return ;
+        if (value.datatype === "img") return ;console.log(this.state.messages);
         return (
             <SwipeAction key={idx} rightActions={this.state.onEdit ? [{
                 key: 'delete',
@@ -169,7 +179,7 @@ class Details extends React.Component {
                         {
                             content: "确定要删除吗？",
                             onConfirm: () => {
-                                this.setState({messages: this.state.messages.splice(idx, 1)});
+                                this.deleteMsg(value.messageId, idx);
                             }
                         }
                     );
@@ -189,7 +199,7 @@ class Details extends React.Component {
                     {
                         content: "确定要删除吗？",
                         onConfirm: () => {
-                            this.setState({messages: this.state.messages.splice(idx, 1)});
+                            this.deleteMsg(pic.messageId, idx);
                         }
                     }
                 );
@@ -224,6 +234,29 @@ class Details extends React.Component {
     }
 
     OnClickBack = () => {
+        if (this.state.inUploading)
+        {
+            Dialog.show(
+                {
+                    closeOnMaskClick: true,
+                    closeOnAction: true,
+                    actions: [
+                        [
+                            {
+                                key: 'cancel',
+                                text: '取消'
+                            },
+                            {
+                                key: 'confirm',
+                                text: '确定',
+                            }
+                        ]
+                    ],
+                    content: <div>  sb,图片还没加载好</div>
+                }
+            )
+            return;
+        }
         this.props.history.replace(this.backAddr);
     }
 
@@ -236,7 +269,7 @@ class Details extends React.Component {
 
             <div className="detail_eventField">
                 <div className="deTitle">
-                    This is event .
+                    This is event {this.eventId}
                 </div>
                 <div className='deTime'>
                      2023
@@ -298,7 +331,7 @@ class Details extends React.Component {
                     <Collapse.Panel key='tag' title='tag' className="myCollapsePanel">
                         {
                             <Grid columns={5}>
-                                {this.state.allTags.map(this.renderTags)}
+                                {this.state.allTags[0] !== '' && this.state.allTags.map(this.renderTags)}
                                 {this.state.onEdit && <div className={"addTag"} onClick={() => {
                                     Dialog.show({
                                         closeOnMaskClick: true,
@@ -314,7 +347,6 @@ class Details extends React.Component {
                                                     text: '确定',
                                                     onClick: () => {
                                                         this.setState(() => {
-                                                            console.log(this.selectTags)
                                                             this.selectTags.map((value) => {
                                                                 if (!this.state.allTags.includes(value.label)) this.state.allTags.push(value.label)
                                                             })
