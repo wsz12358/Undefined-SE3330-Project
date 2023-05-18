@@ -58,8 +58,8 @@ CREATE TABLE `events` (
   `begintime` varchar(255) DEFAULT NULL,
   `finishtime` varchar(255) DEFAULT NULL,
   `user` int DEFAULT NULL,
-  `mul` decimal(10,2) DEFAULT NULL,
-  `lat` decimal(10,2) DEFAULT NULL,
+  `mul` decimal(10,5) DEFAULT NULL,
+  `lat` decimal(10,5) DEFAULT NULL,
   `duration` int DEFAULT NULL,
   PRIMARY KEY (`event_id`),
   KEY `event_user` (`user`),
@@ -73,7 +73,7 @@ CREATE TABLE `events` (
 
 LOCK TABLES `events` WRITE;
 /*!40000 ALTER TABLE `events` DISABLE KEYS */;
-INSERT INTO `events` VALUES (1,'test','test/study','2023/4/10/23/13/55','2023/4/10/23/14/55',1,50.00,50.00,1),(2,'firstevent','love/death/robot','2023/4/10/23/13/55','2023/4/11/23/13/55',1,55.00,55.00,2),(3,'secondevent','study','2023/4/10/23/13/55','2023/4/11/23/13/55',2,60.00,60.00,3),(4,'empty','tags','begintime','finishtime',2,65.00,65.00,5),(5,'empty','tags','begintime','finishtime',2,70.00,70.00,7),(6,'empty','tags','begintime','finishtime',2,75.00,75.00,9),(14,NULL,NULL,NULL,NULL,1,345.60,123.40,3),(15,'group7','E','2023/05/11/21/37/57','2023/05/11/21/39/10',1,121.48,31.24,68);
+INSERT INTO `events` VALUES (1,'test','test/study','2023/4/10/23/13/55','2023/4/10/23/14/55',1,50.00000,50.00000,1),(2,'firstevent','love/death/robot','2023/4/10/23/13/55','2023/4/11/23/13/55',1,55.00000,55.00000,2),(3,'secondevent','study','2023/4/10/23/13/55','2023/4/11/23/13/55',2,60.00000,60.00000,3),(4,'empty','tags','begintime','finishtime',2,65.00000,65.00000,5),(5,'empty','tags','begintime','finishtime',2,70.00000,70.00000,7),(6,'empty','tags','begintime','finishtime',2,75.00000,75.00000,9),(14,NULL,NULL,NULL,NULL,1,345.60000,123.40000,3),(15,'group7','E','2023/05/11/21/37/57','2023/05/11/21/39/10',1,121.48000,31.24000,68);
 /*!40000 ALTER TABLE `events` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -243,4 +243,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-13 15:03:12
+-- Dump completed on 2023-05-13 17:26:42
