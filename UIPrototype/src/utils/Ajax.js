@@ -24,6 +24,6 @@ export const postRequest = (url, json, callback, errback=()=>{}) => {
             // Dialog.alert({
             //     content: "Error Internet connection.",
             // });
-            errback();
+            errback(e);
         })
 }
