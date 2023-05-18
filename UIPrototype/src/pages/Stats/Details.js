@@ -99,7 +99,7 @@ class Details extends React.Component {
         const callback = (e) => {console.log("addMsg callback:", e);
             tmp.pop();
             tmp.push(e);
-            this.setState({messages: [...tmp]}, () => this.setState({scrollSwitch: true}));
+            this.setState({messages: [...tmp]});
             if (e.datatype === "img") this.setUploading(false);
         }
 

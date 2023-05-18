@@ -10,8 +10,7 @@ export default function RecordUtils(props) {
         <div id="record_utils">
             <div className="record_gadgets">
                 <Stopwatch flag={props.flag}
-                           time={props.durTime}
-                           setDurTime={props.setDurTime}/>
+                           time={props.durTime}/>
                 <ClockCircleOutline fontSize={40}/>
                 <span>时长</span>
             </div>

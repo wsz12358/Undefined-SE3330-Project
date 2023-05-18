@@ -10,6 +10,7 @@ import SaveCurDialog from "../../utils/Record/SaveCurDialog";
 import BlockQuitDialog from "../../utils/Record/BlockQuitDialog";
 import SaveQuitDialog from "../../utils/Record/SaveQuitDialog";
 import ContinueDialog from "../../utils/Record/ContinueDialog";
+import BgMask from "../../components/BgMask";
 
 class Record extends React.Component {
     constructor(props) {
@@ -24,8 +25,10 @@ class Record extends React.Component {
         messages: [],
         isStart: 0, //0 new, 1 start, 2 end
         isExtd: false,
-        inUploading: 0,
+        inUploading: 0,  // used for image uploading
+        isSubmitting: false,  // used for background mask (loading) of event saving
         beginTime: "",
+        startTime: null,
         durTime: 0,
         select: [],
 
@@ -36,10 +39,6 @@ class Record extends React.Component {
 
     setSelect = (e) => {
         this.setState({select: [...e]});
-    }
-
-    setDurTime = () => {
-        this.setState({durTime: this.state.durTime + 1});
     }
 
     setUploading = (e) => {
@@ -86,17 +85,24 @@ class Record extends React.Component {
     };
 
     saveCur = () => {
-        let durT = this.state.durTime;
+        let d1 = this.state.startTime;
+        let d2 = new Date().getTime();
+        let dt = Math.abs(d2 - d1);
+        let durT = this.state.durTime + Math.floor(dt / 1000);
+
         console.log(durT);
 
-        pauseEvent({
-            begintime: this.state.beginTime,
-            duration: durT.toString(),
-            tags: this.state.select.join("/"),
-            user: store.getState().user.userid.toString(),
-        }, () => {
-            this.props.history.goBack();
-        });
+        this.setState({isSubmitting: true},
+            () => pauseEvent({
+                    begintime: this.state.beginTime,
+                    duration: durT.toString(),
+                    tags: this.state.select.join("/"),
+                    user: store.getState().user.userid.toString(),
+                },
+                () => {
+                    this.setState({isSubmitting: false});
+                    this.props.history.goBack();
+                }));
     }
 
     onClickBack = () => {
@@ -112,7 +118,8 @@ class Record extends React.Component {
             this.props.history.goBack();
     }
 
-    onClickBtn = () => {
+    onClickBtn = (type) => {
+        // type is used for judging whether this is continuing an event or starting a new event
         if (!this.state.isStart) {
             this.bottom.classList.add("bottom_up");
             this.bottom.classList.remove("bottom_down");
@@ -120,11 +127,19 @@ class Record extends React.Component {
             this.setUploading(true);
 
             const beginT = new Date().getTime();
-            this.setState({beginTime: moment(beginT).format('YYYY/MM/DD/HH/mm/ss')});
+            this.setState({
+                startTime: beginT,
+                beginTime: moment(beginT).format('YYYY/MM/DD/HH/mm/ss')
+            });
 
-            this.addMsg("开始记录。现在是" +
-                moment(beginT).format('HH:mm:ss') +
-                "，专心致志才能有所收获哦！", "system");
+            if (type)
+                this.addMsg("开始记录。现在是" +
+                    moment(beginT).format('HH:mm:ss') +
+                    "，专心致志才能有所收获哦！", "system");
+            else
+                this.addMsg("继续记录。现在是" +
+                    moment(beginT).format('HH:mm:ss') +
+                    "，日复一日必有精进！", "system");
         } else if (this.state.isStart === 1) {
             if (!this.state.isExtd) {
                 this.bottom.classList.remove("bottom_up");
@@ -163,6 +178,9 @@ class Record extends React.Component {
 
         return (
             <div id="record_body">
+                {/*// mask used for loading*/}
+                <BgMask flag={this.state.isSubmitting} type={true}/>
+
                 {this.state.isLoaded &&
                     <>
                         <div id="record_absoluteField"
@@ -183,11 +201,10 @@ class Record extends React.Component {
                         <div id="record_b">
                             <RecordBottom ref={e => this.bottom = e}
                                           state={this.state}
-                                          onClickBtn={this.onClickBtn.bind(this)}
+                                          onClickBtn={this.onClickBtn.bind(this, true)}
                                           setUploading={this.setUploading.bind(this)}
                                           addMsg={this.addMsg.bind(this)}
                                           onClickExtd={this.onClickExtd.bind(this)}
-                                          setDurTime={this.setDurTime.bind(this)}
                                           setSelect={this.setSelect.bind(this)}/>
                         </div>
                     </>}
@@ -219,7 +236,7 @@ class Record extends React.Component {
         }
 
         if (this.state.needRefresh) {
-            this.onClickBtn();
+            this.onClickBtn(false);
             this.setState({needRefresh: false});
         }
     }

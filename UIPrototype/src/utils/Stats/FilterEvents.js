@@ -13,7 +13,6 @@ export default function FilterEvents (data) {
     } else data1 = [...data];
 
     if (filterTimeStatus) {
-        // TODO
         const filterTimeFrom = store.getState().filter.filterTimeFrom;
         const filterTimeTo = store.getState().filter.filterTimeTo;
 

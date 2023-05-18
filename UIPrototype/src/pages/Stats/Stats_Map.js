@@ -9,10 +9,12 @@ class Stats_Map extends React.Component {
     constructor(props) {
         super(props);
         this.markerI = React.createRef();
+        this.dealMarkers = deal_markers.bind(this);
     }
 
     state = {
-        showIdx: 0
+        showIdx: 0,
+        mapMarkers: [],
     }
 
     setMarkerVis = (e) => {
@@ -33,11 +35,17 @@ class Stats_Map extends React.Component {
             }}>
                 <div className="markerInfoBox" ref={this.markerI}>
                     {this.props.eventList.length &&
-                        <Marker event={this.props.eventList[this.state.showIdx]}/>}
+                        <Marker event={this.props.eventList[this.state.showIdx]}
+                                setVis={this.setMarkerVis.bind(this, false)}/>}
                 </div>
                 <div id="address" style={{height: 'calc(100% - 76px)', width: '100%', overflow: 'hidden'}}/>
             </div>
         )
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.eventList.toString() !== this.props.eventList.toString())
+            this.dealMarkers();
     }
 
     componentDidMount() {
@@ -72,19 +80,32 @@ class Stats_Map extends React.Component {
             enableHighAccuracy: true,
         });
 
-        // TODO: need to be changed into independent data int the future
-        this.props.eventList.map((e, idx) => {
-            const point = new window.BMap.Point(e.mul, e.lat);
-            const marker = new window.BMap.Marker(point);
-            this.map.addOverlay(marker);
-
-            marker.addEventListener("click", () => {
-                this.map.panTo(point);
-                this.setState({showIdx: idx});
-                this.setMarkerVis(true);
-            })
-        })
+        this.dealMarkers();
     }
+}
+
+function deal_markers () {
+    this.state.mapMarkers.map((marker) => {
+        this.map.removeOverlay(marker);
+    })
+
+    let temp = this.props.eventList.reduce((prev, curr, idx) => {
+        const point = new window.BMap.Point(curr.mul, curr.lat);
+        const marker = new window.BMap.Marker(point);
+        prev.push(marker);
+
+        this.map.addOverlay(marker);
+
+        marker.addEventListener("click", () => {
+            this.map.panTo(point);
+            this.setState({showIdx: idx});
+            this.setMarkerVis(true);
+        })
+
+        return prev;
+    }, []);
+
+    this.setState({mapMarkers: temp});
 }
 
 export default withRouter(Stats_Map);

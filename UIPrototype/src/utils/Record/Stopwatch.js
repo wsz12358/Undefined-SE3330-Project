@@ -1,12 +1,13 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 
 const Stopwatch = (props) => {
-    const {flag, time, setDurTime} = props;
+    const {flag, time} = props;
+    const [stTime, setStTime] = useState(time);
     useEffect(() => {
         let interval;
         if (flag) {
             interval = setInterval(() => {
-                setDurTime();
+                setStTime(stTime => stTime + 1);
             }, 1000);
         }
         return () => clearInterval(interval);
@@ -14,7 +15,7 @@ const Stopwatch = (props) => {
 
     return (
         <div>
-            {Math.floor(time / 60)}:{time - Math.floor(time / 60) * 60}
+            {Math.floor(stTime / 60)}:{stTime - Math.floor(stTime / 60) * 60}
         </div>
     )
 }

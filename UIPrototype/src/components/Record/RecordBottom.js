@@ -45,7 +45,6 @@ const RecordBottom = forwardRef((props, ref) => {
                          setUploading={props.setUploading}
                          collect={props.state.messages.length}
                          durTime={props.state.durTime}
-                         setDurTime={props.setDurTime}
                          select={props.state.select}
                          setSelect={props.setSelect}/>
         </div>
