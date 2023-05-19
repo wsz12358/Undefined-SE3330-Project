@@ -112,8 +112,10 @@ class Record extends React.Component {
         }
         if (this.state.isStart === 1)
             this.SaveCurDialog();   // Show a confirming dialog as well as the operations
-        else if (this.state.isStart === 2)
+        else if (this.state.isStart === 2) {
             this.SaveQuitDialog(false);  // Show a confirming dialog as well as the operations
+            this.setState({isStart: this.state.isStart + 1});
+        }
         else
             this.props.history.goBack();
     }

@@ -252,7 +252,7 @@ class Details extends React.Component {
                             }
                         ]
                     ],
-                    content: <div>  sb,图片还没加载好</div>
+                    content: <div>  Loading... </div>
                 }
             )
             return;
@@ -310,7 +310,7 @@ class Details extends React.Component {
                                         <ActionSheet visible={this.state.visible}
                                                      actions={[
                                                          {text: "从相册中上传", key: "upload"},
-                                                         {text: "摄像头拍摄", key: "camera"},
+                                                        // {text: "摄像头拍摄", key: "camera"},
                                                      ]}
                                                      onClose={() => this.setState({visible: false})}
                                                      onAction={(action) => {
