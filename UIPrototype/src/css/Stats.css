@@ -182,3 +182,11 @@
     0% {height: 0;}
     100% {height: 200px;}
 }
+
+.stats_statsArrow {
+    background-color: grey;
+    border-radius: 50%;
+    position: absolute;
+    padding: 5px 5px;
+    color: white;
+}

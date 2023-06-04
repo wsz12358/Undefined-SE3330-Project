@@ -17,13 +17,27 @@ class Stats_StatsList extends React.Component {
     render() {
         return (
             <div className='stats_listField'>
+
                 <div className="stats_statsBox">
-                    <div style={{width: '100%', height: '100%'}} id="stats1"/>
                     <div style={{
-                        backgroundColor: 'grey', borderRadius: '50%',
-                        position: 'absolute', left: '-20px',
-                        padding: '5px 5px', color: 'white',
+                        font: '600 20px/1.2 "Microsoft YaHei UI"',
+                        textAlign: 'center', padding: '5px 10px',
+                        backgroundColor: '#bbdfbb', borderRadius: '20px',
                     }}>
+                        {this.state.beginTime !== null &&
+                            (this.state.beginTime.getMonth() + 1).toString() + "/" +
+                            (this.state.beginTime.getDate()).toString()}
+                        &nbsp; - &nbsp;
+                        {this.state.finishTime !== null &&
+                            (this.state.finishTime.getMonth() + 1).toString() + "/" +
+                            (this.state.finishTime.getDate()).toString()}
+                        <div style={{fontSize: '20px', textAlign: 'center'}}>
+                            一周内时长统计（秒）
+                        </div>
+                    </div>
+
+                    <div style={{width: '100%', height: '100%'}} id="stats1"/>
+                    <div className="stats_statsArrow" style={{left: '-20px'}}>
                         <LeftOutline onClick={() => {
                             const beginTime = new Date(this.state.beginTime.getTime() - 7 * (24 * 60 * 60 * 1000));
                             const finishTime = new Date(this.state.finishTime.getTime() - 7 * (24 * 60 * 60 * 1000));
@@ -31,11 +45,7 @@ class Stats_StatsList extends React.Component {
                         }}
                                      fontSize={30}/>
                     </div>
-                    <div style={{
-                        backgroundColor: 'grey', borderRadius: '50%',
-                        position: 'absolute', right: '-20px',
-                        padding: '5px 5px', color: 'white',
-                    }}>
+                    <div className="stats_statsArrow" style={{right: '-20px'}}>
                         <RightOutline onClick={() => {
                             const beginTime = new Date(this.state.beginTime.getTime() + 7 * (24 * 60 * 60 * 1000));
                             const finishTime = new Date(this.state.finishTime.getTime() + 7 * (24 * 60 * 60 * 1000));
