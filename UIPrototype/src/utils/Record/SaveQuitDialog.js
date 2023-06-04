@@ -26,6 +26,7 @@ export default function SaveQuitDialog (type) {
         ]],
         onAction: (e) => {
             if (e.key === 'confirm') {
+                console.log(this.state);
                 this.setState({isSubmitting: true},
                     () => SaveEvent(this.state, callback.bind(this)));
                 // Current event of various users should not be stored in local storage.

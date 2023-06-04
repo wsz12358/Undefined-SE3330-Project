@@ -115,8 +115,6 @@ class Record extends React.Component {
         let dt = Math.abs(d2 - d1);
         let durT = this.state.durTime + Math.floor(dt / 1000);
 
-        console.log(durT);
-
         this.setState({isSubmitting: true},
             () => pauseEvent({
                     begintime: this.state.beginTime,
@@ -232,7 +230,6 @@ class Record extends React.Component {
                                           setUploading={this.setUploading.bind(this)}
                                           addMsg={this.addMsg.bind(this)}
                                           onClickExtd={this.onClickExtd.bind(this)}
-                                          setDurTime={this.setDurTime.bind(this)}
                                           hideMessages={this.hideMessages.bind(this)}
                                           setSelect={this.setSelect.bind(this)}/>
 

@@ -152,14 +152,16 @@
 
 .stats_statsBox {
     display: flex;
+    position: relative;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #fff;
-    width: 80%;
-    height: 300px;
+    width: 90%;
+    height: 400px;
     margin: 20px 0;
     border-radius: 20px;
+    padding: 10px 10px;
 }
 
 .markerInfoBox {
