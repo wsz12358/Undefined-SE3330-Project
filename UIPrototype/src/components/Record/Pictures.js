@@ -1,5 +1,5 @@
 import React, {useRef, useState} from "react";
-import {ActionSheet} from "antd-mobile";
+import {ActionSheet, Mask} from "antd-mobile";
 import {PicturesOutline} from "antd-mobile-icons";
 import HandleImageUpload from "../../utils/Record/HandleImageUpload";
 import Camera from "./Camera";
@@ -52,15 +52,17 @@ const Pictures = (props) => {
             {/*Camera component*/}
             {isCamera &&
                 <div style={{
-                    width: '100%',
-                    position: 'absolute',
-                    backgroundColor: 'white'
+                    width: '100%', zIndex: '5',
+                    position: 'fixed', top: '0',
+                    backgroundColor: 'white',
                 }}>
-                    <Camera setUploading={props.setUploading}
-                            addMsg={props.addMsg}
-                            collect={props.collect}
-                            setIsCamera={setIsCamera.bind(this)}
-                    />
+                    <Mask visible={isCamera}>
+                        <Camera setUploading={props.setUploading}
+                                addMsg={props.addMsg}
+                                collect={props.collect}
+                                setIsCamera={setIsCamera.bind(this)}
+                        />
+                    </Mask>
                 </div>}
         </>
     );

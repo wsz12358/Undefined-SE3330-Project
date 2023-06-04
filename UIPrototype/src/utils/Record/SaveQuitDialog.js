@@ -5,7 +5,7 @@ import {setCategory} from "../../redux/FilterActions";
 
 export default function SaveQuitDialog (type) {
     const callback = (data) => {
-        console.log(data);
+        this.setState({isSubmitting: false});
         if (type)
             this.props.history.push('/stats/details', {id: data.eventid});
         else {
@@ -26,11 +26,12 @@ export default function SaveQuitDialog (type) {
         ]],
         onAction: (e) => {
             if (e.key === 'confirm') {
-                // set duration time in local storage to 0
-                // store.dispatch(setCurDuration(0));
-                SaveEvent(this.state, callback.bind(this));
+                this.setState({isSubmitting: true},
+                    () => SaveEvent(this.state, callback.bind(this)));
                 // Current event of various users should not be stored in local storage.
                 // A table: tags, begintime, userid and messages as well.
+            } else if (e.key === 'cancel') {
+                this.setState({isStart: this.state.isStart - 1});
             }
         }
     })

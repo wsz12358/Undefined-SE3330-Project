@@ -62,6 +62,7 @@ export default function Camera(props) {
             <canvas id="camera_canvas"
                     ref={c_canvas}
                     style={{backgroundColor: 'red', display: 'none'}}/>
+            <Button onClick={() => props.setIsCamera(false)}>CANCEL</Button>
             <Button onClick={getImg}>OK</Button>
         </div>
     )

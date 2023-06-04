@@ -10,6 +10,7 @@ import Record from "./pages/Home/Record";
 import Mine_Friends from "./pages/Mine/Mine_Friends";
 import {useLocation, Route, Switch, useHistory} from 'react-router-dom'
 import {CSSTransition, TransitionGroup} from "react-transition-group";
+import Signup from "./pages/Mine/Signup";
 
 function App() {
     const location = useLocation();
@@ -58,6 +59,8 @@ function App() {
 
                             <Route path='/discover' component={Discover}/>
 
+                            <Route path='/mine/signup' component={Signup}/>
+
                             <Route path='/mine/friends' component={Mine_Friends}/>
 
                             <Route path='/mine' component={Mine}/>
@@ -68,6 +71,7 @@ function App() {
             {!(location.pathname === '/stats/details') &&
                 !(location.pathname === '/home/record') &&
                 !(location.pathname === '/mine/friends') &&
+                !(location.pathname === '/mine/signup') &&
                 <div className="app_bottom"
                      ref={appBottom}>
                     <BottomBar/>
