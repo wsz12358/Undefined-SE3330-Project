@@ -46,7 +46,8 @@ const RecordBottom = forwardRef((props, ref) => {
                          collect={props.state.messages.length}
                          durTime={props.state.durTime}
                          select={props.state.select}
-                         setSelect={props.setSelect}/>
+                         setSelect={props.setSelect}
+                         hideMessages={props.hideMessages}/>
         </div>
     )
 });
