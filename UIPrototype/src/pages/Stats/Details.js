@@ -33,6 +33,7 @@ import store from "../../redux/Store";
 import {withRouter} from "react-router-dom";
 import moment from "moment/moment";
 import HandleImageUpload from "../../utils/Record/HandleImageUpload";
+
 class Details extends React.Component {
     state = {
         onEdit: false,
@@ -92,11 +93,13 @@ class Details extends React.Component {
         </button>
     );
 
-    addMsg = (e, datatype, collect = 0) => {console.log(`e: ${e}, dt: ${datatype}, coll: ${collect}`);
+    addMsg = (e, datatype, collect = 0) => {
+        console.log(`e: ${e}, dt: ${datatype}, coll: ${collect}`);
         let tmp = [...this.state.messages];
         let pend = null;  //used for pending image, popped from the array
         const timestamp = new Date().getTime(); // Get the current time
-        const callback = (e) => {console.log("addMsg callback:", e);
+        const callback = (e) => {
+            console.log("addMsg callback:", e);
             tmp.pop();
             tmp.push(e);
             this.setState({messages: [...tmp]});
@@ -135,12 +138,17 @@ class Details extends React.Component {
 
     deleteMsg = (id, idx) => {
         let tmp = [...this.state.messages];
-        const callback = (e) => {console.log(e);
+        const callback = (e) => {
+            console.log(e);
             tmp.splice(idx, 1);
-            this.setState({messages: [...tmp]}, ()=>{console.log("state:", this.state.messages)})
+            this.setState({messages: [...tmp]}, () => {
+                console.log("state:", this.state.messages)
+            })
         }
         const e = id.toString();
-        delMsg({id: e}, callback, (e)=>{console.log("error: ", e)})
+        delMsg({id: e}, callback, (e) => {
+            console.log("error: ", e)
+        })
     }
 
     handleFileInputChange = (e) => {
@@ -163,12 +171,14 @@ class Details extends React.Component {
         const v = this.eventId.toString();
 
         getMsgs({user: u, eventid: v}, callback,
-            (e) => {console.log("get msg error:", e)
+            (e) => {
+                console.log("get msg error:", e)
             })
     }
 
     renderThoughts = (value, idx) => {
-        if (value.datatype === "img") return ;console.log(this.state.messages);
+        if (value.datatype === "img") return;
+        console.log(this.state.messages);
         return (
             <SwipeAction key={idx} rightActions={this.state.onEdit ? [{
                 key: 'delete',
@@ -192,7 +202,8 @@ class Details extends React.Component {
         )
     }
 
-    renderPictures = (pic, idx) => {if (pic.datatype === "msg") return;
+    renderPictures = (pic, idx) => {
+        if (pic.datatype === "msg") return;
         return <GridItem className='picture' key={idx}>
             {this.state.onEdit && <Button className={"btnDeletePic"} onClick={() => {
                 Dialog.confirm(
@@ -234,8 +245,7 @@ class Details extends React.Component {
     }
 
     OnClickBack = () => {
-        if (this.state.inUploading)
-        {
+        if (this.state.inUploading) {
             Dialog.show(
                 {
                     closeOnMaskClick: true,
@@ -252,7 +262,7 @@ class Details extends React.Component {
                             }
                         ]
                     ],
-                    content: <div>  Loading... </div>
+                    content: <div> Loading... </div>
                 }
             )
             return;
@@ -272,7 +282,7 @@ class Details extends React.Component {
                     This is event {this.eventId}
                 </div>
                 <div className='deTime'>
-                     2023
+                    2023
                 </div>
 
                 <Collapse defaultActiveKey={['1']} className="myCollapse">
@@ -310,7 +320,7 @@ class Details extends React.Component {
                                         <ActionSheet visible={this.state.visible}
                                                      actions={[
                                                          {text: "从相册中上传", key: "upload"},
-                                                        // {text: "摄像头拍摄", key: "camera"},
+                                                         // {text: "摄像头拍摄", key: "camera"},
                                                      ]}
                                                      onClose={() => this.setState({visible: false})}
                                                      onAction={(action) => {

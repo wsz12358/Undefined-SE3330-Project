@@ -62,7 +62,7 @@ class Record extends React.Component {
                 msg.datatype === "system" ? { ...msg, isVisible: false } : msg
             );
             this.setState({ messages: updatedMessages });
-            console.log(updatedMessages.filter(msg => msg.isVisible === false));
+            // console.log(updatedMessages.filter(msg => msg.isVisible === false));
             this.setState({ pureMode : true });
         }
     }
