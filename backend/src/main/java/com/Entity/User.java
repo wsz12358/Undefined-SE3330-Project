@@ -6,10 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @ClassName User
@@ -24,10 +21,53 @@ import javax.persistence.Table;
 public class User {
 
     @Id
+    @GeneratedValue (strategy= GenerationType.IDENTITY)
     private int userId;
     private String nickname;
-    private String name;
     private String tel;
     private String address;
-    private String password;
+
+    @OneToOne
+    @JoinColumn(name="userauth")
+    UserAuth userAuth;
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public UserAuth getUserAuth() {
+        return userAuth;
+    }
+
+    public void setUserAuth(UserAuth userAuth) {
+        this.userAuth = userAuth;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getAddress() {
+        return address;
+    }
 }

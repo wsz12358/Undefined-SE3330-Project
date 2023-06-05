@@ -16,4 +16,6 @@ public interface EventService {
     public void PauseEvent(Tempevent tempevent);
 
     public Tempevent ContinueEvent(Integer user);
+
+    List<Event> RandEvent();
 }

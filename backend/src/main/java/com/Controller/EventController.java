@@ -122,4 +122,11 @@ public class EventController {
         String user = params.get(EventConstant.USER);
         return (JSONObject) JSON.toJSON(eventService.ContinueEvent(Integer.valueOf(user)));
     }
+
+    @RequestMapping("/rand")
+    public JSONArray GetRand(@RequestBody Map<String, String> params)
+    {
+        List<Event> mes = eventService.RandEvent();
+        return JSONArray.parseArray(JSON.toJSONString(mes));
+    }
 }
