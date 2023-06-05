@@ -28,7 +28,7 @@ import {
 } from "antd-mobile-icons";
 import {ListItem} from "antd-mobile/es/components/list/list-item";
 import {GridItem} from "antd-mobile/es/components/grid/grid";
-import {addMsg, delMsg, getMsgs} from "../../service/loginService";
+import {addMsg, delMsg, getMsgs, shareEvent} from "../../service/loginService";
 import store from "../../redux/Store";
 import {withRouter} from "react-router-dom";
 import moment from "moment/moment";
@@ -77,6 +77,17 @@ class Details extends React.Component {
                         }
                     ]
                 ],
+                onAction: (action) => {
+                    if (action.key === 'confirm')
+                    {
+                        const currentTime = new Date();
+                        const formattedTime = currentTime.toLocaleString();
+                        const data = {eventid: this.eventId, sharetime: formattedTime}
+                        const callback = this.OnClickBack;
+                        const errback = (e) => {console.log("share event error:", e)}
+                        shareEvent(data, callback, errback)
+                    }
+                },
                 content: (<List className={"deList"}>
                     <ListItem key={1} prefix={<EnvironmentOutline/>} onClick={() => {
                     }}>所在位置</ListItem>
