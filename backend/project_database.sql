@@ -26,10 +26,13 @@ CREATE TABLE `comments` (
   `comment_id` int NOT NULL AUTO_INCREMENT,
   `comment` varchar(255) DEFAULT NULL,
   `sharedevent` int DEFAULT NULL,
+  `user` int NOT NULL,
   PRIMARY KEY (`comment_id`),
   KEY `comments_sharedevents_sharedevent_id_fk` (`sharedevent`),
-  CONSTRAINT `comments_sharedevents_sharedevent_id_fk` FOREIGN KEY (`sharedevent`) REFERENCES `sharedevents` (`sharedevent_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `comments_user_user_id_fk` (`user`),
+  CONSTRAINT `comments_sharedevents_sharedevent_id_fk` FOREIGN KEY (`sharedevent`) REFERENCES `sharedevents` (`sharedevent_id`),
+  CONSTRAINT `comments_user_user_id_fk` FOREIGN KEY (`user`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -194,7 +197,7 @@ CREATE TABLE `sharedevents` (
   PRIMARY KEY (`sharedevent_id`),
   KEY `sharedevents_events_event_id_fk` (`event`),
   CONSTRAINT `sharedevents_events_event_id_fk` FOREIGN KEY (`event`) REFERENCES `events` (`event_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -298,4 +301,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-05 10:54:03
+-- Dump completed on 2023-06-05 14:53:41

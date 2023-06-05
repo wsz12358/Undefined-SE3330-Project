@@ -137,19 +137,44 @@
 
 2023.6.5 acoustic 更新：</br>
 1. user和userauth分离了，username信息现在在userauth里面 不过这个和前端应该没啥关系
-2. 增加了注册操作，格式如下：
-   {
-   "password": "newuser",
-   "username": "iloveprogramming",
-   "usertype": "typical"
-   }
-目前usertype只有typical一种代表普通用户，应该不需要增加管理员，需要的话管理员的usertype设成root就可以
-如果username和已有的重复会返回信息如下：
-{
-    "message":"username already exist!"
-}
-注册成功返回success的message并包含新用户的所有信息：
-   {
-   "message":"success"
-    /*user infos are also contained*/
-   }
+2. 增加了注册操作，端口为/log/register,格式如下：</br>
+   {</br>
+   "password": "newuser",</br>
+   "username": "iloveprogramming",</br>
+   "usertype": "typical"</br>
+   }</br>
+目前usertype只有typical一种代表普通用户，应该不需要增加管理员，需要的话管理员的usertype设成root就可以</br>
+如果username和已有的重复会返回信息如下：</br>
+{</br>
+    "message":"username already exist!"</br>
+}</br>
+注册成功返回success的message并包含新用户的所有信息：</br>
+   {</br>
+   "message":"success"</br>
+    /*user infos are also contained*/</br>
+   }</br>
+3. 增加了社区功能
+3.1. 增加分享事件，端口为/community/event/add,格式如下：</br>
+{</br>
+    "eventid": "1",</br>
+    "sharetime": "test"</br>
+}</br>
+eventid代表分享事件所对应的用户在event数据库里的原始事件，调用该接口后会在sharedevent里增加一条记录</br>
+3.2 增加评论功能，端口为/community/comment/add，格式如下：</br>
+{</br>
+    "comment": "test",</br>
+    "userid": "1",</br>
+    "sharedeventid": "1"</br>
+}</br>
+每条评论对应一个用户以及一个分享事件</br>
+3.3 事件删除功能，端口为/community/event/delete,格式如下：</br>
+   {</br>
+   "sharedeventid": "1"</br>
+   }</br>
+   删除成功返回message:"success",失败返回message:"no such event!"</br>
+删除时间会将对应的所有comment也删除</br>
+3.4 评论删除功能，端口为/community/comment/delete,格式如下：</br>
+   {</br>
+   "commentid": "1"</br>
+   }</br>
+删除成功返回message:"success",失败返回message:"no such comment!"</br>
