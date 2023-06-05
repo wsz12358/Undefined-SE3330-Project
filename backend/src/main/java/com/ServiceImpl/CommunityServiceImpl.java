@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Transactional
 @Service
@@ -65,6 +67,27 @@ public class CommunityServiceImpl implements CommunityService {
         if (comment == null) return "no such comment!";
         communityDao.deleteComment(id);
         return "success";
+    }
+
+    @Override
+    public List<SharedEvent> getSharedEvents()
+    {
+        List<SharedEvent> events = communityDao.getSharedEvents();
+        List<SharedEvent> randevents = new ArrayList<>();
+        for (int i = 0; i < 5 && !events.isEmpty(); i++)
+        {
+            Random r = new Random();
+            Integer index = 0;
+            if (events.size() == 1)
+            {
+                randevents.add(events.get(0));
+                break;
+            }
+            index = r.nextInt(events.size() - 1) + 1;
+            randevents.add(events.get(index));
+            events.remove(events.get(index));
+        }
+        return randevents;
     }
 
 }
