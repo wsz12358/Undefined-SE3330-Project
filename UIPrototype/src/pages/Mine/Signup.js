@@ -1,12 +1,50 @@
 import React from "react";
 import OnClickRoute from "../../utils/OnClickRoute";
 import HeaderBar from "../../components/HeaderBar";
-import {Button, Card, DotLoading, Form, Input} from "antd-mobile";
+import {Button, Card, Dialog, DotLoading, Form, Input} from "antd-mobile";
 import {RightOutline} from "antd-mobile-icons";
+import {call} from "moment";
+import {register} from "../../service/loginService";
+import {withRouter} from "react-router-dom";
 
 class Signup extends React.Component {
     state = {
         waitSignup: false,
+    }
+
+    onFormFinish = (e) => {
+        const history = this.props.history;
+        const callback = (data) => {
+            if (data.message === "U_EXIST") {
+                Dialog.alert({
+                    content: "Username already exists."
+                });
+            } else if (data.message === "SUCCESS") {
+                Dialog.show({
+                        content: "Signup success.",
+                        closeOnAction: true,
+                        actions: [[
+                            {key: 'confirm', text: '确认'},
+                        ]],
+                        onAction: () => {
+                            history.replace('/mine/login', {username: e.username, password: e.password});
+                        }
+                    }
+                );
+            }
+        }
+
+        register({
+            username: e.username,
+            password: e.password,
+            usertype: "typical",
+        }, callback);
+    }
+
+    pwdValidator = (rule, value, callback) => {
+        if (value !== this.form.getFieldValue('password')) {
+            callback("Inconsistent password.");
+        } else callback();
     }
 
     render() {
@@ -23,9 +61,9 @@ class Signup extends React.Component {
                         paddingLeft: '40px'
                     }}>
                         <Form layout='vertical'
-                              onFinish={() => {
-                              }}
+                              onFinish={this.onFormFinish}
                               style={{width: '90%'}}
+                              ref={e => this.form = e}
                               footer={
                                   <>
                                       <Button block type='login' color='primary' size='large'>
@@ -52,7 +90,10 @@ class Signup extends React.Component {
                             </Form.Item>
                             <Form.Item name='cnf_password'
                                        label='Confirm Password'
-                                       rules={[{required: true}]}>
+                                       rules={[
+                                           {required: true},
+                                           {validator: this.pwdValidator},
+                                       ]}>
                                 <Input clearable type='password'/>
                             </Form.Item>
                         </Form>
@@ -63,4 +104,4 @@ class Signup extends React.Component {
     }
 }
 
-export default Signup;
+export default withRouter(Signup);

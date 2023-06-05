@@ -70,13 +70,15 @@ class Login extends React.Component {
                         <Form.Header>Login</Form.Header>
                         <Form.Item name='username'
                                    label='Username'
-                                   initialValue='group7'
+                                   initialValue={this.props.location.state === undefined ?
+                                       "group7" : this.props.location.state.username}
                                    rules={[{required: true, message: 'username must not be null'}]}>
                             <Input clearable/>
                         </Form.Item>
                         <Form.Item name='password'
                                    label='Password'
-                                   initialValue='sjtuse2021'>
+                                   initialValue={this.props.location.state === undefined ?
+                                       "sjtuse2021" : this.props.location.state.password}>
                             <Input clearable type='password'/>
                         </Form.Item>
                     </Form>
