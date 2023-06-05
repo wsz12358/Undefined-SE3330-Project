@@ -22,15 +22,28 @@
 
 .bottomLine {
     border-bottom: 1px solid gray;
+    width: 100%;
 }
 
 .oneEvent {
-    width: 80%;
-    margin: 1em;
+    margin: 0.5em;
+    display: flex;
 }
 
-.avatarAndTag {
-    margin-bottom: 1em;
+.avatar {
+    /*margin-right: 10px;*/
+}
+
+.content {
+    width: 100%;
+}
+
+.name {
+    width: 90%;
+    margin: auto;
+    font-size: 0.8em;
+    font-weight: bold;
+    color: #0a779f;
 }
 
 .share {
@@ -40,19 +53,21 @@
 }
 
 .locationAndFunc {
-    margin-top: 0.5em;
     margin-bottom: 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .locationAndFunc .location {
-    margin-left: 5%;
-    display: inline-block;
+    /*display: inline-block;*/
     font-size: 0.7em;
-    text-align: center;
+    color: #a9a1a1;
+    margin-left: 5%;
 }
 
 .locationAndFunc .allFunc {
-    display: inline-block;
+    /*display: inline-block;*/
     text-align: right;
     width: 60%;
 }
