@@ -16,6 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `comments`
+--
+
+DROP TABLE IF EXISTS `comments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `comments` (
+  `comment_id` int NOT NULL AUTO_INCREMENT,
+  `comment` varchar(255) DEFAULT NULL,
+  `sharedevent` int DEFAULT NULL,
+  PRIMARY KEY (`comment_id`),
+  KEY `comments_sharedevents_sharedevent_id_fk` (`sharedevent`),
+  CONSTRAINT `comments_sharedevents_sharedevent_id_fk` FOREIGN KEY (`sharedevent`) REFERENCES `sharedevents` (`sharedevent_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comments`
+--
+
+LOCK TABLES `comments` WRITE;
+/*!40000 ALTER TABLE `comments` DISABLE KEYS */;
+/*!40000 ALTER TABLE `comments` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `curevent`
 --
 
@@ -40,7 +66,6 @@ CREATE TABLE `curevent` (
 
 LOCK TABLES `curevent` WRITE;
 /*!40000 ALTER TABLE `curevent` DISABLE KEYS */;
-INSERT INTO `curevent` VALUES (6,'4','5','6',2);
 /*!40000 ALTER TABLE `curevent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,10 +86,11 @@ CREATE TABLE `events` (
   `mul` decimal(10,5) DEFAULT NULL,
   `lat` decimal(10,5) DEFAULT NULL,
   `duration` int DEFAULT NULL,
+  `cover` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`event_id`),
   KEY `event_user` (`user`),
   CONSTRAINT `event_user` FOREIGN KEY (`user`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +99,7 @@ CREATE TABLE `events` (
 
 LOCK TABLES `events` WRITE;
 /*!40000 ALTER TABLE `events` DISABLE KEYS */;
-INSERT INTO `events` VALUES (1,'test','test/study','2023/4/10/23/13/55','2023/4/10/23/14/55',1,50.00000,50.00000,1),(2,'firstevent','love/death/robot','2023/4/10/23/13/55','2023/4/11/23/13/55',1,55.00000,55.00000,2),(3,'secondevent','study','2023/4/10/23/13/55','2023/4/11/23/13/55',2,60.00000,60.00000,3),(4,'empty','tags','begintime','finishtime',2,65.00000,65.00000,5),(5,'empty','tags','begintime','finishtime',2,70.00000,70.00000,7),(6,'empty','tags','begintime','finishtime',2,75.00000,75.00000,9),(14,NULL,NULL,NULL,NULL,1,345.60000,123.40000,3),(15,'group7','E','2023/05/11/21/37/57','2023/05/11/21/39/10',1,121.48000,31.24000,68);
+INSERT INTO `events` VALUES (21,'group7','','2023/05/15/17/23/49','2023/05/15/17/24/09',1,121.48000,31.24000,11,NULL),(23,'group7','C/E/F','2023/05/15/17/24/32','2023/05/15/17/24/49',1,121.48000,31.24000,10,NULL),(25,'group7','C/H','2023/05/15/17/25/05','2023/05/15/17/25/31',1,121.48000,31.24000,18,NULL),(26,'group7','','2023/05/15/17/25/57','2023/05/15/17/26/18',1,121.48000,31.24000,13,NULL),(32,'group7','B/D/H','2023/05/18/20/52/44','2023/05/18/20/53/22',1,121.48000,31.24000,89,NULL),(33,'group7','A/F','2023/05/18/20/56/35','2023/05/18/20/56/59',1,121.48000,31.24000,21,NULL),(34,'group7','B/F','2023/05/18/21/01/34','2023/05/18/21/02/01',1,121.44000,31.03000,21,NULL),(35,'group7','','2023/05/18/21/12/50','2023/05/18/21/15/56',1,121.44000,31.03000,15,NULL),(46,'group7','','2023/05/19/12/43/06','2023/05/19/12/43/17',1,121.44012,31.03230,0,NULL),(47,'group7','A/D/F','2023/05/19/14/07/14','2023/05/19/14/07/43',1,121.44000,31.03000,0,NULL),(48,'group7','C','2023/05/19/14/10/12','2023/05/19/14/10/28',1,121.43838,31.02538,0,NULL),(49,'group7','D/B','2023/05/19/16/06/24','2023/05/19/16/06/54',1,121.43969,31.02834,221,NULL),(50,'group7','','2023/06/04/10/02/52','2023/06/04/10/03/30',1,121.48054,31.23593,0,NULL);
 /*!40000 ALTER TABLE `events` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -115,7 +141,7 @@ CREATE TABLE `messages` (
   PRIMARY KEY (`message_id`),
   KEY `event_` (`event`),
   CONSTRAINT `event_` FOREIGN KEY (`event`) REFERENCES `events` (`event_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,7 +150,7 @@ CREATE TABLE `messages` (
 
 LOCK TABLES `messages` WRITE;
 /*!40000 ALTER TABLE `messages` DISABLE KEYS */;
-INSERT INTO `messages` VALUES ('2023/4/10/14/58/55','msg','test1234567',1,1),('2023/4/11/9/33/52','msg','the first message',2,1),('2023/4/11/9/33/52','msg','the first message',3,1),('2023/4/11/10/18/20','msg','my message',4,1),('2023/2/29/','msg','pizza and more',5,NULL),('2023/2/29/','msg','不许喝百事',6,NULL),('1','msg','123',18,14),('2023/05/11/21/38/07','msg','123',19,15),('2023/05/11/21/38/21','img','https://res.cloudinary.com/dqqesuzb8/image/upload/v1683812302/a1hlnzhehundqsqqqd1g.png',20,15),('2023/05/11/21/38/35','img','https://res.cloudinary.com/dqqesuzb8/image/upload/v1683812315/tr2kg3cggzlxj8niveo1.jpg',21,15);
+INSERT INTO `messages` VALUES ('2023/05/15/17/23/55','msg','qsqsqsqsqs',28,21),('2023/05/15/17/23/59','msg','asasasas',29,21),('2023/05/15/17/24/34','msg','dwdw',30,23),('2023/05/15/17/25/22','img','https://res.cloudinary.com/dqqesuzb8/image/upload/v1684142721/aiyuepxg2d4sgxxn8gnn.png',31,25),('2023/05/15/17/26/01','msg','qd',32,26),('2023/05/15/17/26/07','img','https://res.cloudinary.com/dqqesuzb8/image/upload/v1684142767/yzufsnnvpwxfyh8kbfuj.png',33,26),('2023/05/15/17/26/08','msg','dw',34,26),('2023/05/18/20/52/17','img','https://res.cloudinary.com/dqqesuzb8/image/upload/v1684414337/fc8iic15ukrfzatynmhh.png',35,32),('2023/05/18/20/52/32','img','https://res.cloudinary.com/dqqesuzb8/image/upload/v1684414352/bhmbarbd9x6h1eu7pxt7.png',36,32),('2023/05/18/20/52/38','msg','wd',37,32),('2023/05/18/20/52/57','msg','dwddwwd',38,32),('2023/05/18/20/53/10','img','https://res.cloudinary.com/dqqesuzb8/image/upload/v1684414389/tckyklkyvp1bqpm1mx6g.png',39,32),('2023/05/18/20/56/55','msg','wd',40,33),('2023/05/18/21/01/44','img','https://res.cloudinary.com/dqqesuzb8/image/upload/v1684414904/bbs7xrroeswvzcxwjybx.png',41,34),('2023/05/18/21/01/48','msg','dw',42,34),('2023/05/18/21/01/50','msg','dwdwf',43,34),('2023/05/18/21/12/44','msg','dwd',45,35),('2023/05/19/12/35/39','msg','dfdfqef',63,46),('2023/05/19/12/35/47','msg','efwvW',64,46),('2023/05/19/12/36/00','msg','EWFWAEVGER',65,46),('2023/05/19/12/45/57','img','https://res.cloudinary.com/dqqesuzb8/image/upload/v1684471558/yrkbxjflw74cxclaepuo.png',66,23),('2023/05/19/14/07/16','msg','efewf',67,47),('2023/05/19/14/07/33','img','https://res.cloudinary.com/dqqesuzb8/image/upload/v1684476453/to2esobhjpdzpzfnlflh.png',68,47),('2023/05/19/14/07/39','msg','fw',69,47),('2023/05/19/14/10/15','msg','wddqwqdqddw',70,48),('2023/05/19/14/10/22','msg','ewfwefw',71,48),('2023/05/19/16/02/55','msg','心得xxxx',72,49),('2023/05/19/16/03/03','msg','心得2',73,49),('2023/05/19/16/04/37','img','https://res.cloudinary.com/dqqesuzb8/image/upload/v1684483478/sn7auw3vakaa6boan0xx.png',74,49),('2023/05/19/16/04/37','img','https://res.cloudinary.com/dqqesuzb8/image/upload/v1684483478/xfaqtgrmuvdtm4ayxnj8.png',75,49),('2023/05/19/16/04/53','msg','一段话',76,49),('2023/05/19/16/05/29','img','https://res.cloudinary.com/dqqesuzb8/image/upload/v1684483530/czl7rhcqtrpliwb7ouxx.png',77,49),('2023/05/19/16/06/39','msg','一段话2',78,49),('2023/05/19/16/07/32','msg','感想3',79,49),('2023/06/04/10/02/59','msg','dwdwd',80,50),('2023/06/04/10/03/04','msg','无敌无敌无敌、、',81,50);
 /*!40000 ALTER TABLE `messages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,7 +167,7 @@ CREATE TABLE `sentence_` (
   `sentence_id` int NOT NULL AUTO_INCREMENT,
   `tag` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`sentence_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,8 +176,34 @@ CREATE TABLE `sentence_` (
 
 LOCK TABLES `sentence_` WRITE;
 /*!40000 ALTER TABLE `sentence_` DISABLE KEYS */;
-INSERT INTO `sentence_` VALUES ('test',1,1,'study'),('运动开始，要开始留点汗了~',1,2,'exercise'),('已经学习两个小时了，加油噢~',1,3,'study'),('运动半小时了，注意休息哦~',1,4,'exercise');
+INSERT INTO `sentence_` VALUES ('学无止境，您的求知精神实在令人敬佩。不过，博士，也请不要过度透支自己，保重身体哦。\n',1,1,'study'),('博士，锻炼是非常好的，能让我们在战斗中更加强大。只是别忘了，过度劳累也是会影响战斗力的哦。',1,2,'exercise'),('您一直为罗德岛付出了很多，我们都看在眼里。请记得适时调整，我们都会支持您的。\n',1,3,'work'),('与干员们建立信赖关系是很有必要的，博士。请继续与大家形成联系，我们一起守护这片大地，同时也要注意休息。\n',1,4,'social'),('休息也是为了走更长远的路，博士。请好好享受这片刻的宁静，我们需要您充满活力的回归。\n',1,5,'relax'),('博士，生活中的欢乐让我们更有力量面对挑战。尽情享受这些美好时光，我们会在您身后支持您。\n',1,6,'entertain'),('您只需要做您的事情就好，我会一直在您身边支持您的。请照顾好自己，我们会一起战胜一切困难，守护这片土地。\n',1,7,'other'),('博士，您还好吗？要去休息一下吗，我扶您去吧。不用担心，我挺好的，只要您休息好就可以了。',1,8,'default');
 /*!40000 ALTER TABLE `sentence_` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sharedevents`
+--
+
+DROP TABLE IF EXISTS `sharedevents`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sharedevents` (
+  `sharedevent_id` int NOT NULL AUTO_INCREMENT,
+  `event` int DEFAULT NULL,
+  `sharetime` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`sharedevent_id`),
+  KEY `sharedevents_events_event_id_fk` (`event`),
+  CONSTRAINT `sharedevents_events_event_id_fk` FOREIGN KEY (`event`) REFERENCES `events` (`event_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sharedevents`
+--
+
+LOCK TABLES `sharedevents` WRITE;
+/*!40000 ALTER TABLE `sharedevents` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sharedevents` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -191,13 +243,14 @@ DROP TABLE IF EXISTS `user`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
   `nickname` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
   `tel` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
   `user_id` int NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `userauth` int DEFAULT NULL,
+  PRIMARY KEY (`user_id`),
+  KEY `user_userauth_userauth_id_fk` (`userauth`),
+  CONSTRAINT `user_userauth_userauth_id_fk` FOREIGN KEY (`userauth`) REFERENCES `userauth` (`userauth_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -206,32 +259,34 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('g7','group7','12345678910','where','sjtuse2021',1),('ac','acoustic','12345678911','Shanghai','acoustic',2);
+INSERT INTO `user` VALUES ('g7','12345678910','where',1,1),('ac','12345678911','Shanghai',2,2),(NULL,NULL,NULL,3,5),(NULL,NULL,NULL,4,6),(NULL,NULL,NULL,5,7),(NULL,NULL,NULL,6,8);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `user_auth`
+-- Table structure for table `userauth`
 --
 
-DROP TABLE IF EXISTS `user_auth`;
+DROP TABLE IF EXISTS `userauth`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user_auth` (
-  `user_id` int NOT NULL,
-  `user_type` int DEFAULT NULL,
+CREATE TABLE `userauth` (
+  `userauth_id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `password` varchar(255) DEFAULT NULL,
+  `usertype` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`userauth_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user_auth`
+-- Dumping data for table `userauth`
 --
 
-LOCK TABLES `user_auth` WRITE;
-/*!40000 ALTER TABLE `user_auth` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user_auth` ENABLE KEYS */;
+LOCK TABLES `userauth` WRITE;
+/*!40000 ALTER TABLE `userauth` DISABLE KEYS */;
+INSERT INTO `userauth` VALUES (1,'group7','sjtuse2021','typical'),(2,'acoustic','acoustic','typical'),(5,'acoustic2','acoustic2','typical'),(6,'acoustic3','acoustic3','typical'),(7,'acoustic4','acoustic4','typical'),(8,'acoustic8','acoustic8','typical');
+/*!40000 ALTER TABLE `userauth` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -243,4 +298,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-13 17:26:42
+-- Dump completed on 2023-06-05 10:54:03

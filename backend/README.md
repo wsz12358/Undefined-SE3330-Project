@@ -134,3 +134,22 @@
    "message": "12",</br>
    "event": "1"</br>
    }</br>
+
+2023.6.5 acoustic 更新：</br>
+1. user和userauth分离了，username信息现在在userauth里面 不过这个和前端应该没啥关系
+2. 增加了注册操作，格式如下：
+   {
+   "password": "newuser",
+   "username": "iloveprogramming",
+   "usertype": "typical"
+   }
+目前usertype只有typical一种代表普通用户，应该不需要增加管理员，需要的话管理员的usertype设成root就可以
+如果username和已有的重复会返回信息如下：
+{
+    "message":"username already exist!"
+}
+注册成功返回success的message并包含新用户的所有信息：
+   {
+   "message":"success"
+    /*user infos are also contained*/
+   }

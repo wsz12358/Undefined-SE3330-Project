@@ -10,4 +10,6 @@ public interface LoginService {
     User checkUser(String username, String password);
 
     User getUser(Integer id);
+
+    User addUser(String usertype, String username, String password);
 }
