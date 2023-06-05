@@ -23,9 +23,7 @@ export default function FilterEvents (data) {
 
         data2 = data1.filter((item) => {
             const beginTime = item.begintime.split('/');
-            const bgt = new Date(beginTime[0], Number(beginTime[1]), beginTime[2]);
-
-            // console.log(bgt);
+            const bgt = new Date(beginTime[0], Number(beginTime[1]-1), beginTime[2]);
 
             return ((ftf === null) ? true : (bgt >= ftf)) &&
                 ((ftt === null) ? true : (bgt <= ftt));

@@ -26,10 +26,13 @@ export default function SaveQuitDialog (type) {
         ]],
         onAction: (e) => {
             if (e.key === 'confirm') {
+                console.log(this.state);
                 this.setState({isSubmitting: true},
                     () => SaveEvent(this.state, callback.bind(this)));
                 // Current event of various users should not be stored in local storage.
                 // A table: tags, begintime, userid and messages as well.
+            } else if (e.key === 'cancel') {
+                this.setState({isStart: this.state.isStart - 1});
             }
         }
     })

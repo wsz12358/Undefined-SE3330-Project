@@ -26,6 +26,8 @@ class Filter extends React.Component {
     }
 
     render() {
+        const category = store.getState().filter.category;
+
         return (
             <div id="filterField" ref={(e) => this.filter = e}>
                 <div id="filterModeBox">
@@ -38,11 +40,17 @@ class Filter extends React.Component {
                         <Tabs.Tab title="Map" key="map"/>
                         <Tabs.Tab title="Stats" key="stats"/>
                     </Tabs>
-                    <div style={{marginTop: 10}}>
-                        <FilterHeader filterGrow={this.onFilterGrow.bind(this, false)}/>
-                        <FilterTags onChange={this.props.onChange}/>
-                        <FilterTimes onChange={this.props.onChange}/>
-                    </div>
+
+                    {category !== 'stats' &&
+                        <div style={{marginTop: 10}}>
+                            <FilterHeader filterGrow={this.onFilterGrow.bind(this, false)}/>
+                            <FilterTags onChange={this.props.onChange}/>
+                            <FilterTimes onChange={this.props.onChange}/>
+                        </div>}
+                    {category === 'stats' &&
+                        <div style={{marginTop: 10}} className="stats_sift">
+                            时长统计
+                        </div>}
                 </div>
             </div>
         )

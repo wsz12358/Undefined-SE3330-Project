@@ -6,12 +6,12 @@ import "../../css/ChatMessage.css"
 import {Image, SpinLoading} from "antd-mobile";
 
 const ChatMessage = (props) => {
-    const {msg} = props;
+    const { msg } = props;
     const {message, datatype, timestamp} = msg; // Destructure the 'msg' object
     const myType = (datatype !== "system");
     const t_avatar = myType ? avatar : r_avatar;
     let formattedTime;
-
+    let isVisible = true;
     if (typeof timestamp === 'string') {
         const arr = timestamp.split('/');
         formattedTime = arr[3]+':'+arr[4]+':'+arr[5];

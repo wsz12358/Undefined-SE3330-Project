@@ -1,7 +1,6 @@
 import {Dialog} from "antd-mobile";
 
 export default function SaveCurDialog () {
-    console.log("aaa");
     Dialog.show({
         style: {
             textAlign: 'center'

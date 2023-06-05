@@ -3,6 +3,9 @@ import {Button, Card, Dialog, DotLoading, Form, Input} from "antd-mobile";
 import store from "../../redux/Store";
 import {setIsLogin, setUserId, setUsername} from "../../redux/FilterActions";
 import {login} from "../../service/loginService";
+import {RightOutline} from "antd-mobile-icons";
+import OnClickRoute from "../../utils/OnClickRoute";
+import {withRouter} from "react-router-dom";
 
 
 class Login extends React.Component {
@@ -45,14 +48,23 @@ class Login extends React.Component {
                           onFinish={this.onFinish}
                           style={{width: '90%'}}
                           footer={
-                              <Button block type='login' color='primary' size='large'>
-                                  {this.state.waitLogin &&
+                              <>
+                                  <Button block type='login' color='primary' size='large'>
+                                      {this.state.waitLogin &&
+                                          <div>
+                                              Loading <DotLoading color='white'/>
+                                          </div>}
+                                      {!this.state.waitLogin &&
+                                          "Login"}
+                                  </Button>
+                                  <Button block color='primary' fill='outline' size='large'
+                                          style={{marginTop: '20px'}}
+                                            onClick={OnClickRoute.bind(this, "/mine/signup", "push")}>
                                       <div>
-                                          Loading <DotLoading color='white'/>
-                                      </div>}
-                                  {!this.state.waitLogin &&
-                                      "Login"}
-                              </Button>
+                                          Sign Up <RightOutline/>
+                                      </div>
+                                  </Button>
+                              </>
                           }
                     >
                         <Form.Header>Login</Form.Header>
@@ -74,4 +86,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default withRouter(Login);
