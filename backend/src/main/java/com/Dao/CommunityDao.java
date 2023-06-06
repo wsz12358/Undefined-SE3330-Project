@@ -5,6 +5,8 @@ import com.Entity.Event;
 import com.Entity.SharedEvent;
 import com.Entity.User;
 
+import java.util.List;
+
 public interface CommunityDao
 {
     void addSharedEvent(SharedEvent sharedEvent);
@@ -22,4 +24,6 @@ public interface CommunityDao
     Event getEvent(Integer id);
 
     User getUser(Integer id);
+
+    List<SharedEvent> getSharedEvents();
 }

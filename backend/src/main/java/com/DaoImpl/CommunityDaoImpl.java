@@ -12,6 +12,8 @@ import com.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class CommunityDaoImpl implements CommunityDao {
 
@@ -71,5 +73,11 @@ public class CommunityDaoImpl implements CommunityDao {
     public User getUser(Integer id)
     {
         return userRepository.getUserById(id);
+    }
+
+    @Override
+    public List<SharedEvent> getSharedEvents()
+    {
+        return sharedEventRepository.findAll();
     }
 }

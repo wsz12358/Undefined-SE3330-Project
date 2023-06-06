@@ -64,3 +64,28 @@ export const getCurEvent = (data, callback, errback) => {
     const url = "http://localhost:8080/curevent/get";
     postRequest(url, data, callback, errback);
 }
+
+export const shareEvent = (data, callback, errback) => {
+    const url = "http://localhost:8080/community/event/add";
+    postRequest(url, data, callback, errback);
+}
+
+export const addComment = (data, callback, errback) => {
+    const url = "http://localhost:8080/community/comment/add";
+    postRequest(url, data, callback, errback);
+}
+
+export const deleteComment = (data, callback, errback) => {
+    const url = "http://localhost:8080/community/comment/delete";
+    postRequest(url, data, callback, errback);
+}
+
+export const deleteSharedEvent = (data, callback, errback) => {
+    const url = "http://localhost:8080/community/event/delete";
+    postRequest(url, data, callback, errback);
+}
+
+export const getSharedEvents = (data, callback, errback) => {
+    const url = "http://localhost:8080/community/event/rand";
+    postRequest(url, data, callback, errback);
+}

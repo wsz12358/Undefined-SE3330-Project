@@ -3,6 +3,8 @@ package com.Service;
 import com.Entity.Comment;
 import com.Entity.SharedEvent;
 
+import java.util.List;
+
 public interface CommunityService {
     SharedEvent addEvent(String sharetime, Integer id);
 
@@ -11,4 +13,6 @@ public interface CommunityService {
     Comment addComment(String comment, Integer userid, Integer eventid);
 
     String deleteComment(Integer id);
+
+    List<SharedEvent> getSharedEvents();
 }
