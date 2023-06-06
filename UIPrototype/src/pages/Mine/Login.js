@@ -14,6 +14,7 @@ class Login extends React.Component {
     }
     onFinish = (e) => {
         const callback = (ret) => {
+            console.log(ret);
             if (ret) {
                 const u = e.username.toString();
                 Dialog.alert({
@@ -32,9 +33,16 @@ class Login extends React.Component {
             }
         }
 
+        const errback = (e) => {
+            console.log(e);
+            Dialog.alert({
+                content: "Wrong username or password",
+            });
+            this.setState({waitLogin: false})
+        }
+
         this.setState({waitLogin: true});
-        login({username: e.username, password: e.password}, callback,
-            () => this.setState({waitLogin: false}));
+        login({username: e.username, password: e.password}, callback, errback);
     }
 
     render() {

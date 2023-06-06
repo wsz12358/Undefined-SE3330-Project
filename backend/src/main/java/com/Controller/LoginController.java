@@ -44,15 +44,14 @@ public class LoginController {
         if (user == null)
         {
             JSONObject obj = new JSONObject();
-            obj.put("message", "username already exist!");
+            obj.put("message", "U_EXIST");
             return obj;
         }
         else
         {
             JSONObject obj = (JSONObject) JSON.toJSON(user);
-            obj.put("message", "success");
+            obj.put("message", "SUCCESS");
             return obj;
         }
     }
-
 }
