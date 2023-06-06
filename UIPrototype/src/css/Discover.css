@@ -5,13 +5,17 @@
     height: 100%;
     width: 100%;
     font: 2em "Microsoft Sans Serif";
+    background-color: #f8f9fa;
 }
 
 .discuv_head {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #fff;
+    background-color: rgb(76, 175, 80);
+    padding: 10px;
+    color: white;
+    font-size: 1.5em;
 }
 
 .discuv_field {
@@ -23,15 +27,20 @@
 .bottomLine {
     border-bottom: 1px solid gray;
     width: 100%;
+    margin-bottom: 20px;
 }
 
 .oneEvent {
     margin: 0.5em;
     display: flex;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.1);
 }
 
 .avatar {
-    /*margin-right: 10px;*/
+    margin-right: 10px;
 }
 
 .content {
@@ -43,31 +52,31 @@
     margin: auto;
     font-size: 0.8em;
     font-weight: bold;
-    color: #0a779f;
+    color: rgb(67, 160, 71);
+    margin-bottom: 10px;
 }
 
 .share {
     width: 90%;
     margin: auto;
     font-size: 0.8em;
+    margin-bottom: 10px;
 }
 
 .locationAndFunc {
     margin-bottom: 0.5em;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .locationAndFunc .location {
-    /*display: inline-block;*/
     font-size: 0.7em;
     color: #a9a1a1;
     margin-left: 5%;
 }
 
 .locationAndFunc .allFunc {
-    /*display: inline-block;*/
     text-align: right;
     width: 60%;
 }
@@ -75,17 +84,25 @@
 .locationAndFunc .allFunc .func {
     margin-left: 5%;
     display: inline-block;
+    color: rgb(27, 94, 32);
 }
 
 .comment {
     width: 90%;
-    margin: auto;
-    border: 1px solid black;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.1);
+    background-color: #f7f7f7;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
 }
 
 .comment .likePeople {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #d9d9d9;
     font-size: 0.7em;
+    padding-bottom: 5px;
+    text-align: left;
+    color: rgb(56, 142, 60);
 }
 
 .comment .reply {
@@ -94,6 +111,9 @@
 
 .comment .replyMessage {
     font-size: 0.7em;
+    margin-top: 10px;
+    text-align: left;
+    color: black;
 }
 
 .foot {
@@ -103,6 +123,7 @@
     justify-content: center;
     align-items: center;
     font: 1em "Microsoft Sans Serif";
+    color: darkgray;
 }
 
 .aaa {
