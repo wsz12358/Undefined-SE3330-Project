@@ -134,10 +134,12 @@
 
 .stats_listField {
     display: flex;
+    position: relative;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     padding-bottom: 100px;
+    padding-top: 70px;
 }
 
 #stats_timeScroll {
@@ -186,7 +188,6 @@
 .stats_statsArrow {
     background-color: grey;
     border-radius: 50%;
-    position: absolute;
     padding: 5px 5px;
     color: white;
 }

@@ -4,6 +4,8 @@ import store from "../../redux/Store";
 import BarChart from "../../components/BarChart";
 import * as echart from "echarts";
 import {LeftOutline, RightOutline} from "antd-mobile-icons";
+import StatsHeader from "../../components/StatsHeader";
+import PieChart from "../../components/PieChart";
 
 class Stats_StatsList extends React.Component {
     state = {
@@ -17,48 +19,27 @@ class Stats_StatsList extends React.Component {
     render() {
         return (
             <div className='stats_listField'>
+                <StatsHeader beginTime={this.state.beginTime}
+                             finishTime={this.state.finishTime}
+                             setState={this.setState.bind(this)}/>
 
                 <div className="stats_statsBox">
-                    <div style={{
-                        font: '600 20px/1.2 "Microsoft YaHei UI"',
-                        textAlign: 'center', padding: '5px 10px',
-                        backgroundColor: '#bbdfbb', borderRadius: '20px',
-                    }}>
-                        {this.state.beginTime !== null &&
-                            (this.state.beginTime.getMonth() + 1).toString() + "/" +
-                            (this.state.beginTime.getDate()).toString()}
-                        &nbsp; - &nbsp;
-                        {this.state.finishTime !== null &&
-                            (this.state.finishTime.getMonth() + 1).toString() + "/" +
-                            (this.state.finishTime.getDate()).toString()}
-                        <div style={{fontSize: '20px', textAlign: 'center'}}>
-                            一周内时长统计（秒）
-                        </div>
+                    <div style={{fontSize: '20px', textAlign: 'center'}}>
+                        一周内时长统计（秒）
                     </div>
 
                     <div style={{width: '100%', height: '100%'}} id="stats1"/>
-                    <div className="stats_statsArrow" style={{left: '-20px'}}>
-                        <LeftOutline onClick={() => {
-                            const beginTime = new Date(this.state.beginTime.getTime() - 7 * (24 * 60 * 60 * 1000));
-                            const finishTime = new Date(this.state.finishTime.getTime() - 7 * (24 * 60 * 60 * 1000));
-                            this.setState({beginTime: beginTime, finishTime: finishTime});
-                        }}
-                                     fontSize={30}/>
-                    </div>
-                    <div className="stats_statsArrow" style={{right: '-20px'}}>
-                        <RightOutline onClick={() => {
-                            const beginTime = new Date(this.state.beginTime.getTime() + 7 * (24 * 60 * 60 * 1000));
-                            const finishTime = new Date(this.state.finishTime.getTime() + 7 * (24 * 60 * 60 * 1000));
-                            this.setState({beginTime: beginTime, finishTime: finishTime});
-                        }}
-                                      fontSize={30}/>
-                    </div>
                 </div>
 
 
                 <div className="stats_statsBox">
-                    Stats2.
+                    <div style={{fontSize: '20px', textAlign: 'center'}}>
+                        一周内标签统计（秒）
+                    </div>
+
+                    <div style={{width: '100%', height: '100%'}} id="stats2"/>
                 </div>
+
                 <div className="stats_statsBox">
                     Stats3.
                 </div>
@@ -84,11 +65,15 @@ class Stats_StatsList extends React.Component {
         this.setState({beginTime: beginTime, finishTime: finishTime});
 
         const s1 = document.getElementById('stats1');
-        this.chart = echart.init(s1);
+        this.chart1 = echart.init(s1);
+
+        const s2 = document.getElementById('stats2');
+        this.chart2 = echart.init(s2);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        BarChart(this.chart, this.state.eventList, this.state.beginTime, this.state.finishTime);
+        BarChart(this.chart1, this.state.eventList, this.state.beginTime, this.state.finishTime);
+        PieChart(this.chart2, this.state.eventList, this.state.beginTime, this.state.finishTime);
     }
 }
 

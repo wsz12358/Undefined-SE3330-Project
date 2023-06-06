@@ -53,7 +53,7 @@ export default function BarChart(chart, eventList, beginDate, finishDate) {
 
     option.series[0].data = [0, 0, 0, 0, 0, 0, 0];
 
-    eventList = eventList.filter((item) => {
+    eventList.filter((item) => {
         const dayArr = item.begintime.split('/');
         const day = new Date(dayArr[0], Number(dayArr[1] - 1), dayArr[2]);
         if (day >= beginDate && day <= finishDate) {
@@ -61,10 +61,6 @@ export default function BarChart(chart, eventList, beginDate, finishDate) {
             return true;
         } else return false;
     });
-
-    console.log(option.series[0].data);
-
-    console.log(eventList);
 
     chart.setOption(option);
 }
