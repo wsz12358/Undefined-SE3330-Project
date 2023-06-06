@@ -6,6 +6,7 @@ import OnClickRoute from "../../utils/OnClickRoute";
 import {Image} from "antd-mobile";
 import sea from "../../assets/sea.jpg"
 import {getSharedEvents} from "../../service/loginService";
+import store from "../../redux/Store";
 
 class Discover extends React.Component {
 
@@ -33,7 +34,9 @@ class Discover extends React.Component {
         const lat = singleItem.event.lat;
         const mul = singleItem.event.mul;
         const comments = singleItem.comments;
-        return <DiscoverCommentItem name={name} messages={messages} lat={lat} mul={mul} comments={comments} key={idx}/>
+        const userID = store.getState().user.userid.toString();
+        const sharedEventId = singleItem.sharedeventId;
+        return <DiscoverCommentItem sharedEventId={sharedEventId} userId={userID} name={name} messages={messages} lat={lat} mul={mul} comments={comments} key={idx}/>
     }
 
     render() {
