@@ -91,6 +91,19 @@ const DiscoverCommentItem = (props) => {
     const [commenting, setCommenting] = useState(false);
     const [Location, setLocation] = useState("");
 
+    useEffect(()=>{
+        const map = new BMap.Map("l-map");
+// 创建地理编码实例, 并配置参数获取乡镇级数据
+        const myGeo = new BMap.Geocoder({extensions_town: true});
+// 根据坐标得到地址描述
+        myGeo.getLocation(new BMap.Point(props.mul, props.lat), function(result){
+            if (result){
+                console.log(result.address);
+                setLocation(result.address);
+            }
+        });
+    },[])
+
     return (
         <div className='bottomLine'>
             <div className='oneEvent'>
