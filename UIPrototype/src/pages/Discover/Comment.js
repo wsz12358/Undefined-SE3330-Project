@@ -3,6 +3,7 @@ import {DeleteOutline, LikeOutline, MessageOutline, SendOutline} from "antd-mobi
 import {Button} from "antd";
 import "../../css/Discover.css"
 import jntm from "../../assets/jntm.png"
+import ava from "../../assets/miyu.jpg"
 import {ListItem} from "antd-mobile/es/components/list/list-item";
 import {GridItem} from "antd-mobile/es/components/grid/grid";
 import React, {useRef, useState} from "react";
@@ -22,7 +23,7 @@ const renderImages = (img, idx) => {
         <Image src={img.message} width={100} height={100} fit='fill' onClick={() => {
             Modal.show({
                 image: img.message,
-                content: "jntm",
+                content: "Record",
                 closeOnMaskClick: true,
                 actions: []
             })
@@ -55,9 +56,11 @@ const deleteEvent = (id) => {
     );
 };
 
-const myAddComment = (cmt, sharedEventId, userId) => {
+const myAddComment = (cmt, sharedEventId, userId, refresh) => {
     const data = {comment: cmt, sharedeventid: sharedEventId, userid: userId};
-    const callback = () => {};
+    const callback = () => {
+        refresh();
+    };
     const errback = (e) => {console.log("add comment error:", e)};
     addComment(data, callback, errback);
 }
@@ -71,13 +74,11 @@ const DiscoverCommentItem = (props) => {
         <div className='bottomLine'>
             <div className='oneEvent'>
                 <div className="avatar">
-                    <Avatar src={jntm}/>
+                    <Avatar src={ava}/>
                 </div>
                 <div className="content">
                     <div className={"name"}>{props.name}</div>
-                    {/*region share*/}
                     <div className="share">
-                        {/*全民制作人大家好，我是练习时长两年半的个人练习生蔡徐坤，喜欢唱、跳、rap、篮球，music*/}
                         {props.messages.some(value => value.datatype === "msg") &&
                             <List>
                                 {props.messages.map(renderThoughts)}
@@ -89,51 +90,20 @@ const DiscoverCommentItem = (props) => {
                             </Grid>
                         }
                     </div>
-                    {/*endregion*/}
                     <div className={"locationAndFunc"}>
                         <div className={"location"}>
                             地点：美国
                         </div>
-                        {/*region allFunc*/}
                         <div className='allFunc'>
-                            {/*<div className={"func"}>
-                                <LikeOutline/>
-                            </div>*/}
-                            {/*<div className={"func"}>
-                                <SendOutline/>
-                            </div>*/}
                             <Button className={"func"} icon={<MessageOutline />} onClick={() => setCommenting(true)}></Button>
                             <Button className={"func"} icon={<DeleteOutline/>} onClick={() => deleteEvent(props.sharedEventId)}></Button>
                         </div>
-                        {/*endregion*/}
                     </div>
-                    {/*region comment*/}
-                    <div className={"comment"}>
-                        {/*<div className={"likePeople"}>*/}
-                        {/*    <LikeOutline/>*/}
-                        {/*    纯鹿仁*/}
-                        {/*    梅素汁*/}
-                        {/*    共2人点赞*/}
-                        {/*</div>*/}
-                        {/*<div className={"reply"}>*/}
-                        {/*    <div className={"replyMessage"}>*/}
-                        {/*        纯鹿仁：哈哈*/}
-                        {/*    </div>*/}
-                        {/*    <div className={"replyMessage"}>*/}
-                        {/*        梅素汁：嘿嘿*/}
-                        {/*    </div>*/}
-                        {/*    <div className={"replyMessage"}>*/}
-                        {/*        贞癌坟回复纯鹿仁：食不食油饼,拿什么荔枝*/}
-                        {/*    </div>*/}
-                        {/*</div>*/}
-                    </div>
-                    {/*endregion*/}
                     {props.comments.length !== 0 && <div className={"comment"}>
                         {props.comments.map(renderComments)}
                     </div>}
-                    {/*region new comment*/}
                     {commenting && <Form name={"form"} layout={"horizontal"} onFinish={(v) => {
-                        myAddComment(v.inputComment, props.sharedEventId, props.userId);
+                        myAddComment(v.inputComment, props.sharedEventId, props.userId, props.refresh);
                         commentRef.current.clear();
                     }}>
                         <Form.Item name={"inputComment"}>
@@ -142,7 +112,6 @@ const DiscoverCommentItem = (props) => {
                             }}/>
                         </Form.Item>
                     </Form>}
-                    {/*    endregion*/}
                 </div>
             </div>
         </div>

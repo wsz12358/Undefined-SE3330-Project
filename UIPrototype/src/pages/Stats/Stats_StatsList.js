@@ -40,9 +40,9 @@ class Stats_StatsList extends React.Component {
                     <div style={{width: '100%', height: '100%'}} id="stats2"/>
                 </div>
 
-                <div className="stats_statsBox">
-                    Stats3.
-                </div>
+                {/*<div className="stats_statsBox">*/}
+                {/*    Stats3.*/}
+                {/*</div>*/}
             </div>
         )
     }
