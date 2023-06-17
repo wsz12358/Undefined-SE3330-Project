@@ -6,9 +6,10 @@ import jntm from "../../assets/jntm.png"
 import ava from "../../assets/miyu.jpg"
 import {ListItem} from "antd-mobile/es/components/list/list-item";
 import {GridItem} from "antd-mobile/es/components/grid/grid";
-import React, {useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {addComment} from "../../service/loginService";
 import {postRequest} from "../../utils/Ajax";
+import BMap from 'BMap';
 
 const renderThoughts = (msg, idx) => {
     if (msg.datatype === "img") return;
@@ -36,7 +37,25 @@ const renderComments = (cmt, idx) => {
         {cmt.user.nickname}: {cmt.comment}
     </div>
 }
-const deleteEvent = (id) => {
+
+const getAddress = (lat, mul, refresh) => {
+    const map = new BMap.Map("l-map");
+    let address = "";
+// 创建地理编码实例, 并配置参数获取乡镇级数据
+    const myGeo = new BMap.Geocoder({extensions_town: true});
+// 根据坐标得到地址描述
+    myGeo.getLocation(new BMap.Point(mul, lat), function(result){
+        if (result){
+            console.log(result.address);
+            address = result.address;
+            // refresh();
+        }
+    });
+    return address
+}
+
+
+const deleteEvent = (id, refresh) => {
     const url = "http://localhost:8080/community/event/delete"
     const share_id = id.toString();
     console.log({sharedeventid: share_id});
@@ -46,6 +65,7 @@ const deleteEvent = (id) => {
             if (response.message === 'success') {
                 // 如果删除成功，刷新页面
                 //window.location.reload();
+                refresh();
             } else {
                 console.error('删除事件失败: ' + response.message);
             }
@@ -69,6 +89,7 @@ const DiscoverCommentItem = (props) => {
 
     const commentRef = useRef()
     const [commenting, setCommenting] = useState(false);
+    const [Location, setLocation] = useState("");
 
     return (
         <div className='bottomLine'>
@@ -92,11 +113,14 @@ const DiscoverCommentItem = (props) => {
                     </div>
                     <div className={"locationAndFunc"}>
                         <div className={"location"}>
-                            地点：美国
+                            地点：{Location}
                         </div>
                         <div className='allFunc'>
-                            <Button className={"func"} icon={<MessageOutline />} onClick={() => setCommenting(true)}></Button>
-                            <Button className={"func"} icon={<DeleteOutline/>} onClick={() => deleteEvent(props.sharedEventId)}></Button>
+                            <Button className={"func"} icon={<MessageOutline/>} onClick={() => setCommenting(true)}/>
+                            {props.sharedEventUserId === props.userId && <Button className={"func"} icon={<DeleteOutline/>} onClick={async () => {
+                                const res = await Modal.confirm({content: "确定要删除吗？"})
+                                if (res) deleteEvent(props.sharedEventId, props.refresh)
+                            }}/>}
                         </div>
                     </div>
                     {props.comments.length !== 0 && <div className={"comment"}>
