@@ -8,11 +8,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 public interface CureventRepository extends JpaRepository<Curevent, Integer> {
 
-    @Modifying
+    @Modifying@Transactional
     @Query(value = "delete from Curevent where user.userId = :user ")
     void deleteCureventsByUser(@Param("user") Integer user);
 

@@ -22,8 +22,8 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<Message> GetMessages(Integer event) {
-        return messageDao.GetMessages(event);
+    public List<Message> GetMessages(Integer eventid) {
+        return messageDao.GetMessages(eventid);
     }
 
     @Override

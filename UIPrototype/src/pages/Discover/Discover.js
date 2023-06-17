@@ -12,12 +12,13 @@ class Discover extends React.Component {
 
     getSharedEvents = () => {
         const callback = (res) => {
+            console.log(res);
             this.setState({shareEvents: res})
         }
         const errback = (e) => {
             console.log("get shared events error:", e);
         }
-        getSharedEvents({}, callback, errback);
+        getSharedEvents(null, callback, errback);
     }
 
     constructor(props) {

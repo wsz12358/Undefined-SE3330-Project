@@ -1,7 +1,9 @@
 package com.DaoImpl;
 
 import com.Dao.MessageDao;
+import com.Entity.Event;
 import com.Entity.Message;
+import com.Repository.EventRepository;
 import com.Repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,6 +18,9 @@ public class MessageDaoImpl implements MessageDao {
     @Autowired
     MessageRepository messageRepository;
 
+    @Autowired
+    EventRepository eventRepository;
+
     @Override
     public void AddMessage(Message message) {
         messageRepository.save(message);
@@ -23,8 +28,9 @@ public class MessageDaoImpl implements MessageDao {
 
     @Override
     public List<Message> GetMessages(Integer event) {
+        Event e = eventRepository.findEventByEventId(event);
 
-        return messageRepository.findByEvent(event);
+        return messageRepository.findByEvent(e);
     }
 
     @Override

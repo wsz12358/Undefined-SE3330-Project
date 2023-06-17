@@ -6,8 +6,10 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import javax.transaction.Transactional;
+
 public interface CommentRepository  extends JpaRepository<Comment, Integer> {
-    @Modifying
+    @Modifying@Transactional
     @Query("delete from Comment where CommentId = :id")
     void deleteCommentByCommentId(@Param("id") Integer id);
 

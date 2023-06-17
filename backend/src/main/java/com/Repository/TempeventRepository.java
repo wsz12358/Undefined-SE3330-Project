@@ -7,9 +7,11 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public interface TempeventRepository  extends JpaRepository<Tempevent, Integer>
+import javax.transaction.Transactional;
 
-    {@Modifying
+public interface TempeventRepository  extends JpaRepository<Tempevent, Integer> {
+
+    @Modifying@Transactional
     @Query(value = "delete from Tempevent where user.userId = :user")
     void deleteTempeventByUser(@Param("user") Integer user);
 

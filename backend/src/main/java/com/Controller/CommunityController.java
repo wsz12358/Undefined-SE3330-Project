@@ -29,7 +29,8 @@ public class CommunityController {
         String sharetime = params.get(CommunityConstant.SHARETIME);
         String eventid = params.get(CommunityConstant.EVENTID);
         SharedEvent s = communityService.addEvent(sharetime, Integer.valueOf(eventid));
-        return (JSONObject) JSON.toJSON(s);
+        JSONObject object = (JSONObject) JSON.toJSON(s);
+        return object;
     }
 
     @RequestMapping("/comment/add")
@@ -63,7 +64,7 @@ public class CommunityController {
     }
 
     @RequestMapping("/event/rand")
-    public JSONArray getRand(@RequestBody Map<String, String> params)
+    public JSONArray getRand()
     {
         List<SharedEvent> mes = communityService.getSharedEvents();
         return JSONArray.parseArray(JSON.toJSONString(mes));

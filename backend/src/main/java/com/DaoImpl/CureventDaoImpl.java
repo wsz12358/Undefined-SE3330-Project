@@ -19,6 +19,7 @@ public class CureventDaoImpl implements CureventDao {
     {
         return cureventRepository.findCureventsByUser(user);
     }
+
     @Override
     public void AddCurevent(Curevent curevent)
     {
@@ -26,8 +27,7 @@ public class CureventDaoImpl implements CureventDao {
     }
 
     @Override
-    public void DeleteCurevent(Integer user)
-    {
+    public void DeleteCurevent(Integer user) {
         cureventRepository.deleteCureventsByUser(user);;
     }
 }
