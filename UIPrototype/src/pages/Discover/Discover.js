@@ -37,11 +37,13 @@ class Discover extends React.Component {
         const comments = singleItem.comments;
         const userID = store.getState().user.userid.toString();
         const sharedEventId = singleItem.sharedeventId;
+        const sharedEventUserId = singleItem.event.user.userId.toString();
         return <DiscoverCommentItem sharedEventId={sharedEventId}
                                     userId={userID} name={name}
                                     messages={messages}
                                     lat={lat} mul={mul}
                                     comments={comments} key={idx}
+                                    sharedEventUserId = {sharedEventUserId}
                                     refresh={this.getSharedEvents.bind(this)}/>
     }
 
