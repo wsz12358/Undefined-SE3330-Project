@@ -1,10 +1,9 @@
-package com.Service;
+package com.ServiceImpl;
 
 import com.Entity.Event;
 import com.Entity.Tempevent;
-import com.alibaba.fastjson.JSONObject;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import com.Service.EventService;
+import com.Service.LoginService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,7 +13,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class EventServiceTest {
+class EventServiceImplTest {
     @Autowired
     EventService eventService;
     @Autowired
@@ -72,5 +71,12 @@ class EventServiceTest {
 
     @Test
     void continueEvent() {
+    }
+
+    @Test
+    void randEvent() {
+        List<Event> eventList = eventService.RandEvent();
+
+        assert eventList.size() <= 10;
     }
 }

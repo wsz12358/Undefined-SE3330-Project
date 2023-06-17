@@ -41,7 +41,7 @@ public class EventServiceImpl implements EventService {
     public Tempevent ContinueEvent(Integer user) {return eventDao.ContinueEvent(user);}
 
     @Override
-    public  List<Event> RandEvent()
+    public List<Event> RandEvent()
     {
         List<Event> events = eventDao.GetEvents(1);
         List<Event> randevents = new ArrayList<>();
