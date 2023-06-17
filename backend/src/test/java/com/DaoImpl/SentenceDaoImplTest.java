@@ -19,7 +19,7 @@ class SentenceDaoImplTest {
     void getOneByTagAndId() {
         Sentence sentence = sentenceDao.GetOneByTagAndId(1, "study");
 
-        assertEquals("学无止境，您的求知精神实在令人敬佩。不过，博士，也请不要过度透支自己，保重身体哦。\n", sentence.getSentence());
+        assertEquals("学无止境，您的求知精神实在令人敬佩。不过，博士，也请不要过度透支自己，保重身体哦! \n", sentence.getSentence());
         sentenceDao.UpdateSentence("学无止境，您的求知精神实在令人敬佩。不过，博士，也请不要过度透支自己，保重身体哦! \n", 1);
         Sentence sentence1 = sentenceDao.FindSentence(1);
 

@@ -28,9 +28,9 @@ class CommunityControllerTest {
         Map<String, String> map = new HashMap<>();
         map.put("sharetime", "12");
         map.put("eventid", "32");
-//        SharedEvent sharedEvent = communityController.addSharedEvent(map);
-//        assertEquals("12", sharedEvent.getSharetime());
-//        assertEquals(32, sharedEvent.getEvent().getEventid());
+        SharedEvent sharedEvent = communityController.addSharedEvent(map);
+        assertEquals("12", sharedEvent.getSharetime());
+        assertEquals(32, sharedEvent.getEvent().getEventid());
     }
 
     @Test
@@ -39,10 +39,10 @@ class CommunityControllerTest {
         map.put("userid", "1");
         map.put("sharedeventid", "3");
         map.put("comment", "aaa");
-//        Comment comment = communityController.addComment(map);
+        Comment comment = communityController.addComment(map);
 
-//        assertEquals(1, comment.getUser().getUserId());
-//        assertEquals(3, comment.getSharedevent());
+        assertEquals(1, comment.getUser().getUserId());
+        assertEquals(3, comment.getSharedevent());
     }
 
     @Test
@@ -51,13 +51,13 @@ class CommunityControllerTest {
         map.put("userid", "1");
         map.put("sharedeventid", "3");
         map.put("comment", "aaa");
-//        Comment comment = communityController.addComment(map);
+        Comment comment = communityController.addComment(map);
 
-//        Map<String, String> map1 = new HashMap<>();
-//        map1.put("commentid", comment.getCommentId().toString());
-//
-//        JSONObject object = communityController.deleteComment(map1);
-//        assertEquals("success", object.get("message"));
+        Map<String, String> map1 = new HashMap<>();
+        map1.put("commentid", comment.getCommentId().toString());
+
+        JSONObject object = communityController.deleteComment(map1);
+        assertEquals("success", object.get("message"));
     }
 
     @Test
@@ -65,18 +65,18 @@ class CommunityControllerTest {
         Map<String, String> map = new HashMap<>();
         map.put("sharetime", "12");
         map.put("eventid", "32");
-//        SharedEvent sharedEvent = communityController.addSharedEvent(map);
-//
-//        Map<String, String> map1 = new HashMap<>();
-//        map1.put("sharedeventid", sharedEvent.getSharedeventId().toString());
-//        JSONObject object = communityController.deleteEvent(map1);
-//
-//        assertEquals("success", object.get("message"));
+        SharedEvent sharedEvent = communityController.addSharedEvent(map);
+
+        Map<String, String> map1 = new HashMap<>();
+        map1.put("sharedeventid", sharedEvent.getSharedeventId().toString());
+        JSONObject object = communityController.deleteEvent(map1);
+
+        assertEquals("success", object.get("message"));
     }
 
     @Test
     void getRand() {
-//        List<SharedEvent> sharedEventList = communityController.getRand();
-//        assert sharedEventList.size() >= 3;
+        List<SharedEvent> sharedEventList = communityController.getRand();
+        assert sharedEventList.size() >= 3;
     }
 }

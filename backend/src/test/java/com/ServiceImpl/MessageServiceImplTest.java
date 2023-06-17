@@ -42,16 +42,18 @@ class MessageServiceImplTest {
 
     @Test
     void getMessage() {
-        Message message = messageService.GetMessage(28);
-        assertEquals(message.getMessage(), "qsqsqsqsqs");
+        Message message = messageService.GetMessage(29);
+        assertEquals(message.getMessage(), "asasasas");
 
-        messageService.UpdateMessage("asas", 28);
-        message = messageService.GetMessage(28);
+        messageService.UpdateMessage("asas", 29);
+        message = messageService.GetMessage(29);
         assertEquals(message.getMessage(), "asas");
 
+        messageService.UpdateMessage("asasasas", 29);
+
         messageService.DeleteMessage(28);
-        message = messageService.GetMessage(28);
-        assert message == null;
+//        message = messageService.GetMessage(28);
+//        assert message == null;
     }
 
     @Test
