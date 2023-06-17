@@ -1,4 +1,4 @@
-import {Avatar, Form, Grid, Image, Input, List, Modal, Space, Tag} from "antd-mobile";
+import {Avatar, Form, Grid, Image, Input, List, Modal, Popover, Space, Tag} from "antd-mobile";
 import {DeleteOutline, LikeOutline, MessageOutline, SendOutline} from "antd-mobile-icons";
 import {Button} from "antd";
 import "../../css/Discover.css"
@@ -7,7 +7,7 @@ import ava from "../../assets/miyu.jpg"
 import {ListItem} from "antd-mobile/es/components/list/list-item";
 import {GridItem} from "antd-mobile/es/components/grid/grid";
 import React, {useEffect, useRef, useState} from "react";
-import {addComment} from "../../service/loginService";
+import {addComment, deleteComment} from "../../service/loginService";
 import {postRequest} from "../../utils/Ajax";
 import BMap from 'BMap';
 
@@ -85,6 +85,16 @@ const myAddComment = (cmt, sharedEventId, userId, refresh) => {
     addComment(data, callback, errback);
 }
 
+const myDeleteComment = (commentId, refresh) => {
+    const data = {commentid:commentId}
+    const callback = (res) => {
+        console.log(res);
+        refresh();
+    }
+    const errback = (e) => {console.log("delete comment error:", e)}
+    deleteComment(data, callback, errback);
+}
+
 const DiscoverCommentItem = (props) => {
 
     const commentRef = useRef()
@@ -137,7 +147,22 @@ const DiscoverCommentItem = (props) => {
                         </div>
                     </div>
                     {props.comments.length !== 0 && <div className={"comment"}>
-                        {props.comments.map(renderComments)}
+                        {props.comments.map((cmt, idx) => {
+                            if (cmt.user.userId.toString() !== props.userId)
+                            return <div className={"replyMessage"}>
+                                {cmt.user.nickname}: {cmt.comment}
+                            </div>
+                            else
+                                return <Popover content={<Button onClick={async ()=>{
+                                    const res = await Modal.confirm({content: "确定要删除吗？"})
+                                    if (res) myDeleteComment(cmt.commentId, props.refresh);
+                                }
+                                }>删除</Button>} trigger={'click'}>
+                                    <div className={"replyMessage"}>
+                                        {cmt.user.nickname}: {cmt.comment}
+                                    </div>
+                            </Popover>
+                        })}
                     </div>}
                     {commenting && <Form name={"form"} layout={"horizontal"} onFinish={(v) => {
                         myAddComment(v.inputComment, props.sharedEventId, props.userId, props.refresh);
