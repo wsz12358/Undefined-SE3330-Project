@@ -4,6 +4,7 @@ import HeaderBar from "../../components/HeaderBar";
 import ChatMessage from "../../components/Record/ChatMessage";
 import moment from "moment/moment";
 import {continueEvent, pauseEvent, saveCurMsg} from "../../service/loginService";
+import {getSentence} from "../../service/RecordService";
 import store from "../../redux/Store";
 import RecordBottom from "../../components/Record/RecordBottom";
 import SaveCurDialog from "../../utils/Record/SaveCurDialog";
@@ -11,7 +12,7 @@ import BlockQuitDialog from "../../utils/Record/BlockQuitDialog";
 import SaveQuitDialog from "../../utils/Record/SaveQuitDialog";
 import ContinueDialog from "../../utils/Record/ContinueDialog";
 import BgMask from "../../components/BgMask";
-
+const timeInterval = 30000;
 class Record extends React.Component {
     constructor(props) {
         super(props);
@@ -240,6 +241,24 @@ class Record extends React.Component {
     }
 
     componentDidMount() {
+        this.messageInterval = setInterval(() => {
+
+            let messageContent;
+            if (this.state.select === undefined || this.state.select.length === 0) {
+                messageContent = "default";
+            } else {
+                messageContent = this.state.select[0].toString();
+            }
+            let backmsg;
+            console.log(messageContent);
+            getSentence({
+                    robot_id: "1",
+                    tag:messageContent,
+                },
+                (backmsg) => {
+                    this.addMsg(backmsg.sentence, "system");
+                });
+        }, timeInterval);
         const callback = (data) => {
             this.ContinueDialog(data);
         }
@@ -250,6 +269,10 @@ class Record extends React.Component {
 
         if (!this.state.isLoaded)
             continueEvent({user: store.getState().user.userid.toString()}, callback, errback);
+    }
+    componentWillUnmount() {
+        // Clear the interval when the component unmounts
+        clearInterval(this.messageInterval);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
