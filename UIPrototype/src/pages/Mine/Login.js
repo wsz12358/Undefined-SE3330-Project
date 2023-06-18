@@ -18,7 +18,7 @@ class Login extends React.Component {
             if (ret) {
                 const u = e.username.toString();
                 Dialog.alert({
-                    content: "Welcome! Dear " + u + ".",
+                    content: "欢迎！亲爱的 " + u + "。",
                 });
                 store.dispatch(setIsLogin(true));
                 store.dispatch(setUsername(e.username));
@@ -27,7 +27,7 @@ class Login extends React.Component {
                 // if access to password is required, program should fetch from Backend
             } else {
                 Dialog.alert({
-                    content: "Wrong username or password",
+                    content: "用户名或密码错误",
                 });
                 this.setState({waitLogin: false})
             }
@@ -36,7 +36,7 @@ class Login extends React.Component {
         const errback = (e) => {
             console.log(e);
             Dialog.alert({
-                content: "Wrong username or password",
+                content: "用户名或密码错误",
             });
             this.setState({waitLogin: false})
         }
@@ -60,31 +60,31 @@ class Login extends React.Component {
                                   <Button block type='login' color='primary' size='large'>
                                       {this.state.waitLogin &&
                                           <div>
-                                              Loading <DotLoading color='white'/>
+                                              加载中 <DotLoading color='white'/>
                                           </div>}
                                       {!this.state.waitLogin &&
-                                          "Login"}
+                                          "登录"}
                                   </Button>
                                   <Button block color='primary' fill='outline' size='large'
                                           style={{marginTop: '20px'}}
                                             onClick={OnClickRoute.bind(this, "/mine/signup", "push")}>
                                       <div>
-                                          Sign Up <RightOutline/>
+                                          注册 <RightOutline/>
                                       </div>
                                   </Button>
                               </>
                           }
                     >
-                        <Form.Header>Login</Form.Header>
+                        <Form.Header>登录</Form.Header>
                         <Form.Item name='username'
-                                   label='Username'
+                                   label='用户名'
                                    initialValue={this.props.location.state === undefined ?
                                        "group7" : this.props.location.state.username}
-                                   rules={[{required: true, message: 'username must not be null'}]}>
+                                   rules={[{required: true, message: '用户名不能为空'}]}>
                             <Input clearable/>
                         </Form.Item>
                         <Form.Item name='password'
-                                   label='Password'
+                                   label='密码'
                                    initialValue={this.props.location.state === undefined ?
                                        "sjtuse2021" : this.props.location.state.password}>
                             <Input clearable type='password'/>

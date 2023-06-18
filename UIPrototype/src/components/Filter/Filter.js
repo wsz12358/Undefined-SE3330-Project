@@ -36,9 +36,9 @@ class Filter extends React.Component {
                         this.onFilterGrow(true);
                     }}
                           activeKey={store.getState().filter.category}>
-                        <Tabs.Tab title="Events" key="event"/>
-                        <Tabs.Tab title="Map" key="map"/>
-                        <Tabs.Tab title="Stats" key="stats"/>
+                        <Tabs.Tab title="事件" key="event"/>
+                        <Tabs.Tab title="地图" key="map"/>
+                        <Tabs.Tab title="统计" key="stats"/>
                     </Tabs>
 
                     {category !== 'stats' &&

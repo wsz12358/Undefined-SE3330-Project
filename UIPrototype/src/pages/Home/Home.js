@@ -34,7 +34,7 @@ class Home extends React.Component {
             return (
                 <div id="home_noteBox">
                     {this.state.isLogin && FocusUser.facade_memo}
-                    {!this.state.isLogin && "Please go login."}
+                    {!this.state.isLogin && "请登录"}
                 </div>
             )
         } else {
@@ -50,7 +50,7 @@ class Home extends React.Component {
         return (
             <div id="home_body">
                 <div id="home_avatarField">
-                    ProLiferate
+                    生活记录仪
                     <div id="home_avatar"
                          onClick={OnClickRoute.bind(this, this.goAddr, "push")}>
                         <img alt="avatar"
@@ -69,7 +69,7 @@ class Home extends React.Component {
                         <UndoOutline fontSize={18}/>
                     </Button>
                     <div id="home_countBox">
-                        {this.state.isLogin && "本月已记录10次"}
+                        {/*{this.state.isLogin && "本月已记录10次"}*/}
                         {!this.state.isLogin && "请进行登录"}
                     </div>
                     <Button className="home_startBtn" size='large'

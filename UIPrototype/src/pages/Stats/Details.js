@@ -290,7 +290,7 @@ class Details extends React.Component {
 
             <div className="detail_eventField">
                 <div className="deTitle">
-                    This is event {this.eventId}
+                    这是事件 {this.eventId}
                 </div>
                 <div className='deTime'>
                     2023
@@ -349,7 +349,7 @@ class Details extends React.Component {
                             </div>
                         }
                     </Collapse.Panel>
-                    <Collapse.Panel key='tag' title='tag' className="myCollapsePanel">
+                    <Collapse.Panel key='tag' title='标签' className="myCollapsePanel">
                         {
                             <Grid columns={5}>
                                 {this.state.allTags[0] !== '' && this.state.allTags.map(this.renderTags)}
@@ -386,13 +386,12 @@ class Details extends React.Component {
                                                       columns={3}
                                                       showCheckMark={false}
                                                       options={[
-                                                          {label: '唱', value: 1},
-                                                          {label: '跳', value: 2},
-                                                          {label: 'rap', value: 3},
-                                                          {label: '篮球', value: 4},
-                                                          {label: 'music', value: 5},
-                                                          {label: '吃饭', value: 6},
-                                                          {label: '睡觉', value: 7}
+                                                          {label: '学习', value: 1},
+                                                          {label: '工作', value: 2},
+                                                          {label: '运动', value: 3},
+                                                          {label: '社交', value: 4},
+                                                          {label: '休闲', value: 5},
+                                                          {label: '其他', value: 6},
                                                       ]}/>
                                         )
                                     })

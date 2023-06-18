@@ -17,11 +17,11 @@ class Signup extends React.Component {
         const callback = (data) => {
             if (data.message === "U_EXIST") {
                 Dialog.alert({
-                    content: "Username already exists."
+                    content: "用户名已存在"
                 });
             } else if (data.message === "SUCCESS") {
                 Dialog.show({
-                        content: "Signup success.",
+                        content: "注册成功",
                         closeOnAction: true,
                         actions: [[
                             {key: 'confirm', text: '确认'},
@@ -43,7 +43,7 @@ class Signup extends React.Component {
 
     pwdValidator = (rule, value, callback) => {
         if (value !== this.form.getFieldValue('password')) {
-            callback("Inconsistent password.");
+            callback("两次输入不一致");
         } else callback();
     }
 
@@ -69,27 +69,27 @@ class Signup extends React.Component {
                                       <Button block type='login' color='primary' size='large'>
                                           {this.state.waitSignup &&
                                               <div>
-                                                  Loading <DotLoading color='white'/>
+                                                  加载中 <DotLoading color='white'/>
                                               </div>}
                                           {!this.state.waitSignup &&
-                                              "Sign up"}
+                                              "注册"}
                                       </Button>
                                   </>
                               }
                         >
-                            <Form.Header>Sign up</Form.Header>
+                            <Form.Header>注册</Form.Header>
                             <Form.Item name='username'
-                                       label='Username'
+                                       label='用户名'
                                        rules={[{required: true, message: 'username must not be null'}]}>
                                 <Input clearable/>
                             </Form.Item>
                             <Form.Item name='password'
-                                       label='Password'
+                                       label='密码'
                                        rules={[{required: true}]}>
                                 <Input clearable type='password'/>
                             </Form.Item>
                             <Form.Item name='cnf_password'
-                                       label='Confirm Password'
+                                       label='重复密码'
                                        rules={[
                                            {required: true},
                                            {validator: this.pwdValidator},

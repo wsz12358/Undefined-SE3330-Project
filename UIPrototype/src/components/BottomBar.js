@@ -24,7 +24,7 @@ export default function BottomBar() {
                 history.replace(value);
         else {
             Dialog.alert({
-                content: "Please go login.",
+                content: "请登录",
             });
         }
     };

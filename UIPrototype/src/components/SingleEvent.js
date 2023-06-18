@@ -18,7 +18,7 @@ export default function SingleEvent(props) {
         tags.reduce((p, c) => {
             p = p + c + " / ";
             return p;
-        }, "") : "None";
+        }, "") : "无";
 
     return (
         <div id="sgEventField">
@@ -41,7 +41,7 @@ export default function SingleEvent(props) {
 
                     <div className="sgEventTag">
                         <TagOutline/> &nbsp;
-                        Category &nbsp;&nbsp;&nbsp;
+                        标签 &nbsp;&nbsp;&nbsp;
                         {t_tags}
                     </div>
 
